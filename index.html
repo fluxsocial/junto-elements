@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link href="dist/main.css" rel="stylesheet" />
+    <link href="dist/main.css" rel="stylesheet" />
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.40/dist/shoelace.js"
+    ></script>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+      }
+      .header {
+      }
+      .header__content {
+        max-width: 1400px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-left: var(--j-space-500);
+        height: 60px;
+      }
+      .header__logo {
+        font-size: var(--j-font-size-600);
+      }
+      .tooltip {
+        border-radius: 4px;
+        padding: 4px;
+        background-color: var(--j-color-ui-700);
+        color: var(--j-color-white);
+      }
+      .layout {
+        display: grid;
+        grid-template-columns: 150px 200px 100%;
+      }
+      .nav {
+        padding-top: var(--j-space-600);
+      }
+      .main-content {
+      }
+      .communities {
+        position: sticky;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        padding-top: var(--j-space-600);
+        display: flex;
+        gap: var(--j-space-600);
+        align-items: center;
+        flex-direction: column;
+      }
+      .sidebar {
+        position: sticky;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+      }
+      .section {
+        padding: var(--j-space-800);
+        margin-bottom: var(--j-space-800);
+      }
+    </style>
+  </head>
+  <body theme="funny">
+    <div id="app">
+      <header class="header">
+        <div class="header__content">
+          <div class="header__logo">Junto Components</div>
+          <nav></nav>
+        </div>
+      </header>
+      <main class="layout">
+        <aside class="communities">
+          <j-community-item
+            id="hello"
+            src="https://i.pravatar.cc/300"
+          ></j-community-item>
+          <j-popover
+            class="tooltip"
+            event="mouseover"
+            placement="right"
+            selector="#hello"
+          >
+            Name
+          </j-popover>
+          <j-community-item
+            id="another"
+            selected
+            src="https://i.pravatar.cc/300"
+          ></j-community-item>
+          <j-popover
+            class="tooltip"
+            event="mouseover"
+            placement="right"
+            selector="#another"
+          >
+            Name
+          </j-popover>
+          <j-button variant="primary" size="xl" circle square>
+            <sl-icon name="arrow-down-right-square"></sl-icon>
+          </j-button>
+        </aside>
+        <aside class="sidebar">
+          <nav id="navtarget" class="nav">
+            <a
+              style="text-decoration: none"
+              v-for="(component, index) in components"
+              :key="component.id"
+              :id="component.id"
+              :href="'#' + component.id"
+            >
+              <j-menu-item :title="component.title"></j-menu-item>
+            </a>
+          </nav>
+        </aside>
+        <div class="main-content">
+          <section
+            v-for="component in components"
+            :key="component.id"
+            class="section"
+            :id="component.id"
+          >
+            <j-text variant="heading-sm">{{component.title}}</j-text>
+            <j-knobs :element="component.tagName" v-html="component.example">
+            </j-knobs>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <script src="dist/main.js" type="module"></script>
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            components: [
+              {
+                id: "text",
+                title: "Text",
+                tagName: "j-text",
+                href: "#text",
+                example: `<j-text variant="heading">The quick brown fox jumped over the lazy dog</j-text>`,
+              },
+              {
+                id: "button",
+                title: "Button",
+                tagName: "j-button",
+                href: "#button",
+                example: `<j-button>Button text</j-button>`,
+              },
+              {
+                id: "radio-button",
+                title: "Radio button",
+                tagName: "j-radio-button",
+                href: "#radio",
+                example: `<j-radio-button name="radio">Radio button</j-radio-button>`,
+              },
+              {
+                id: "input",
+                title: "Input",
+                tagName: "j-input",
+                href: "#input",
+                example: `
+                  <j-input
+                    label="First Name"
+                    placeholder="Joe Doe"
+                    min="10"
+                    type="number"
+                    help-text="This is the help text">
+                  </j-input>
+                `,
+              },
+              {
+                id: "menu",
+                title: "Menu",
+                tagName: "j-menu",
+                href: "#menu",
+                example: `
+                  <j-menu>
+                    <j-menu-item title="Menu item 1"></j-menu-item>
+                    <j-menu-item title="Menu item 2"></j-menu-item>
+                  </j-menu>
+                `,
+              },
+              {
+                id: "menuitem",
+                title: "Menu item",
+                tagName: "j-menu-item",
+                href: "#menuitem",
+                example: `
+                  <j-menu>
+                    <j-menu-item title="Menu item 1"></j-menu-item>
+                    <j-menu-item title="Menu item 2"></j-menu-item>
+                  </j-menu>
+                `,
+              },
+              {
+                id: "popover",
+                title: "Popover",
+                tagName: "j-popover",
+                href: "#popover",
+                example: `
+                  <div>
+                    <button id="popovertarget">Click me</button>
+                    <j-popover selector="#popovertarget">
+                      <j-menu>
+                        <j-menu-item title="title"></j-menu-item>
+                      </j-menu>
+                    </j-popover>
+                  </div>
+                `,
+              },
+              {
+                id: "communityitem",
+                title: "Community item",
+                tagName: "j-community-item",
+                href: "#communityitem",
+                example: `<j-community-item src="https://i.pravatar.cc/300"></j-community-item>`,
+              },
+              {
+                id: "message-item",
+                title: "Message item",
+                tagName: "j-message-item",
+                href: "#message",
+                example: `
+                  <j-message-item timestamp="11/11/2021">
+                    <img
+                      id="avatar"
+                      slot="avatar"
+                      src="https://i.pravatar.cc/300"
+                    />
+                    <a id="username" slot="username">Username</a>
+                    <div slot="message">
+                      Lorem Ipsum is simply dummy text of the printing and
+                      typesetting industry. Lorem Ipsum has been the industry's
+                      standard dummy text ever since the 1500s, when an unknown
+                      printer took a galley of type and scrambled it to make a type
+                      specimen book. It has survived not only five centuries, but
+                      also the leap into electronic typesetting, remaining
+                      essentially unchanged.
+                    </div>
+                  </j-message-item>
+                `,
+              },
+            ],
+          };
+        },
+      });
+
+      const vm = app.mount("#app");
+    </script>
+  </body>
+</html>

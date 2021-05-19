@@ -1,0 +1,799 @@
+{
+  "version": "experimental",
+  "tags": [
+    {
+      "name": "j-button",
+      "path": "./src/components/button/Button.ts",
+      "attributes": [
+        {
+          "name": "variant",
+          "description": "Variations",
+          "type": "\"\"|\"primary\"|\"transparent\"|\"success\"|\"danger\"",
+          "default": "\"\""
+        },
+        {
+          "name": "size",
+          "description": "Sizes",
+          "type": "\"\"|\"sm\"|\"lg\"",
+          "default": "\"\""
+        },
+        {
+          "name": "disabled",
+          "description": "Sizes",
+          "type": "boolean",
+          "default": "\"\""
+        },
+        {
+          "name": "square",
+          "description": "Squared",
+          "type": "boolean",
+          "default": "\"\""
+        },
+        {
+          "name": "full",
+          "description": "Full",
+          "type": "boolean",
+          "default": "\"\""
+        },
+        {
+          "name": "circle",
+          "description": "Circle",
+          "type": "boolean",
+          "default": "false"
+        }
+      ],
+      "properties": [
+        {
+          "name": "styles",
+          "type": "CSSResultGroup[]",
+          "default": "[\"sharedStyles\",\"styles\"]"
+        },
+        {
+          "name": "variant",
+          "attribute": "variant",
+          "description": "Variations",
+          "type": "\"\"|\"primary\"|\"transparent\"|\"success\"|\"danger\"",
+          "default": "\"\""
+        },
+        {
+          "name": "size",
+          "attribute": "size",
+          "description": "Sizes",
+          "type": "\"\"|\"sm\"|\"lg\"",
+          "default": "\"\""
+        },
+        {
+          "name": "disabled",
+          "attribute": "disabled",
+          "description": "Sizes",
+          "type": "boolean",
+          "default": "\"\""
+        },
+        {
+          "name": "square",
+          "attribute": "square",
+          "description": "Squared",
+          "type": "boolean",
+          "default": "\"\""
+        },
+        {
+          "name": "full",
+          "attribute": "full",
+          "description": "Full",
+          "type": "boolean",
+          "default": "\"\""
+        },
+        {
+          "name": "circle",
+          "attribute": "circle",
+          "description": "Circle",
+          "type": "boolean",
+          "default": "false"
+        }
+      ]
+    },
+    {
+      "name": "j-community-item",
+      "path": "./src/components/community-item/CommunityItem.ts",
+      "attributes": [
+        {
+          "name": "src",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "selected",
+          "type": "boolean",
+          "default": "false"
+        }
+      ],
+      "properties": [
+        {
+          "name": "styles",
+          "type": "CSSResultGroup[]",
+          "default": "[\"sharedStyles\",\"styles\"]"
+        },
+        {
+          "name": "src",
+          "attribute": "src",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "selected",
+          "attribute": "selected",
+          "type": "boolean",
+          "default": "false"
+        }
+      ]
+    },
+    {
+      "name": "j-input",
+      "path": "./src/components/input/Input.js",
+      "attributes": [
+        {
+          "name": "value",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "max",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "min",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "maxlength",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "autocomplete",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "autofocus",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "placeholder",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "full",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "size",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "error",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "required",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "readonly",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "error-text",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "help-text",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "type",
+          "type": "string",
+          "default": "\"text\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "value",
+          "attribute": "value",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "max",
+          "attribute": "max",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "min",
+          "attribute": "min",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "maxlength",
+          "attribute": "maxlength",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "autocomplete",
+          "attribute": "autocomplete",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "autofocus",
+          "attribute": "autofocus",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "placeholder",
+          "attribute": "placeholder",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "disabled",
+          "attribute": "disabled",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "full",
+          "attribute": "full",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "label",
+          "attribute": "label",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "size",
+          "attribute": "size",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "error",
+          "attribute": "error",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "required",
+          "attribute": "required",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "readonly",
+          "attribute": "readonly",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "errorText",
+          "attribute": "error-text",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "helpText",
+          "attribute": "help-text",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "type",
+          "attribute": "type",
+          "type": "string",
+          "default": "\"text\""
+        },
+        {
+          "name": "onFocus"
+        },
+        {
+          "name": "onBlur"
+        }
+      ],
+      "events": [
+        {
+          "name": "input"
+        },
+        {
+          "name": "change"
+        },
+        {
+          "name": "blur"
+        }
+      ]
+    },
+    {
+      "name": "j-knobs",
+      "path": "./src/components/knobs/Knobs.js",
+      "attributes": [
+        {
+          "name": "src",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "tab",
+          "type": "string",
+          "default": "\"props\""
+        },
+        {
+          "name": "hideTabs",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "hideProps",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "hideSrc",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "element",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "hideEvents",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "attributes",
+          "type": "array",
+          "default": "[]"
+        },
+        {
+          "name": "properties",
+          "type": "array",
+          "default": "[]"
+        },
+        {
+          "name": "events",
+          "type": "array",
+          "default": "[]"
+        }
+      ],
+      "properties": [
+        {
+          "name": "componentEl",
+          "type": "Element | null"
+        },
+        {
+          "name": "srcHTML",
+          "type": "string"
+        },
+        {
+          "name": "src",
+          "attribute": "src",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "name",
+          "attribute": "name",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "tab",
+          "attribute": "tab",
+          "type": "string",
+          "default": "\"props\""
+        },
+        {
+          "name": "hideTabs",
+          "attribute": "hideTabs",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "hideProps",
+          "attribute": "hideProps",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "hideSrc",
+          "attribute": "hideSrc",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "element",
+          "attribute": "element",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "hideEvents",
+          "attribute": "hideEvents",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "attributes",
+          "attribute": "attributes",
+          "type": "array",
+          "default": "[]"
+        },
+        {
+          "name": "properties",
+          "attribute": "properties",
+          "type": "array",
+          "default": "[]"
+        },
+        {
+          "name": "events",
+          "attribute": "events",
+          "type": "array",
+          "default": "[]"
+        }
+      ]
+    },
+    {
+      "name": "j-menu-item",
+      "path": "./src/components/menu-item/MenuItem.ts",
+      "attributes": [
+        {
+          "name": "title",
+          "description": "Title",
+          "type": "String",
+          "default": "\"\""
+        },
+        {
+          "name": "description",
+          "description": "Description",
+          "type": "String",
+          "default": "\"\""
+        },
+        {
+          "name": "selected",
+          "description": "Selected",
+          "type": "Boolean",
+          "default": "false"
+        }
+      ],
+      "properties": [
+        {
+          "name": "styles",
+          "type": "CSSResultGroup[]",
+          "default": "[\"sharedStyles\",\"styles\"]"
+        },
+        {
+          "name": "title",
+          "attribute": "title",
+          "description": "Title",
+          "type": "String",
+          "default": "\"\""
+        },
+        {
+          "name": "description",
+          "attribute": "description",
+          "description": "Description",
+          "type": "String",
+          "default": "\"\""
+        },
+        {
+          "name": "selected",
+          "attribute": "selected",
+          "description": "Selected",
+          "type": "Boolean",
+          "default": "false"
+        }
+      ]
+    },
+    {
+      "name": "j-menu",
+      "path": "./src/components/menu/Menu.ts",
+      "properties": [
+        {
+          "name": "styles",
+          "type": "CSSResultGroup[]",
+          "default": "[\"sharedStyles\",\"styles\"]"
+        }
+      ]
+    },
+    {
+      "name": "j-message-item",
+      "path": "./src/components/message-item/MessageItem.ts",
+      "attributes": [
+        {
+          "name": "timestamp",
+          "description": "Date",
+          "type": "String",
+          "default": "\"\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "styles",
+          "type": "CSSResultGroup[]",
+          "default": "[\"sharedStyles\",\"styles\"]"
+        },
+        {
+          "name": "timestamp",
+          "attribute": "timestamp",
+          "description": "Date",
+          "type": "String",
+          "default": "\"\""
+        }
+      ]
+    },
+    {
+      "name": "j-popover",
+      "path": "./src/components/popover/Popover.ts",
+      "attributes": [
+        {
+          "name": "open",
+          "description": "Open",
+          "type": "Boolean",
+          "default": "false"
+        },
+        {
+          "name": "placement",
+          "description": "Placement",
+          "type": "\"auto\"|\"auto-start\"|\"auto-end\"|\"top\"|\"top-start\"|\"top-end\"|\"bottom\"|\"bottom-start\"|\"bottom-end\"|\"right\"|\"right-start\"|\"right-end\"|\"left\"|\"left-start\"|\"left-end",
+          "default": "\"auto\""
+        },
+        {
+          "name": "event",
+          "description": "Open",
+          "type": "\"contextmenu\"|\"mouseover\"|\"click\"",
+          "default": "\"click\""
+        },
+        {
+          "name": "selector",
+          "description": "Selector",
+          "type": "String",
+          "default": "\"\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "styles",
+          "type": "CSSResultGroup[]",
+          "default": "[\"sharedStyles\",\"styles\"]"
+        },
+        {
+          "name": "open",
+          "attribute": "open",
+          "description": "Open",
+          "type": "Boolean",
+          "default": "false"
+        },
+        {
+          "name": "placement",
+          "attribute": "placement",
+          "description": "Placement",
+          "type": "\"auto\"|\"auto-start\"|\"auto-end\"|\"top\"|\"top-start\"|\"top-end\"|\"bottom\"|\"bottom-start\"|\"bottom-end\"|\"right\"|\"right-start\"|\"right-end\"|\"left\"|\"left-start\"|\"left-end",
+          "default": "\"auto\""
+        },
+        {
+          "name": "event",
+          "attribute": "event",
+          "description": "Open",
+          "type": "\"contextmenu\"|\"mouseover\"|\"click\"",
+          "default": "\"click\""
+        },
+        {
+          "name": "selector",
+          "attribute": "selector",
+          "description": "Selector",
+          "type": "String",
+          "default": "\"\""
+        }
+      ]
+    },
+    {
+      "name": "j-radio-button",
+      "path": "./src/components/radio-button/RadioButton.js",
+      "attributes": [
+        {
+          "name": "checked",
+          "type": "boolean"
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "size",
+          "description": "Sizes",
+          "type": "\"\"|\"sm\"|\"md\"|\"lg\"",
+          "default": "\"\""
+        },
+        {
+          "name": "full",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": "false"
+        }
+      ],
+      "properties": [
+        {
+          "name": "options",
+          "type": "Element[]"
+        },
+        {
+          "name": "currentCheckedItem",
+          "type": "Element | undefined"
+        },
+        {
+          "name": "formElement",
+          "type": "HTMLInputElement | null"
+        },
+        {
+          "name": "checked",
+          "attribute": "checked",
+          "type": "boolean"
+        },
+        {
+          "name": "value",
+          "attribute": "value",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "name",
+          "attribute": "name",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "size",
+          "attribute": "size",
+          "description": "Sizes",
+          "type": "\"\"|\"sm\"|\"md\"|\"lg\"",
+          "default": "\"\""
+        },
+        {
+          "name": "full",
+          "attribute": "full",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "disabled",
+          "attribute": "disabled",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "focus"
+        },
+        {
+          "name": "selectNext"
+        },
+        {
+          "name": "selectPrevious"
+        }
+      ],
+      "events": [
+        {
+          "name": "change"
+        }
+      ]
+    },
+    {
+      "name": "j-text",
+      "path": "./src/components/text/Text.ts",
+      "attributes": [
+        {
+          "name": "size",
+          "description": "Sizes",
+          "type": "\"\"|\"100\"|\"200\"|\"300\"|\"400\"|\"500\"|\"600\"|\"700\"|\"800\"|\"900\"|\"1000\"",
+          "default": "\"\""
+        },
+        {
+          "name": "variant",
+          "description": "Variants",
+          "type": "\"\"|\"heading-lg\"|\"heading\"|\"heading-sm\"|\"subheading\"|\"\"  ingress\"|\"body\"|\"footnote\"",
+          "default": "\"body\""
+        },
+        {
+          "name": "tag",
+          "description": "Tag to render",
+          "type": "\"\"|\"h1\"|\"h2\"|\"h3\"|\"h4\"|\"h5\"|\"h6\"|\"p\"|\"small\"|\"b\"|\"span\"|\"div\"",
+          "default": "\"\""
+        },
+        {
+          "name": "nomargin",
+          "description": "No margin",
+          "type": "Boolean",
+          "default": "\"\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "styles",
+          "type": "CSSResultGroup[]",
+          "default": "[\"sharedStyles\",\"styles\"]"
+        },
+        {
+          "name": "size",
+          "attribute": "size",
+          "description": "Sizes",
+          "type": "\"\"|\"100\"|\"200\"|\"300\"|\"400\"|\"500\"|\"600\"|\"700\"|\"800\"|\"900\"|\"1000\"",
+          "default": "\"\""
+        },
+        {
+          "name": "variant",
+          "attribute": "variant",
+          "description": "Variants",
+          "type": "\"\"|\"heading-lg\"|\"heading\"|\"heading-sm\"|\"subheading\"|\"\"  ingress\"|\"body\"|\"footnote\"",
+          "default": "\"body\""
+        },
+        {
+          "name": "tag",
+          "attribute": "tag",
+          "description": "Tag to render",
+          "type": "\"\"|\"h1\"|\"h2\"|\"h3\"|\"h4\"|\"h5\"|\"h6\"|\"p\"|\"small\"|\"b\"|\"span\"|\"div\"",
+          "default": "\"\""
+        },
+        {
+          "name": "nomargin",
+          "attribute": "nomargin",
+          "description": "No margin",
+          "type": "Boolean",
+          "default": "\"\""
+        }
+      ]
+    }
+  ]
+}
