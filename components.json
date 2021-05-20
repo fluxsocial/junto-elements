@@ -93,6 +93,74 @@
       ]
     },
     {
+      "name": "j-checkbox",
+      "path": "./src/components/checkbox/Checkbox.js",
+      "attributes": [
+        {
+          "name": "checked",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "full",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "size",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "default": "\"\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "checked",
+          "attribute": "checked",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "full",
+          "attribute": "full",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "disabled",
+          "attribute": "disabled",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "size",
+          "attribute": "size",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "value",
+          "attribute": "value",
+          "type": "string",
+          "default": "\"\""
+        }
+      ],
+      "events": [
+        {
+          "name": "change"
+        }
+      ]
+    },
+    {
       "name": "j-community-item",
       "path": "./src/components/community-item/CommunityItem.ts",
       "attributes": [
@@ -103,6 +171,11 @@
         },
         {
           "name": "selected",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "initials",
           "type": "boolean",
           "default": "false"
         }
@@ -122,6 +195,12 @@
         {
           "name": "selected",
           "attribute": "selected",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "initials",
+          "attribute": "initials",
           "type": "boolean",
           "default": "false"
         }
@@ -477,26 +556,65 @@
       ]
     },
     {
-      "name": "j-menu-item",
-      "path": "./src/components/menu-item/MenuItem.ts",
+      "name": "j-menu-group-item",
+      "path": "./src/components/menu-group-item/MenuGroupItem.ts",
       "attributes": [
+        {
+          "name": "open",
+          "description": "Open",
+          "type": "Boolean",
+          "default": "\"\""
+        },
         {
           "name": "title",
           "description": "Title",
           "type": "String",
           "default": "\"\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "styles",
+          "type": "CSSResultGroup[]",
+          "default": "[\"styles\",\"sharedStyles\"]"
         },
         {
-          "name": "description",
-          "description": "Description",
-          "type": "String",
+          "name": "open",
+          "attribute": "open",
+          "description": "Open",
+          "type": "Boolean",
           "default": "\"\""
         },
+        {
+          "name": "title",
+          "attribute": "title",
+          "description": "Title",
+          "type": "String",
+          "default": "\"\""
+        }
+      ]
+    },
+    {
+      "name": "j-menu-item",
+      "path": "./src/components/menu-item/MenuItem.ts",
+      "attributes": [
         {
           "name": "selected",
           "description": "Selected",
           "type": "Boolean",
           "default": "false"
+        },
+        {
+          "name": "value",
+          "description": "Value",
+          "type": "String",
+          "default": "\"\""
+        },
+        {
+          "name": "label",
+          "description": "Label",
+          "type": "String",
+          "default": "\"\""
         }
       ],
       "properties": [
@@ -506,25 +624,25 @@
           "default": "[\"sharedStyles\",\"styles\"]"
         },
         {
-          "name": "title",
-          "attribute": "title",
-          "description": "Title",
-          "type": "String",
-          "default": "\"\""
-        },
-        {
-          "name": "description",
-          "attribute": "description",
-          "description": "Description",
-          "type": "String",
-          "default": "\"\""
-        },
-        {
           "name": "selected",
           "attribute": "selected",
           "description": "Selected",
           "type": "Boolean",
           "default": "false"
+        },
+        {
+          "name": "value",
+          "attribute": "value",
+          "description": "Value",
+          "type": "String",
+          "default": "\"\""
+        },
+        {
+          "name": "label",
+          "attribute": "label",
+          "description": "Label",
+          "type": "String",
+          "default": "\"\""
         }
       ]
     },
@@ -562,6 +680,32 @@
           "description": "Date",
           "type": "String",
           "default": "\"\""
+        }
+      ]
+    },
+    {
+      "name": "j-modal",
+      "path": "./src/components/modal/Modal.ts",
+      "attributes": [
+        {
+          "name": "open",
+          "description": "Date",
+          "type": "Boolean",
+          "default": "false"
+        }
+      ],
+      "properties": [
+        {
+          "name": "styles",
+          "type": "CSSResultGroup[]",
+          "default": "[\"sharedStyles\",\"styles\"]"
+        },
+        {
+          "name": "open",
+          "attribute": "open",
+          "description": "Date",
+          "type": "Boolean",
+          "default": "false"
         }
       ]
     },
@@ -727,6 +871,71 @@
       "events": [
         {
           "name": "change"
+        }
+      ]
+    },
+    {
+      "name": "j-select",
+      "path": "./src/components/select/Select.ts",
+      "attributes": [
+        {
+          "name": "value",
+          "description": "Selected",
+          "type": "String",
+          "default": "\"\""
+        },
+        {
+          "name": "label",
+          "description": "Label",
+          "type": "String",
+          "default": "\"\""
+        },
+        {
+          "name": "open",
+          "description": "Selected",
+          "type": "Boolean",
+          "default": "false"
+        },
+        {
+          "name": "inputValue",
+          "description": "Input value",
+          "type": "Boolean",
+          "default": "\"\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "styles",
+          "type": "CSSResultGroup[]",
+          "default": "[\"sharedStyles\",\"styles\"]"
+        },
+        {
+          "name": "value",
+          "attribute": "value",
+          "description": "Selected",
+          "type": "String",
+          "default": "\"\""
+        },
+        {
+          "name": "label",
+          "attribute": "label",
+          "description": "Label",
+          "type": "String",
+          "default": "\"\""
+        },
+        {
+          "name": "open",
+          "attribute": "open",
+          "description": "Selected",
+          "type": "Boolean",
+          "default": "false"
+        },
+        {
+          "name": "inputValue",
+          "attribute": "inputValue",
+          "description": "Input value",
+          "type": "Boolean",
+          "default": "\"\""
         }
       ]
     },
