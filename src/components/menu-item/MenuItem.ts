@@ -4,13 +4,20 @@ import sharedStyles from "../../shared/styles";
 
 const styles = css`
   :host {
+    --j-menu-item-border-radius: var(--j-border-radius);
     --j-menu-item-height: var(--j-element-md);
     --j-menu-item-bg: transparent;
+    --j-menu-item-color: var(--j-color-ui-600);
+    --j-menu-item-color-hover: var(--j-color-ui-800);
     --j-menu-item-bg-hover: var(--j-color-ui-50);
+    --j-menu-item-padding: 0 var(--j-space-500);
   }
-  :host([selected]) {
-    --j-menu-item-bg: var(--j-color-primary-300);
-    --j-menu-item-bg-hover: var(--j-color-primary-300);
+  :host([selected]),
+  :host([selected]) [part="base"]:hover {
+    --j-menu-item-bg: var(--j-color-primary-50);
+    --j-menu-item-bg-hover: var(--j-color-primary-50);
+    --j-menu-item-color: var(--j-color-primary-600);
+    --j-menu-item-color-hover: var(--j-color-primary-600);
   }
   :host([size="sm"]) {
     --j-menu-item-height: var(--j-element-sm);
@@ -28,18 +35,18 @@ const styles = css`
     display: flex;
     align-items: center;
     gap: var(--j-space-400);
-    border-radius: var(--j-border-radius);
+    border-radius: var(--j-menu-item-border-radius);
     background: var(--j-menu-item-bg);
     text-decoration: none;
     cursor: pointer;
     width: 100%;
     height: var(--j-menu-item-height);
-    padding: 0 var(--j-space-500);
-    color: var(--j-color-ui-500);
+    padding: var(--j-menu-item-padding);
+    color: var(--j-menu-item-color);
     font-weight: 400;
   }
   [part="base"]:hover {
-    color: var(--j-color-ui-800);
+    color: var(--j-menu-item-color-hover);
     background: var(--j-menu-item-bg-hover);
   }
   [part="content"] {
