@@ -5,8 +5,8 @@ const styles = css`
     --j-input-label-size: var(--j-font-size-500);
     --j-input-height: var(--j-element-md);
   }
-  [part="input-wrapper"] {
-    height: var(--j-input-height);
+  [part="base"] {
+    display: block;
   }
   [part="label"] {
     display: inline-block;
@@ -15,10 +15,15 @@ const styles = css`
     font-size: var(--j-input-label-size);
     margin-bottom: var(--j-space-400);
   }
+  [part="input-wrapper"] {
+    display: block;
+    height: var(--j-input-height);
+  }
   [part="input-field"] {
     border-radius: var(--j-border-radius);
     border: 1px solid var(--j-color-ui-200);
     height: 100%;
+    min-width: 250px;
     padding: 0px var(--j-space-400);
   }
   [part="help-text"],
