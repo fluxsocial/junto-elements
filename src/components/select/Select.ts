@@ -10,12 +10,18 @@ const styles = css`
     border: 1px solid var(--j-color-ui-200);
     background: var(--j-color-white);
     height: var(--j-element-md);
+    position: relative;
+    width: 250px;
+  }
+  [part="input"] {
+    width: 100%;
   }
   [part="overlay"] {
-    display: none;
+    width: 250px;
+    visibility: hidden;
   }
   :host([open]) [part="overlay"] {
-    display: block;
+    visibility: visible;
     z-index: 999;
   }
 `;
@@ -40,14 +46,21 @@ export default class Select extends LitElement {
   @property({ type: Boolean, reflect: true })
   open = false;
 
-  connectedCallback() {
-    super.connectedCallback();
-
-    const trigger = this.renderRoot.querySelector("input");
+  firstUpdated() {
+    const input = this.renderRoot.querySelector("input");
     const menu = this.renderRoot.querySelector("nav");
 
-    createPopper(trigger, menu, {
-      placement: "auto",
+    createPopper(input, menu, {
+      placement: "bottom",
+    });
+
+    // Handle click outside
+    window.addEventListener("mousedown", (e) => {
+      const clickedInput = input.contains(e.target as Node);
+      const clickedMenu = this.contains(e.target as Node);
+      if (!clickedInput && !clickedMenu) {
+        this.open = false;
+      }
     });
   }
 
