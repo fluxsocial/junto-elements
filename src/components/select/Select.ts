@@ -5,22 +5,24 @@ import sharedStyles from "../../shared/styles";
 
 const styles = css`
   :host {
+    position: relative;
   }
   [part="base"] {
-    border: 1px solid var(--j-color-ui-200);
-    background: var(--j-color-white);
-    height: var(--j-element-md);
-    position: relative;
-    width: 250px;
   }
-  [part="input"] {
-    width: 100%;
+  [part="input"]::part(input-field) {
+    cursor: pointer;
   }
-  [part="overlay"] {
+  [part="menu"] {
+    position: absolute;
+    left: 0;
+    top: 80px;
+    max-height: 400px;
+    overflow-y: auto;
     width: 250px;
     visibility: hidden;
   }
-  :host([open]) [part="overlay"] {
+  :host([open]) [part="menu"] {
+    height: fit-content;
     visibility: visible;
     z-index: 999;
   }
@@ -39,6 +41,14 @@ export default class Select extends LitElement {
   value = "";
 
   /**
+   * Label
+   * @type {String}
+   * @attr
+   */
+  @property({ type: String, reflect: true })
+  label = "";
+
+  /**
    * Selected
    * @type {Boolean}
    * @attr
@@ -46,12 +56,28 @@ export default class Select extends LitElement {
   @property({ type: Boolean, reflect: true })
   open = false;
 
-  firstUpdated() {
-    const input = this.renderRoot.querySelector("input");
-    const menu = this.renderRoot.querySelector("nav");
+  /**
+   * Input value
+   * @type {Boolean}
+   * @attr
+   */
+  @property({ type: String, reflect: true })
+  inputValue = "";
 
-    createPopper(input, menu, {
-      placement: "bottom",
+  firstUpdated() {
+    const input = this.renderRoot.querySelector("[part='input']");
+    const menu = this.renderRoot.querySelector("[part='menu']") as any;
+
+    const options = this.querySelectorAll("[value]");
+
+    console.log(options);
+
+    options.forEach((option) => {
+      option.addEventListener("click", (e: any) => {
+        this.open = false;
+        this.value = e.target.value;
+        this.inputValue = e.target.label;
+      });
     });
 
     // Handle click outside
@@ -69,13 +95,16 @@ export default class Select extends LitElement {
   }
 
   render() {
-    return html`<div part="base">
-      <input
+    return html` <div part="base">
+      <j-input
+        label=${this.label}
+        readonly
         @click=${this._handleInputClick}
-        .value=${this.value}
+        .value=${this.inputValue}
         part="input"
-      />
-      <nav part="overlay">
+      ></j-input>
+
+      <nav part="menu">
         <slot></slot>
       </nav>
     </div>`;
