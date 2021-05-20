@@ -17,10 +17,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "run-p watch docs",
+    "build": "run-s analyze package",
     "docs": "live-server",
     "analyze": "web-component-analyzer src --outFile components.json",
     "watch": "esbuild src/main.ts --watch --bundle --minify --sourcemap --outfile=dist/main.js",
-    "build": "esbuild src/main.ts --bundle --minify --sourcemap --outfile=dist/main.js"
+    "package": "esbuild src/main.ts --bundle --minify --sourcemap --outfile=dist/main.js"
   },
   "keywords": [],
   "author": "",
