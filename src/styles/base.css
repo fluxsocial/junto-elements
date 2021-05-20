@@ -7,17 +7,17 @@
   --j-color-focus: #83b6fb;
   --j-focus-outline: 0px 0px 0px 4px var(--j-color-focus);
 
-  --j-color-primary-hue: 620;
-  --j-color-primary-50: hsl(var(--j-color-primary-hue), 30%, 95%);
-  --j-color-primary-100: hsl(var(--j-color-primary-hue), 30%, 90%);
-  --j-color-primary-200: hsl(var(--j-color-primary-hue), 30%, 80%);
-  --j-color-primary-300: hsl(var(--j-color-primary-hue), 30%, 70%);
-  --j-color-primary-400: hsl(var(--j-color-primary-hue), 30%, 60%);
-  --j-color-primary-500: hsl(var(--j-color-primary-hue), 30%, 50%);
-  --j-color-primary-600: hsl(var(--j-color-primary-hue), 30%, 40%);
-  --j-color-primary-700: hsl(var(--j-color-primary-hue), 30%, 30%);
-  --j-color-primary-800: hsl(var(--j-color-primary-hue), 30%, 20%);
-  --j-color-primary-900: hsl(var(--j-color-primary-hue), 30%, 10%);
+  --j-color-primary-hue: 610;
+  --j-color-primary-50: hsl(var(--j-color-primary-hue), 50%, 95%);
+  --j-color-primary-100: hsl(var(--j-color-primary-hue), 50%, 90%);
+  --j-color-primary-200: hsl(var(--j-color-primary-hue), 50%, 80%);
+  --j-color-primary-300: hsl(var(--j-color-primary-hue), 50%, 70%);
+  --j-color-primary-400: hsl(var(--j-color-primary-hue), 50%, 60%);
+  --j-color-primary-500: hsl(var(--j-color-primary-hue), 50%, 50%);
+  --j-color-primary-600: hsl(var(--j-color-primary-hue), 50%, 40%);
+  --j-color-primary-700: hsl(var(--j-color-primary-hue), 50%, 30%);
+  --j-color-primary-800: hsl(var(--j-color-primary-hue), 50%, 20%);
+  --j-color-primary-900: hsl(var(--j-color-primary-hue), 50%, 10%);
 
   --j-color-success-hue: 130;
   --j-color-success-100: hsl(var(--j-color-success-hue), 20%, 90%);
@@ -94,9 +94,9 @@
 
   --j-element-sm: 1.5rem;
   --j-element-md: 2rem;
-  --j-element-lg: 2.5rem;
-  --j-element-xl: 4rem;
-  --j-element-xxl: 6rem;
+  --j-element-lg: 2.4rem;
+  --j-element-xl: 3.5rem;
+  --j-element-xxl: 4.2rem;
 
   /* DEPTH */
   --j-depth-none: none;
