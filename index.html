@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link href="dist/main.css" rel="stylesheet" />
-    <link href="dist/main.css" rel="stylesheet" />
     <script
       type="module"
       src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.40/dist/shoelace.js"
@@ -14,25 +13,15 @@
     <script src="https://unpkg.com/vue@next"></script>
     <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
     <style>
+      html {
+        scroll-behavior: smooth;
+      }
       body {
         padding: 0;
         margin: 0;
       }
-      .header {
-      }
-      .header__content {
-        max-width: 1400px;
-        margin: 0 auto;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding-left: var(--j-space-500);
-        height: 60px;
-      }
-      .header__logo {
-        font-size: var(--j-font-size-600);
-      }
       .tooltip {
+        z-index: 999;
         border-radius: 4px;
         padding: 4px;
         background-color: var(--j-color-ui-700);
@@ -40,12 +29,21 @@
       }
       .layout {
         display: grid;
-        grid-template-columns: 150px 200px 100%;
+        grid-template-columns: 120px 250px 2fr;
+      }
+      .logo {
+        display: block;
+        padding-top: var(--j-space-600);
+        padding-left: var(--j-space-300);
       }
       .nav {
+        display: flex;
+        flex-direction: column;
+        gap: var(--j-space-500);
         padding-top: var(--j-space-600);
       }
       .main-content {
+        scroll-behavior: smooth;
       }
       .communities {
         position: sticky;
@@ -57,14 +55,17 @@
         gap: var(--j-space-600);
         align-items: center;
         flex-direction: column;
+        border-right: 1px solid var(--j-color-ui-100);
       }
       .sidebar {
         position: sticky;
         top: 0;
         left: 0;
         height: 100vh;
+        padding: var(--j-space-400);
         overflow-y: auto;
         overscroll-behavior: contain;
+        border-right: 1px solid var(--j-color-ui-100);
       }
       .section {
         padding: var(--j-space-800);
@@ -72,67 +73,78 @@
       }
     </style>
   </head>
-  <body theme="funny">
+  <body>
     <div id="app">
-      <header class="header">
-        <div class="header__content">
-          <div class="header__logo">Junto Components</div>
-          <nav></nav>
-        </div>
-      </header>
       <main class="layout">
         <aside class="communities">
           <j-community-item
-            id="hello"
-            src="https://i.pravatar.cc/300"
+            @click="activeView = 'elements'"
+            :selected="activeView === 'elements'"
+            initials="E"
+            id="elements"
           ></j-community-item>
           <j-popover
             class="tooltip"
             event="mouseover"
             placement="right"
-            selector="#hello"
+            selector="#elements"
           >
-            Name
+            Elements
           </j-popover>
           <j-community-item
-            id="another"
-            selected
-            src="https://i.pravatar.cc/300"
+            @click="activeView = 'patterns'"
+            id="patterns"
+            :selected="activeView === 'patterns'"
+            initials="P"
           ></j-community-item>
           <j-popover
             class="tooltip"
             event="mouseover"
             placement="right"
-            selector="#another"
+            selector="#patterns"
           >
-            Name
+            Patterns
           </j-popover>
-          <j-button variant="primary" size="xl" circle square>
-            <sl-icon name="arrow-down-right-square"></sl-icon>
-          </j-button>
         </aside>
         <aside class="sidebar">
+          <j-text class="logo" variant="heading-sm">
+            <span v-if="activeView === 'elements'">Junto Elements</span>
+            <span v-if="activeView === 'patterns'">Junto Patterns</span>
+          </j-text>
           <nav id="navtarget" class="nav">
-            <a
-              style="text-decoration: none"
-              v-for="(component, index) in components"
-              :key="component.id"
-              :id="component.id"
-              :href="'#' + component.id"
+            <j-menu-group-item
+              :title="key"
+              open
+              v-for="(group, key) in groupedSections"
+              :key="key"
             >
-              <j-menu-item :title="component.title"></j-menu-item>
-            </a>
+              <a
+                style="text-decoration: none"
+                v-for="(section, index) in group"
+                :key="section.id"
+                :href="'#' + section.id"
+              >
+                <j-menu-item size="lg">
+                  <sl-icon
+                    v-if="section.icon"
+                    slot="start"
+                    :name="section.icon"
+                  ></sl-icon>
+                  {{section.title}}
+                </j-menu-item>
+              </a>
+            </j-menu-group-item>
           </nav>
         </aside>
         <div class="main-content">
           <section
-            v-for="component in components"
-            :key="component.id"
+            v-for="section in sections"
+            :key="section.id"
             class="section"
-            :id="component.id"
+            :id="section.id"
           >
-            <j-text variant="heading-sm">{{component.title}}</j-text>
-            <j-knobs :element="component.tagName" v-html="component.example">
+            <j-text variant="heading-sm">{{section.title}}</j-text>
+            <j-knobs :element="section.tagName" v-html="section.example">
             </j-knobs>
           </section>
         </div>
@@ -144,32 +156,51 @@
       const app = Vue.createApp({
         data() {
           return {
-            components: [
+            activeView: "elements",
+            patterns: [],
+            elements: [
               {
                 id: "text",
                 title: "Text",
                 tagName: "j-text",
+                group: "primitives",
+                icon: "text-paragraph",
                 href: "#text",
                 example: `<j-text variant="heading">The quick brown fox jumped over the lazy dog</j-text>`,
               },
               {
                 id: "button",
                 title: "Button",
+                icon: "app",
                 tagName: "j-button",
+                group: "primitives",
                 href: "#button",
                 example: `<j-button>Button text</j-button>`,
               },
               {
                 id: "radio-button",
                 title: "Radio button",
+                icon: "record-circle",
                 tagName: "j-radio-button",
+                group: "form",
                 href: "#radio",
                 example: `<j-radio-button name="radio">Radio button</j-radio-button>`,
               },
               {
+                id: "checkbox",
+                title: "Checkbox",
+                icon: "check2-square",
+                tagName: "j-checkbox",
+                group: "form",
+                href: "#checkbox",
+                example: `<j-checkbox name="radio">Radio button</j-checkbox>`,
+              },
+              {
                 id: "input",
                 title: "Input",
+                icon: "pencil",
                 tagName: "j-input",
+                group: "form",
                 href: "#input",
                 example: `
                   <j-input
@@ -182,14 +213,51 @@
                 `,
               },
               {
+                id: "select",
+                title: "Select",
+                icon: "pencil",
+                tagName: "j-select",
+                group: "form",
+                href: "#select",
+                example: `
+                  <j-select>
+                    <j-menu>
+                      <j-menu-item>Hello</j-menu-item>
+                      <j-menu-item>Hello</j-menu-item>
+                    <j-menu>
+                  </j-select>
+                `,
+              },
+              {
                 id: "menu",
                 title: "Menu",
                 tagName: "j-menu",
+                icon: "view-stacked",
+                group: "navigation",
                 href: "#menu",
                 example: `
                   <j-menu>
-                    <j-menu-item title="Menu item 1"></j-menu-item>
-                    <j-menu-item title="Menu item 2"></j-menu-item>
+                    <j-menu-item>Menu item 1</j-menu-item>
+                    <j-menu-item>Menu item 2</j-menu-item>
+                  </j-menu>
+                `,
+              },
+              {
+                id: "menu",
+                title: "Menu",
+                tagName: "j-menu-group-item",
+                icon: "view-stacked",
+                group: "navigation",
+                href: "#menu",
+                example: `
+                  <j-menu>
+                    <j-menu-group-item title="Group">
+                      <j-menu-item>Menu item 1</j-menu-item>
+                    </j-menu-group-item>
+                    <j-menu-group-item title="Group">
+                      <j-menu-item>Menu item 1</j-menu-item>
+                      <j-menu-item>Menu item 2</j-menu-item>
+                    </j-menu-group-item>
                   </j-menu>
                 `,
               },
@@ -197,17 +265,21 @@
                 id: "menuitem",
                 title: "Menu item",
                 tagName: "j-menu-item",
+                group: "navigation",
+                icon: "view-list",
                 href: "#menuitem",
                 example: `
                   <j-menu>
-                    <j-menu-item title="Menu item 1"></j-menu-item>
-                    <j-menu-item title="Menu item 2"></j-menu-item>
+                    <j-menu-item>Menu item 1</j-menu-item>
+                    <j-menu-item>Menu item 2</j-menu-item>
                   </j-menu>
                 `,
               },
               {
                 id: "popover",
                 title: "Popover",
+                icon: "menu-up",
+                group: "navigation",
                 tagName: "j-popover",
                 href: "#popover",
                 example: `
@@ -215,7 +287,7 @@
                     <button id="popovertarget">Click me</button>
                     <j-popover selector="#popovertarget">
                       <j-menu>
-                        <j-menu-item title="title"></j-menu-item>
+                        <j-menu-item>Title</j-menu-item>
                       </j-menu>
                     </j-popover>
                   </div>
@@ -224,14 +296,18 @@
               {
                 id: "communityitem",
                 title: "Community item",
+                icon: "globe2",
                 tagName: "j-community-item",
+                group: "navigation",
                 href: "#communityitem",
                 example: `<j-community-item src="https://i.pravatar.cc/300"></j-community-item>`,
               },
               {
                 id: "message-item",
                 title: "Message item",
+                icon: "chat-text",
                 tagName: "j-message-item",
+                group: "chat",
                 href: "#message",
                 example: `
                   <j-message-item timestamp="11/11/2021">
@@ -255,6 +331,20 @@
               },
             ],
           };
+        },
+        computed: {
+          groupedSections() {
+            return this[this.activeView].reduce((acc, section) => {
+              const group = acc[section.group] || [];
+              return {
+                ...acc,
+                [section.group]: [...group, { ...section }],
+              };
+            }, {});
+          },
+          sections() {
+            return this[this.activeView];
+          },
         },
       });
 
