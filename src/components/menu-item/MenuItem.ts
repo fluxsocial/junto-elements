@@ -9,7 +9,7 @@ const styles = css`
     --j-menu-item-bg: transparent;
     --j-menu-item-color: var(--j-color-ui-600);
     --j-menu-item-color-hover: var(--j-color-ui-800);
-    --j-menu-item-bg-hover: var(--j-color-ui-50);
+    --j-menu-item-bg-hover: rgba(0, 0, 0, 0.05);
     --j-menu-item-padding: 0 var(--j-space-500);
   }
   :host([selected]),
@@ -71,6 +71,28 @@ export default class MenuItem extends LitElement {
    */
   @property({ type: Boolean, reflect: true })
   selected = false;
+
+  /**
+   * Value
+   * @type {String}
+   * @attr
+   */
+  @property({ type: String, reflect: true })
+  value = "";
+
+  /**
+   * Label
+   * @type {String}
+   * @attr
+   */
+  @property({ type: String, reflect: true })
+  label = "";
+
+  firstUpdated() {
+    if (!this.label) {
+      this.label = this.innerText;
+    }
+  }
 
   render() {
     return html`<div part="base" role="menuitem">

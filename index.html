@@ -29,7 +29,7 @@
       }
       .layout {
         display: grid;
-        grid-template-columns: 120px 250px 2fr;
+        grid-template-columns: 120px 250px 700px;
       }
       .logo {
         display: block;
@@ -45,7 +45,7 @@
       .main-content {
         scroll-behavior: smooth;
       }
-      .communities {
+      .left-nav {
         position: sticky;
         top: 0;
         left: 0;
@@ -54,8 +54,17 @@
         display: flex;
         gap: var(--j-space-600);
         align-items: center;
+        justify-content: space-between;
         flex-direction: column;
-        border-right: 1px solid var(--j-color-ui-100);
+      }
+      .communities {
+        display: flex;
+        gap: var(--j-space-600);
+        align-items: center;
+        flex-direction: column;
+      }
+      .settings {
+        height: 100px;
       }
       .sidebar {
         position: sticky;
@@ -65,7 +74,6 @@
         padding: var(--j-space-400);
         overflow-y: auto;
         overscroll-behavior: contain;
-        border-right: 1px solid var(--j-color-ui-100);
       }
       .section {
         padding: var(--j-space-800);
@@ -76,35 +84,47 @@
   <body>
     <div id="app">
       <main class="layout">
-        <aside class="communities">
-          <j-community-item
-            @click="activeView = 'elements'"
-            :selected="activeView === 'elements'"
-            initials="E"
-            id="elements"
-          ></j-community-item>
-          <j-popover
-            class="tooltip"
-            event="mouseover"
-            placement="right"
-            selector="#elements"
-          >
-            Elements
-          </j-popover>
-          <j-community-item
-            @click="activeView = 'patterns'"
-            id="patterns"
-            :selected="activeView === 'patterns'"
-            initials="P"
-          ></j-community-item>
-          <j-popover
-            class="tooltip"
-            event="mouseover"
-            placement="right"
-            selector="#patterns"
-          >
-            Patterns
-          </j-popover>
+        <aside class="left-nav">
+          <div class="communities">
+            <j-community-item
+              @click="activeView = 'elements'"
+              :selected="activeView === 'elements'"
+              initials="E"
+              id="elements"
+            ></j-community-item>
+            <j-popover
+              class="tooltip"
+              event="mouseover"
+              placement="right"
+              selector="#elements"
+            >
+              Elements
+            </j-popover>
+            <j-community-item
+              @click="activeView = 'patterns'"
+              id="patterns"
+              :selected="activeView === 'patterns'"
+              initials="P"
+            ></j-community-item>
+            <j-popover
+              class="tooltip"
+              event="mouseover"
+              placement="right"
+              selector="#patterns"
+            >
+              Patterns
+            </j-popover>
+          </div>
+          <div class="settings">
+            <j-button
+              @click="() => darkMode = !darkMode"
+              size="xl"
+              square
+              circle
+            >
+              <sl-icon :name="darkMode ? 'sun' : 'moon'"></sl-icon>
+            </j-button>
+          </div>
         </aside>
         <aside class="sidebar">
           <j-text class="logo" variant="heading-sm">
@@ -156,6 +176,7 @@
       const app = Vue.createApp({
         data() {
           return {
+            darkMode: false,
             activeView: "elements",
             patterns: [],
             elements: [
@@ -220,10 +241,10 @@
                 group: "form",
                 href: "#select",
                 example: `
-                  <j-select>
+                  <j-select label="Values" placeholder="Select an option">
                     <j-menu>
-                      <j-menu-item>Hello</j-menu-item>
-                      <j-menu-item>Hello</j-menu-item>
+                      <j-menu-item value="1">Menu 1</j-menu-item>
+                      <j-menu-item value="2">Menu 2</j-menu-item>
                     </j-menu>
                   </j-select>
                 `,
@@ -354,6 +375,12 @@
               },
             ],
           };
+        },
+        watch: {
+          darkMode: function (val) {
+            if (val) document.body.setAttribute("theme", "dark");
+            else document.body.removeAttribute("theme");
+          },
         },
         computed: {
           groupedSections() {
