@@ -215,7 +215,7 @@
               {
                 id: "select",
                 title: "Select",
-                icon: "pencil",
+                icon: "menu-button-wide",
                 tagName: "j-select",
                 group: "form",
                 href: "#select",
@@ -224,8 +224,31 @@
                     <j-menu>
                       <j-menu-item>Hello</j-menu-item>
                       <j-menu-item>Hello</j-menu-item>
-                    <j-menu>
+                    </j-menu>
                   </j-select>
+                `,
+              },
+              {
+                id: "modal",
+                title: "Modal",
+                icon: "chat-square",
+                tagName: "j-select",
+                group: "primitives",
+                href: "#modal",
+                example: `
+                  <j-button onclick="modall.open = true">Toggle</j-button>
+                  <j-modal id="modall">
+                    <header slot="header">
+                      <j-text variant="heading">Create something</j-text>
+                    </header>
+                    <div>
+                      <j-input label="Your group name" help-text="Here is some help text"></j-input>
+                    </div>
+                    <footer slot="footer">
+                      <j-button variant="primary" size="lg">Create</j-button>
+                      <j-button size="lg">Cancel</j-button>
+                    </footer>
+                  </j-modal>
                 `,
               },
               {
@@ -244,9 +267,9 @@
               },
               {
                 id: "menu",
-                title: "Menu",
+                title: "Menu group",
                 tagName: "j-menu-group-item",
-                icon: "view-stacked",
+                icon: "folder",
                 group: "navigation",
                 href: "#menu",
                 example: `
