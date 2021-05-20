@@ -17,3 +17,4 @@ export * as CommunityItem from "./components/community-item";
 export * as Input from "./components/input";
 export * as Checkbox from "./components/checkbox";
 export * as Select from "./components/select";
+export * as Modal from "./components/modal";
