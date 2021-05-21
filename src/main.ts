@@ -18,3 +18,4 @@ export * as Input from "./components/input";
 export * as Checkbox from "./components/checkbox";
 export * as Select from "./components/select";
 export * as Modal from "./components/modal";
+export * as Tooltip from "./components/tooltip";
