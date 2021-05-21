@@ -79,6 +79,8 @@ const styles = css`
     border: 0;
     width: 15px;
     height: 15px;
+    color: var(--j-color-black);
+    fill: currentColor;
     position: absolute;
     right: var(--j-space-600);
     top: var(--j-space-600);

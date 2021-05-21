@@ -5,7 +5,7 @@ import sharedStyles from "../../shared/styles";
 const styles = css`
   [part="base"] {
     border-radius: var(--j-border-radius);
-    padding: var(--j-space-300);
+    padding: var(--j-space-300) 0;
     min-width: 200px;
     background: var(--j-color-white);
     border: 1px solid var(--j-color-ui-200);

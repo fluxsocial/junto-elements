@@ -18,11 +18,12 @@ const styles = css`
     width: 100%;
   }
   :host table {
+    box-shadow: var(--j-depth-100);
     border-collapse: collapse;
     border-radius: var(--j-border-radius);
     padding: 0;
     margin: 0;
-    border: 1px solid var(--j-color-ui-100);
+    border: 0;
     text-align: left;
   }
   :host table th {

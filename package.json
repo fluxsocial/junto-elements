@@ -2,7 +2,11 @@
   "name": "junto-elements",
   "version": "0.0.0",
   "description": "",
-  "main": "index.js",
+  "homepage": "https://junto-elements.netlify.com",
+  "main": "dist/main.js",
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "@popperjs/core": "^2.9.2",
     "lit": "^2.0.0-rc.2"
@@ -11,17 +15,22 @@
     "esbuild": "^0.12.0",
     "highlight.js": "^10.7.2",
     "live-server": "^1.2.1",
+    "np": "^7.5.0",
     "npm-run-all": "^4.1.5",
     "web-component-analyzer": "^1.1.6"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "run-p watch docs",
-    "build": "run-s analyze package",
-    "docs": "live-server",
-    "analyze": "web-component-analyzer src --outFile components.json",
-    "watch": "esbuild src/main.ts --watch --bundle --minify --sourcemap --outfile=dist/main.js",
-    "package": "esbuild src/main.ts --bundle --minify --sourcemap --outfile=dist/main.js"
+    "prepublish": "run-s build:*",
+    "release": "np",
+    "start": "run-p dev:*",
+    "build": "run-s build:*",
+    "dev": "run-p dev:*",
+    "dev:docs": "live-server",
+    "dev:watch": "esbuild src/main.ts --watch --bundle --minify --sourcemap --outfile=dist/main.js",
+    "build:analyze": "web-component-analyzer src --outFile components.json",
+    "build:iife": "esbuild src/main.ts --format=iife --format=esm --bundle --minify --sourcemap --outfile=dist/main.js",
+    "build:esm": "esbuild src/main.ts --format=iife --format=esm --bundle --minify --sourcemap --outfile=dist/esm.js"
   },
   "keywords": [],
   "author": "",

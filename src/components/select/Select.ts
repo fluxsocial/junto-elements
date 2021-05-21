@@ -70,8 +70,6 @@ export default class Select extends LitElement {
 
     const options = this.querySelectorAll("[value]");
 
-    console.log(options);
-
     options.forEach((option) => {
       option.addEventListener("click", (e: any) => {
         this.open = false;

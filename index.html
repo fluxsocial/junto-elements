@@ -20,6 +20,11 @@
         padding: 0;
         margin: 0;
       }
+      [theme="dark"] {
+        --j-left-nav-bg: var(--j-color-white);
+        --j-sidebar-bg: var(--j-color-ui-50);
+        --j-main-content-bg: var(--j-color-ui-white);
+      }
       .tooltip {
         z-index: 999;
         border-radius: 4px;
@@ -28,14 +33,21 @@
         color: var(--j-color-white);
       }
       .layout {
+        background-color: var(--j-main-content-bg);
         display: grid;
-        grid-template-columns: 120px 250px 700px;
+        grid-template-columns: 260px 1fr;
       }
       .logo {
-        display: block;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: var(--j-space-600);
         padding-top: var(--j-space-600);
-        padding-left: var(--j-space-300);
+        padding-left: var(--j-space-700);
+        padding-right: var(--j-space-400);
+        padding-bottom: var(--j-space-600);
       }
+
       .nav {
         display: flex;
         flex-direction: column;
@@ -43,37 +55,21 @@
         padding-top: var(--j-space-600);
       }
       .main-content {
+        max-width: 600px;
         scroll-behavior: smooth;
-      }
-      .left-nav {
-        position: sticky;
-        top: 0;
-        left: 0;
-        height: 100vh;
-        padding-top: var(--j-space-600);
-        display: flex;
-        gap: var(--j-space-600);
-        align-items: center;
-        justify-content: space-between;
-        flex-direction: column;
-      }
-      .communities {
-        display: flex;
-        gap: var(--j-space-600);
-        align-items: center;
-        flex-direction: column;
       }
       .settings {
         height: 100px;
       }
       .sidebar {
+        background-color: var(--j-sidebar-bg);
         position: sticky;
         top: 0;
         left: 0;
         height: 100vh;
-        padding: var(--j-space-400);
         overflow-y: auto;
         overscroll-behavior: contain;
+        border-right: 1px solid var(--j-color-ui-50);
       }
       .section {
         padding: var(--j-space-800);
@@ -84,53 +80,19 @@
   <body>
     <div id="app">
       <main class="layout">
-        <aside class="left-nav">
-          <div class="communities">
-            <j-community-item
-              @click="activeView = 'elements'"
-              :selected="activeView === 'elements'"
-              initials="E"
-              id="elements"
-            ></j-community-item>
-            <j-popover
-              class="tooltip"
-              event="mouseover"
-              placement="right"
-              selector="#elements"
-            >
-              Elements
-            </j-popover>
-            <j-community-item
-              @click="activeView = 'patterns'"
-              id="patterns"
-              :selected="activeView === 'patterns'"
-              initials="P"
-            ></j-community-item>
-            <j-popover
-              class="tooltip"
-              event="mouseover"
-              placement="right"
-              selector="#patterns"
-            >
-              Patterns
-            </j-popover>
-          </div>
-          <div class="settings">
-            <j-button
-              @click="() => darkMode = !darkMode"
-              size="xl"
-              square
-              circle
-            >
-              <sl-icon :name="darkMode ? 'sun' : 'moon'"></sl-icon>
-            </j-button>
-          </div>
-        </aside>
         <aside class="sidebar">
-          <j-text class="logo" variant="heading-sm">
-            <span v-if="activeView === 'elements'">Junto Elements</span>
-            <span v-if="activeView === 'patterns'">Junto Patterns</span>
-          </j-text>
+          <div class="logo">
+            <div>
+              <img
+                class="logo__img"
+                width="25"
+                src="https://junto.foundation/dist/junto-home-2.0__logo--rainbow.png?d9ff94e4e39bfd0536e60f760a9e6bd7"
+              />
+            </div>
+            <j-text nomargin class="logo_text" size="600"
+              >Junto Elements</j-text
+            >
+          </div>
           <nav id="navtarget" class="nav">
             <j-menu-group-item
               :title="key"
@@ -177,14 +139,12 @@
         data() {
           return {
             darkMode: false,
-            activeView: "elements",
-            patterns: [],
-            elements: [
+            sections: [
               {
                 id: "text",
                 title: "Text",
                 tagName: "j-text",
-                group: "primitives",
+                group: "elements",
                 icon: "text-paragraph",
                 href: "#text",
                 example: `<j-text variant="heading">The quick brown fox jumped over the lazy dog</j-text>`,
@@ -194,7 +154,7 @@
                 title: "Button",
                 icon: "app",
                 tagName: "j-button",
-                group: "primitives",
+                group: "elements",
                 href: "#button",
                 example: `<j-button>Button text</j-button>`,
               },
@@ -203,7 +163,7 @@
                 title: "Radio button",
                 icon: "record-circle",
                 tagName: "j-radio-button",
-                group: "form",
+                group: "elements",
                 href: "#radio",
                 example: `<j-radio-button name="radio">Radio button</j-radio-button>`,
               },
@@ -212,7 +172,7 @@
                 title: "Checkbox",
                 icon: "check2-square",
                 tagName: "j-checkbox",
-                group: "form",
+                group: "elements",
                 href: "#checkbox",
                 example: `<j-checkbox name="radio">Radio button</j-checkbox>`,
               },
@@ -221,7 +181,7 @@
                 title: "Input",
                 icon: "pencil",
                 tagName: "j-input",
-                group: "form",
+                group: "elements",
                 href: "#input",
                 example: `
                   <j-input
@@ -238,7 +198,7 @@
                 title: "Select",
                 icon: "menu-button-wide",
                 tagName: "j-select",
-                group: "form",
+                group: "elements",
                 href: "#select",
                 example: `
                   <j-select label="Values" placeholder="Select an option">
@@ -250,11 +210,24 @@
                 `,
               },
               {
+                id: "tooltip",
+                title: "Tooltip",
+                icon: "menu-button-wide",
+                tagName: "j-tooltip",
+                group: "elements",
+                href: "#tooltip",
+                example: `
+                  <j-tooltip title="Hello">
+                    <j-button>Button</j-button>
+                  </j-tooltip>
+                `,
+              },
+              {
                 id: "modal",
                 title: "Modal",
                 icon: "chat-square",
                 tagName: "j-select",
-                group: "primitives",
+                group: "elements",
                 href: "#modal",
                 example: `
                   <j-button onclick="modall.open = true">Toggle</j-button>
@@ -277,7 +250,7 @@
                 title: "Menu",
                 tagName: "j-menu",
                 icon: "view-stacked",
-                group: "navigation",
+                group: "elements",
                 href: "#menu",
                 example: `
                   <j-menu>
@@ -291,7 +264,7 @@
                 title: "Menu group",
                 tagName: "j-menu-group-item",
                 icon: "folder",
-                group: "navigation",
+                group: "elements",
                 href: "#menu",
                 example: `
                   <j-menu>
@@ -309,7 +282,7 @@
                 id: "menuitem",
                 title: "Menu item",
                 tagName: "j-menu-item",
-                group: "navigation",
+                group: "elements",
                 icon: "view-list",
                 href: "#menuitem",
                 example: `
@@ -323,7 +296,7 @@
                 id: "popover",
                 title: "Popover",
                 icon: "menu-up",
-                group: "navigation",
+                group: "elements",
                 tagName: "j-popover",
                 href: "#popover",
                 example: `
@@ -342,7 +315,7 @@
                 title: "Community item",
                 icon: "globe2",
                 tagName: "j-community-item",
-                group: "navigation",
+                group: "elements",
                 href: "#communityitem",
                 example: `<j-community-item src="https://i.pravatar.cc/300"></j-community-item>`,
               },
@@ -351,7 +324,7 @@
                 title: "Message item",
                 icon: "chat-text",
                 tagName: "j-message-item",
-                group: "chat",
+                group: "elements",
                 href: "#message",
                 example: `
                   <j-message-item timestamp="11/11/2021">
@@ -384,16 +357,16 @@
         },
         computed: {
           groupedSections() {
-            return this[this.activeView].reduce((acc, section) => {
-              const group = acc[section.group] || [];
-              return {
-                ...acc,
-                [section.group]: [...group, { ...section }],
-              };
-            }, {});
-          },
-          sections() {
-            return this[this.activeView];
+            return this.sections.reduce(
+              (acc, section) => {
+                const group = acc[section.group] || [];
+                return {
+                  ...acc,
+                  [section.group]: [...group, { ...section }],
+                };
+              },
+              { "getting started": [], elements: [], patterns: [] }
+            );
           },
         },
       });

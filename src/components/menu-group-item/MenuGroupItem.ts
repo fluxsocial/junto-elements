@@ -5,17 +5,15 @@ import sharedStyles from "../../shared/styles";
 const styles = css`
   :host {
   }
-  :host([open]) [part="base"]:after {
-    transform: rotate(45deg);
-  }
   [part="summary"] {
+    position: relative;
     cursor: pointer;
     list-style: none;
     text-transform: uppercase;
     font-size: var(--j-font-size-400);
     color: var(--j-color-ui-400);
     font-weight: 500;
-    padding-left: var(--j-space-500);
+    padding-left: var(--j-space-800);
     -webkit-appearance: none;
   }
   [part="summary"]::-webkit-details-marker {
@@ -24,9 +22,9 @@ const styles = css`
   [part="summary"]:hover {
     color: var(--j-color-ui-700);
   }
-  [part="base"]:after {
+  [part="summary"]:after {
     top: 6px;
-    left: 0;
+    left: var(--j-space-500);
     position: absolute;
     display: block;
     content: "";
@@ -36,6 +34,10 @@ const styles = css`
     height: 7px;
     transition: all 0.2s ease;
     transform: rotate(-45deg);
+    transform-origin: center;
+  }
+  :host([open]) [part="summary"]:after {
+    transform: rotate(45deg);
   }
   [part="content"] {
     margin-top: var(--j-space-300);
