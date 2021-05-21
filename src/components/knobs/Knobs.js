@@ -190,22 +190,25 @@ class Knobs extends LitElement {
           <td>${attr.name}</td>
           <td>string</td>
           <td>
-            <select
+            <j-select
               .value=${this.componentEl.getAttribute(attr.name)}
               @change=${(e) => this._handleAttrChange(e, attr)}
             >
-              ${options.map((opt) => {
-                return html`
-                  <option
-                    ?selected=${this.componentEl.getAttribute(attr.name) ===
-                    opt}
-                    value=${opt}
-                  >
-                    ${opt}
-                  </option>
-                `;
-              })}
-            </select>
+              <j-menu>
+                ${options.map((opt) => {
+                  return html`
+                    <j-menu-item
+                      label=${opt}
+                      ?selected=${this.componentEl.getAttribute(attr.name) ===
+                      opt}
+                      value=${opt}
+                    >
+                      ${opt}
+                    </j-menu-item>
+                  `;
+                })}
+              </j-menu>
+            </j-select>
           </td>
         </tr>
       `;

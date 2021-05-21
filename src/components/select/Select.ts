@@ -37,7 +37,10 @@ export default class Select extends LitElement {
    * @type {String}
    * @attr
    */
-  @property({ type: String, reflect: true })
+  @property({
+    type: String,
+    reflect: true,
+  })
   value = "";
 
   /**
@@ -49,7 +52,7 @@ export default class Select extends LitElement {
   label = "";
 
   /**
-   * Selected
+   * Open
    * @type {Boolean}
    * @attr
    */
@@ -65,13 +68,13 @@ export default class Select extends LitElement {
   inputValue = "";
 
   firstUpdated() {
-    const input = this.renderRoot.querySelector("[part='input']");
+    const input = this.renderRoot.querySelector("[part='input-wrapper']");
     const menu = this.renderRoot.querySelector("[part='menu']") as any;
 
     const options = this.querySelectorAll("[value]");
 
     options.forEach((option) => {
-      option.addEventListener("click", (e: any) => {
+      option.addEventListener("mousedown", (e: any) => {
         this.open = false;
         this.value = e.target.value;
         this.inputValue = e.target.label;
@@ -79,8 +82,8 @@ export default class Select extends LitElement {
     });
 
     // Handle click outside
-    window.addEventListener("mousedown", (e) => {
-      const clickedInput = input.contains(e.target as Node);
+    window.addEventListener("click", (e) => {
+      const clickedInput = this.contains(e.target as Node);
       const clickedMenu = this.contains(e.target as Node);
       if (!clickedInput && !clickedMenu) {
         this.open = false;
@@ -89,7 +92,24 @@ export default class Select extends LitElement {
   }
 
   _handleInputClick(e) {
-    this.open = true;
+    e.preventDefault();
+    setTimeout(() => {
+      this.open = true;
+    }, 0);
+  }
+
+  shouldUpdate(changedProperties) {
+    if (changedProperties.has("value")) {
+      this.dispatchEvent(new CustomEvent("change", { bubbles: true }));
+      this.querySelectorAll("[value]").forEach((option) => {
+        option.removeAttribute("selected");
+        if (option.getAttribute("value") === this.value) {
+          option.setAttribute("selected", "");
+        }
+      });
+    }
+
+    return true;
   }
 
   render() {
