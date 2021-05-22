@@ -16,7 +16,7 @@ const styles = css`
     padding-left: var(--j-space-800);
     -webkit-appearance: none;
   }
-  [part="summary"]::-webkit-details-marker {
+  [part="summary"]::marker {
     display: none;
   }
   [part="summary"]:hover {

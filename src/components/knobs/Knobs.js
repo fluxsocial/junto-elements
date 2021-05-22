@@ -220,13 +220,13 @@ class Knobs extends LitElement {
           <td>${attr.name}</td>
           <td>${attr.type}</td>
           <td>
-            <input
+            <j-input
               name=${attr.name}
               .value=${this.componentEl[attr.name]}
               @input=${(e) => this._handleAttrChange(e, attr)}
               type="text"
             >
-            </input>
+            </j-input>
           </td>
         </tr>
       `;

@@ -20,6 +20,7 @@ const styles = css`
     height: var(--j-input-height);
   }
   [part="input-field"] {
+    font-size: var(--j-font-size-400);
     color: var(--j-color-black);
     background: var(--j-color-white);
     border-radius: var(--j-border-radius);

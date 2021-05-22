@@ -11,10 +11,11 @@ const styles = css`
     --j-menu-item-color-hover: var(--j-color-ui-900);
     --j-menu-item-bg-hover: var(--j-color-ui-50);
     --j-menu-item-padding: 0 var(--j-space-700);
+    --j-menu-item-font-weight: 400;
   }
   :host([selected]),
   :host([selected]) [part="base"]:hover {
-    font-weight: 500;
+    --j-menu-item-font-weight: 500;
     --j-menu-item-bg: var(--j-color-primary-50);
     --j-menu-item-bg-hover: var(--j-color-primary-50);
     --j-menu-item-color: var(--j-color-primary-600);
@@ -44,7 +45,7 @@ const styles = css`
     height: var(--j-menu-item-height);
     padding: var(--j-menu-item-padding);
     color: var(--j-menu-item-color);
-    font-weight: 400;
+    font-weight: var(--j-menu-item-font-weight);
   }
   [part="base"]:hover {
     color: var(--j-menu-item-color-hover);
