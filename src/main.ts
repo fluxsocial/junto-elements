@@ -19,3 +19,5 @@ export * as Checkbox from "./components/checkbox";
 export * as Select from "./components/select";
 export * as Modal from "./components/modal";
 export * as Tooltip from "./components/tooltip";
+export * as Editor from "./components/editor";
+export * as Icon from "./components/icon";
