@@ -107,11 +107,11 @@
                 :href="'#' + section.id"
               >
                 <j-menu-item size="lg">
-                  <sl-icon
+                  <j-icon
                     v-if="section.icon"
                     slot="start"
                     :name="section.icon"
-                  ></sl-icon>
+                  ></j-icon>
                   {{section.title}}
                 </j-menu-item>
               </a>
@@ -138,6 +138,7 @@
       const app = Vue.createApp({
         data() {
           return {
+            editorValue: "Hello",
             darkMode: false,
             sections: [
               {
@@ -157,6 +158,15 @@
                 group: "elements",
                 href: "#button",
                 example: `<j-button>Button text</j-button>`,
+              },
+              {
+                id: "icon",
+                title: "Icons",
+                icon: "emoji-smile",
+                tagName: "j-icon",
+                group: "elements",
+                href: "#icon",
+                example: `<j-icon name="sun"></j-icon>`,
               },
               {
                 id: "radio-button",
@@ -220,6 +230,18 @@
                   <j-tooltip title="Hello">
                     <j-button>Button</j-button>
                   </j-tooltip>
+                `,
+              },
+              {
+                id: "editor",
+                title: "Editor",
+                icon: "menu-button-wide",
+                tagName: "j-editor",
+                group: "elements",
+                href: "#editor",
+                example: `
+                  <j-editor>
+                  </j-editor>
                 `,
               },
               {

@@ -207,6 +207,70 @@
       ]
     },
     {
+      "name": "j-editor",
+      "path": "./src/components/editor/Editor.ts",
+      "attributes": [
+        {
+          "name": "value",
+          "type": "string",
+          "default": "\"\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "styles",
+          "type": "CSSResultGroup[]",
+          "default": "[\"sharedStyles\",\"styles\"]"
+        },
+        {
+          "name": "value",
+          "attribute": "value",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "editorInstance",
+          "type": "null"
+        }
+      ],
+      "events": [
+        {
+          "name": "change"
+        }
+      ]
+    },
+    {
+      "name": "j-icon",
+      "path": "./src/components/icon/Icon.ts",
+      "attributes": [
+        {
+          "name": "name",
+          "description": "Open",
+          "type": "String",
+          "default": "\"\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "styles",
+          "type": "CSSResultGroup[]",
+          "default": "[\"sharedStyles\",\"styles\"]"
+        },
+        {
+          "name": "name",
+          "attribute": "name",
+          "description": "Open",
+          "type": "String",
+          "default": "\"\""
+        },
+        {
+          "name": "svg",
+          "type": "string",
+          "default": "\"\""
+        }
+      ]
+    },
+    {
       "name": "j-input",
       "path": "./src/components/input/Input.js",
       "attributes": [
@@ -892,7 +956,7 @@
         },
         {
           "name": "open",
-          "description": "Selected",
+          "description": "Open",
           "type": "Boolean",
           "default": "false"
         },
@@ -926,7 +990,7 @@
         {
           "name": "open",
           "attribute": "open",
-          "description": "Selected",
+          "description": "Open",
           "type": "Boolean",
           "default": "false"
         },
@@ -936,6 +1000,11 @@
           "description": "Input value",
           "type": "Boolean",
           "default": "\"\""
+        }
+      ],
+      "events": [
+        {
+          "name": "change"
         }
       ]
     },
@@ -1001,6 +1070,68 @@
           "description": "No margin",
           "type": "Boolean",
           "default": "\"\""
+        }
+      ]
+    },
+    {
+      "name": "j-tooltip",
+      "path": "./src/components/tooltip/Tooltip.ts",
+      "attributes": [
+        {
+          "name": "open",
+          "description": "Open",
+          "type": "Boolean",
+          "default": "false"
+        },
+        {
+          "name": "title",
+          "description": "Title",
+          "type": "String",
+          "default": "\"\""
+        },
+        {
+          "name": "placement",
+          "description": "Placement",
+          "type": "\"auto\"|\"auto-start\"|\"auto-end\"|\"top\"|\"top-start\"|\"top-end\"|\"bottom\"|\"bottom-start\"|\"bottom-end\"|\"right\"|\"right-start\"|\"right-end\"|\"left\"|\"left-start\"|\"left-end",
+          "default": "\"auto\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "styles",
+          "type": "CSSResultGroup[]",
+          "default": "[\"sharedStyles\",\"styles\"]"
+        },
+        {
+          "name": "open",
+          "attribute": "open",
+          "description": "Open",
+          "type": "Boolean",
+          "default": "false"
+        },
+        {
+          "name": "title",
+          "attribute": "title",
+          "description": "Title",
+          "type": "String",
+          "default": "\"\""
+        },
+        {
+          "name": "placement",
+          "attribute": "placement",
+          "description": "Placement",
+          "type": "\"auto\"|\"auto-start\"|\"auto-end\"|\"top\"|\"top-start\"|\"top-end\"|\"bottom\"|\"bottom-start\"|\"bottom-end\"|\"right\"|\"right-start\"|\"right-end\"|\"left\"|\"left-start\"|\"left-end",
+          "default": "\"auto\""
+        },
+        {
+          "name": "popperInstance",
+          "type": "null"
+        },
+        {
+          "name": "tooltipEl"
+        },
+        {
+          "name": "contentEl"
         }
       ]
     }
