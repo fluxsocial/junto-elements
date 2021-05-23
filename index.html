@@ -47,7 +47,11 @@
         padding-right: var(--j-space-400);
         padding-bottom: var(--j-space-600);
       }
-
+      .dark-mode {
+        position: fixed;
+        right: var(--j-space-500);
+        top: var(--j-space-500);
+      }
       .nav {
         display: flex;
         flex-direction: column;
@@ -93,6 +97,19 @@
               >Junto Elements</j-text
             >
           </div>
+
+          <div class="dark-mode">
+            <j-button
+              variant="transparent"
+              size="xl"
+              square
+              circle
+              @click="darkMode = !darkMode"
+            >
+              <j-icon :name="darkMode ? 'sun' : 'moon'"></j-icon>
+            </j-button>
+          </div>
+
           <nav id="navtarget" class="nav">
             <j-menu-group-item
               :title="key"
@@ -106,14 +123,7 @@
                 :key="section.id"
                 :href="'#' + section.id"
               >
-                <j-menu-item size="lg">
-                  <j-icon
-                    v-if="section.icon"
-                    slot="start"
-                    :name="section.icon"
-                  ></j-icon>
-                  {{section.title}}
-                </j-menu-item>
+                <j-menu-item size="lg"> {{section.title}} </j-menu-item>
               </a>
             </j-menu-group-item>
           </nav>
@@ -138,8 +148,8 @@
       const app = Vue.createApp({
         data() {
           return {
-            editorValue: "Hello",
             darkMode: false,
+            activeSection: "",
             sections: [
               {
                 id: "text",
@@ -197,8 +207,8 @@
                   <j-input
                     label="First Name"
                     placeholder="Joe Doe"
-                    min="10"
-                    type="number"
+                    required
+                    error-text="Error"
                     help-text="This is the help text">
                   </j-input>
                 `,
@@ -212,10 +222,8 @@
                 href: "#select",
                 example: `
                   <j-select label="Values" placeholder="Select an option">
-                    <j-menu>
-                      <j-menu-item value="1">Menu 1</j-menu-item>
-                      <j-menu-item value="2">Menu 2</j-menu-item>
-                    </j-menu>
+                    <j-menu-item value="1">Menu 1</j-menu-item>
+                    <j-menu-item value="2">Menu 2</j-menu-item>
                   </j-select>
                 `,
               },
@@ -240,7 +248,7 @@
                 group: "elements",
                 href: "#editor",
                 example: `
-                  <j-editor>
+                  <j-editor placeholder="Write your first message...">
                   </j-editor>
                 `,
               },
@@ -248,7 +256,7 @@
                 id: "modal",
                 title: "Modal",
                 icon: "chat-square",
-                tagName: "j-select",
+                tagName: "j-modal",
                 group: "elements",
                 href: "#modal",
                 example: `
@@ -375,6 +383,13 @@
           darkMode: function (val) {
             if (val) document.body.setAttribute("theme", "dark");
             else document.body.removeAttribute("theme");
+          },
+        },
+        methods: {
+          isActiveSection(id) {
+            const isActive = this.activeSection === id;
+            console.log("is section", isActive);
+            return isActive;
           },
         },
         computed: {
