@@ -14,6 +14,7 @@
     "@tiptap/extension-code-block": "^2.0.0-beta.15",
     "@tiptap/extension-document": "^2.0.0-beta.12",
     "@tiptap/extension-paragraph": "^2.0.0-beta.14",
+    "@tiptap/extension-placeholder": "^2.0.0-beta.19",
     "@tiptap/extension-text": "^2.0.0-beta.12",
     "@tiptap/starter-kit": "^2.0.0-beta.63",
     "lit": "^2.0.0-rc.2"
