@@ -5,26 +5,35 @@ import sharedStyles from "../../shared/styles";
 
 const styles = css`
   :host {
-    position: relative;
   }
   [part="base"] {
+    position: relative;
   }
   [part="input"]::part(input-field) {
     cursor: pointer;
   }
   [part="menu"] {
+    background: var(--j-color-white);
     position: absolute;
     left: 0;
-    top: 80px;
-    max-height: 400px;
+    top: 120%;
+    max-height: 200px;
     overflow-y: auto;
-    width: 250px;
+    width: 100%;
+    border: 1px solid var(--j-color-ui-100);
+    border-radius: var(--j-border-radius);
     visibility: hidden;
   }
   :host([open]) [part="menu"] {
     height: fit-content;
     visibility: visible;
     z-index: 999;
+  }
+  [part="arrow"] {
+    position: absolute;
+    right: var(--j-space-400);
+    top: 55%;
+    transform: translateY(-50%);
   }
 `;
 
@@ -121,7 +130,7 @@ export default class Select extends LitElement {
         .value=${this.inputValue}
         part="input"
       ></j-input>
-
+      <j-icon part="arrow" name="chevron-down"></j-icon>
       <nav part="menu">
         <slot></slot>
       </nav>

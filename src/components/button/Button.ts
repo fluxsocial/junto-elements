@@ -45,7 +45,7 @@ const styles = css`
   }
 
   :host([variant="primary"]) {
-    --j-button-bg: var(--j-color-primary-400);
+    --j-button-bg: var(--j-color-primary-600);
     --j-button-bg-hover: var(--j-color-primary-500);
     --j-button-text: var(--j-color-white);
     --j-button-border: 1px solid transparent;

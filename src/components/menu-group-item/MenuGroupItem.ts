@@ -30,8 +30,8 @@ const styles = css`
     content: "";
     border-right: 1px solid var(--j-color-ui-500);
     border-bottom: 1px solid var(--j-color-ui-500);
-    width: 7px;
-    height: 7px;
+    width: 4px;
+    height: 4px;
     transition: all 0.2s ease;
     transform: rotate(-45deg);
     transform-origin: center;

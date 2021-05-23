@@ -1,5 +1,5 @@
 import { html, css, LitElement } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { customElement, property, state } from "lit/decorators.js";
 import sharedStyles from "../../shared/styles";
 
 const styles = css`
@@ -10,7 +10,7 @@ const styles = css`
     --j-menu-item-color: var(--j-color-ui-600);
     --j-menu-item-color-hover: var(--j-color-ui-900);
     --j-menu-item-bg-hover: var(--j-color-ui-50);
-    --j-menu-item-padding: 0 var(--j-space-700);
+    --j-menu-item-padding: 0 var(--j-space-800);
     --j-menu-item-font-weight: 400;
   }
   :host([selected]),
@@ -76,18 +76,16 @@ export default class MenuItem extends LitElement {
   @property({ type: String, reflect: true })
   value = "";
 
-  /**
-   * Label
-   * @type {String}
-   * @attr
-   */
-  @property({ type: String, reflect: true })
-  label = "";
+  @state()
+  _label = "";
 
-  firstUpdated() {
-    if (!this.label) {
-      this.label = this.innerText;
-    }
+  get label() {
+    return this._label || this.getAttribute("label") || this.innerText;
+  }
+
+  set label(val) {
+    this._label = val;
+    this.setAttribute("label", val);
   }
 
   render() {
