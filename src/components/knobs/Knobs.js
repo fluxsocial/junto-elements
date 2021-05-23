@@ -153,13 +153,12 @@ class Knobs extends LitElement {
   }
 
   _handleAttrChange(e, attr) {
-    if (attr.type.includes("|")) {
+    if (attr.type.includes("|") && e.target.value) {
       const trimmedVal = e.target.value.replace(/\s+/g, "");
       this.componentEl.setAttribute(attr.name, trimmedVal);
     }
     if (attr.type === "string" || attr.type === "String") {
-      const trimmedVal = e.target.value.replace(/\s+/g, "");
-      this.componentEl.setAttribute(attr.name, trimmedVal);
+      this.componentEl.setAttribute(attr.name, e.target.value);
     }
     if (attr.type === "boolean" || attr.type === "Boolean") {
       if (e.target.checked) {
@@ -194,20 +193,18 @@ class Knobs extends LitElement {
               .value=${this.componentEl.getAttribute(attr.name)}
               @change=${(e) => this._handleAttrChange(e, attr)}
             >
-              <j-menu>
-                ${options.map((opt) => {
-                  return html`
-                    <j-menu-item
-                      label=${opt}
-                      ?selected=${this.componentEl.getAttribute(attr.name) ===
-                      opt}
-                      value=${opt}
-                    >
-                      ${opt}
-                    </j-menu-item>
-                  `;
-                })}
-              </j-menu>
+              ${options.map((opt) => {
+                return html`
+                  <j-menu-item
+                    label=${opt}
+                    ?selected=${this.componentEl.getAttribute(attr.name) ===
+                    opt}
+                    value=${opt}
+                  >
+                    ${opt}
+                  </j-menu-item>
+                `;
+              })}
             </j-select>
           </td>
         </tr>
