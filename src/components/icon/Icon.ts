@@ -8,7 +8,6 @@ const styles = css`
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    vertical-align: sub;
   }
   :host svg {
     display: block;
@@ -33,9 +32,21 @@ export default class Icon extends LitElement {
   svg = "";
 
   firstUpdated() {
+    this.fetchIcon();
+  }
+
+  fetchIcon() {
     fetch(`https://unpkg.com/bootstrap-icons@1.5.0/icons/${this.name}.svg`)
       .then((res) => res.text())
       .then((svg) => (this.svg = svg));
+  }
+
+  shouldUpdate(changedProperties) {
+    if (changedProperties.has("name")) {
+      this.fetchIcon();
+    }
+
+    return true;
   }
 
   render() {
