@@ -5,6 +5,7 @@ import sharedStyles from "../../shared/styles";
 import { Editor as TipTap } from "@tiptap/core";
 import StarterKit from "@tiptap/starter-kit";
 import CodeBlock from "@tiptap/extension-code-block";
+import Placeholder from "@tiptap/extension-placeholder";
 
 const styles = css`
   :host {
@@ -26,13 +27,36 @@ const styles = css`
     padding: var(--j-space-500);
     border-bottom: 1px solid var(--j-color-ui-100);
     width: 100%;
-    min-height: 40px;
   }
   .ProseMirror:focus {
     outline: 0;
   }
-  p {
+  *:last-of-type {
+    margin-bottom: 0;
+  }
+  .ProseMirror p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     margin-top: 0;
+  }
+  .ProseMirror pre {
+    background: #0d0d0d;
+    color: #fff;
+    font-family: JetBrainsMono, monospace;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+  }
+  /* Placeholder (at the top) */
+  .ProseMirror p.is-editor-empty:first-child::before {
+    content: attr(data-placeholder);
+    float: left;
+    color: #ced4da;
+    pointer-events: none;
+    height: 0;
   }
 `;
 
@@ -43,6 +67,9 @@ export default class Editor extends LitElement {
   @property({ type: String })
   value = "";
 
+  @property({ type: String })
+  placeholder = "";
+
   @state()
   editorInstance = null;
 
@@ -51,10 +78,22 @@ export default class Editor extends LitElement {
     this.editorInstance = new TipTap({
       content: this.value,
       element: editorEl,
-      extensions: [StarterKit, CodeBlock],
+      extensions: [
+        StarterKit,
+        CodeBlock,
+        Placeholder.configure({ placeholder: this.placeholder }),
+      ],
       onUpdate: ({ editor }) => {
         this.value = editor.getHTML();
-        this.dispatchEvent(new CustomEvent("change", { bubbles: true }));
+        this.dispatchEvent(
+          new CustomEvent("change", {
+            bubbles: true,
+            detail: {
+              html: editor.getHTML(),
+              json: editor.getJSON(),
+            },
+          })
+        );
       },
     });
   }
@@ -62,7 +101,7 @@ export default class Editor extends LitElement {
   shouldUpdate(changedProperties) {
     if (changedProperties.has("value") && this.editorInstance) {
       // TODO: Bug when this gets set and marker is put on bottom of input field
-      this.editorInstance.commands.setContent(this.value);
+      // this.editorInstance.commands.setContent(this.value);
     }
     return true;
   }
