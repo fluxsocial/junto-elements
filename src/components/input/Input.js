@@ -1,4 +1,5 @@
 import { LitElement, html, css } from "lit";
+import sharedStyles from "../../shared/styles";
 
 const styles = css`
   :host {
@@ -26,7 +27,8 @@ const styles = css`
     border-radius: var(--j-border-radius);
     border: 1px solid var(--j-color-ui-200);
     height: 100%;
-    min-width: 250px;
+    width: 100%;
+    min-width: 200px;
     padding: 0px var(--j-space-400);
   }
   [part="help-text"],
@@ -87,7 +89,7 @@ class Input extends LitElement {
   }
 
   static get styles() {
-    return [styles];
+    return [styles, sharedStyles];
   }
 
   connectedCallback() {
