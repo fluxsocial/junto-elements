@@ -35,10 +35,9 @@
     "build": "run-s build:*",
     "dev": "run-p dev:*",
     "dev:docs": "live-server",
-    "dev:watch": "esbuild src/main.ts --watch --bundle --minify --sourcemap --outfile=dist/main.js",
+    "dev:watch": "esbuild src/main.ts --watch --format=iife --bundle --minify --sourcemap --outfile=dist/main.js",
     "build:analyze": "web-component-analyzer src --outFile components.json",
-    "build:iife": "esbuild src/main.ts --format=iife --format=esm --bundle --minify --sourcemap --outfile=dist/main.js",
-    "build:esm": "esbuild src/main.ts --format=iife --format=esm --bundle --minify --sourcemap --outfile=dist/esm.js"
+    "build:esm": "esbuild src/main.ts --format=iife --bundle --minify --sourcemap --outfile=dist/main.js"
   },
   "keywords": [],
   "author": "",
