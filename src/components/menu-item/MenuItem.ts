@@ -21,6 +21,13 @@ const styles = css`
     --j-menu-item-color: var(--j-color-primary-600);
     --j-menu-item-color-hover: var(--j-color-primary-600);
   }
+  :host([active]) {
+    --j-menu-item-font-weight: 400;
+    --j-menu-item-bg: var(--j-color-primary-100);
+    --j-menu-item-bg-hover: var(--j-color-primary-100);
+    --j-menu-item-color: var(--j-color-primary-600);
+    --j-menu-item-color-hover: var(--j-color-primary-600);
+  }
   :host([size="sm"]) {
     --j-menu-item-height: var(--j-element-sm);
   }
@@ -67,6 +74,14 @@ export default class MenuItem extends LitElement {
    */
   @property({ type: Boolean, reflect: true })
   selected = false;
+
+  /**
+   * Active
+   * @type {Boolean}
+   * @attr
+   */
+  @property({ type: Boolean, reflect: true })
+  active = false;
 
   /**
    * Value

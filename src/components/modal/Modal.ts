@@ -114,7 +114,7 @@ export default class Menu extends LitElement {
   static styles = [sharedStyles, styles];
 
   /**
-   * Date
+   * Open
    * @type {Boolean}
    * @attr
    */
@@ -131,6 +131,13 @@ export default class Menu extends LitElement {
     },
   })
   open = false;
+
+  shouldUpdate(changedProperties) {
+    if (changedProperties.has("open")) {
+      this.dispatchEvent(new CustomEvent("toggle", { bubbles: true }));
+    }
+    return true;
+  }
 
   render() {
     return html` <div part="base">

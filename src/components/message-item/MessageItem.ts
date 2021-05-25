@@ -11,7 +11,7 @@ const styles = css`
     padding-right: var(--j-space-400);
     padding-top: var(--j-space-500);
     padding-bottom: var(--j-space-500);
-    padding-left: var(--j-space-1000);
+    padding-left: 70px;
     border-radius: var(--j-border-radius);
     box-shadow: var(--j-depth-100);
   }

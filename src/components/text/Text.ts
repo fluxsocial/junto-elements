@@ -22,7 +22,7 @@ const styles = css`
     --j-text-font-color: var(--j-color-ui-700);
     --j-text-font-size: var(--j-font-size-800);
     --j-text-font-weight: 600;
-    --j-text-margin-bottom: var(--j-space-700);
+    --j-text-margin-bottom: var(--j-space-400);
   }
 
   :host([variant="heading-sm"]) {
@@ -70,42 +70,6 @@ const styles = css`
   :host([nomargin]) {
     --j-text-margin-bottom: 0;
   }
-
-  :host([size="200"]) {
-    --j-text-font-size: var(--j-font-size-200);
-  }
-
-  :host([size="300"]) {
-    --j-text-font-size: var(--j-font-size-300);
-  }
-
-  :host([size="400"]) {
-    --j-text-font-size: var(--j-font-size-400);
-  }
-
-  :host([size="500"]) {
-    --j-text-font-size: var(--j-font-size-x-md);
-  }
-
-  :host([size="600"]) {
-    --j-text-font-size: var(--j-font-size-600);
-  }
-
-  :host([size="700"]) {
-    --j-text-font-size: var(--j-font-size-700);
-  }
-
-  :host([size="800"]) {
-    --j-text-font-size: var(--j-font-size-800);
-  }
-
-  :host([size="900"]) {
-    --j-text-font-size: var(--j-font-size-900);
-  }
-
-  :host([size="1000"]) {
-    --j-text-font-size: var(--j-font-size-1000);
-  }
 `;
 
 @customElement("j-text")
@@ -138,7 +102,22 @@ export default class Text extends LitElement {
    * @type {Boolean}
    * @attr
    */
-  @property({ type: Boolean, reflect: true }) nomargin = "";
+  @property({ type: Boolean, reflect: true }) nomargin = false;
+
+  shouldUpdate(changedProperties) {
+    if (changedProperties.has("size")) {
+      if (this.size) {
+        this.style.setProperty(
+          "--j-text-font-size",
+          `var(--j-font-size-${this.size})`
+        );
+      } else {
+        this.style.removeProperty("--j-text-font-size");
+      }
+    }
+
+    return true;
+  }
 
   render() {
     switch (this.tag) {
