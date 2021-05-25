@@ -125,16 +125,18 @@
           </nav>
         </aside>
         <div class="main-content">
-          <section
-            v-for="section in sections"
-            :key="section.id"
-            class="section"
-            :id="section.id"
-          >
-            <j-text variant="heading-sm">{{section.title}}</j-text>
-            <j-knobs :element="section.tagName" v-html="section.example">
-            </j-knobs>
-          </section>
+          <div v-for="(group, key) in groupedSections" :key="key">
+            <section
+              v-for="(section, index) in group"
+              :key="section.id"
+              class="section"
+              :id="section.id"
+            >
+              <j-text variant="heading-sm">{{section.title}}</j-text>
+              <j-knobs :element="section.tagName" v-html="section.example">
+              </j-knobs>
+            </section>
+          </div>
         </div>
       </main>
     </div>
