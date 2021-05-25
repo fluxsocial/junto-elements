@@ -4,25 +4,34 @@ import sharedStyles from "../../shared/styles";
 
 const styles = css`
   :host {
-    --j-community-item-depth: 0;
-    --j-community-item-size: var(--j-element-xl);
-    --j-community-item-border: 2px solid transparent;
+    --j-avatar-depth: 0;
+    --j-avatar-size: var(--j-element-md);
+    --j-avatar-border: 2px solid transparent;
   }
   :host(:hover) {
-    --j-community-item-depth: var(--j-depth-100);
+    --j-avatar-depth: var(--j-depth-100);
   }
   :host([selected]) {
-    --j-community-item-depth: var(--j-depth-200);
-    --j-community-item-border: 2px solid var(--j-color-primary-500);
+    --j-avatar-depth: var(--j-depth-200);
+    --j-avatar-border: 2px solid var(--j-color-primary-500);
+  }
+  :host([size="sm"]) {
+    --j-avatar-size: var(--j-element-sm);
+  }
+  :host([size="lg"]) {
+    --j-avatar-size: var(--j-element-lg);
+  }
+  :host([size="xl"]) {
+    --j-avatar-size: var(--j-element-xl);
   }
   [part="base"] {
     background: var(--j-color-ui-100);
-    box-shadow: var(--j-community-item-depth);
-    border: var(--j-community-item-border);
+    box-shadow: var(--j-avatar-depth);
+    border: var(--j-avatar-border);
     cursor: pointer;
     padding: 0;
-    width: var(--j-community-item-size);
-    height: var(--j-community-item-size);
+    width: var(--j-avatar-size);
+    height: var(--j-avatar-size);
     border-radius: 50%;
   }
   [part="img"] {
@@ -36,7 +45,7 @@ const styles = css`
   }
 `;
 
-@customElement("j-community-item")
+@customElement("j-avatar")
 export default class Component extends LitElement {
   static styles = [sharedStyles, styles];
 
@@ -44,7 +53,9 @@ export default class Component extends LitElement {
 
   @property({ type: Boolean, reflect: true }) selected = false;
 
-  @property({ type: String, reflect: true }) initials = false;
+  @property({ type: String, reflect: true }) initials = "";
+
+  @property({ type: String, reflect: true }) size = "";
 
   render() {
     return html`<button part="base">
