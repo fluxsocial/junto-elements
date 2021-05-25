@@ -37,7 +37,7 @@
     "dev:docs": "live-server",
     "dev:watch": "esbuild src/main.ts --watch --format=iife --bundle --minify --sourcemap --outfile=dist/main.js",
     "build:analyze": "web-component-analyzer src --outFile components.json",
-    "build:esm": "esbuild src/main.ts --format=iife --bundle --minify --sourcemap --outfile=dist/main.js"
+    "build:package": "esbuild src/main.ts --format=iife --metafile=meta.json --bundle --minify --sourcemap --outfile=dist/main.js"
   },
   "keywords": [],
   "author": "",

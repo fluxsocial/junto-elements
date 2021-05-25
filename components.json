@@ -2,6 +2,227 @@
   "version": "experimental",
   "tags": [
     {
+      "name": "j-box",
+      "path": "./src/components/box/Box.ts",
+      "attributes": [
+        {
+          "name": "p",
+          "description": "Padding",
+          "type": "\"\"|\"100\"|\"200\"|\"300\"|\"400\"|\"500\"|\"600\"|\"700\"|\"800\"|\"900",
+          "default": "\"\""
+        },
+        {
+          "name": "pl",
+          "description": "Padding left",
+          "type": "\"\"|\"100\"|\"200\"|\"300\"|\"400\"|\"500\"|\"600\"|\"700\"|\"800\"|\"900",
+          "default": "\"\""
+        },
+        {
+          "name": "pr",
+          "description": "Padding right",
+          "type": "\"\"|\"100\"|\"200\"|\"300\"|\"400\"|\"500\"|\"600\"|\"700\"|\"800\"|\"900",
+          "default": "\"\""
+        },
+        {
+          "name": "pt",
+          "description": "Padding top",
+          "type": "\"\"|\"100\"|\"200\"|\"300\"|\"400\"|\"500\"|\"600\"|\"700\"|\"800\"|\"900",
+          "default": "\"\""
+        },
+        {
+          "name": "pb",
+          "description": "Padding bottom",
+          "type": "\"\"|\"100\"|\"200\"|\"300\"|\"400\"|\"500\"|\"600\"|\"700\"|\"800\"|\"900",
+          "default": "\"\""
+        },
+        {
+          "name": "px",
+          "description": "Padding horistonal",
+          "type": "\"\"|\"100\"|\"200\"|\"300\"|\"400\"|\"500\"|\"600\"|\"700\"|\"800\"|\"900",
+          "default": "\"\""
+        },
+        {
+          "name": "py",
+          "description": "Padding vertical",
+          "type": "\"\"|\"100\"|\"200\"|\"300\"|\"400\"|\"500\"|\"600\"|\"700\"|\"800\"|\"900",
+          "default": "\"\""
+        },
+        {
+          "name": "m",
+          "description": "Margin",
+          "type": "\"\"|\"100\"|\"200\"|\"300\"|\"400\"|\"500\"|\"600\"|\"700\"|\"800\"|\"900",
+          "default": "\"\""
+        },
+        {
+          "name": "ml",
+          "description": "Margin left",
+          "type": "\"\"|\"100\"|\"200\"|\"300\"|\"400\"|\"500\"|\"600\"|\"700\"|\"800\"|\"900",
+          "default": "\"\""
+        },
+        {
+          "name": "mr",
+          "description": "Margin right",
+          "type": "\"\"|\"100\"|\"200\"|\"300\"|\"400\"|\"500\"|\"600\"|\"700\"|\"800\"|\"900",
+          "default": "\"\""
+        },
+        {
+          "name": "mt",
+          "description": "Margin top",
+          "type": "\"\"|\"100\"|\"200\"|\"300\"|\"400\"|\"500\"|\"600\"|\"700\"|\"800\"|\"900",
+          "default": "\"\""
+        },
+        {
+          "name": "mb",
+          "description": "Margin bottom",
+          "type": "\"\"|\"100\"|\"200\"|\"300\"|\"400\"|\"500\"|\"600\"|\"700\"|\"800\"|\"900",
+          "default": "\"\""
+        },
+        {
+          "name": "mx",
+          "description": "Margin horistonal",
+          "type": "\"\"|\"100\"|\"200\"|\"300\"|\"400\"|\"500\"|\"600\"|\"700\"|\"800\"|\"900",
+          "default": "\"\""
+        },
+        {
+          "name": "my",
+          "description": "Margin vertical",
+          "type": "\"\"|\"100\"|\"200\"|\"300\"|\"400\"|\"500\"|\"600\"|\"700\"|\"800\"|\"900",
+          "default": "\"\""
+        },
+        {
+          "name": "bg",
+          "description": "Background color",
+          "type": "\"\"|\"100\"|\"200\"|\"300\"|\"400\"|\"500\"|\"600\"|\"700\"|\"800\"|\"900",
+          "default": "\"\""
+        },
+        {
+          "name": "bghover",
+          "description": "Background hover color",
+          "type": "\"\"|\"100\"|\"200\"|\"300\"|\"400\"|\"500\"|\"600\"|\"700\"|\"800\"|\"900",
+          "default": "\"\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "styles",
+          "type": "CSSResultGroup[]",
+          "default": "[\"sharedStyles\",\"styles\"]"
+        },
+        {
+          "name": "p",
+          "attribute": "p",
+          "description": "Padding",
+          "type": "\"\"|\"100\"|\"200\"|\"300\"|\"400\"|\"500\"|\"600\"|\"700\"|\"800\"|\"900",
+          "default": "\"\""
+        },
+        {
+          "name": "pl",
+          "attribute": "pl",
+          "description": "Padding left",
+          "type": "\"\"|\"100\"|\"200\"|\"300\"|\"400\"|\"500\"|\"600\"|\"700\"|\"800\"|\"900",
+          "default": "\"\""
+        },
+        {
+          "name": "pr",
+          "attribute": "pr",
+          "description": "Padding right",
+          "type": "\"\"|\"100\"|\"200\"|\"300\"|\"400\"|\"500\"|\"600\"|\"700\"|\"800\"|\"900",
+          "default": "\"\""
+        },
+        {
+          "name": "pt",
+          "attribute": "pt",
+          "description": "Padding top",
+          "type": "\"\"|\"100\"|\"200\"|\"300\"|\"400\"|\"500\"|\"600\"|\"700\"|\"800\"|\"900",
+          "default": "\"\""
+        },
+        {
+          "name": "pb",
+          "attribute": "pb",
+          "description": "Padding bottom",
+          "type": "\"\"|\"100\"|\"200\"|\"300\"|\"400\"|\"500\"|\"600\"|\"700\"|\"800\"|\"900",
+          "default": "\"\""
+        },
+        {
+          "name": "px",
+          "attribute": "px",
+          "description": "Padding horistonal",
+          "type": "\"\"|\"100\"|\"200\"|\"300\"|\"400\"|\"500\"|\"600\"|\"700\"|\"800\"|\"900",
+          "default": "\"\""
+        },
+        {
+          "name": "py",
+          "attribute": "py",
+          "description": "Padding vertical",
+          "type": "\"\"|\"100\"|\"200\"|\"300\"|\"400\"|\"500\"|\"600\"|\"700\"|\"800\"|\"900",
+          "default": "\"\""
+        },
+        {
+          "name": "m",
+          "attribute": "m",
+          "description": "Margin",
+          "type": "\"\"|\"100\"|\"200\"|\"300\"|\"400\"|\"500\"|\"600\"|\"700\"|\"800\"|\"900",
+          "default": "\"\""
+        },
+        {
+          "name": "ml",
+          "attribute": "ml",
+          "description": "Margin left",
+          "type": "\"\"|\"100\"|\"200\"|\"300\"|\"400\"|\"500\"|\"600\"|\"700\"|\"800\"|\"900",
+          "default": "\"\""
+        },
+        {
+          "name": "mr",
+          "attribute": "mr",
+          "description": "Margin right",
+          "type": "\"\"|\"100\"|\"200\"|\"300\"|\"400\"|\"500\"|\"600\"|\"700\"|\"800\"|\"900",
+          "default": "\"\""
+        },
+        {
+          "name": "mt",
+          "attribute": "mt",
+          "description": "Margin top",
+          "type": "\"\"|\"100\"|\"200\"|\"300\"|\"400\"|\"500\"|\"600\"|\"700\"|\"800\"|\"900",
+          "default": "\"\""
+        },
+        {
+          "name": "mb",
+          "attribute": "mb",
+          "description": "Margin bottom",
+          "type": "\"\"|\"100\"|\"200\"|\"300\"|\"400\"|\"500\"|\"600\"|\"700\"|\"800\"|\"900",
+          "default": "\"\""
+        },
+        {
+          "name": "mx",
+          "attribute": "mx",
+          "description": "Margin horistonal",
+          "type": "\"\"|\"100\"|\"200\"|\"300\"|\"400\"|\"500\"|\"600\"|\"700\"|\"800\"|\"900",
+          "default": "\"\""
+        },
+        {
+          "name": "my",
+          "attribute": "my",
+          "description": "Margin vertical",
+          "type": "\"\"|\"100\"|\"200\"|\"300\"|\"400\"|\"500\"|\"600\"|\"700\"|\"800\"|\"900",
+          "default": "\"\""
+        },
+        {
+          "name": "bg",
+          "attribute": "bg",
+          "description": "Background color",
+          "type": "\"\"|\"100\"|\"200\"|\"300\"|\"400\"|\"500\"|\"600\"|\"700\"|\"800\"|\"900",
+          "default": "\"\""
+        },
+        {
+          "name": "bghover",
+          "attribute": "bghover",
+          "description": "Background hover color",
+          "type": "\"\"|\"100\"|\"200\"|\"300\"|\"400\"|\"500\"|\"600\"|\"700\"|\"800\"|\"900",
+          "default": "\"\""
+        }
+      ]
+    },
+    {
       "name": "j-button",
       "path": "./src/components/button/Button.ts",
       "attributes": [
@@ -214,6 +435,11 @@
           "name": "value",
           "type": "string",
           "default": "\"\""
+        },
+        {
+          "name": "placeholder",
+          "type": "string",
+          "default": "\"\""
         }
       ],
       "properties": [
@@ -225,6 +451,12 @@
         {
           "name": "value",
           "attribute": "value",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "placeholder",
+          "attribute": "placeholder",
           "type": "string",
           "default": "\"\""
         },
@@ -669,14 +901,14 @@
           "default": "false"
         },
         {
-          "name": "value",
-          "description": "Value",
-          "type": "String",
-          "default": "\"\""
+          "name": "active",
+          "description": "Active",
+          "type": "Boolean",
+          "default": "false"
         },
         {
-          "name": "label",
-          "description": "Label",
+          "name": "value",
+          "description": "Value",
           "type": "String",
           "default": "\"\""
         }
@@ -695,6 +927,13 @@
           "default": "false"
         },
         {
+          "name": "active",
+          "attribute": "active",
+          "description": "Active",
+          "type": "Boolean",
+          "default": "false"
+        },
+        {
           "name": "value",
           "attribute": "value",
           "description": "Value",
@@ -703,10 +942,7 @@
         },
         {
           "name": "label",
-          "attribute": "label",
-          "description": "Label",
-          "type": "String",
-          "default": "\"\""
+          "type": "string"
         }
       ]
     },
@@ -944,7 +1180,7 @@
       "attributes": [
         {
           "name": "value",
-          "description": "Selected",
+          "description": "Value",
           "type": "String",
           "default": "\"\""
         },
@@ -976,7 +1212,7 @@
         {
           "name": "value",
           "attribute": "value",
-          "description": "Selected",
+          "description": "Value",
           "type": "String",
           "default": "\"\""
         },
@@ -1000,6 +1236,17 @@
           "description": "Input value",
           "type": "Boolean",
           "default": "\"\""
+        },
+        {
+          "name": "optionElements",
+          "type": "Element[]"
+        },
+        {
+          "name": "selectedElement",
+          "type": "Element | undefined"
+        },
+        {
+          "name": "activeElement"
         }
       ],
       "events": [

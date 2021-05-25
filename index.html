@@ -6,12 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link href="dist/main.css" rel="stylesheet" />
-    <script
-      type="module"
-      src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.40/dist/shoelace.js"
-    ></script>
     <script src="https://unpkg.com/vue@next"></script>
-    <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
     <style>
       html {
         scroll-behavior: smooth;
@@ -228,6 +223,28 @@
                 `,
               },
               {
+                id: "tabs",
+                title: "Tabs",
+                icon: "",
+                tagName: "j-tabs",
+                group: "elements",
+                href: "#tabs",
+                example: `
+                <j-tabs value="Tab 1">
+                  <j-tab-item>Tab 1</j-tab-item>
+                  <j-tab-item>Tab 2</j-tab-item>
+                </j-tabs>`,
+              },
+              {
+                id: "tabitem",
+                title: "Tab Item",
+                icon: "",
+                tagName: "j-tab-item",
+                group: "elements",
+                href: "#tabitem",
+                example: `<j-tabs><j-tab-item>Tab 1</j-tab-item></j-tabs>`,
+              },
+              {
                 id: "tooltip",
                 title: "Tooltip",
                 icon: "menu-button-wide",
@@ -341,13 +358,13 @@
                 `,
               },
               {
-                id: "communityitem",
-                title: "Community item",
+                id: "avatar",
+                title: "Avatar",
                 icon: "globe2",
-                tagName: "j-community-item",
+                tagName: "j-avatar",
                 group: "elements",
-                href: "#communityitem",
-                example: `<j-community-item src="https://i.pravatar.cc/300"></j-community-item>`,
+                href: "#avatar",
+                example: `<j-avatar src="https://i.pravatar.cc/300"></j-avatar>`,
               },
               {
                 id: "message-item",
