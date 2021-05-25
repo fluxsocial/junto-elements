@@ -34,7 +34,7 @@ const styles = css`
     left: var(--j-tabs-indicator-left);
     width: var(--j-tabs-indicator-width);
     height: calc(100% - calc(var(--j-tabs-padding) * 2));
-    background: var(--j-color-primary-100);
+    background: var(--j-color-primary-50);
     border-radius: var(--j-border-radius);
     transition: all 0.2s ease;
   }

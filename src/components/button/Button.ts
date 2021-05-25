@@ -5,7 +5,7 @@ import sharedStyles from "../../shared/styles";
 const styles = css`
   :host {
     --j-button-depth: none;
-    --j-button-display: inline-block;
+    --j-button-display: inline-flex;
     --j-button-width: initial;
     --j-button-padding: 0 var(--j-space-500);
     --j-button-bg: var(--j-color-white);
@@ -21,6 +21,8 @@ const styles = css`
     transition: box-shadow 0.2s ease;
     cursor: pointer;
     border: 0;
+    align-items: center;
+    justify-content: center;
     box-shadow: var(--j-button-depth);
     display: var(--j-button-display);
     width: var(--j-button-width);
@@ -88,7 +90,7 @@ const styles = css`
     --j-button-padding: 0 var(--j-space-600);
   }
   :host([full]) {
-    --j-button-display: block;
+    --j-button-display: flex;
     --j-button-width: 100%;
   }
   :host([square]) {
