@@ -1,6 +1,5 @@
 import { LitElement, html, css } from "lit";
 import { unsafeHTML } from "lit/directives/unsafe-html";
-import hljs from "highlight.js";
 import sharedStyles from "../../shared/styles";
 
 const styles = css`
@@ -136,7 +135,7 @@ class Knobs extends LitElement {
   }
 
   get srcHTML() {
-    return hljs.highlightAuto(this.innerHTML).value;
+    return this.innerHTML;
   }
 
   _getPropValue(attr) {
@@ -153,12 +152,16 @@ class Knobs extends LitElement {
   }
 
   _handleAttrChange(e, attr) {
-    if (attr.type.includes("|") && e.target.value) {
-      const trimmedVal = e.target.value.replace(/\s+/g, "");
-      this.componentEl.setAttribute(attr.name, trimmedVal);
+    if (attr.type.includes("|")) {
+      const trimmedVal = e.target.value?.replace(/\s+/g, "");
+      trimmedVal
+        ? this.componentEl.setAttribute(attr.name, trimmedVal)
+        : this.componentEl.removeAttribute(attr.name);
     }
     if (attr.type === "string" || attr.type === "String") {
-      this.componentEl.setAttribute(attr.name, e.target.value);
+      e.target.value
+        ? this.componentEl.setAttribute(attr.name, e.target.value)
+        : this.componentEl.removeAttribute(attr.name);
     }
     if (attr.type === "boolean" || attr.type === "Boolean") {
       if (e.target.checked) {
