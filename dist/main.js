@@ -560,22 +560,22 @@
     --j-menu-item-border-radius: none;
     --j-menu-item-height: var(--j-element-md);
     --j-menu-item-bg: transparent;
+    --j-menu-item-bg-hover: var(--j-color-primary-50);
     --j-menu-item-color: var(--j-color-ui-600);
-    --j-menu-item-color-hover: var(--j-color-ui-900);
-    --j-menu-item-bg-hover: var(--j-color-ui-50);
+    --j-menu-item-color-hover: var(--j-color-primary-600);
     --j-menu-item-padding: 0 var(--j-space-800);
     --j-menu-item-font-weight: 400;
   }
-  :host([selected]),
-  :host([selected]) [part="base"]:hover {
-    --j-menu-item-font-weight: 500;
+  :host([active]) {
+    --j-menu-item-font-weight: 400;
     --j-menu-item-bg: var(--j-color-primary-50);
     --j-menu-item-bg-hover: var(--j-color-primary-50);
     --j-menu-item-color: var(--j-color-primary-600);
     --j-menu-item-color-hover: var(--j-color-primary-600);
   }
-  :host([active]) {
-    --j-menu-item-font-weight: 400;
+  :host([selected]),
+  :host([selected]) [part="base"]:hover {
+    --j-menu-item-font-weight: 500;
     --j-menu-item-bg: var(--j-color-primary-100);
     --j-menu-item-bg-hover: var(--j-color-primary-100);
     --j-menu-item-color: var(--j-color-primary-600);
