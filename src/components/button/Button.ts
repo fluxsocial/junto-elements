@@ -134,7 +134,7 @@ export default class Button extends LitElement {
    * @attr
    */
   @property({ type: Boolean, reflect: true })
-  square = "";
+  square = false;
 
   /**
    * Full
@@ -142,7 +142,7 @@ export default class Button extends LitElement {
    * @attr
    */
   @property({ type: Boolean, reflect: true })
-  full = "";
+  full = false;
 
   /**
    * Circle
