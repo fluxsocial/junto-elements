@@ -78,16 +78,16 @@
   --j-font-size-900: 42px;
   --j-font-size-1000: 58px;
 
-  --j-space-100: 2px;
-  --j-space-200: 4px;
-  --j-space-300: 6px;
-  --j-space-400: 8px;
-  --j-space-500: 16px;
-  --j-space-600: 24px;
-  --j-space-700: 32px;
-  --j-space-800: 38px;
-  --j-space-900: 44px;
-  --j-space-1000: 52px;
+  --j-space-100: 4px;
+  --j-space-200: 6px;
+  --j-space-300: 8px;
+  --j-space-400: 16px;
+  --j-space-500: 24px;
+  --j-space-600: 32px;
+  --j-space-700: 38px;
+  --j-space-800: 44px;
+  --j-space-900: 52px;
+  --j-space-1000: 64px;
 
   --j-border-width: 1px;
   --j-border-radius: 6px;
@@ -123,9 +123,5 @@ body {
   text-rendering: optimizeLegibility;
   color: var(--j-color-ui-600);
   font-family: var(--j-font-family);
-  background-color: var(--j-color-white);
-}
-
-[mode="dark"] {
   background-color: var(--j-color-white);
 }
