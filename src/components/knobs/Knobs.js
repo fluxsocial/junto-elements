@@ -1,6 +1,8 @@
 import { LitElement, html, css } from "lit";
 import { unsafeHTML } from "lit/directives/unsafe-html";
 import sharedStyles from "../../shared/styles";
+import Prism from "prismjs";
+import atom from "./atom.js";
 
 const styles = css`
   :host nav {
@@ -69,7 +71,7 @@ class Knobs extends LitElement {
   }
 
   static get styles() {
-    return [styles, sharedStyles];
+    return [styles, sharedStyles, atom];
   }
 
   static get properties() {
@@ -135,7 +137,7 @@ class Knobs extends LitElement {
   }
 
   get srcHTML() {
-    return this.innerHTML;
+    return Prism.highlight(this.innerHTML, Prism.languages.html, "html");
   }
 
   _getPropValue(attr) {
@@ -302,9 +304,11 @@ class Knobs extends LitElement {
     return html`
       <div class="src">
         <h2>
-          <pre><code><div class="hljs">${unsafeHTML(
-            this.srcHTML
-          )}</div></code></pre>
+          <pre class="language-html">
+            <code class="language-html">
+            ${unsafeHTML(this.srcHTML)}
+          </code>
+        </pre>
         </h2>
       </div>
     `;
@@ -335,24 +339,14 @@ class Knobs extends LitElement {
     return html`
       <slot @slotchange=${() => this.requestUpdate()}></slot>
       <nav>
-        <j-button
-          variant="${this.tab === "src" && "primary"}"
-          size="sm"
-          @click=${() => (this.tab = "src")}
-          >Src</j-button
+        <j-tabs
+          .value=${this.tab}
+          @change=${(e) => (this.tab = e.target.value)}
         >
-        <j-button
-          size="sm"
-          variant="${this.tab === "props" && "primary"}"
-          @click=${() => (this.tab = "props")}
-          >Props</j-button
-        >
-        <j-button
-          size="sm"
-          variant="${this.tab === "src" && "events"}"
-          @click=${() => (this.tab = "events")}
-          >Events</j-button
-        >
+          <j-tab-item value="src">Src</j-tab-item>
+          <j-tab-item value="props">Props</j-tab-item>
+          <j-tab-item value="events">Events</j-tab-item>
+        </j-tabs>
       </nav>
       <div class="tabs">${this._renderTabs()}</div>
     `;
