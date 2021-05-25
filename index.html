@@ -411,12 +411,17 @@
         },
         computed: {
           groupedSections() {
+            function sortByTitle(a, b) {
+              return a.title < b.title ? -1 : 1;
+            }
+
+            // TODO: Most ineffective reduce function ever
             return this.sections.reduce(
               (acc, section) => {
                 const group = acc[section.group] || [];
                 return {
                   ...acc,
-                  [section.group]: [...group, { ...section }],
+                  [section.group]: [...group, { ...section }].sort(sortByTitle),
                 };
               },
               { "getting started": [], elements: [], patterns: [] }

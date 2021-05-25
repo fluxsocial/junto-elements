@@ -17,7 +17,8 @@
     "@tiptap/extension-placeholder": "^2.0.0-beta.19",
     "@tiptap/extension-text": "^2.0.0-beta.12",
     "@tiptap/starter-kit": "^2.0.0-beta.63",
-    "lit": "^2.0.0-rc.2"
+    "lit": "^2.0.0-rc.2",
+    "prismjs": "^1.23.0"
   },
   "devDependencies": {
     "esbuild": "^0.12.0",
