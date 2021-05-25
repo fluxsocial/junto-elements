@@ -6,6 +6,12 @@ const styles = css`
     --j-input-label-size: var(--j-font-size-500);
     --j-input-height: var(--j-element-md);
   }
+  :host([size="sm"]) {
+    --j-input-height: var(--j-element-sm);
+  }
+  :host([size="lg"]) {
+    --j-input-height: var(--j-element-lg);
+  }
   [part="base"] {
     display: block;
   }
