@@ -19,6 +19,7 @@ const styles = css`
     width: 100%;
   }
   :host table {
+    width: 100%;
     box-shadow: var(--j-depth-100);
     border-collapse: collapse;
     border-radius: var(--j-border-radius);
@@ -41,6 +42,13 @@ const styles = css`
   }
   :host .hljs {
     font-size: var(--j-font-size-300);
+  }
+  .component {
+    box-shadow: var(--j-depth-100);
+    border-radius: var(--j-border-radius);
+    background: var(--j-color-white);
+    border: 1px solid var(--j-color-ui-100);
+    padding: var(--j-space-500);
   }
 `;
 
@@ -337,7 +345,9 @@ class Knobs extends LitElement {
 
   render() {
     return html`
-      <slot @slotchange=${() => this.requestUpdate()}></slot>
+      <div class="component">
+        <slot @slotchange=${() => this.requestUpdate()}></slot>
+      </div>
       <nav>
         <j-tabs
           .value=${this.tab}

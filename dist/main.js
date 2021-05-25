@@ -271,6 +271,7 @@
     width: 100%;
   }
   :host table {
+    width: 100%;
     box-shadow: var(--j-depth-100);
     border-collapse: collapse;
     border-radius: var(--j-border-radius);
@@ -293,6 +294,13 @@
   }
   :host .hljs {
     font-size: var(--j-font-size-300);
+  }
+  .component {
+    box-shadow: var(--j-depth-100);
+    border-radius: var(--j-border-radius);
+    background: var(--j-color-white);
+    border: 1px solid var(--j-color-ui-100);
+    padding: var(--j-space-500);
   }
 `,Lo=class extends D{constructor(){super();this.src="",this.name="",this.tab="props",this.hideTabs=!1,this.hideProps=!1,this.hideSrc=!1,this.element="",this.hideEvents=!1,this.attributes=[],this.properties=[],this.events=[],this._eventCounts={},this._fetchJson=this._fetchJson.bind(this),this._observeProps=this._observeProps.bind(this),this._handleAttrChange=this._handleAttrChange.bind(this),this._renderTabs=this._renderTabs.bind(this),this._renderEventTab=this._renderEventTab.bind(this),this._renderSrcTab=this._renderSrcTab.bind(this),this._renderVariablesTab=this._renderVariablesTab.bind(this),this._renderPropTab=this._renderPropTab.bind(this),this._propComponent=this._propComponent.bind(this)}static get styles(){return[Af,I,pa]}static get properties(){return{tab:{type:String},src:{type:String},name:{type:String},element:{type:String},attributes:{type:Array},properties:{type:Array},events:{type:Array},hideTabs:{type:Boolean},hideProps:{type:Boolean},hideSrc:{type:Boolean},hideEvents:{type:Boolean}}}get componentEl(){return this.querySelector(this.element)}connectedCallback(){super.connectedCallback(),this._fetchJson(),this._observeProps()}_attachEvents(){!this.events||this.events.forEach(t=>{this._eventCounts[t.name]=0,this.componentEl.addEventListener(t.name,r=>{this._eventCounts[t.name]=this._eventCounts[t.name]+1,this.requestUpdate()})})}_observeProps(){var t=new MutationObserver(r=>{r.forEach(n=>{this.requestUpdate()})});t.observe(this,{attributes:!0,childList:!0})}async _fetchJson(){try{let n=(await(await fetch("/components.json")).json()).tags.find(o=>o.name===this.element);this.properties=n?n.properties:[],this.attributes=n?n.attributes:[],this.cssProperties=n?n.cssProperties:[],this.events=n?n.events:[],this._attachEvents()}catch(t){console.log("error",t)}}get srcHTML(){return Bo.default.highlight(this.innerHTML,Bo.default.languages.html,"html")}_getPropValue(t){return t.type.includes("|")?t.type.split("|")[0]:t.type==="boolean"?this.componentEl.hasAttribute(t.name):t.type==="string"?this.componentEl[t.name]:null}_handleAttrChange(t,r){if(r.type.includes("|")){let n=t.target.value?.replace(/\s+/g,"");n?this.componentEl.setAttribute(r.name,n):this.componentEl.removeAttribute(r.name)}(r.type==="string"||r.type==="String")&&(t.target.value?this.componentEl.setAttribute(r.name,t.target.value):this.componentEl.removeAttribute(r.name)),(r.type==="boolean"||r.type==="Boolean")&&(t.target.checked?this.componentEl.setAttribute(r.name,""):this.componentEl.removeAttribute(r.name))}_handleTabChange(t){this.tab=t.target.value}_renderTabs(){if(this.tab==="props")return this._renderPropTab();if(this.tab==="src")return this._renderSrcTab();if(this.tab==="events")return this._renderEventTab();if(this.tab==="variables")return this._renderVariablesTab()}_propComponent(t){if(t.type.includes("|")){let r=t.type.replace(/"/g,"").split("|");return C`
         <tr>
@@ -398,7 +406,9 @@
         </tbody>
       </table>
     `}render(){return C`
-      <slot @slotchange=${()=>this.requestUpdate()}></slot>
+      <div class="component">
+        <slot @slotchange=${()=>this.requestUpdate()}></slot>
+      </div>
       <nav>
         <j-tabs
           .value=${this.tab}
