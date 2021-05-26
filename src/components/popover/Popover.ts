@@ -120,6 +120,14 @@ export default class Popover extends LitElement {
 
       const instance = createPopper(virtualElement, this, {
         placement: this.placement as Placement,
+        modifiers: [
+          {
+            name: "offset",
+            options: {
+              offset: [0, 10],
+            },
+          },
+        ],
       });
 
       virtualElement.getBoundingClientRect = generateGetBoundingClientRect(
@@ -130,6 +138,14 @@ export default class Popover extends LitElement {
     } else {
       createPopper(trigger, this, {
         placement: this.placement as Placement,
+        modifiers: [
+          {
+            name: "offset",
+            options: {
+              offset: [0, 10],
+            },
+          },
+        ],
       });
     }
   }
