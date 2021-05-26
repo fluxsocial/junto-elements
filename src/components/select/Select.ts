@@ -38,12 +38,6 @@ const styles = css`
     visibility: visible;
     z-index: 999;
   }
-  [part="arrow"] {
-    position: absolute;
-    right: var(--j-space-400);
-    top: 55%;
-    transform: translateY(-50%);
-  }
 `;
 
 @customElement("j-select")
@@ -206,8 +200,10 @@ export default class Select extends LitElement {
         @click=${this._handleInputClick}
         .value=${this.inputValue}
         part="input"
-      ></j-input>
-      <j-icon part="arrow" name="chevron-down"></j-icon>
+      >
+        <j-icon size="sm" slot="end" part="arrow" name="chevron-down"></j-icon>
+      </j-input>
+
       <nav part="menu">
         <slot></slot>
       </nav>

@@ -11,7 +11,7 @@ const styles = css`
     --j-menu-item-bg-hover: var(--j-color-ui-50);
     --j-menu-item-color: var(--j-color-ui-600);
     --j-menu-item-color-hover: var(--j-color-ui-600);
-    --j-menu-item-padding: 0 var(--j-space-500) 0 var(--j-space-800);
+    --j-menu-item-padding: 0 var(--j-space-500) 0 var(--j-space-500);
     --j-menu-item-font-weight: 400;
   }
   :host([active]) {
@@ -49,7 +49,6 @@ const styles = css`
     background: var(--j-menu-item-bg);
     text-decoration: none;
     cursor: pointer;
-    width: 100%;
     font-size: var(--j-font-size-500);
     height: var(--j-menu-item-height);
     padding: var(--j-menu-item-padding);
@@ -63,6 +62,9 @@ const styles = css`
   }
   [part="content"] {
     flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 `;
 

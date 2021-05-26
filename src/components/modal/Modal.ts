@@ -25,7 +25,7 @@ const styles = css`
   :host {
     width: 100vw;
     height: 100vh;
-    z-index: 1000;
+    z-index: 999999;
     position: fixed;
     left: 0;
     top: 0;

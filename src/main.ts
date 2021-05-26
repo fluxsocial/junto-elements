@@ -7,6 +7,7 @@ import "highlight.js/styles/github.css";
 export * as Button from "./components/button";
 export * as Knobs from "./components/knobs";
 export * as Text from "./components/text";
+export * as Box from "./components/box";
 export * as Popover from "./components/popover";
 export * as Menu from "./components/menu";
 export * as MenuGroupItem from "./components/menu-group-item";

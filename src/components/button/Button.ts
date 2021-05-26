@@ -56,7 +56,7 @@ const styles = css`
   :host([variant="transparent"]) {
     --j-button-bg: transparent;
     --j-button-text: var(--j-color-font);
-    --j-button-bg-hover: var(--j-color-ui-100);
+    --j-button-bg-hover: transparent;
     --j-button-border: 1px solid transparent;
     --j-button-border-hover: 1px solid transparent;
   }

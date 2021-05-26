@@ -24,6 +24,7 @@ const styles = css`
   }
   [part="input-wrapper"] {
     display: block;
+    position: relative;
     height: var(--j-input-height);
   }
   [part="input-field"] {
@@ -44,6 +45,12 @@ const styles = css`
   }
   [part="error-text"] {
     color: var(--j-color-danger-500);
+  }
+  [part="end"]::slotted(*) {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: var(--j-space-400);
   }
 `;
 
@@ -152,6 +159,7 @@ class Input extends LitElement {
       <div part="base">
         ${this.label && html` <label part="label">${this.label}</label> `}
         <div part="input-wrapper">
+          <slot part="start" name="start"></slot>
           <input
             part="input-field"
             .value=${this.value}
@@ -170,6 +178,7 @@ class Input extends LitElement {
             placeholder="${this.placeholder}"
             type=${this.type}
           />
+          <slot part="end" name="end"></slot>
         </div>
         ${this.error
           ? html` <div part="error-text">${this.errorText}</div> `

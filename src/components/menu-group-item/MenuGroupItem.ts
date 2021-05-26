@@ -9,21 +9,21 @@ const styles = css`
     position: relative;
     cursor: pointer;
     list-style: none;
-    text-transform: uppercase;
-    font-size: var(--j-font-size-400);
-    color: var(--j-color-ui-400);
-    font-weight: 500;
+    display: flex;
+    align-items: center;
     padding-left: var(--j-space-800);
     -webkit-appearance: none;
   }
-  [part="summary"]::marker {
+  [part="summary"]::marker,
+  [part="summary"]::-webkit-details-marker {
     display: none;
   }
+
   [part="summary"]:hover {
     color: var(--j-color-ui-700);
   }
   [part="summary"]:after {
-    top: 6px;
+    top: 50%;
     left: var(--j-space-500);
     position: absolute;
     display: block;
@@ -33,11 +33,25 @@ const styles = css`
     width: 4px;
     height: 4px;
     transition: all 0.2s ease;
-    transform: rotate(-45deg);
+    transform: rotate(-45deg) translateX(-50%);
     transform-origin: center;
   }
   :host([open]) [part="summary"]:after {
-    transform: rotate(45deg);
+    transform: rotate(45deg) translateX(-50%);
+  }
+  [part="start"]::slotted(*) {
+  }
+  [part="end"]::slotted(*) {
+  }
+  [part="title"] {
+    text-transform: uppercase;
+    font-size: var(--j-font-size-400);
+    color: var(--j-color-ui-400);
+    font-weight: 500;
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   [part="content"] {
     margin-top: var(--j-space-300);
@@ -72,7 +86,11 @@ export default class MenuItem extends LitElement {
       part="base"
       role="menuitem"
     >
-      <summary part="summary">${this.title}</summary>
+      <summary part="summary">
+        <slot part="start" name="start"></slot>
+        <div part="title">${this.title}</div>
+        <slot part="end" name="end"></slot>
+      </summary>
       <div part="content">
         <slot></slot>
       </div>

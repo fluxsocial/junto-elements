@@ -25,6 +25,14 @@ const styles = css`
   }
   [part="base"] {
     background-color: var(--j-box-bg-color);
+    padding-left: var(--j-box-padding-left);
+    padding-right: var(--j-box-padding-right);
+    padding-top: var(--j-box-padding-top);
+    padding-right: var(--j-box-padding-right);
+    margin-left: var(--j-box-margin-left);
+    margin-right: var(--j-box-margin-right);
+    margin-top: var(--j-box-margin-top);
+    margin-right: var(--j-box-margin-right);
   }
   [part="base"]:hover {
     background-color: var(--j-box-bg-color-hover);
@@ -177,57 +185,114 @@ export default class Box extends LitElement {
         `var(--j-color-${this.bghover})`
       );
     }
-    if (changedProperties.has("pl")) {
-      this.style.setProperty("--j-padding-left", `var(--j-space-${this.pl})`);
+    if (changedProperties.has("pl") && this.pl) {
+      this.style.setProperty(
+        "--j-box-padding-left",
+        `var(--j-space-${this.pl})`
+      );
     }
-    if (changedProperties.has("pr")) {
-      this.style.setProperty("--j-padding-right", `var(--j-space-${this.pr})`);
+    if (changedProperties.has("pr") && this.pr) {
+      this.style.setProperty(
+        "--j-box-padding-right",
+        `var(--j-space-${this.pr})`
+      );
     }
-    if (changedProperties.has("pt")) {
-      this.style.setProperty("--j-padding-top", `var(--j-space-${this.pt})`);
+    if (changedProperties.has("pt") && this.pt) {
+      this.style.setProperty(
+        "--j-box-padding-top",
+        `var(--j-space-${this.pt})`
+      );
     }
-    if (changedProperties.has("pb")) {
-      this.style.setProperty("--j-padding-bottom", `var(--j-space-${this.pb})`);
+    if (changedProperties.has("pb") && this.pb) {
+      this.style.setProperty(
+        "--j-box-padding-bottom",
+        `var(--j-space-${this.pb})`
+      );
     }
-    if (changedProperties.has("px")) {
-      this.style.setProperty("--j-padding-left", `var(--j-space-${this.px})`);
-      this.style.setProperty("--j-padding-right", `var(--j-space-${this.px})`);
+    if (changedProperties.has("px") && this.px) {
+      this.style.setProperty(
+        "--j-box-padding-left",
+        `var(--j-space-${this.px})`
+      );
+      this.style.setProperty(
+        "--j-box-padding-right",
+        `var(--j-space-${this.px})`
+      );
     }
-    if (changedProperties.has("py")) {
-      this.style.setProperty("--j-padding-top", `var(--j-space-${this.px})`);
-      this.style.setProperty("--j-padding-bottom", `var(--j-space-${this.px})`);
+    if (changedProperties.has("py") && this.py) {
+      this.style.setProperty(
+        "--j-box-padding-top",
+        `var(--j-space-${this.px})`
+      );
+      this.style.setProperty(
+        "--j-box-padding-bottom",
+        `var(--j-space-${this.px})`
+      );
     }
-    if (changedProperties.has("p")) {
-      this.style.setProperty("--j-padding-left", `var(--j-space-${this.p})`);
-      this.style.setProperty("--j-padding-right", `var(--j-space-${this.p})`);
-      this.style.setProperty("--j-padding-bottom", `var(--j-space-${this.p})`);
-      this.style.setProperty("--j-padding-top", `var(--j-space-${this.p})`);
+    if (changedProperties.has("p") && this.p) {
+      this.style.setProperty(
+        "--j-box-padding-left",
+        `var(--j-space-${this.p})`
+      );
+      this.style.setProperty(
+        "--j-box-padding-right",
+        `var(--j-space-${this.p})`
+      );
+      this.style.setProperty(
+        "--j-box-padding-bottom",
+        `var(--j-space-${this.p})`
+      );
+      this.style.setProperty("--j-box-padding-top", `var(--j-space-${this.p})`);
     }
-    if (changedProperties.has("ml")) {
-      this.style.setProperty("--j-margin-left", `var(--j-space-${this.ml})`);
+    if (changedProperties.has("ml") && this.ml) {
+      this.style.setProperty(
+        "--j-box-margin-left",
+        `var(--j-space-${this.ml})`
+      );
     }
-    if (changedProperties.has("mr")) {
-      this.style.setProperty("--j-margin-right", `var(--j-space-${this.mr})`);
+    if (changedProperties.has("mr") && this.mr) {
+      this.style.setProperty(
+        "--j-box-margin-right",
+        `var(--j-space-${this.mr})`
+      );
     }
-    if (changedProperties.has("mt")) {
-      this.style.setProperty("--j-margin-top", `var(--j-space-${this.mt})`);
+    if (changedProperties.has("mt") && this.mt) {
+      this.style.setProperty("--j-box-margin-top", `var(--j-space-${this.mt})`);
     }
-    if (changedProperties.has("mb")) {
-      this.style.setProperty("--j-margin-bottom", `var(--j-space-${this.mb})`);
+    if (changedProperties.has("mb") && this.mb) {
+      this.style.setProperty(
+        "--j-box-margin-bottom",
+        `var(--j-space-${this.mb})`
+      );
     }
-    if (changedProperties.has("mx")) {
-      this.style.setProperty("--j-margin-left", `var(--j-space-${this.mx})`);
-      this.style.setProperty("--j-margin-right", `var(--j-space-${this.mx})`);
+    if (changedProperties.has("mx") && this.mx) {
+      this.style.setProperty(
+        "--j-box-margin-left",
+        `var(--j-space-${this.mx})`
+      );
+      this.style.setProperty(
+        "--j-box-margin-right",
+        `var(--j-space-${this.mx})`
+      );
     }
-    if (changedProperties.has("my")) {
-      this.style.setProperty("--j-margin-top", `var(--j-space-${this.mx})`);
-      this.style.setProperty("--j-margin-bottom", `var(--j-space-${this.mx})`);
+    if (changedProperties.has("my") && this.my) {
+      this.style.setProperty("--j-box-margin-top", `var(--j-space-${this.mx})`);
+      this.style.setProperty(
+        "--j-box-margin-bottom",
+        `var(--j-space-${this.mx})`
+      );
     }
-    if (changedProperties.has("m")) {
-      this.style.setProperty("--j-margin-left", `var(--j-space-${this.m})`);
-      this.style.setProperty("--j-margin-right", `var(--j-space-${this.m})`);
-      this.style.setProperty("--j-margin-bottom", `var(--j-space-${this.m})`);
-      this.style.setProperty("--j-margin-top", `var(--j-space-${this.m})`);
+    if (changedProperties.has("m") && this.m) {
+      this.style.setProperty("--j-box-margin-left", `var(--j-space-${this.m})`);
+      this.style.setProperty(
+        "--j-box-margin-right",
+        `var(--j-space-${this.m})`
+      );
+      this.style.setProperty(
+        "--j-box-margin-bottom",
+        `var(--j-space-${this.m})`
+      );
+      this.style.setProperty("--j-box-margin-top", `var(--j-space-${this.m})`);
     }
 
     return true;

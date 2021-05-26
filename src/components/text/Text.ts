@@ -4,7 +4,7 @@ import sharedStyles from "../../shared/styles";
 
 const styles = css`
   :host {
-    --j-text-font-color: var(--j-color-ui-800);
+    --j-text-color: var(--j-color-ui-800);
     --j-text-font-weight: initial;
     --j-text-font-size: var(--j-font-size-500);
     --j-text-margin-bottom: 0;
@@ -12,56 +12,56 @@ const styles = css`
 
   :host > *:first-child {
     margin: 0;
-    color: var(--j-text-font-color);
+    color: var(--j-text-color);
     font-weight: var(--j-text-font-weight);
     font-size: var(--j-text-font-size);
     margin-bottom: var(--j-text-margin-bottom);
   }
 
   :host([variant="heading"]) {
-    --j-text-font-color: var(--j-color-ui-700);
+    --j-text-color: var(--j-color-ui-700);
     --j-text-font-size: var(--j-font-size-800);
     --j-text-font-weight: 600;
     --j-text-margin-bottom: var(--j-space-400);
   }
 
   :host([variant="heading-sm"]) {
-    --j-text-font-color: var(--j-color-ui-700);
+    --j-text-color: var(--j-color-ui-700);
     --j-text-font-size: var(--j-font-size-700);
+    --j-text-font-weight: 600;
+    --j-text-margin-bottom: var(--j-space-300);
+  }
+
+  :host([variant="heading-lg"]) {
+    --j-text-color: var(--j-color-ui-700);
+    --j-text-font-size: var(--j-font-size-900);
     --j-text-font-weight: 600;
     --j-text-margin-bottom: var(--j-space-600);
   }
 
-  :host([variant="heading-lg"]) {
-    --j-text-font-color: var(--j-color-ui-700);
-    --j-text-font-size: var(--j-font-size-900);
-    --j-text-font-weight: 600;
-    --j-text-margin-bottom: var(--j-space-900);
-  }
-
   :host([variant="ingress"]) {
-    --j-text-font-color: var(--j-color-ui-700);
+    --j-text-color: var(--j-color-ui-700);
     --j-text-font-size: var(--j-font-size-600);
     --j-text-font-weight: 400;
     --j-text-margin-bottom: var(--j-space-500);
   }
 
   :host([variant="subheading"]) {
-    --j-text-font-color: var(--j-color-ui-800);
+    --j-text-color: var(--j-color-ui-800);
     --j-text-font-size: var(--j-font-size-700);
     --j-text-font-weight: 400;
     --j-text-margin-bottom: var(--j-space-600);
   }
 
   :host([variant="body"]) {
-    --j-text-font-color: var(--j-color-ui-600);
+    --j-text-color: var(--j-color-ui-600);
     --j-text-font-size: var(--j-font-size-500);
     --j-text-font-weight: 400;
     --j-text-margin-bottom: var(--j-space-400);
   }
 
   :host([variant="footnote"]) {
-    --j-text-font-color: var(--j-color-ui-600);
+    --j-text-color: var(--j-color-ui-600);
     --j-text-font-size: var(--j-font-size-400);
     --j-text-font-weight: 400;
     --j-text-margin-bottom: var(--j-space-300);
@@ -104,6 +104,13 @@ export default class Text extends LitElement {
    */
   @property({ type: Boolean, reflect: true }) nomargin = false;
 
+  /**
+   * Color
+   * @type {String}
+   * @attr
+   */
+  @property({ type: String, reflect: true }) color = "";
+
   shouldUpdate(changedProperties) {
     if (changedProperties.has("size")) {
       if (this.size) {
@@ -113,6 +120,16 @@ export default class Text extends LitElement {
         );
       } else {
         this.style.removeProperty("--j-text-font-size");
+      }
+    }
+    if (changedProperties.has("color")) {
+      if (this.color) {
+        this.style.setProperty(
+          "--j-text-color",
+          `var(--j-color-${this.color})`
+        );
+      } else {
+        this.style.removeProperty("--j-text-color");
       }
     }
 
