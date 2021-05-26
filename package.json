@@ -29,7 +29,6 @@
     "web-component-analyzer": "^1.1.6"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "prepublish": "run-s build:*",
     "release": "np",
     "start": "run-p dev:*",

@@ -192,7 +192,7 @@
       ]
     },
     "src/components/button/Button.ts": {
-      "bytes": 4304,
+      "bytes": 4294,
       "imports": [
         {
           "path": "node_modules/lit/index.js",
@@ -312,6 +312,32 @@
       "imports": [
         {
           "path": "src/components/text/Text.ts",
+          "kind": "import-statement"
+        }
+      ]
+    },
+    "src/components/box/Box.ts": {
+      "bytes": 7771,
+      "imports": [
+        {
+          "path": "node_modules/lit/index.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "node_modules/lit/decorators.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "src/shared/styles.js",
+          "kind": "import-statement"
+        }
+      ]
+    },
+    "src/components/box/index.ts": {
+      "bytes": 45,
+      "imports": [
+        {
+          "path": "src/components/box/Box.ts",
           "kind": "import-statement"
         }
       ]
@@ -1333,7 +1359,7 @@
       ]
     },
     "src/components/menu-group-item/MenuGroupItem.ts": {
-      "bytes": 1793,
+      "bytes": 2228,
       "imports": [
         {
           "path": "node_modules/lit/index.js",
@@ -1359,7 +1385,7 @@
       ]
     },
     "src/components/menu-item/MenuItem.ts": {
-      "bytes": 3036,
+      "bytes": 3095,
       "imports": [
         {
           "path": "node_modules/lit/index.js",
@@ -1529,7 +1555,7 @@
       ]
     },
     "src/components/modal/Modal.ts": {
-      "bytes": 4326,
+      "bytes": 4328,
       "imports": [
         {
           "path": "node_modules/lit/index.js",
@@ -2274,7 +2300,7 @@
       ]
     },
     "src/main.ts": {
-      "bytes": 1181,
+      "bytes": 1222,
       "imports": [
         {
           "path": "src/styles/base.css",
@@ -2306,6 +2332,10 @@
         },
         {
           "path": "src/components/text/index.ts",
+          "kind": "import-statement"
+        },
+        {
+          "path": "src/components/box/index.ts",
           "kind": "import-statement"
         },
         {
@@ -2388,7 +2418,7 @@
       "imports": [],
       "exports": [],
       "inputs": {},
-      "bytes": 1425511
+      "bytes": 1437599
     },
     "dist/main.js": {
       "imports": [],
@@ -2465,7 +2495,7 @@
           "bytesInOutput": 178
         },
         "src/components/button/Button.ts": {
-          "bytesInOutput": 3783
+          "bytesInOutput": 3773
         },
         "src/main.ts": {
           "bytesInOutput": 0
@@ -2493,6 +2523,12 @@
         },
         "src/components/text/Text.ts": {
           "bytesInOutput": 3428
+        },
+        "src/components/box/index.ts": {
+          "bytesInOutput": 44
+        },
+        "src/components/box/Box.ts": {
+          "bytesInOutput": 4584
         },
         "src/components/popover/index.ts": {
           "bytesInOutput": 44
@@ -2669,13 +2705,13 @@
           "bytesInOutput": 44
         },
         "src/components/menu-group-item/MenuGroupItem.ts": {
-          "bytesInOutput": 1497
+          "bytesInOutput": 1932
         },
         "src/components/menu-item/index.ts": {
           "bytesInOutput": 44
         },
         "src/components/menu-item/MenuItem.ts": {
-          "bytesInOutput": 2666
+          "bytesInOutput": 2725
         },
         "src/components/radio-button/index.ts": {
           "bytesInOutput": 44
@@ -2717,7 +2753,7 @@
           "bytesInOutput": 44
         },
         "src/components/modal/Modal.ts": {
-          "bytesInOutput": 3888
+          "bytesInOutput": 3890
         },
         "src/components/tooltip/index.ts": {
           "bytesInOutput": 44
@@ -2870,7 +2906,7 @@
           "bytesInOutput": 1681
         }
       },
-      "bytes": 364890
+      "bytes": 370004
     },
     "dist/main.css": {
       "imports": [],
