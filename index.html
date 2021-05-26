@@ -6,11 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link href="dist/main.css" rel="stylesheet" />
-    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@latest"></script>
     <style>
-      html {
-        scroll-behavior: smooth;
-      }
       body {
         padding: 0;
         margin: 0;
@@ -71,6 +68,9 @@
         overscroll-behavior: contain;
         border-right: 1px solid var(--j-color-ui-50);
       }
+      [theme="dark"] .sidebar j-menu-item {
+        --j-menu-item-bg-hover: var(--j-color-ui-100);
+      }
       .section {
         padding: var(--j-space-800);
         margin-bottom: var(--j-space-800);
@@ -114,12 +114,15 @@
               :key="key"
             >
               <a
+                @click="activeSection = section.id"
                 style="text-decoration: none"
                 v-for="(section, index) in group"
                 :key="section.id"
                 :href="'#' + section.id"
               >
-                <j-menu-item> {{section.title}} </j-menu-item>
+                <j-menu-item :selected="activeSection === section.id">
+                  {{section.title}}
+                </j-menu-item>
               </a>
             </j-menu-group-item>
           </nav>
@@ -143,7 +146,8 @@
 
     <script src="dist/main.js" type="module"></script>
     <script>
-      const app = Vue.createApp({
+      const app = new Vue({
+        el: "#app",
         data() {
           return {
             darkMode: false,
@@ -157,6 +161,15 @@
                 icon: "text-paragraph",
                 href: "#text",
                 example: `<j-text variant="heading">The quick brown fox jumped over the lazy dog</j-text>`,
+              },
+              {
+                id: "badge",
+                title: "Badge",
+                tagName: "j-badge",
+                group: "elements",
+                icon: "badge-paragraph",
+                href: "#badge",
+                example: `<j-badge>Badge</j-badge>`,
               },
               {
                 id: "button",
@@ -310,7 +323,7 @@
                 `,
               },
               {
-                id: "menu",
+                id: "menugroup",
                 title: "Menu group",
                 tagName: "j-menu-group-item",
                 icon: "folder",
@@ -405,13 +418,6 @@
             else document.body.removeAttribute("theme");
           },
         },
-        methods: {
-          isActiveSection(id) {
-            const isActive = this.activeSection === id;
-            console.log("is section", isActive);
-            return isActive;
-          },
-        },
         computed: {
           groupedSections() {
             function sortByTitle(a, b) {
@@ -433,7 +439,9 @@
         },
       });
 
-      const vm = app.mount("#app");
+      Vue.config.ignoredElements = [/^j-/];
+
+      //const vm = app.mount("#app");
     </script>
   </body>
 </html>

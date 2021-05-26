@@ -2,6 +2,102 @@
   "version": "experimental",
   "tags": [
     {
+      "name": "j-avatar",
+      "path": "./src/components/avatar/Avatar.ts",
+      "attributes": [
+        {
+          "name": "src",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "selected",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "initials",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "size",
+          "type": "string",
+          "default": "\"\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "styles",
+          "type": "CSSResultGroup[]",
+          "default": "[\"sharedStyles\",\"styles\"]"
+        },
+        {
+          "name": "src",
+          "attribute": "src",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "selected",
+          "attribute": "selected",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "initials",
+          "attribute": "initials",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "size",
+          "attribute": "size",
+          "type": "string",
+          "default": "\"\""
+        }
+      ]
+    },
+    {
+      "name": "j-badge",
+      "path": "./src/components/badge/Badge.ts",
+      "attributes": [
+        {
+          "name": "variant",
+          "description": "Variations",
+          "type": "\"\"|\"primary\"|\"success\"|\"danger\"|\"warning\"",
+          "default": "\"\""
+        },
+        {
+          "name": "size",
+          "description": "Sizes",
+          "type": "\"\"|\"sm\"|\"lg\"",
+          "default": "\"\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "styles",
+          "type": "CSSResultGroup[]",
+          "default": "[\"sharedStyles\",\"styles\"]"
+        },
+        {
+          "name": "variant",
+          "attribute": "variant",
+          "description": "Variations",
+          "type": "\"\"|\"primary\"|\"success\"|\"danger\"|\"warning\"",
+          "default": "\"\""
+        },
+        {
+          "name": "size",
+          "attribute": "size",
+          "description": "Sizes",
+          "type": "\"\"|\"sm\"|\"lg\"",
+          "default": "\"\""
+        }
+      ]
+    },
+    {
       "name": "j-box",
       "path": "./src/components/box/Box.ts",
       "attributes": [
@@ -248,13 +344,13 @@
           "name": "square",
           "description": "Squared",
           "type": "boolean",
-          "default": "\"\""
+          "default": "false"
         },
         {
           "name": "full",
           "description": "Full",
           "type": "boolean",
-          "default": "\"\""
+          "default": "false"
         },
         {
           "name": "circle",
@@ -295,14 +391,14 @@
           "attribute": "square",
           "description": "Squared",
           "type": "boolean",
-          "default": "\"\""
+          "default": "false"
         },
         {
           "name": "full",
           "attribute": "full",
           "description": "Full",
           "type": "boolean",
-          "default": "\"\""
+          "default": "false"
         },
         {
           "name": "circle",
@@ -382,52 +478,6 @@
       ]
     },
     {
-      "name": "j-community-item",
-      "path": "./src/components/community-item/CommunityItem.ts",
-      "attributes": [
-        {
-          "name": "src",
-          "type": "string",
-          "default": "\"\""
-        },
-        {
-          "name": "selected",
-          "type": "boolean",
-          "default": "false"
-        },
-        {
-          "name": "initials",
-          "type": "boolean",
-          "default": "false"
-        }
-      ],
-      "properties": [
-        {
-          "name": "styles",
-          "type": "CSSResultGroup[]",
-          "default": "[\"sharedStyles\",\"styles\"]"
-        },
-        {
-          "name": "src",
-          "attribute": "src",
-          "type": "string",
-          "default": "\"\""
-        },
-        {
-          "name": "selected",
-          "attribute": "selected",
-          "type": "boolean",
-          "default": "false"
-        },
-        {
-          "name": "initials",
-          "attribute": "initials",
-          "type": "boolean",
-          "default": "false"
-        }
-      ]
-    },
-    {
       "name": "j-editor",
       "path": "./src/components/editor/Editor.ts",
       "attributes": [
@@ -472,12 +522,96 @@
       ]
     },
     {
+      "name": "j-flex",
+      "path": "./src/components/flex/Flex.ts",
+      "attributes": [
+        {
+          "name": "j",
+          "description": "Justify content",
+          "type": "String",
+          "default": "\"\""
+        },
+        {
+          "name": "a",
+          "description": "Align items",
+          "type": "String",
+          "default": "\"\""
+        },
+        {
+          "name": "wrap",
+          "description": "Wrap",
+          "type": "Boolean",
+          "default": "false"
+        },
+        {
+          "name": "gap",
+          "description": "Gap",
+          "type": "\"\"|\"100\"|\"200\"|\"300\"|\"400\"|\"500\"|\"600\"|\"700\"|\"800\"|\"900",
+          "default": "\"\""
+        },
+        {
+          "name": "direction",
+          "description": "Direction",
+          "type": "\"\"|\"100\"|\"200\"|\"300\"|\"400\"|\"500\"|\"600\"|\"700\"|\"800\"|\"900",
+          "default": "\"\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "styles",
+          "type": "CSSResultGroup[]",
+          "default": "[\"sharedStyles\",\"styles\"]"
+        },
+        {
+          "name": "j",
+          "attribute": "j",
+          "description": "Justify content",
+          "type": "String",
+          "default": "\"\""
+        },
+        {
+          "name": "a",
+          "attribute": "a",
+          "description": "Align items",
+          "type": "String",
+          "default": "\"\""
+        },
+        {
+          "name": "wrap",
+          "attribute": "wrap",
+          "description": "Wrap",
+          "type": "Boolean",
+          "default": "false"
+        },
+        {
+          "name": "gap",
+          "attribute": "gap",
+          "description": "Gap",
+          "type": "\"\"|\"100\"|\"200\"|\"300\"|\"400\"|\"500\"|\"600\"|\"700\"|\"800\"|\"900",
+          "default": "\"\""
+        },
+        {
+          "name": "direction",
+          "attribute": "direction",
+          "description": "Direction",
+          "type": "\"\"|\"100\"|\"200\"|\"300\"|\"400\"|\"500\"|\"600\"|\"700\"|\"800\"|\"900",
+          "default": "\"\""
+        }
+      ]
+    },
+    {
       "name": "j-icon",
       "path": "./src/components/icon/Icon.ts",
       "attributes": [
         {
           "name": "name",
           "description": "Open",
+          "type": "String",
+          "default": "\"\""
+        },
+        {
+          "name": "size",
+          "description": "Size",
           "type": "String",
           "default": "\"\""
         }
@@ -492,6 +626,13 @@
           "name": "name",
           "attribute": "name",
           "description": "Open",
+          "type": "String",
+          "default": "\"\""
+        },
+        {
+          "name": "size",
+          "attribute": "size",
+          "description": "Size",
           "type": "String",
           "default": "\"\""
         },
@@ -989,7 +1130,7 @@
       "attributes": [
         {
           "name": "open",
-          "description": "Date",
+          "description": "Open",
           "type": "Boolean",
           "default": "false"
         }
@@ -1003,9 +1144,14 @@
         {
           "name": "open",
           "attribute": "open",
-          "description": "Date",
+          "description": "Open",
           "type": "Boolean",
           "default": "false"
+        }
+      ],
+      "events": [
+        {
+          "name": "toggle"
         }
       ]
     },
@@ -1256,6 +1402,118 @@
       ]
     },
     {
+      "name": "j-tab-item",
+      "path": "./src/components/tab-item/TabItem.ts",
+      "attributes": [
+        {
+          "name": "checked",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "full",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "size",
+          "type": "string",
+          "default": "\"\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "checked",
+          "attribute": "checked",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "full",
+          "attribute": "full",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "disabled",
+          "attribute": "disabled",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "size",
+          "attribute": "size",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "label",
+          "type": "string"
+        },
+        {
+          "name": "value",
+          "type": "string"
+        }
+      ],
+      "events": [
+        {
+          "name": "tab-selected"
+        }
+      ]
+    },
+    {
+      "name": "j-tabs",
+      "path": "./src/components/tabs/Tabs.ts",
+      "attributes": [
+        {
+          "name": "value",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "size",
+          "type": "string",
+          "default": "\"\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "styles",
+          "type": "CSSResultGroup[]",
+          "default": "[\"sharedStyles\",\"styles\"]"
+        },
+        {
+          "name": "value",
+          "attribute": "value",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "size",
+          "attribute": "size",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "optionElements",
+          "type": "Element[]"
+        },
+        {
+          "name": "selectedElement"
+        }
+      ],
+      "events": [
+        {
+          "name": "change"
+        }
+      ]
+    },
+    {
       "name": "j-text",
       "path": "./src/components/text/Text.ts",
       "attributes": [
@@ -1281,7 +1539,7 @@
           "name": "nomargin",
           "description": "No margin",
           "type": "Boolean",
-          "default": "\"\""
+          "default": "false"
         }
       ],
       "properties": [
@@ -1316,7 +1574,7 @@
           "attribute": "nomargin",
           "description": "No margin",
           "type": "Boolean",
-          "default": "\"\""
+          "default": "false"
         }
       ]
     },
