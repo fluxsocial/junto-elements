@@ -4,29 +4,30 @@ import sharedStyles from "../../shared/styles";
 
 const styles = css`
   :host {
+    --j-menu-item-border-left: none;
     --j-menu-item-border-radius: none;
     --j-menu-item-height: var(--j-element-md);
     --j-menu-item-bg: transparent;
-    --j-menu-item-bg-hover: var(--j-color-primary-50);
+    --j-menu-item-bg-hover: var(--j-color-ui-50);
     --j-menu-item-color: var(--j-color-ui-600);
-    --j-menu-item-color-hover: var(--j-color-primary-600);
-    --j-menu-item-padding: 0 var(--j-space-800);
+    --j-menu-item-color-hover: var(--j-color-ui-600);
+    --j-menu-item-padding: 0 var(--j-space-500) 0 var(--j-space-800);
     --j-menu-item-font-weight: 400;
   }
   :host([active]) {
     --j-menu-item-font-weight: 400;
-    --j-menu-item-bg: var(--j-color-primary-50);
-    --j-menu-item-bg-hover: var(--j-color-primary-50);
-    --j-menu-item-color: var(--j-color-primary-600);
-    --j-menu-item-color-hover: var(--j-color-primary-600);
+    --j-menu-item-bg: var(--j-color-ui-50);
+    --j-menu-item-bg-hover: var(--j-color-ui-50);
+    --j-menu-item-color: var(--j-color-ui-600);
+    --j-menu-item-color-hover: var(--j-color-ui-600);
   }
   :host([selected]),
   :host([selected]) [part="base"]:hover {
     --j-menu-item-font-weight: 500;
     --j-menu-item-bg: var(--j-color-primary-100);
     --j-menu-item-bg-hover: var(--j-color-primary-100);
-    --j-menu-item-color: var(--j-color-primary-600);
-    --j-menu-item-color-hover: var(--j-color-primary-600);
+    --j-menu-item-color: var(--j-color-primary-500);
+    --j-menu-item-color-hover: var(--j-color-primary-500);
   }
   :host([size="sm"]) {
     --j-menu-item-height: var(--j-element-sm);
@@ -49,10 +50,12 @@ const styles = css`
     text-decoration: none;
     cursor: pointer;
     width: 100%;
+    font-size: var(--j-font-size-500);
     height: var(--j-menu-item-height);
     padding: var(--j-menu-item-padding);
     color: var(--j-menu-item-color);
     font-weight: var(--j-menu-item-font-weight);
+    border-left: var(--j-menu-item-border-left);
   }
   [part="base"]:hover {
     color: var(--j-menu-item-color-hover);
