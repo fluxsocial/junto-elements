@@ -24,3 +24,4 @@ export * as Icon from "./components/icon";
 export * as Tabs from "./components/tabs";
 export * as TabItem from "./components/tab-item";
 export * as Flex from "./components/flex";
+export * as Badge from "./components/badge";
