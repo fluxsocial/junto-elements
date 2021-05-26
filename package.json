@@ -30,7 +30,7 @@
   },
   "scripts": {
     "prepublish": "run-s build:*",
-    "release": "np",
+    "release": "np --no-2fa",
     "start": "run-p dev:*",
     "build": "run-s build:*",
     "dev": "run-p dev:*",
