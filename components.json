@@ -1540,6 +1540,12 @@
           "description": "No margin",
           "type": "Boolean",
           "default": "false"
+        },
+        {
+          "name": "color",
+          "description": "Color",
+          "type": "String",
+          "default": "\"\""
         }
       ],
       "properties": [
@@ -1575,6 +1581,13 @@
           "description": "No margin",
           "type": "Boolean",
           "default": "false"
+        },
+        {
+          "name": "color",
+          "attribute": "color",
+          "description": "Color",
+          "type": "String",
+          "default": "\"\""
         }
       ]
     },

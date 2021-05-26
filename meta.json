@@ -192,7 +192,7 @@
       ]
     },
     "src/components/button/Button.ts": {
-      "bytes": 4246,
+      "bytes": 4304,
       "imports": [
         {
           "path": "node_modules/lit/index.js",
@@ -243,8 +243,21 @@
         }
       ]
     },
+    "node_modules/prismjs/prism.js": {
+      "bytes": 50773,
+      "imports": []
+    },
+    "src/components/knobs/atom.js": {
+      "bytes": 2204,
+      "imports": [
+        {
+          "path": "node_modules/lit/index.js",
+          "kind": "import-statement"
+        }
+      ]
+    },
     "src/components/knobs/Knobs.js": {
-      "bytes": 9135,
+      "bytes": 9464,
       "imports": [
         {
           "path": "node_modules/lit/index.js",
@@ -256,6 +269,14 @@
         },
         {
           "path": "src/shared/styles.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "node_modules/prismjs/prism.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "src/components/knobs/atom.js",
           "kind": "import-statement"
         }
       ]
@@ -270,7 +291,7 @@
       ]
     },
     "src/components/text/Text.ts": {
-      "bytes": 4134,
+      "bytes": 4562,
       "imports": [
         {
           "path": "node_modules/lit/index.js",
@@ -1256,7 +1277,7 @@
       ]
     },
     "src/components/popover/Popover.ts": {
-      "bytes": 3208,
+      "bytes": 3516,
       "imports": [
         {
           "path": "node_modules/lit/index.js",
@@ -1338,7 +1359,7 @@
       ]
     },
     "src/components/menu-item/MenuItem.ts": {
-      "bytes": 2910,
+      "bytes": 3036,
       "imports": [
         {
           "path": "node_modules/lit/index.js",
@@ -1411,8 +1432,8 @@
         }
       ]
     },
-    "src/components/community-item/CommunityItem.ts": {
-      "bytes": 1531,
+    "src/components/avatar/Avatar.ts": {
+      "bytes": 1704,
       "imports": [
         {
           "path": "node_modules/lit/index.js",
@@ -1428,17 +1449,17 @@
         }
       ]
     },
-    "src/components/community-item/index.ts": {
-      "bytes": 75,
+    "src/components/avatar/index.ts": {
+      "bytes": 54,
       "imports": [
         {
-          "path": "src/components/community-item/CommunityItem.ts",
+          "path": "src/components/avatar/Avatar.ts",
           "kind": "import-statement"
         }
       ]
     },
     "src/components/input/Input.js": {
-      "bytes": 4802,
+      "bytes": 5057,
       "imports": [
         {
           "path": "node_modules/lit/index.js",
@@ -1482,7 +1503,7 @@
       ]
     },
     "src/components/select/Select.ts": {
-      "bytes": 5135,
+      "bytes": 5041,
       "imports": [
         {
           "path": "node_modules/lit/index.js",
@@ -1508,7 +1529,7 @@
       ]
     },
     "src/components/modal/Modal.ts": {
-      "bytes": 4149,
+      "bytes": 4326,
       "imports": [
         {
           "path": "node_modules/lit/index.js",
@@ -1534,7 +1555,7 @@
       ]
     },
     "src/components/tooltip/Tooltip.ts": {
-      "bytes": 3334,
+      "bytes": 3359,
       "imports": [
         {
           "path": "node_modules/lit/index.js",
@@ -2119,7 +2140,7 @@
       ]
     },
     "src/components/icon/Icon.ts": {
-      "bytes": 1070,
+      "bytes": 1446,
       "imports": [
         {
           "path": "node_modules/lit/index.js",
@@ -2148,8 +2169,112 @@
         }
       ]
     },
+    "src/components/tabs/Tabs.ts": {
+      "bytes": 2798,
+      "imports": [
+        {
+          "path": "node_modules/lit/index.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "node_modules/lit/decorators.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "src/shared/styles.js",
+          "kind": "import-statement"
+        }
+      ]
+    },
+    "src/components/tabs/index.ts": {
+      "bytes": 48,
+      "imports": [
+        {
+          "path": "src/components/tabs/Tabs.ts",
+          "kind": "import-statement"
+        }
+      ]
+    },
+    "src/components/tab-item/TabItem.ts": {
+      "bytes": 1960,
+      "imports": [
+        {
+          "path": "node_modules/lit/index.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "node_modules/lit/decorators.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "src/shared/styles.js",
+          "kind": "import-statement"
+        }
+      ]
+    },
+    "src/components/tab-item/index.ts": {
+      "bytes": 57,
+      "imports": [
+        {
+          "path": "src/components/tab-item/TabItem.ts",
+          "kind": "import-statement"
+        }
+      ]
+    },
+    "src/components/flex/Flex.ts": {
+      "bytes": 2380,
+      "imports": [
+        {
+          "path": "node_modules/lit/index.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "node_modules/lit/decorators.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "src/shared/styles.js",
+          "kind": "import-statement"
+        }
+      ]
+    },
+    "src/components/flex/index.ts": {
+      "bytes": 48,
+      "imports": [
+        {
+          "path": "src/components/flex/Flex.ts",
+          "kind": "import-statement"
+        }
+      ]
+    },
+    "src/components/badge/Badge.ts": {
+      "bytes": 2006,
+      "imports": [
+        {
+          "path": "node_modules/lit/index.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "node_modules/lit/decorators.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "src/shared/styles.js",
+          "kind": "import-statement"
+        }
+      ]
+    },
+    "src/components/badge/index.ts": {
+      "bytes": 51,
+      "imports": [
+        {
+          "path": "src/components/badge/Badge.ts",
+          "kind": "import-statement"
+        }
+      ]
+    },
     "src/main.ts": {
-      "bytes": 1015,
+      "bytes": 1181,
       "imports": [
         {
           "path": "src/styles/base.css",
@@ -2208,7 +2333,7 @@
           "kind": "import-statement"
         },
         {
-          "path": "src/components/community-item/index.ts",
+          "path": "src/components/avatar/index.ts",
           "kind": "import-statement"
         },
         {
@@ -2238,6 +2363,22 @@
         {
           "path": "src/components/icon/index.ts",
           "kind": "import-statement"
+        },
+        {
+          "path": "src/components/tabs/index.ts",
+          "kind": "import-statement"
+        },
+        {
+          "path": "src/components/tab-item/index.ts",
+          "kind": "import-statement"
+        },
+        {
+          "path": "src/components/flex/index.ts",
+          "kind": "import-statement"
+        },
+        {
+          "path": "src/components/badge/index.ts",
+          "kind": "import-statement"
         }
       ]
     }
@@ -2247,31 +2388,16 @@
       "imports": [],
       "exports": [],
       "inputs": {},
-      "bytes": 1336499
+      "bytes": 1425511
     },
     "dist/main.js": {
       "imports": [],
-      "exports": [
-        "Button",
-        "Checkbox",
-        "CommunityItem",
-        "Editor",
-        "Icon",
-        "Input",
-        "Knobs",
-        "Menu",
-        "MenuGroupItem",
-        "MenuItem",
-        "MessageItem",
-        "Modal",
-        "Popover",
-        "RadioButton",
-        "Select",
-        "Text",
-        "Tooltip"
-      ],
+      "exports": [],
       "entryPoint": "src/main.ts",
       "inputs": {
+        "node_modules/prismjs/prism.js": {
+          "bytesInOutput": 16761
+        },
         "src/styles/base.css": {
           "bytesInOutput": 0
         },
@@ -2339,7 +2465,7 @@
           "bytesInOutput": 178
         },
         "src/components/button/Button.ts": {
-          "bytesInOutput": 3731
+          "bytesInOutput": 3783
         },
         "src/main.ts": {
           "bytesInOutput": 0
@@ -2357,13 +2483,16 @@
           "bytesInOutput": 0
         },
         "src/components/knobs/Knobs.js": {
-          "bytesInOutput": 7030
+          "bytesInOutput": 7316
+        },
+        "src/components/knobs/atom.js": {
+          "bytesInOutput": 2165
         },
         "src/components/text/index.ts": {
           "bytesInOutput": 44
         },
         "src/components/text/Text.ts": {
-          "bytesInOutput": 3209
+          "bytesInOutput": 3428
         },
         "src/components/popover/index.ts": {
           "bytesInOutput": 44
@@ -2480,13 +2609,13 @@
           "bytesInOutput": 496
         },
         "node_modules/@popperjs/core/lib/utils/detectOverflow.js": {
-          "bytesInOutput": 827
+          "bytesInOutput": 825
         },
         "node_modules/@popperjs/core/lib/utils/computeAutoPlacement.js": {
           "bytesInOutput": 463
         },
         "node_modules/@popperjs/core/lib/modifiers/flip.js": {
-          "bytesInOutput": 1409
+          "bytesInOutput": 1406
         },
         "node_modules/@popperjs/core/lib/modifiers/hide.js": {
           "bytesInOutput": 748
@@ -2501,7 +2630,7 @@
           "bytesInOutput": 38
         },
         "node_modules/@popperjs/core/lib/modifiers/preventOverflow.js": {
-          "bytesInOutput": 1432
+          "bytesInOutput": 1429
         },
         "node_modules/@popperjs/core/lib/dom-utils/getHTMLElementScroll.js": {
           "bytesInOutput": 69
@@ -2528,7 +2657,7 @@
           "bytesInOutput": 65
         },
         "src/components/popover/Popover.ts": {
-          "bytesInOutput": 1450
+          "bytesInOutput": 1554
         },
         "src/components/menu/index.ts": {
           "bytesInOutput": 44
@@ -2546,7 +2675,7 @@
           "bytesInOutput": 44
         },
         "src/components/menu-item/MenuItem.ts": {
-          "bytesInOutput": 2540
+          "bytesInOutput": 2666
         },
         "src/components/radio-button/index.ts": {
           "bytesInOutput": 44
@@ -2560,17 +2689,17 @@
         "src/components/message-item/MessageItem.ts": {
           "bytesInOutput": 1689
         },
-        "src/components/community-item/index.ts": {
+        "src/components/avatar/index.ts": {
           "bytesInOutput": 44
         },
-        "src/components/community-item/CommunityItem.ts": {
-          "bytesInOutput": 1339
+        "src/components/avatar/Avatar.ts": {
+          "bytesInOutput": 1526
         },
         "src/components/input/index.ts": {
           "bytesInOutput": 44
         },
         "src/components/input/Input.js": {
-          "bytesInOutput": 3619
+          "bytesInOutput": 3874
         },
         "src/components/checkbox/index.ts": {
           "bytesInOutput": 44
@@ -2582,19 +2711,19 @@
           "bytesInOutput": 44
         },
         "src/components/select/Select.ts": {
-          "bytesInOutput": 3268
+          "bytesInOutput": 3174
         },
         "src/components/modal/index.ts": {
           "bytesInOutput": 44
         },
         "src/components/modal/Modal.ts": {
-          "bytesInOutput": 3788
+          "bytesInOutput": 3888
         },
         "src/components/tooltip/index.ts": {
           "bytesInOutput": 44
         },
         "src/components/tooltip/Tooltip.ts": {
-          "bytesInOutput": 2307
+          "bytesInOutput": 2332
         },
         "src/components/editor/index.ts": {
           "bytesInOutput": 44
@@ -2603,16 +2732,16 @@
           "bytesInOutput": 1387
         },
         "node_modules/prosemirror-model/dist/index.es.js": {
-          "bytesInOutput": 48773
+          "bytesInOutput": 48798
         },
         "node_modules/prosemirror-transform/dist/index.es.js": {
-          "bytesInOutput": 26449
+          "bytesInOutput": 26470
         },
         "node_modules/prosemirror-state/dist/index.es.js": {
-          "bytesInOutput": 14294
+          "bytesInOutput": 14295
         },
         "node_modules/prosemirror-view/dist/index.es.js": {
-          "bytesInOutput": 85618
+          "bytesInOutput": 85613
         },
         "node_modules/w3c-keyname/index.es.js": {
           "bytesInOutput": 1763
@@ -2714,10 +2843,34 @@
           "bytesInOutput": 85
         },
         "src/components/icon/Icon.ts": {
-          "bytesInOutput": 642
+          "bytesInOutput": 974
+        },
+        "src/components/tabs/index.ts": {
+          "bytesInOutput": 44
+        },
+        "src/components/tabs/Tabs.ts": {
+          "bytesInOutput": 2156
+        },
+        "src/components/tab-item/index.ts": {
+          "bytesInOutput": 44
+        },
+        "src/components/tab-item/TabItem.ts": {
+          "bytesInOutput": 1624
+        },
+        "src/components/flex/index.ts": {
+          "bytesInOutput": 44
+        },
+        "src/components/flex/Flex.ts": {
+          "bytesInOutput": 1674
+        },
+        "src/components/badge/index.ts": {
+          "bytesInOutput": 44
+        },
+        "src/components/badge/Badge.ts": {
+          "bytesInOutput": 1681
         }
       },
-      "bytes": 336543
+      "bytes": 364890
     },
     "dist/main.css": {
       "imports": [],
