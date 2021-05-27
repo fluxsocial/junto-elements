@@ -5,10 +5,13 @@
 /.pnp
 .pnp.js
 
+meta.json
+
 # testing
 /coverage
 
 # production
+/dist
 /build
 /.cache
 .cache
