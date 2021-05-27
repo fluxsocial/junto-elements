@@ -1,5 +1,5 @@
 {
-  "name": "junto-elements",
+  "name": "@junto-foundation/junto-elements",
   "version": "0.0.2",
   "description": "",
   "homepage": "https://junto-elements.netlify.com",
@@ -7,6 +7,9 @@
   "files": [
     "dist"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "@popperjs/core": "^2.9.2",
     "@tiptap/core": "^2.0.0-beta.66",
