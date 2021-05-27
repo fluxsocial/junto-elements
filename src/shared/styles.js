@@ -11,6 +11,10 @@ export default css`
     box-sizing: inherit;
   }
 
+  :host *:focus {
+    outline: 0;
+  }
+
   [hidden] {
     display: none !important;
   }
