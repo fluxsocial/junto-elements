@@ -29,6 +29,7 @@ const styles = css`
     padding-right: var(--j-box-padding-right);
     padding-top: var(--j-box-padding-top);
     padding-right: var(--j-box-padding-right);
+    padding-bottom: var(--j-box-padding-bottom);
     margin-left: var(--j-box-margin-left);
     margin-right: var(--j-box-margin-right);
     margin-top: var(--j-box-margin-top);
