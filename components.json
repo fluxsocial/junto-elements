@@ -1116,7 +1116,7 @@
           "default": "\"\""
         },
         {
-          "name": "hideUser",
+          "name": "hideuser",
           "description": "Date",
           "type": "Boolean",
           "default": "false"
@@ -1136,8 +1136,8 @@
           "default": "\"\""
         },
         {
-          "name": "hideUser",
-          "attribute": "hideUser",
+          "name": "hideuser",
+          "attribute": "hideuser",
           "description": "Date",
           "type": "Boolean",
           "default": "false"
