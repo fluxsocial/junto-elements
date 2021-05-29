@@ -2,7 +2,7 @@ import { html, css, LitElement } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import sharedStyles from "../../shared/styles";
 
-import { Editor as TipTap } from "@tiptap/core";
+import { Editor as TipTap, generateHTML, generateJSON } from "@tiptap/core";
 import StarterKit from "@tiptap/starter-kit";
 import CodeBlock from "@tiptap/extension-code-block";
 import Placeholder from "@tiptap/extension-placeholder";
@@ -16,8 +16,9 @@ const styles = css`
     --j-editor-border-color: var(--j-color-ui-200);
   }
   [part="base"] {
+    font-size: var(--j-font-size-500);
     width: 100%;
-    border: 2px solid var(--j-editor-border-color);
+    border: 1px solid var(--j-editor-border-color);
     border-radius: var(--j-border-radius);
   }
   [part="toolbar"] {
@@ -31,17 +32,11 @@ const styles = css`
   .ProseMirror:focus {
     outline: 0;
   }
-  *:last-of-type {
-    margin-bottom: 0;
-  }
-  .ProseMirror p,
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
+  .ProseMirror *:first-of-type {
     margin-top: 0;
+  }
+  .ProseMirror *:last-of-type {
+    margin-bottom: 0;
   }
   .ProseMirror pre {
     background: #0d0d0d;
@@ -67,16 +62,22 @@ export default class Editor extends LitElement {
   @property({ type: String })
   value = "";
 
+  @property({ type: Object })
+  json = { type: "doc", content: [] };
+
   @property({ type: String })
   placeholder = "";
 
   @state()
-  editorInstance = null;
+  _editorInstance = null;
+
+  @state()
+  _editorChange = false;
 
   firstUpdated() {
     const editorEl = this.renderRoot.querySelector("[part='editor']");
-    this.editorInstance = new TipTap({
-      content: this.value,
+    this._editorInstance = new TipTap({
+      content: this.value || this.json,
       element: editorEl,
       extensions: [
         StarterKit,
@@ -84,14 +85,12 @@ export default class Editor extends LitElement {
         Placeholder.configure({ placeholder: this.placeholder }),
       ],
       onUpdate: ({ editor }) => {
+        this._editorChange = true;
         this.value = editor.getHTML();
+        this.json = editor.getJSON() as any;
         this.dispatchEvent(
           new CustomEvent("change", {
             bubbles: true,
-            detail: {
-              html: editor.getHTML(),
-              json: editor.getJSON(),
-            },
           })
         );
       },
@@ -99,15 +98,20 @@ export default class Editor extends LitElement {
   }
 
   shouldUpdate(changedProperties) {
-    if (changedProperties.has("value") && this.editorInstance) {
+    if (
+      changedProperties.has("value") &&
+      this._editorInstance &&
+      !this._editorChange
+    ) {
       // TODO: Bug when this gets set and marker is put on bottom of input field
-      // this.editorInstance.commands.setContent(this.value);
+      this._editorInstance.commands.setContent(this.value);
     }
+    this._editorChange = false;
     return true;
   }
 
   _toggleBold() {
-    this.editorInstance.chain().toggleBold().focus().run();
+    this._editorInstance.chain().toggleBold().focus().run();
   }
 
   render() {
@@ -115,27 +119,32 @@ export default class Editor extends LitElement {
       <div part="editor"></div>
       <div part="toolbar">
         <j-button
-          @click=${() => this.editorInstance.chain().toggleBold().focus().run()}
+          size="sm"
+          @click=${() =>
+            this._editorInstance.chain().toggleBold().focus().run()}
         >
-          <j-icon name="type-bold"></j-icon>
+          <j-icon size="sm" name="type-bold"></j-icon>
         </j-button>
         <j-button
+          size="sm"
           @click=${() =>
-            this.editorInstance.chain().toggleItalic().focus().run()}
+            this._editorInstance.chain().toggleItalic().focus().run()}
         >
-          <j-icon name="type-italic"></j-icon>
+          <j-icon size="sm" name="type-italic"></j-icon>
         </j-button>
         <j-button
+          size="sm"
           @click=${() =>
-            this.editorInstance.chain().toggleStrike().focus().run()}
+            this._editorInstance.chain().toggleStrike().focus().run()}
         >
-          <j-icon name="type-strikethrough"></j-icon>
+          <j-icon size="sm" name="type-strikethrough"></j-icon>
         </j-button>
         <j-button
+          size="sm"
           @click=${() =>
-            this.editorInstance.chain().toggleCodeBlock().focus().run()}
+            this._editorInstance.chain().toggleCodeBlock().focus().run()}
         >
-          <j-icon name="code"></j-icon>
+          <j-icon size="sm" name="code"></j-icon>
         </j-button>
       </div>
     </div>`;
