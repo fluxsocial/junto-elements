@@ -4,19 +4,34 @@ import sharedStyles from "../../shared/styles";
 
 const styles = css`
   :host {
-    --j-message-item-padding: 0 var(--j-space-500);
+    --j-message-item-padding: var(--j-space-300) var(--j-space-500);
   }
-  [part="content"] {
+  [part="base"] {
+    display: flex;
     position: relative;
-    padding-right: var(--j-space-400);
-    padding-top: var(--j-space-500);
-    padding-bottom: var(--j-space-500);
-    padding-left: 70px;
-    border-radius: var(--j-border-radius);
-    box-shadow: var(--j-depth-100);
+    padding: var(--j-message-item-padding);
+    gap: var(--j-space-200);
+    border-radius: none;
+    font-size: var(--j-font-size-500);
   }
-  [part="content"]:hover {
+  [part="base"]:hover {
     background: var(--j-color-ui-50);
+  }
+  :host([hideuser]) [part="base"] [part="timestamp"] {
+    display: none;
+  }
+  :host([hideuser]) [part="base"]:hover [part="timestamp"] {
+    display: block;
+  }
+  [part="sidebar"] {
+    width: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  [part="main"] {
+    flex: 1;
   }
   [part="metadata"] {
     display: flex;
@@ -37,13 +52,10 @@ const styles = css`
     text-decoration: underline;
   }
   [part="avatar"]::slotted(*) {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     object-fit: cover;
     border-radius: 100%;
-    position: absolute;
-    top: 15px;
-    left: 15px;
   }
 `;
 
@@ -59,20 +71,51 @@ export default class Button extends LitElement {
   @property({ type: String, reflect: true })
   timestamp = "";
 
+  /**
+   * Date
+   * @type {Boolean}
+   * @attr
+   */
+  @property({ type: Boolean, reflect: true })
+  hideuser = false;
+
   render() {
-    const formattedTime = this.timestamp
+    const shortTime = this.timestamp
+      ? new Intl.DateTimeFormat("en-US", {
+          hour: "numeric",
+          minute: "numeric",
+        }).format(new Date(this.timestamp))
+      : null;
+
+    const longTime = this.timestamp
       ? new Intl.DateTimeFormat("en-US").format(new Date(this.timestamp))
       : null;
 
+    function timeStamp() {
+      return html`
+        <j-tooltip placement="top" title=${longTime}>
+          <span part="timestamp">${shortTime}</span>
+        </j-tooltip>
+      `;
+    }
+
     return html`
       <div part="base" role="listitem">
-        <div part="content">
-          <slot name="avatar" part="avatar"></slot>
-          <div part="metadata">
-            <slot part="username" name="username"></slot>
-            <span part="timestamp">${formattedTime}</span>
+        <div part="sidebar">
+          ${this.hideuser
+            ? timeStamp()
+            : html`<slot part="avatar" name="avatar"></slot>`}
+        </div>
+        <div part="main">
+          ${this.hideuser
+            ? null
+            : html`<div part="metadata">
+                <slot part="username" name="username"></slot>
+                ${timeStamp()}
+              </div>`}
+          <div part="message">
+            <slot name="message"></slot>
           </div>
-          <slot part="message" name="message"><slot></slot></slot>
         </div>
       </div>
     `;
