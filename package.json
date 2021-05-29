@@ -39,9 +39,9 @@
     "build": "run-s build:*",
     "dev": "run-p dev:*",
     "dev:docs": "live-server",
-    "dev:watch": "esbuild src/main.ts --watch --format=iife --bundle --minify --sourcemap --outfile=dist/main.js",
+    "dev:watch": "esbuild src/main.ts --watch --bundle --minify --sourcemap --outfile=dist/main.js --target=es2016",
     "build:analyze": "web-component-analyzer src --outFile components.json",
-    "build:package": "esbuild src/main.ts --format=iife --metafile=meta.json --bundle --minify --sourcemap --outfile=dist/main.js"
+    "build:package": "esbuild src/main.ts --metafile=meta.json --bundle --minify --sourcemap --outfile=dist/main.js --target=es2016"
   },
   "keywords": [],
   "author": "",

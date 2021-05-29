@@ -487,6 +487,11 @@
           "default": "\"\""
         },
         {
+          "name": "json",
+          "type": "{ type: string; content: never[]; }",
+          "default": "{\"type\":\"doc\",\"content\":[]}"
+        },
+        {
           "name": "placeholder",
           "type": "string",
           "default": "\"\""
@@ -505,14 +510,16 @@
           "default": "\"\""
         },
         {
+          "name": "json",
+          "attribute": "json",
+          "type": "{ type: string; content: never[]; }",
+          "default": "{\"type\":\"doc\",\"content\":[]}"
+        },
+        {
           "name": "placeholder",
           "attribute": "placeholder",
           "type": "string",
           "default": "\"\""
-        },
-        {
-          "name": "editorInstance",
-          "type": "null"
         }
       ],
       "events": [
@@ -1107,6 +1114,12 @@
           "description": "Date",
           "type": "String",
           "default": "\"\""
+        },
+        {
+          "name": "hideUser",
+          "description": "Date",
+          "type": "Boolean",
+          "default": "false"
         }
       ],
       "properties": [
@@ -1121,6 +1134,13 @@
           "description": "Date",
           "type": "String",
           "default": "\"\""
+        },
+        {
+          "name": "hideUser",
+          "attribute": "hideUser",
+          "description": "Date",
+          "type": "Boolean",
+          "default": "false"
         }
       ]
     },
