@@ -181,8 +181,12 @@ class Input extends LitElement {
           <slot part="end" name="end"></slot>
         </div>
         ${this.error
-          ? html` <div part="error-text">${this.errorText}</div> `
-          : html` <div part="help-text">${this.helpText}</div> `}
+          ? this.errorText
+            ? html`<div part="error-text">${this.errorText}</div>`
+            : null
+          : this.helpText
+          ? html`<div part="help-text">${this.helpText}</div>`
+          : null}
       </div>
     `;
   }
