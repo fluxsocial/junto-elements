@@ -4,14 +4,20 @@ import sharedStyles from "../../shared/styles";
 
 const styles = css`
   :host {
+    --j-menu-group-item-cursor: default;
+    --j-menu-group-item-title-padding-left: var(--j-space-500);
+  }
+  :host([collapsible]) {
+    --j-menu-group-item-cursor: pointer;
+    --j-menu-group-item-title-padding-left: var(--j-space-800);
   }
   [part="summary"] {
     position: relative;
-    cursor: pointer;
+    cursor: var(--j-menu-group-item-cursor);
     list-style: none;
     display: flex;
     align-items: center;
-    padding-left: var(--j-space-800);
+    padding-left: var(--j-menu-group-item-title-padding-left);
     -webkit-appearance: none;
   }
   [part="summary"]::marker,
@@ -22,7 +28,7 @@ const styles = css`
   [part="summary"]:hover {
     color: var(--j-color-ui-700);
   }
-  [part="summary"]:after {
+  :host([collapsible]) [part="summary"]:after {
     top: 50%;
     left: var(--j-space-500);
     position: absolute;
@@ -36,7 +42,7 @@ const styles = css`
     transform: rotate(-45deg) translateX(-50%);
     transform-origin: center;
   }
-  :host([open]) [part="summary"]:after {
+  :host([open][collapsible]) [part="summary"]:after {
     transform: rotate(45deg) translateX(-50%);
   }
   [part="start"]::slotted(*) {
@@ -69,7 +75,15 @@ export default class MenuItem extends LitElement {
    * @attr
    */
   @property({ type: Boolean, reflect: true })
-  open = "";
+  collapsible = false;
+
+  /**
+   * Open
+   * @type {Boolean}
+   * @attr
+   */
+  @property({ type: Boolean, reflect: true })
+  open = false;
 
   /**
    * Title
@@ -79,7 +93,7 @@ export default class MenuItem extends LitElement {
   @property({ type: String, reflect: true })
   title = "";
 
-  render() {
+  collapsibleContent() {
     return html`<details
       .open=${this.open}
       @toggle=${(e) => (this.open = e.target.open)}
@@ -95,5 +109,22 @@ export default class MenuItem extends LitElement {
         <slot></slot>
       </div>
     </details>`;
+  }
+
+  normal() {
+    return html`<div part="base" role="menuitem">
+      <div part="summary">
+        <slot part="start" name="start"></slot>
+        <div part="title">${this.title}</div>
+        <slot part="end" name="end"></slot>
+      </div>
+      <div part="content">
+        <slot></slot>
+      </div>
+    </div>`;
+  }
+
+  render() {
+    return this.collapsible ? this.collapsibleContent() : this.normal();
   }
 }
