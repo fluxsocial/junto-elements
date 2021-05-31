@@ -35,6 +35,7 @@ const styles = css`
     font-size: var(--j-button-font-size);
     font-family: inherit;
     border: var(--j-button-border);
+    position: relative;
   }
 
   button:not([disabled]):hover {
@@ -44,6 +45,24 @@ const styles = css`
   button[disabled] {
     opacity: 0.5;
     cursor: default;
+  }
+
+  j-spinner {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+  }
+
+  :host([loading]) j-spinner {
+    display: block;
+    --j-spinner-color: var(--j-button-text);
+  }
+
+  :host([loading]) [part="base"] slot {
+    visibility: hidden;
+    opacity: 0;
   }
 
   :host([variant="primary"]) {
@@ -123,12 +142,20 @@ export default class Button extends LitElement {
   size = "";
 
   /**
-   * Sizes
+   * Disabled
    * @type {boolean}
    * @attr
    */
   @property({ type: Boolean, reflect: true })
-  disabled = "";
+  disabled = false;
+
+  /**
+   * Loading
+   * @type {boolean}
+   * @attr
+   */
+  @property({ type: Boolean, reflect: true })
+  loading = false;
 
   /**
    * Squared
@@ -155,6 +182,11 @@ export default class Button extends LitElement {
   circle = false;
 
   render() {
-    return html` <button ?disabled=${this.disabled}><slot></slot></button> `;
+    return html`
+      <button part="base" ?disabled=${this.disabled}>
+        <j-spinner size="sm"></j-spinner>
+        <slot></slot>
+      </button>
+    `;
   }
 }
