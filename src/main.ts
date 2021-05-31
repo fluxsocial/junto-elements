@@ -26,3 +26,4 @@ import "./components/tabs";
 import "./components/tab-item";
 import "./components/flex";
 import "./components/badge";
+import "./components/spinner";
