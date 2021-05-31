@@ -336,9 +336,15 @@
         },
         {
           "name": "disabled",
-          "description": "Sizes",
+          "description": "Disabled",
           "type": "boolean",
-          "default": "\"\""
+          "default": "false"
+        },
+        {
+          "name": "loading",
+          "description": "Loading",
+          "type": "boolean",
+          "default": "false"
         },
         {
           "name": "square",
@@ -382,9 +388,16 @@
         {
           "name": "disabled",
           "attribute": "disabled",
-          "description": "Sizes",
+          "description": "Disabled",
           "type": "boolean",
-          "default": "\"\""
+          "default": "false"
+        },
+        {
+          "name": "loading",
+          "attribute": "loading",
+          "description": "Loading",
+          "type": "boolean",
+          "default": "false"
         },
         {
           "name": "square",
@@ -1004,10 +1017,16 @@
       "path": "./src/components/menu-group-item/MenuGroupItem.ts",
       "attributes": [
         {
+          "name": "collapsible",
+          "description": "Open",
+          "type": "Boolean",
+          "default": "false"
+        },
+        {
           "name": "open",
           "description": "Open",
           "type": "Boolean",
-          "default": "\"\""
+          "default": "false"
         },
         {
           "name": "title",
@@ -1023,11 +1042,18 @@
           "default": "[\"styles\",\"sharedStyles\"]"
         },
         {
+          "name": "collapsible",
+          "attribute": "collapsible",
+          "description": "Open",
+          "type": "Boolean",
+          "default": "false"
+        },
+        {
           "name": "open",
           "attribute": "open",
           "description": "Open",
           "type": "Boolean",
-          "default": "\"\""
+          "default": "false"
         },
         {
           "name": "title",
@@ -1418,6 +1444,30 @@
       "events": [
         {
           "name": "change"
+        }
+      ]
+    },
+    {
+      "name": "j-spinner",
+      "path": "./src/components/spinner/Spinner.ts",
+      "attributes": [
+        {
+          "name": "size",
+          "type": "string",
+          "default": "\"\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "styles",
+          "type": "CSSResultGroup[]",
+          "default": "[\"sharedStyles\",\"styles\"]"
+        },
+        {
+          "name": "size",
+          "attribute": "size",
+          "type": "string",
+          "default": "\"\""
         }
       ]
     },
