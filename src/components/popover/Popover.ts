@@ -28,6 +28,23 @@ const styles = css`
   :host([open]) {
     display: inline-block;
   }
+  :host [part="base"] {
+    display: none;
+  }
+  :host([open]) [part="base"] {
+    display: block;
+    animation: fade-in 0.2s ease;
+  }
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
 `;
 
 @customElement("j-popover")
