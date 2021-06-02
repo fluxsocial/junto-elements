@@ -11,6 +11,7 @@ const styles = css`
   }
 
   :host > *:first-child {
+    display: block;
     margin: 0;
     color: var(--j-text-color);
     font-weight: var(--j-text-font-weight);
@@ -67,6 +68,13 @@ const styles = css`
     --j-text-margin-bottom: var(--j-space-300);
   }
 
+  :host([variant="label"]) {
+    --j-text-color: var(--j-color-ui-700);
+    --j-text-font-size: var(--j-font-size-500);
+    --j-text-font-weight: 500;
+    --j-text-margin-bottom: var(--j-space-300);
+  }
+
   :host([nomargin]) {
     --j-text-margin-bottom: 0;
   }
@@ -85,7 +93,7 @@ export default class Text extends LitElement {
 
   /**
    * Variants
-   * @type {""|"heading-lg"|"heading"|"heading-sm"|"subheading"|""ingress"|"body"|"footnote"}
+   * @type {""|"heading-lg"|"heading"|"heading-sm"|"subheading"|""ingress"|"body"|"label"|"footnote"}
    * @attr
    */
   @property({ type: String, reflect: true }) variant = "body";
@@ -160,6 +168,8 @@ export default class Text extends LitElement {
         return html`<i part="base"><slot></slot></i>`;
       case "span":
         return html`<span part="base"><slot></slot></span>`;
+      case "label":
+        return html`<label part="base"><slot></slot></label>`;
       case "div":
         return html`<div part="base"><slot></slot></div>`;
       default:
