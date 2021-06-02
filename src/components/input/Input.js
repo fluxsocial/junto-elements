@@ -15,13 +15,6 @@ const styles = css`
   [part="base"] {
     display: block;
   }
-  [part="label"] {
-    display: inline-block;
-    color: var(--j-color-ui-800);
-    font-weight: 500;
-    font-size: var(--j-input-label-size);
-    margin-bottom: var(--j-space-400);
-  }
   [part="input-wrapper"] {
     display: block;
     position: relative;
@@ -37,6 +30,12 @@ const styles = css`
     width: 100%;
     min-width: 200px;
     padding: 0px var(--j-space-400);
+  }
+  [part="input-field"]:hover {
+    border: 1px solid var(--j-color-ui-400);
+  }
+  [part="input-field"]:focus {
+    border: 1px solid var(--j-color-primary-400);
   }
   [part="help-text"],
   [part="error-text"] {
@@ -157,7 +156,12 @@ class Input extends LitElement {
   render() {
     return html`
       <div part="base">
-        ${this.label && html` <label part="label">${this.label}</label> `}
+        ${this.label &&
+        html`
+          <j-text tag="label" variant="label" part="label"
+            >${this.label}
+          </j-text>
+        `}
         <div part="input-wrapper">
           <slot part="start" name="start"></slot>
           <input
