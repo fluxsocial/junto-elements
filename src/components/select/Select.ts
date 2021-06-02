@@ -79,8 +79,18 @@ export default class Select extends LitElement {
   @property({ type: String, reflect: true })
   inputValue = "";
 
+  constructor() {
+    super();
+
+    this._handleClickOutside = this._handleClickOutside.bind(this);
+    this._handleKeyDown = this._handleKeyDown.bind(this);
+    this._handleInputClick = this._handleInputClick.bind(this);
+    this._handleOptionClick = this._handleOptionClick.bind(this);
+    this._handleSlotChange = this._handleSlotChange.bind(this);
+  }
+
   get optionElements() {
-    return [...this.querySelectorAll("[value]")];
+    return [...this.children].filter((child: any) => child.value);
   }
 
   get selectedElement() {
@@ -91,83 +101,87 @@ export default class Select extends LitElement {
     return this.optionElements.find((el) => el.hasAttribute("active")) as any;
   }
 
-  firstUpdated() {
-    this.optionElements.forEach((option) => {
-      option.addEventListener("mousedown", (e: any) => {
-        this.open = false;
-        this.value = e.target.value;
-        this.inputValue = e.target.label;
+  connectedCallback() {
+    super.connectedCallback();
+    this.addEventListener("keydown", this._handleKeyDown);
+    window.addEventListener("click", this._handleClickOutside);
+  }
+
+  _handleOptionClick(e) {
+    this.open = false;
+    this.value = e.target.value;
+    this.inputValue = e.target.label;
+  }
+
+  _handleClickOutside(e) {
+    const clickedInput = this.contains(e.target as Node);
+    const clickedMenu = this.contains(e.target as Node);
+    if (!clickedInput && !clickedMenu) {
+      this.open = false;
+    }
+  }
+
+  _handleKeyDown(e) {
+    e.preventDefault();
+    const { keyCode } = e;
+
+    const keyName = keyCodes[keyCode];
+
+    if (keyName === "escape") {
+      this.open = false;
+      return;
+    }
+
+    if ((keyName === "up" || "down" || "enter" || "space") && !this.open) {
+      this.open = true;
+      this.optionElements.forEach((el, index) => {
+        if (index === 0) el.setAttribute("active", "");
+        else el.removeAttribute("active");
       });
-    });
+      return;
+    }
 
-    this.addEventListener("keydown", (e) => {
-      e.preventDefault();
-      const { keyCode } = e;
+    if (keyName === "enter" && this.open && this.activeElement) {
+      this.open = false;
+      this.value = this.activeElement.value;
+      this.inputValue = this.activeElement.label;
+    }
 
-      const keyName = keyCodes[keyCode];
+    if (keyName === "down" && this.open) {
+      console.log("keydown and is open");
+      const activeIndex = this.optionElements.findIndex((el) =>
+        el.hasAttribute("active")
+      );
+      this.activeElement?.removeAttribute("active");
+      this.optionElements.forEach((el, index) => {
+        if (index + 1 > this.optionElements.length) {
+          this.optionElements[0].setAttribute("active", "");
+        } else if (index === activeIndex + 1) {
+          el.setAttribute("active", "");
+        }
+      });
+    }
 
-      if (keyName === "escape") {
-        this.open = false;
-        return;
-      }
+    if (keyName === "up" && this.open) {
+      const activeIndex = this.optionElements.findIndex((el) =>
+        el.hasAttribute("active")
+      );
 
-      if ((keyName === "up" || "down" || "enter" || "space") && !this.open) {
-        this.open = true;
-        this.optionElements.forEach((el, index) => {
-          if (index === 0) el.setAttribute("active", "");
-          else el.removeAttribute("active");
-        });
-        return;
-      }
+      this.activeElement?.removeAttribute("active");
 
-      if (keyName === "enter" && this.open && this.activeElement) {
-        this.value === this.activeElement.value;
-        this.inputValue = this.activeElement.label;
-        this.open = false;
-      }
-
-      if (keyName === "down" && this.open) {
-        const activeIndex = this.optionElements.findIndex((el) =>
-          el.hasAttribute("active")
-        );
-        this.activeElement?.removeAttribute("active");
-        this.optionElements.forEach((el, index) => {
-          if (index + 1 > this.optionElements.length) {
-            this.optionElements[0].setAttribute("active", "");
-          } else if (index === activeIndex + 1) {
-            el.setAttribute("active", "");
-          }
-        });
-      }
-
-      if (keyName === "up" && this.open) {
-        const activeIndex = this.optionElements.findIndex((el) =>
-          el.hasAttribute("active")
-        );
-
-        this.optionElements.forEach((el, index) => {
-          if (activeIndex === 0) {
-            this.optionElements[this.optionElements.length - 1].setAttribute(
-              "active",
-              ""
-            );
-          } else if (index === activeIndex - 1) {
-            el.setAttribute("active", "");
-          } else {
-            this.activeElement?.removeAttribute("active");
-          }
-        });
-      }
-    });
-
-    // Handle click outside
-    window.addEventListener("click", (e) => {
-      const clickedInput = this.contains(e.target as Node);
-      const clickedMenu = this.contains(e.target as Node);
-      if (!clickedInput && !clickedMenu) {
-        this.open = false;
-      }
-    });
+      this.optionElements.forEach((el, index) => {
+        if (activeIndex === 0) {
+          this.optionElements[this.optionElements.length - 1].setAttribute(
+            "active",
+            ""
+          );
+        } else if (index === activeIndex - 1) {
+          el.setAttribute("active", "");
+        } else {
+          this.activeElement?.removeAttribute("active");
+        }
+      });
+    }
   }
 
   _handleInputClick(e) {
@@ -177,11 +191,21 @@ export default class Select extends LitElement {
     }, 0);
   }
 
+  _handleSlotChange(e) {
+    const slottedElements = e.target.assignedNodes();
+    [...slottedElements].forEach((el) => {
+      console.log(el);
+      el.removeEventListener("mousedown", this._handleOptionClick);
+      el.addEventListener("mousedown", this._handleOptionClick);
+    });
+  }
+
   shouldUpdate(changedProperties) {
+    console.log(changedProperties);
     if (changedProperties.has("value")) {
       this.dispatchEvent(new CustomEvent("change", { bubbles: true }));
-      this.querySelectorAll("[value]").forEach((option) => {
-        if (option.getAttribute("value") === this.value) {
+      this.optionElements.forEach((option: any) => {
+        if (option.value === this.value) {
           option.setAttribute("selected", "");
         } else {
           option.removeAttribute("selected");
@@ -205,7 +229,7 @@ export default class Select extends LitElement {
       </j-input>
 
       <nav part="menu">
-        <slot></slot>
+        <slot @slotchange=${this._handleSlotChange}></slot>
       </nav>
     </div>`;
   }

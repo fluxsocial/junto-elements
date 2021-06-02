@@ -90,13 +90,8 @@ export default class MenuItem extends LitElement {
   @property({ type: Boolean, reflect: true })
   active = false;
 
-  /**
-   * Value
-   * @type {String}
-   * @attr
-   */
-  @property({ type: String, reflect: true })
-  value = "";
+  @state()
+  _value = "";
 
   @state()
   _label = "";
@@ -108,6 +103,15 @@ export default class MenuItem extends LitElement {
   set label(val) {
     this._label = val;
     this.setAttribute("label", val);
+  }
+
+  get value() {
+    return this._value || this.getAttribute("value") || this.innerText;
+  }
+
+  set value(val) {
+    this._value = val;
+    this.setAttribute("value", val);
   }
 
   render() {
