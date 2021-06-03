@@ -21,6 +21,7 @@ const styles = css`
     transition: box-shadow 0.2s ease;
     cursor: pointer;
     border: 0;
+    gap: var(--j-space-400);
     align-items: center;
     justify-content: center;
     box-shadow: var(--j-button-depth);
@@ -185,7 +186,9 @@ export default class Button extends LitElement {
     return html`
       <button part="base" ?disabled=${this.disabled}>
         <j-spinner size="sm"></j-spinner>
+        <slot name="start"></slot>
         <slot></slot>
+        <slot name="end"></slot>
       </button>
     `;
   }
