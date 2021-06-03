@@ -5,7 +5,7 @@ import sharedStyles from "../../shared/styles";
 const styles = css`
   :host {
     --j-text-color: var(--j-color-ui-800);
-    --j-text-font-weight: initial;
+    --j-text-weight: initial;
     --j-text-font-size: var(--j-font-size-500);
     --j-text-margin-bottom: 0;
   }
@@ -14,7 +14,7 @@ const styles = css`
     display: block;
     margin: 0;
     color: var(--j-text-color);
-    font-weight: var(--j-text-font-weight);
+    font-weight: var(--j-text-weight);
     font-size: var(--j-text-font-size);
     margin-bottom: var(--j-text-margin-bottom);
   }
@@ -22,56 +22,56 @@ const styles = css`
   :host([variant="heading"]) {
     --j-text-color: var(--j-color-ui-700);
     --j-text-font-size: var(--j-font-size-800);
-    --j-text-font-weight: 600;
+    --j-text-weight: 600;
     --j-text-margin-bottom: var(--j-space-400);
   }
 
   :host([variant="heading-sm"]) {
     --j-text-color: var(--j-color-ui-700);
     --j-text-font-size: var(--j-font-size-700);
-    --j-text-font-weight: 600;
+    --j-text-weight: 600;
     --j-text-margin-bottom: var(--j-space-300);
   }
 
   :host([variant="heading-lg"]) {
     --j-text-color: var(--j-color-ui-700);
     --j-text-font-size: var(--j-font-size-900);
-    --j-text-font-weight: 600;
+    --j-text-weight: 600;
     --j-text-margin-bottom: var(--j-space-600);
   }
 
   :host([variant="ingress"]) {
     --j-text-color: var(--j-color-ui-700);
     --j-text-font-size: var(--j-font-size-600);
-    --j-text-font-weight: 400;
+    --j-text-weight: 400;
     --j-text-margin-bottom: var(--j-space-500);
   }
 
   :host([variant="subheading"]) {
     --j-text-color: var(--j-color-ui-800);
     --j-text-font-size: var(--j-font-size-700);
-    --j-text-font-weight: 400;
+    --j-text-weight: 400;
     --j-text-margin-bottom: var(--j-space-600);
   }
 
   :host([variant="body"]) {
     --j-text-color: var(--j-color-ui-600);
     --j-text-font-size: var(--j-font-size-500);
-    --j-text-font-weight: 400;
+    --j-text-weight: 400;
     --j-text-margin-bottom: var(--j-space-400);
   }
 
   :host([variant="footnote"]) {
     --j-text-color: var(--j-color-ui-600);
     --j-text-font-size: var(--j-font-size-400);
-    --j-text-font-weight: 400;
+    --j-text-weight: 400;
     --j-text-margin-bottom: var(--j-space-300);
   }
 
   :host([variant="label"]) {
     --j-text-color: var(--j-color-ui-700);
     --j-text-font-size: var(--j-font-size-500);
-    --j-text-font-weight: 500;
+    --j-text-weight: 500;
     --j-text-margin-bottom: var(--j-space-300);
   }
 
@@ -119,6 +119,13 @@ export default class Text extends LitElement {
    */
   @property({ type: String, reflect: true }) color = "";
 
+  /**
+   * Weight
+   * @type {String}
+   * @attr
+   */
+  @property({ type: String, reflect: true }) weight = "";
+
   shouldUpdate(changedProperties) {
     if (changedProperties.has("size")) {
       if (this.size) {
@@ -128,6 +135,13 @@ export default class Text extends LitElement {
         );
       } else {
         this.style.removeProperty("--j-text-font-size");
+      }
+    }
+    if (changedProperties.has("weight")) {
+      if (this.weight) {
+        this.style.setProperty("--j-text-weight", this.weight);
+      } else {
+        this.style.removeProperty("--j-text-weight");
       }
     }
     if (changedProperties.has("color")) {
