@@ -20,6 +20,7 @@
   --j-color-primary-900: hsl(var(--j-color-primary-hue), 50%, 10%);
 
   --j-color-success-hue: 130;
+  --j-color-success-50: hsl(var(--j-color-success-hue), 20%, 95%);
   --j-color-success-100: hsl(var(--j-color-success-hue), 20%, 90%);
   --j-color-success-200: hsl(var(--j-color-success-hue), 20%, 80%);
   --j-color-success-300: hsl(var(--j-color-success-hue), 20%, 70%);
@@ -31,6 +32,7 @@
   --j-color-success-900: hsl(var(--j-color-success-hue), 20%, 10%);
 
   --j-color-warning-hue: 45;
+  --j-color-warning-50: hsl(var(--j-color-warning-hue), 20%, 95%);
   --j-color-warning-100: hsl(var(--j-color-warning-hue), 20%, 90%);
   --j-color-warning-200: hsl(var(--j-color-warning-hue), 20%, 80%);
   --j-color-warning-300: hsl(var(--j-color-warning-hue), 20%, 70%);
@@ -42,6 +44,7 @@
   --j-color-warning-900: hsl(var(--j-color-warning-hue), 20%, 10%);
 
   --j-color-danger-hue: 350;
+  --j-color-warning-50: hsl(var(--j-color-danger-hue), 20%, 95%);
   --j-color-danger-100: hsl(var(--j-color-danger-hue), 40%, 90%);
   --j-color-danger-200: hsl(var(--j-color-danger-hue), 40%, 80%);
   --j-color-danger-300: hsl(var(--j-color-danger-hue), 40%, 70%);
