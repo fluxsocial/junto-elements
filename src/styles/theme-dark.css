@@ -58,3 +58,11 @@
   --j-color-ui-800: hsl(var(--j-color-ui-hue), 15%, 95%);
   --j-color-ui-900: hsl(var(--j-color-ui-hue), 15%, 100%);
 }
+
+:root[theme="dark"] j-tabs {
+  --j-tabs-indicator-bg: var(--j-color-primary-400);
+}
+
+:root[theme="dark"] j-tab-item[checked]::part(base) {
+  color: var(--j-color-black);
+}
