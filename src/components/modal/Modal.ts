@@ -56,6 +56,8 @@ const styles = css`
     z-index: 999;
     border-radius: var(--j-border-radius);
     min-width: 80vw;
+    max-width: 90vw;
+    max-height: 90vh;
     min-height: 50vh;
     background: var(--j-color-white);
     border: 1px solid var(--j-color-ui-200);
@@ -67,8 +69,10 @@ const styles = css`
 
   @media (min-width: 800px) {
     [part="modal"] {
+      max-width: 70vw;
       min-width: 600px;
       min-height: 400px;
+      max-height: 70vh;
     }
   }
 
