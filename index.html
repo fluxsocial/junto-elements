@@ -414,8 +414,8 @@
         },
         watch: {
           darkMode: function (val) {
-            if (val) document.body.setAttribute("theme", "dark");
-            else document.body.removeAttribute("theme");
+            if (val) document.documentElement.setAttribute("theme", "dark");
+            else document.documentElement.removeAttribute("theme");
           },
         },
         computed: {
