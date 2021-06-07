@@ -8,12 +8,11 @@ const styles = css`
     --j-avatar-size: var(--j-element-md);
     --j-avatar-border: 2px solid transparent;
   }
-  :host(:hover) {
-    --j-avatar-depth: var(--j-depth-100);
-  }
   :host([selected]) {
-    --j-avatar-depth: var(--j-depth-200);
     --j-avatar-border: 2px solid var(--j-color-primary-500);
+  }
+  :host([online]) {
+    --j-avatar-border: 2px solid var(--j-color-success-500);
   }
   :host([size="sm"]) {
     --j-avatar-size: var(--j-element-sm);
@@ -52,6 +51,8 @@ export default class Component extends LitElement {
   @property({ type: String, reflect: true }) src = "";
 
   @property({ type: Boolean, reflect: true }) selected = false;
+
+  @property({ type: Boolean, reflect: true }) online = false;
 
   @property({ type: String, reflect: true }) initials = "";
 
