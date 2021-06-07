@@ -6,6 +6,7 @@ const styles = css`
   :host {
     --j-tabs-padding: 4px;
     --j-tabs-height: var(--j-element-md);
+    --j-tabs-indicator-bg: var(--j-color-primary-50);
     --j-tabs-indicator-width: 0px;
     --j-tabs-indicator-left: 0px;
   }
@@ -20,7 +21,7 @@ const styles = css`
     gap: var(--j-space-200);
     background: var(--j-color-white);
     border-radius: var(--j-border-radius);
-    border: 1px solid var(--j-color-ui-50);
+    border: 1px solid var(--j-color-ui-100);
     padding: 0 var(--j-tabs-padding);
     position: relative;
   }
@@ -34,7 +35,7 @@ const styles = css`
     left: var(--j-tabs-indicator-left);
     width: var(--j-tabs-indicator-width);
     height: calc(100% - calc(var(--j-tabs-padding) * 2));
-    background: var(--j-color-primary-50);
+    background: var(--j-tabs-indicator-bg);
     border-radius: var(--j-border-radius);
     transition: all 0.2s ease;
   }
