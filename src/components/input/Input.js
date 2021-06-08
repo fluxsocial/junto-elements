@@ -1,4 +1,5 @@
 import { LitElement, html, css } from "lit";
+import { ifDefined } from "lit-html/directives/if-defined.js";
 import sharedStyles from "../../shared/styles";
 
 const styles = css`
@@ -57,45 +58,51 @@ class Input extends LitElement {
   constructor() {
     super();
     this.value = "";
-    this.max = "";
-    this.min = "";
-    this.maxlength = "";
+    this._initialValue = "";
+    this.max = undefined;
+    this.min = undefined;
+    this.maxlength = undefined;
+    this.minlength = undefined;
+    this.pattern = undefined;
+    this.label = undefined;
+    this.size = undefined;
+    this.placeholder = undefined;
+    this.errorText = undefined;
+    this.helpText = undefined;
     this.autocomplete = false;
+    this.autovalidate = false;
     this.autofocus = false;
-    this.placeholder = "";
     this.disabled = false;
     this.full = false;
-    this.label = "";
-    this.size = "";
     this.error = false;
     this.required = false;
     this.readonly = false;
-    this.errorText = "";
-    this.helpText = "";
     this.type = "text";
     this.onFocus = this.onFocus.bind(this);
     this.onBlur = this.onBlur.bind(this);
-    this._initialValue = "";
   }
 
   static get properties() {
     return {
-      errorText: { type: String, attribute: "error-text" },
-      helpText: { type: String, attribute: "help-text" },
+      errorText: { type: String, attribute: "errortext" },
+      helpText: { type: String, attribute: "helptext" },
       size: { type: String, reflect: true },
       placeholder: { type: String },
       label: { type: String },
-      full: { type: Boolean },
+      full: { type: Boolean, reflect: true },
       value: { type: String, reflect: true },
-      error: { type: Boolean },
-      max: { type: String },
-      min: { type: String },
-      maxlength: { type: String },
+      error: { type: Boolean, reflect: true },
+      max: { type: Number },
+      min: { type: Number },
+      maxlength: { type: Number },
+      minlength: { type: Number },
+      pattern: { type: String },
       autocomplete: { type: Boolean },
+      autovalidate: { type: Boolean },
       autofocus: { type: Boolean },
-      disabled: { type: Boolean },
-      readonly: { type: Boolean },
-      required: { type: Boolean },
+      disabled: { type: Boolean, reflect: true },
+      readonly: { type: Boolean, reflect: true },
+      required: { type: Boolean, reflect: true },
       type: { type: String },
     };
   }
@@ -125,20 +132,6 @@ class Input extends LitElement {
     // this will then become the e.target.value of the custom event
     this.value = e.target.value;
 
-    const valid = this.renderRoot.querySelector("input").checkValidity();
-
-    const message = this.renderRoot.querySelector("input").validationMessage;
-
-    if (!this.errorText) {
-      this.errorText = message;
-    }
-
-    if (!valid) {
-      this.error = true;
-    } else {
-      this.error = false;
-    }
-
     this.dispatchEvent(new CustomEvent("change", e));
   }
 
@@ -150,6 +143,24 @@ class Input extends LitElement {
 
   onBlur(e) {
     e.stopPropagation();
+
+    if (this.autovalidate) {
+      const valid = this.renderRoot.querySelector("input").checkValidity();
+
+      const message = this.renderRoot.querySelector("input").validationMessage;
+
+      if (!this.errorText) {
+        this.errorText = message;
+      }
+
+      if (!valid) {
+        this.error = true;
+      } else {
+        this.error = false;
+      }
+      this.dispatchEvent(new CustomEvent("validate", e));
+    }
+
     this.dispatchEvent(new CustomEvent("blur", e));
   }
 
@@ -167,20 +178,23 @@ class Input extends LitElement {
           <input
             part="input-field"
             .value=${this.value}
-            max=${this.max}
-            min=${this.min}
+            max=${ifDefined(this.max)}
+            min=${ifDefined(this.min)}
+            maxlength=${ifDefined(this.maxlength)}
+            minlength=${ifDefined(this.minlength)}
+            pattern="${ifDefined(this.pattern)}"
+            placeholder="${ifDefined(this.placeholder)}"
+            type=${ifDefined(this.type)}
             @input=${this.onInput}
             @blur=${this.onBlur}
             @focus=${this.onFocus}
             @change=${this.onChange}
             @invalid=${this.onInvalid}
-            maxlength=${this.maxlength}
             ?autocomplete=${this.autocomplete}
             ?autofocus=${this.autofocus}
             ?readonly=${this.readonly}
+            ?required=${this.required}
             ?disabled=${this.disabled}
-            placeholder="${this.placeholder}"
-            type=${this.type}
           />
           <slot part="end" name="end"></slot>
         </div>
