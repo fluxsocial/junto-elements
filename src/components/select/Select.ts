@@ -148,7 +148,6 @@ export default class Select extends LitElement {
     }
 
     if (keyName === "down" && this.open) {
-      console.log("keydown and is open");
       const activeIndex = this.optionElements.findIndex((el) =>
         el.hasAttribute("active")
       );
@@ -194,14 +193,12 @@ export default class Select extends LitElement {
   _handleSlotChange(e) {
     const slottedElements = e.target.assignedNodes();
     [...slottedElements].forEach((el) => {
-      console.log(el);
       el.removeEventListener("mousedown", this._handleOptionClick);
       el.addEventListener("mousedown", this._handleOptionClick);
     });
   }
 
   shouldUpdate(changedProperties) {
-    console.log(changedProperties);
     if (changedProperties.has("value")) {
       this.dispatchEvent(new CustomEvent("change", { bubbles: true }));
       this.optionElements.forEach((option: any) => {
