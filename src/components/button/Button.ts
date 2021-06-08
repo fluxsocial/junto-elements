@@ -17,7 +17,7 @@ const styles = css`
     --j-button-border-radius: var(--j-border-radius);
     --j-button-font-size: var(--j-font-size-500);
   }
-  button {
+  [part="base"] {
     transition: box-shadow 0.2s ease;
     cursor: pointer;
     border: 0;
@@ -39,11 +39,12 @@ const styles = css`
     position: relative;
   }
 
-  button:not([disabled]):hover {
+  :host(:not([disabled])) [part="base"]:hover {
     border: var(--j-button-border-hover);
     background-color: var(--j-button-bg-hover);
   }
-  button[disabled] {
+
+  :host([disabled]) [part="base"] {
     opacity: 0.5;
     cursor: default;
   }
@@ -182,9 +183,16 @@ export default class Button extends LitElement {
   @property({ type: Boolean, reflect: true })
   circle = false;
 
+  handleClick(event: MouseEvent) {
+    if (this.disabled || this.loading) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+  }
+
   render() {
     return html`
-      <button part="base" ?disabled=${this.disabled}>
+      <button @click=${this.handleClick} part="base">
         <j-spinner size="sm"></j-spinner>
         <slot name="start"></slot>
         <slot></slot>
