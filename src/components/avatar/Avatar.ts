@@ -14,6 +14,9 @@ const styles = css`
   :host([online]) {
     --j-avatar-border: 2px solid var(--j-color-success-500);
   }
+  :host([size="xs"]) {
+    --j-avatar-size: var(--j-element-xs);
+  }
   :host([size="sm"]) {
     --j-avatar-size: var(--j-element-sm);
   }
@@ -48,14 +51,39 @@ const styles = css`
 export default class Component extends LitElement {
   static styles = [sharedStyles, styles];
 
+  /**
+   * Img src
+   * @type {String}
+   * @attr
+   */
   @property({ type: String, reflect: true }) src = "";
 
+  /**
+   * Avatar is selected
+   * @type {Boolean}
+   * @attr
+   */
   @property({ type: Boolean, reflect: true }) selected = false;
 
+  /**
+   * User is online
+   * @type {Boolean}
+   * @attr
+   */
   @property({ type: Boolean, reflect: true }) online = false;
 
+  /**
+   * Placeholder initials
+   * @type {String}
+   * @attr
+   */
   @property({ type: String, reflect: true }) initials = "";
 
+  /**
+   * Sizes
+   * @type {""|"xs"|"sm"|"lg"|"xl"}
+   * @attr
+   */
   @property({ type: String, reflect: true }) size = "";
 
   render() {
