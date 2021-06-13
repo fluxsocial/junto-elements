@@ -39,6 +39,9 @@ const styles = css`
     border-radius: var(--j-border-radius);
     transition: all 0.2s ease;
   }
+  :host([size="sm"]) {
+    --j-tabs-height: var(--j-element-sm);
+  }
   :host([size="lg"]) {
     --j-tabs-height: var(--j-element-lg);
   }
@@ -48,9 +51,19 @@ const styles = css`
 export default class Menu extends LitElement {
   static styles = [sharedStyles, styles];
 
+  /**
+   * Value
+   * @type {String}
+   * @attr
+   */
   @property({ type: String, reflect: true })
   value = "";
 
+  /**
+   * Size
+   * @type {""|"sm"|"lg"}
+   * @attr
+   */
   @property({ type: String, reflect: true })
   size = "";
 

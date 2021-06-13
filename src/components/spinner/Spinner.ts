@@ -62,6 +62,11 @@ const styles = css`
 export default class Component extends LitElement {
   static styles = [sharedStyles, styles];
 
+  /**
+   * Size
+   * @type {""|"sm"|"lg"}
+   * @attr
+   */
   @property({ type: String, reflect: true }) size = "";
 
   render() {

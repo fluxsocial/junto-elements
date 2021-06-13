@@ -72,7 +72,7 @@ export default class Button extends LitElement {
   timestamp = "";
 
   /**
-   * Date
+   * Hide user
    * @type {Boolean}
    * @attr
    */

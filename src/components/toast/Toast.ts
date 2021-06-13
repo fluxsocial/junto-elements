@@ -13,6 +13,16 @@ const styles = css`
     --j-toast-background: var(--j-color-success-50);
     --j-toast-color: var(--j-color-success-700);
   }
+  :host([variant="danger"]) {
+    --j-toast-border: 1px solid var(--j-color-danger-100);
+    --j-toast-background: var(--j-color-danger-50);
+    --j-toast-color: var(--j-color-danger-700);
+  }
+  :host([variant="warning"]) {
+    --j-toast-border: 1px solid var(--j-color-warning-100);
+    --j-toast-background: var(--j-color-warning-50);
+    --j-toast-color: var(--j-color-warning-700);
+  }
   :host {
     display: none;
   }
@@ -53,10 +63,25 @@ const styles = css`
 export default class Component extends LitElement {
   static styles = [sharedStyles, styles];
 
+  /**
+   * Variant
+   * @type {""|"success"|"danger"|"warning"}
+   * @attr
+   */
   @property({ type: String, reflect: true }) variant = "";
 
+  /**
+   * Open
+   * @type {Boolean}
+   * @attr
+   */
   @property({ type: Boolean, reflect: true }) open = false;
 
+  /**
+   * Number of seconds before toast autohides
+   * @type {Number}
+   * @attr
+   */
   @property({ type: Number, reflect: true }) autohide = 5;
 
   autoClose() {

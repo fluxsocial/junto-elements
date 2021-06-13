@@ -6,10 +6,35 @@ const styles = css``;
 class Checkbox extends LitElement {
   constructor() {
     super();
+    /**
+     * Checked
+     * @type {Boolean}
+     * @attr
+     */
     this.checked = false;
+    /**
+     * Full width
+     * @type {Boolean}
+     * @attr
+     */
     this.full = false;
+    /**
+     * Disabled
+     * @type {Boolean}
+     * @attr
+     */
     this.disabled = false;
+    /**
+     * Size
+     * @type {""|"sm"|"lg"}
+     * @attr
+     */
     this.size = "";
+    /**
+     * Value
+     * @type {String}
+     * @attr
+     */
     this.value = "";
     this._handleChange = this._handleChange.bind(this);
   }

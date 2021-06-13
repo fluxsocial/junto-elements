@@ -28,17 +28,29 @@ const styles = css`
 
 @customElement("j-tab-item")
 class TabItem extends LitElement {
+  /**
+   * Checked
+   * @type {Boolean}
+   * @attr
+   */
   @property({ type: Boolean, reflect: true })
   checked = false;
 
+  /**
+   * Full width
+   * @type {Boolean}
+   * @attr
+   */
   @property({ type: Boolean, reflect: true })
   full = false;
 
+  /**
+   * Disabled
+   * @type {Boolean}
+   * @attr
+   */
   @property({ type: Boolean, reflect: true })
   disabled = false;
-
-  @property({ type: String, reflect: true })
-  size = "";
 
   @state()
   _label = "";
