@@ -17,26 +17,34 @@ const styles = css`
     display: block;
   }
   [part="input-wrapper"] {
-    display: block;
+    display: flex;
+    align-items: center;
     position: relative;
     height: var(--j-input-height);
-  }
-  [part="input-field"] {
     font-size: var(--j-font-size-400);
     color: var(--j-color-black);
     background: var(--j-color-white);
     border-radius: var(--j-border-radius);
     border: 1px solid var(--j-color-ui-200);
-    height: 100%;
     width: 100%;
     min-width: 200px;
-    padding: 0px var(--j-space-400);
+    padding: 0px;
   }
-  [part="input-field"]:hover {
+  [part="input-wrapper"]:hover {
     border: 1px solid var(--j-color-ui-400);
   }
-  [part="input-field"]:focus {
+  [part="input-wrapper"]:focus-within {
     border: 1px solid var(--j-color-primary-400);
+  }
+  [part="input-field"] {
+    border: 0;
+    flex: 1;
+    background: none;
+    outline: 0;
+    font-size: inherit;
+    height: 100%;
+    width: 100%;
+    padding: 0px var(--j-space-400);
   }
   [part="help-text"],
   [part="error-text"] {
@@ -46,11 +54,11 @@ const styles = css`
   [part="error-text"] {
     color: var(--j-color-danger-500);
   }
+  [part="start"]::slotted(*) {
+    padding-left: var(--j-space-400);
+  }
   [part="end"]::slotted(*) {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    right: var(--j-space-400);
+    padding-right: var(--j-space-400);
   }
 `;
 
@@ -59,16 +67,16 @@ class Input extends LitElement {
     super();
     this.value = "";
     this._initialValue = "";
-    this.max = undefined;
-    this.min = undefined;
-    this.maxlength = undefined;
-    this.minlength = undefined;
-    this.pattern = undefined;
-    this.label = undefined;
-    this.size = undefined;
-    this.placeholder = undefined;
-    this.errorText = undefined;
-    this.helpText = undefined;
+    this.max = null;
+    this.min = null;
+    this.maxlength = null;
+    this.minlength = null;
+    this.pattern = null;
+    this.label = null;
+    this.size = null;
+    this.placeholder = null;
+    this.errorText = null;
+    this.helpText = null;
     this.autocomplete = false;
     this.autovalidate = false;
     this.autofocus = false;
