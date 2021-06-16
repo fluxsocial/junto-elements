@@ -87,6 +87,7 @@ export default class Select extends LitElement {
     this._handleInputClick = this._handleInputClick.bind(this);
     this._handleOptionClick = this._handleOptionClick.bind(this);
     this._handleSlotChange = this._handleSlotChange.bind(this);
+    this._handleNavMouseOver = this._handleNavMouseOver.bind(this);
   }
 
   get optionElements() {
@@ -107,6 +108,11 @@ export default class Select extends LitElement {
     window.addEventListener("click", this._handleClickOutside);
   }
 
+  disconnectedCallback() {
+    window.removeEventListener("click", this._handleClickOutside);
+    super.disconnectedCallback();
+  }
+
   _handleOptionClick(e) {
     this.open = false;
     this.value = e.target.value;
@@ -119,6 +125,10 @@ export default class Select extends LitElement {
     if (!clickedInput && !clickedMenu) {
       this.open = false;
     }
+  }
+
+  _handleNavMouseOver(e) {
+    this.optionElements.forEach((el) => el.removeAttribute("active"));
   }
 
   _handleKeyDown(e) {
@@ -152,9 +162,14 @@ export default class Select extends LitElement {
         el.hasAttribute("active")
       );
       this.activeElement?.removeAttribute("active");
+
+      const firstOption = this.optionElements[0];
+
       this.optionElements.forEach((el, index) => {
-        if (index + 1 > this.optionElements.length) {
-          this.optionElements[0].setAttribute("active", "");
+        if (activeIndex === -1) {
+          firstOption.setAttribute("active", "");
+        } else if (activeIndex >= this.optionElements.length - 1) {
+          firstOption.setAttribute("active", "");
         } else if (index === activeIndex + 1) {
           el.setAttribute("active", "");
         }
@@ -168,16 +183,13 @@ export default class Select extends LitElement {
 
       this.activeElement?.removeAttribute("active");
 
+      const lastOption = this.optionElements[this.optionElements.length - 1];
+
       this.optionElements.forEach((el, index) => {
-        if (activeIndex === 0) {
-          this.optionElements[this.optionElements.length - 1].setAttribute(
-            "active",
-            ""
-          );
+        if (activeIndex === 0 || activeIndex === -1) {
+          lastOption.setAttribute("active", "");
         } else if (index === activeIndex - 1) {
           el.setAttribute("active", "");
-        } else {
-          this.activeElement?.removeAttribute("active");
         }
       });
     }
@@ -225,7 +237,7 @@ export default class Select extends LitElement {
         <j-icon size="sm" slot="end" part="arrow" name="chevron-down"></j-icon>
       </j-input>
 
-      <nav part="menu">
+      <nav part="menu" @mouseover=${this._handleNavMouseOver}>
         <slot @slotchange=${this._handleSlotChange}></slot>
       </nav>
     </div>`;
