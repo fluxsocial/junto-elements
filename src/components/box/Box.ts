@@ -35,10 +35,6 @@ const styles = css`
     margin-top: var(--j-box-margin-top);
     margin-right: var(--j-box-margin-right);
   }
-  [part="base"]:hover {
-    background-color: var(--j-box-bg-color-hover);
-    border-color: var(--j-box-border-color);
-  }
 `;
 
 @customElement("j-box")
@@ -165,23 +161,9 @@ export default class Box extends LitElement {
   @property({ type: String, reflect: true })
   bg = "";
 
-  /**
-   * Background hover color
-   * @type {""|"100"|"200"|"300"|"400"|"500"|"600"|"700"|"800"|"900}
-   * @attr
-   */
-  @property({ type: String, reflect: true })
-  bghover = "";
-
   shouldUpdate(changedProperties) {
     if (changedProperties.has("bg")) {
       this.style.setProperty("--j-box-bg-color", `var(--j-color-${this.bg})`);
-    }
-    if (changedProperties.has("bghover")) {
-      this.style.setProperty(
-        "--j-box-bg-color-hover",
-        `var(--j-color-${this.bghover})`
-      );
     }
     if (changedProperties.has("pl") && this.pl) {
       this.style.setProperty(
