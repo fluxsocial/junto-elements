@@ -10,7 +10,7 @@ const styles = css`
     --j-modal-transition: all 0.4s cubic-bezier(0.785, 0.135, 0.15, 0.86);
     --j-modal-box-shadow: none;
     --j-modal-width: clamp(200px, 60vw, 800px);
-    --j-modal-height: clamp(200px, 50vw, 800px);
+    --j-modal-height: auto;
     --j-modal-padding: var(--j-space-400);
     --j-modal-border: 1px solid transparent;
     --j-modal-translateY: 100%;
@@ -54,6 +54,7 @@ const styles = css`
     border-radius: var(--j-border-radius);
     width: var(--j-modal-width);
     height: var(--j-modal-height);
+    max-height: 90vh;
     background: var(--j-color-white);
     border: 1px solid var(--j-color-ui-200);
   }
