@@ -57,6 +57,10 @@ const styles = css`
     object-fit: cover;
     border-radius: 100%;
   }
+  [name="message"]::slotted(pre) {
+    background: black;
+    color: white;
+  }
 `;
 
 @customElement("j-message-item")
