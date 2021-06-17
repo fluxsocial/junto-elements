@@ -7,7 +7,7 @@ const styles = css`
     --j-button-depth: none;
     --j-button-display: inline-flex;
     --j-button-width: initial;
-    --j-button-padding: 0 var(--j-space-500);
+    --j-button-padding: 0 var(--j-space-400);
     --j-button-bg: var(--j-color-white);
     --j-button-bg-hover: var(--j-color-white);
     --j-button-border: 1px solid var(--j-color-ui-100);
@@ -97,7 +97,7 @@ const styles = css`
   }
   :host([size="sm"]) {
     --j-button-font-size: var(--j-font-size-400);
-    --j-button-padding: 0 var(--j-space-400);
+    --j-button-padding: 0 var(--j-space-300);
     --j-button-height: var(--j-element-sm);
   }
   :host([size="lg"]) {
