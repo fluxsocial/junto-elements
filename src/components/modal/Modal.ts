@@ -9,11 +9,8 @@ const styles = css`
       cubic-bezier(0.785, 0.135, 0.15, 0.86);
     --j-modal-transition: all 0.4s cubic-bezier(0.785, 0.135, 0.15, 0.86);
     --j-modal-box-shadow: none;
-    --j-modal-width: 100%;
-    --j-modal-max-height: 90%;
-    --j-modal-min-height: 300px;
-    --j-modal-max-width: 600px;
-    --j-modal-min-width: 200px;
+    --j-modal-width: clamp(200px, 60vw, 800px);
+    --j-modal-height: clamp(200px, 50vw, 800px);
     --j-modal-padding: var(--j-space-400);
     --j-modal-border: 1px solid transparent;
     --j-modal-translateY: 100%;
@@ -55,25 +52,14 @@ const styles = css`
     position: relative;
     z-index: 999;
     border-radius: var(--j-border-radius);
-    min-width: 80vw;
-    max-width: 90vw;
-    max-height: 90vh;
-    min-height: 50vh;
+    width: var(--j-modal-width);
+    height: var(--j-modal-height);
     background: var(--j-color-white);
     border: 1px solid var(--j-color-ui-200);
   }
 
   [part="content"] {
     flex: 1;
-  }
-
-  @media (min-width: 800px) {
-    [part="modal"] {
-      max-width: 70vw;
-      min-width: 600px;
-      min-height: 400px;
-      max-height: 70vh;
-    }
   }
 
   [part="close-button"] {
