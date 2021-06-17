@@ -9,7 +9,7 @@ const styles = css`
       cubic-bezier(0.785, 0.135, 0.15, 0.86);
     --j-modal-transition: all 0.4s cubic-bezier(0.785, 0.135, 0.15, 0.86);
     --j-modal-box-shadow: none;
-    --j-modal-width: clamp(200px, 60vw, 800px);
+    --j-modal-width: clamp(200px, 40vw, 800px);
     --j-modal-height: auto;
     --j-modal-padding: var(--j-space-400);
     --j-modal-border: 1px solid transparent;
@@ -98,11 +98,35 @@ const styles = css`
   :host([open]) [part="backdrop"] {
     opacity: 1;
   }
+
+  :host([size="xs"]) {
+    --j-modal-width: clamp(200px, 30vw, 500px);
+  }
+
+  :host([size="sm"]) {
+    --j-modal-width: clamp(200px, 30vw, 600px);
+  }
+
+  :host([size="lg"]) {
+    --j-modal-width: clamp(200px, 50vw, 1000px);
+  }
+
+  :host([size="xl"]) {
+    --j-modal-width: clamp(200px, 60vw, 1200px);
+  }
 `;
 
 @customElement("j-modal")
 export default class Menu extends LitElement {
   static styles = [sharedStyles, styles];
+
+  /**
+   * Size
+   * @type {""|"xs"|"sm"|"lg"|"xl"|}
+   * @attr
+   */
+  @property({ type: String, reflect: true })
+  size = "";
 
   /**
    * Open
