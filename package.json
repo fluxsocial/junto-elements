@@ -1,6 +1,6 @@
 {
   "name": "@junto-foundation/junto-elements",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "",
   "homepage": "https://junto-elements.netlify.com",
   "main": "dist/main.js",
