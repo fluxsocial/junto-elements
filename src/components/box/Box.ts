@@ -175,11 +175,11 @@ export default class Box extends LitElement {
 
   shouldUpdate(changedProperties) {
     if (changedProperties.has("bg")) {
-      this.style.setProperty("--j-bg-color", `var(--j-color-${this.bg})`);
+      this.style.setProperty("--j-box-bg-color", `var(--j-color-${this.bg})`);
     }
     if (changedProperties.has("bghover")) {
       this.style.setProperty(
-        "--j-bg-color-hover",
+        "--j-box-bg-color-hover",
         `var(--j-color-${this.bghover})`
       );
     }
