@@ -1,5 +1,5 @@
 :root[theme="dark"] {
-  --j-color-white: hsl(var(--j-color-ui-hue), 15%, 13%);
+  --j-color-white: hsl(var(--j-color-ui-hue), 19%, 19%);
   --j-color-black: hsl(var(--j-color-ui-hue), 15%, 100%);
 
   --j-color-focus: #83b6fb;
@@ -47,15 +47,15 @@
   --j-color-danger-900: hsl(var(--j-color-danger-hue), 40%, 90%);
 
   --j-color-ui-hue: var(--j-color-primary-hue);
-  --j-color-ui-50: hsl(var(--j-color-ui-hue), 15%, 15%);
-  --j-color-ui-100: hsl(var(--j-color-ui-hue), 15%, 20%);
-  --j-color-ui-200: hsl(var(--j-color-ui-hue), 15%, 30%);
-  --j-color-ui-300: hsl(var(--j-color-ui-hue), 15%, 50%);
-  --j-color-ui-400: hsl(var(--j-color-ui-hue), 15%, 60%);
-  --j-color-ui-500: hsl(var(--j-color-ui-hue), 15%, 70%);
-  --j-color-ui-600: hsl(var(--j-color-ui-hue), 15%, 80%);
-  --j-color-ui-700: hsl(var(--j-color-ui-hue), 15%, 90%);
-  --j-color-ui-800: hsl(var(--j-color-ui-hue), 15%, 95%);
+  --j-color-ui-50: hsl(var(--j-color-ui-hue), 18%, 26%);
+  --j-color-ui-100: hsl(var(--j-color-ui-hue), 15%, 34%);
+  --j-color-ui-200: hsl(var(--j-color-ui-hue), 15%, 41%);
+  --j-color-ui-300: hsl(var(--j-color-ui-hue), 15%, 58%);
+  --j-color-ui-400: hsl(var(--j-color-ui-hue), 15%, 66%);
+  --j-color-ui-500: hsl(var(--j-color-ui-hue), 15%, 76%);
+  --j-color-ui-600: hsl(var(--j-color-ui-hue), 15%, 86%);
+  --j-color-ui-700: hsl(var(--j-color-ui-hue), 15%, 95%);
+  --j-color-ui-800: hsl(var(--j-color-ui-hue), 15%, 97%);
   --j-color-ui-900: hsl(var(--j-color-ui-hue), 15%, 100%);
 }
 
