@@ -8,7 +8,7 @@ const styles = css`
     padding: var(--j-space-300) 0;
     min-width: 200px;
     background: var(--j-color-white);
-    border: 1px solid var(--j-color-ui-100);
+    border: 1px solid var(--j-border-color);
   }
 `;
 

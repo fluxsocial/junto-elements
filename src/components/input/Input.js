@@ -25,16 +25,16 @@ const styles = css`
     color: var(--j-color-black);
     background: var(--j-color-white);
     border-radius: var(--j-border-radius);
-    border: 1px solid var(--j-color-ui-200);
+    border: 1px solid var(--j-border-color);
     width: 100%;
     min-width: 200px;
     padding: 0px;
   }
   [part="input-wrapper"]:hover {
-    border: 1px solid var(--j-color-ui-400);
+    border: 1px solid var(--j-border-color-strong);
   }
   [part="input-wrapper"]:focus-within {
-    border: 1px solid var(--j-color-primary-400);
+    border: 1px solid var(--j-focus-color);
   }
   [part="input-field"] {
     border: 0;

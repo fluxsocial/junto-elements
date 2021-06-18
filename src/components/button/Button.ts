@@ -10,8 +10,8 @@ const styles = css`
     --j-button-padding: 0 var(--j-space-400);
     --j-button-bg: var(--j-color-white);
     --j-button-bg-hover: var(--j-color-white);
-    --j-button-border: 1px solid var(--j-color-ui-100);
-    --j-button-border-hover: 1px solid var(--j-color-ui-200);
+    --j-button-border: 1px solid var(--j-border-color);
+    --j-button-border-hover: 1px solid var(--j-border-color-strong);
     --j-button-text: var(--j-color-ui-800);
     --j-button-height: var(--j-element-md);
     --j-button-border-radius: var(--j-border-radius);

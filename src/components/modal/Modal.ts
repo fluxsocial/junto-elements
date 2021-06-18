@@ -56,7 +56,7 @@ const styles = css`
     height: var(--j-modal-height);
     max-height: 90vh;
     background: var(--j-color-white);
-    border: 1px solid var(--j-color-ui-200);
+    border: 1px solid var(--j-border-color);
   }
 
   [part="content"] {

@@ -21,7 +21,7 @@ const styles = css`
     gap: var(--j-space-200);
     background: var(--j-color-white);
     border-radius: var(--j-border-radius);
-    border: 1px solid var(--j-color-ui-100);
+    border: 1px solid var(--j-border-color);
     padding: 0 var(--j-tabs-padding);
     position: relative;
   }

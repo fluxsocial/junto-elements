@@ -10,10 +10,10 @@ import Placeholder from "@tiptap/extension-placeholder";
 const styles = css`
   :host {
     width: 100%;
-    --j-editor-border-color: var(--j-color-ui-100);
+    --j-editor-border-color: var(--j-border-color);
   }
   :host(:focus-within) {
-    --j-editor-border-color: var(--j-color-ui-200);
+    --j-editor-border-color: var(--j-focus-color);
   }
   [part="base"] {
     font-size: var(--j-font-size-500);
