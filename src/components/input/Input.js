@@ -41,10 +41,14 @@ const styles = css`
     flex: 1;
     background: none;
     outline: 0;
+    color: var(--j-color-black);
     font-size: inherit;
     height: 100%;
     width: 100%;
     padding: 0px var(--j-space-400);
+  }
+  [part="input-field"]::placeholder {
+    color: var(--j-color-ui-400);
   }
   [part="help-text"],
   [part="error-text"] {
