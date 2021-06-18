@@ -5,23 +5,23 @@ import sharedStyles from "../../shared/styles";
 const styles = css`
   :host {
     --j-toast-border: 1px solid var(--j-color-ui-100);
-    --j-toast-background: var(--j-color-ui-50);
-    --j-toast-color: var(--j-color-ui-700);
+    --j-toast-background: var(--j-color-white);
+    --j-toast-color: var(--j-color-ui-500);
   }
   :host([variant="success"]) {
-    --j-toast-border: 1px solid var(--j-color-success-100);
-    --j-toast-background: var(--j-color-success-50);
-    --j-toast-color: var(--j-color-success-700);
+    --j-toast-border: 1px solid var(--j-color-success-300);
+    --j-toast-background: var(--j-color-white);
+    --j-toast-color: var(--j-color-success-500);
   }
   :host([variant="danger"]) {
-    --j-toast-border: 1px solid var(--j-color-danger-100);
-    --j-toast-background: var(--j-color-danger-50);
-    --j-toast-color: var(--j-color-danger-700);
+    --j-toast-border: 1px solid var(--j-color-danger-300);
+    --j-toast-background: var(--j-color-white);
+    --j-toast-color: var(--j-color-danger-500);
   }
   :host([variant="warning"]) {
-    --j-toast-border: 1px solid var(--j-color-warning-100);
-    --j-toast-background: var(--j-color-warning-50);
-    --j-toast-color: var(--j-color-warning-700);
+    --j-toast-border: 1px solid var(--j-color-warning-300);
+    --j-toast-background: var(--j-color-white);
+    --j-toast-color: var(--j-color-warning-500);
   }
   :host {
     display: none;
