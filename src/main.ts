@@ -1,8 +1,4 @@
 import "./styles/base.css";
-import "./styles/theme-funny.css";
-import "./styles/theme-dark.css";
-import "./styles/knobs.css";
-import "highlight.js/styles/github.css";
 
 import "./components/button";
 import "./components/knobs";
