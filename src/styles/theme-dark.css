@@ -60,9 +60,17 @@
 }
 
 :root[theme="dark"] j-tabs {
-  --j-tabs-indicator-bg: var(--j-color-primary-400);
+  --j-tabs-indicator-bg: var(--j-color-primary-600);
+}
+
+:root[theme="dark"] j-tab-item::part(base) {
+  color: var(--j-color-ui-600);
+}
+
+:root[theme="dark"] j-tab-item:hover::part(base) {
+  color: var(--j-color-black);
 }
 
 :root[theme="dark"] j-tab-item[checked]::part(base) {
-  color: var(--j-color-black);
+  color: var(--j-color-white);
 }
