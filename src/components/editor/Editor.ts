@@ -26,7 +26,7 @@ const styles = css`
   }
   .ProseMirror {
     padding: var(--j-space-500);
-    border-bottom: 1px solid var(--j-color-ui-100);
+    border-bottom: 1px solid var(--j-border-color);
     width: 100%;
   }
   .ProseMirror:focus {
