@@ -45,9 +45,11 @@ const styles = css`
   :host([open][collapsible]) [part="summary"]:after {
     transform: rotate(45deg) translateX(-50%);
   }
-  [part="start"]::slotted(*) {
+  [name="start"]::slotted(*) {
+    margin-left: var(--j-space-400);
   }
-  [part="end"]::slotted(*) {
+  [name="end"]::slotted(*) {
+    margin-right: var(--j-space-400);
   }
   [part="title"] {
     text-transform: uppercase;
