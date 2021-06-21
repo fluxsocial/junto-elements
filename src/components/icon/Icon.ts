@@ -5,30 +5,27 @@ import sharedStyles from "../../shared/styles";
 
 const styles = css`
   :host {
+    --j-icon-size: 24px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
   }
   :host svg {
     display: block;
-    width: 24px;
-    height: 24px;
+    width: var(--j-icon-size);
+    height: var(--j-icon-size);
   }
   :host([size="xs"]) svg {
-    width: 16px;
-    height: 16px;
+    --j-icon-size: 16px;
   }
   :host([size="sm"]) svg {
-    width: 18px;
-    height: 18px;
+    --j-icon-size: 18px;
   }
   :host([size="lg"]) svg {
-    width: 32px;
-    height: 32px;
+    --j-icon-size: 32px;
   }
   :host([size="xl"]) svg {
-    width: 48px;
-    height: 48px;
+    --j-icon-size: 48px;
   }
 `;
 
