@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link href="dist/main.css" rel="stylesheet" />
+    <script src="dist/main.js" type="module"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@latest"></script>
     <style>
       body {
@@ -132,7 +133,6 @@
       </main>
     </div>
 
-    <script src="dist/main.js" type="module"></script>
     <script>
       const app = new Vue({
         el: "#app",
@@ -375,7 +375,7 @@
                 tagName: "j-avatar",
                 group: "elements",
                 href: "#avatar",
-                example: `<j-avatar src="https://i.pravatar.cc/300"></j-avatar>`,
+                example: `<j-avatar></j-avatar>`,
               },
               {
                 id: "message-item",
