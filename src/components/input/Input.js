@@ -5,13 +5,13 @@ import sharedStyles from "../../shared/styles";
 const styles = css`
   :host {
     --j-input-label-size: var(--j-font-size-500);
-    --j-input-height: var(--j-element-md);
+    --j-input-height: var(--j-size-md);
   }
   :host([size="sm"]) {
-    --j-input-height: var(--j-element-sm);
+    --j-input-height: var(--j-size-sm);
   }
   :host([size="lg"]) {
-    --j-input-height: var(--j-element-lg);
+    --j-input-height: var(--j-size-lg);
   }
   [part="base"] {
     display: block;

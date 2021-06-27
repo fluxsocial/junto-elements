@@ -5,7 +5,7 @@ import sharedStyles from "../../shared/styles";
 const styles = css`
   :host {
     --j-tabs-padding: 4px;
-    --j-tabs-height: var(--j-element-md);
+    --j-tabs-height: var(--j-size-md);
     --j-tabs-indicator-bg: var(--j-color-primary-50);
     --j-tabs-indicator-width: 0px;
     --j-tabs-indicator-left: 0px;
@@ -40,10 +40,10 @@ const styles = css`
     transition: all 0.2s ease;
   }
   :host([size="sm"]) {
-    --j-tabs-height: var(--j-element-sm);
+    --j-tabs-height: var(--j-size-sm);
   }
   :host([size="lg"]) {
-    --j-tabs-height: var(--j-element-lg);
+    --j-tabs-height: var(--j-size-lg);
   }
 `;
 

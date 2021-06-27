@@ -6,7 +6,7 @@ const styles = css`
   :host {
     --j-menu-item-border-left: none;
     --j-menu-item-border-radius: none;
-    --j-menu-item-height: var(--j-element-md);
+    --j-menu-item-height: var(--j-size-md);
     --j-menu-item-bg: transparent;
     --j-menu-item-color: var(--j-color-ui-600);
     --j-menu-item-padding: 0 var(--j-space-500) 0 var(--j-space-500);
@@ -29,13 +29,13 @@ const styles = css`
   }
   :host([size="sm"]) {
     --j-menu-item-font-size: var(--j-font-size-400);
-    --j-menu-item-height: var(--j-element-sm);
+    --j-menu-item-height: var(--j-size-sm);
   }
   :host([size="lg"]) {
-    --j-menu-item-height: var(--j-element-lg);
+    --j-menu-item-height: var(--j-size-lg);
   }
   :host([size="xl"]) {
-    --j-menu-item-height: var(--j-element-xl);
+    --j-menu-item-height: var(--j-size-xl);
   }
   :host(:last-of-type) [part="base"] {
     margin-bottom: 0;

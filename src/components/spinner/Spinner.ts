@@ -4,19 +4,19 @@ import sharedStyles from "../../shared/styles";
 
 const styles = css`
   :host {
-    --j-spinner-size: var(--j-element-md);
+    --j-spinner-size: var(--j-size-md);
     --j-spinner-stroke: 2px;
     --j-spinner-color: var(--j-color-primary-500);
   }
 
   :host([size="sm"]) {
-    --j-spinner-size: var(--j-element-sm);
+    --j-spinner-size: var(--j-size-sm);
     --j-spinner-stroke: 4px;
     --j-spinner-color: var(--j-color-primary-500);
   }
 
   :host([size="lg"]) {
-    --j-spinner-size: var(--j-element-lg);
+    --j-spinner-size: var(--j-size-lg);
     --j-spinner-stroke: 8px;
     --j-spinner-color: var(--j-color-primary-500);
   }

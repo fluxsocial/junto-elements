@@ -15,7 +15,7 @@ const styles = css`
     padding-bottom: 30px;
   }
   :host select {
-    height: var(--j-element-md);
+    height: var(--j-size-md);
     width: 100%;
   }
   :host table {
