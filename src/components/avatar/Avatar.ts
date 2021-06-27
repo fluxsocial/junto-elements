@@ -39,6 +39,9 @@ const styles = css`
     height: var(--j-avatar-size);
     border-radius: 50%;
   }
+  [part="icon"] {
+    --j-icon-size: calc(var(--j-avatar-size) * 0.6);
+  }
   [part="img"] {
     width: 100%;
     height: 100%;
