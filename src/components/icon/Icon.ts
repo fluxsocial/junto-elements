@@ -5,12 +5,15 @@ import sharedStyles from "../../shared/styles";
 
 const styles = css`
   :host {
+    --j-icon-color: currentColor;
     --j-icon-size: 24px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
   }
   :host svg {
+    color: var(--j-icon-color);
+    fill: var(--j-icon-color);
     display: block;
     width: var(--j-icon-size);
     height: var(--j-icon-size);
@@ -49,6 +52,14 @@ export default class Icon extends LitElement {
   @property({ type: String, reflect: true })
   size = "";
 
+  /**
+   * Color
+   * @type {String}
+   * @attr
+   */
+  @property({ type: String, reflect: true })
+  color = "";
+
   @state()
   svg = "";
 
@@ -65,6 +76,10 @@ export default class Icon extends LitElement {
   shouldUpdate(changedProperties) {
     if (changedProperties.has("name")) {
       this.fetchIcon();
+    }
+
+    if (changedProperties.has("color") && this.color) {
+      this.style.setProperty("--j-icon-color", `var(--j-color-${this.color})`);
     }
 
     return true;
