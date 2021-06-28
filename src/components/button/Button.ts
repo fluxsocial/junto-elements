@@ -74,6 +74,13 @@ const styles = css`
     --j-button-border: 1px solid transparent;
     --j-button-border-hover: 1px solid transparent;
   }
+  :host([variant="subtle"]) {
+    --j-button-bg: transparent;
+    --j-button-bg-hover: var(--j-color-ui-50);
+    --j-button-text: var(--j-color-font);
+    --j-button-border: 1px solid transparent;
+    --j-button-border-hover: 1px solid transparent;
+  }
   :host([variant="transparent"]) {
     --j-button-bg: transparent;
     --j-button-text: var(--j-color-font);
@@ -129,7 +136,7 @@ export default class Button extends LitElement {
 
   /**
    * Variations
-   * @type {""|"primary"|"transparent"|"success"|"danger"}
+   * @type {""|"primary"|"subtle"|"transparent"|"success"|"danger"}
    * @attr
    */
   @property({ type: String, reflect: true })
