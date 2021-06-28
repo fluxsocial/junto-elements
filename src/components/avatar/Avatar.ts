@@ -1,5 +1,6 @@
 import { html, css, LitElement } from "lit";
-import renderIcon from "@holo-host/identicon";
+import { unsafeSVG } from "lit/directives/unsafe-svg.js";
+import { toSvg } from "jdenticon";
 import { customElement, property } from "lit/decorators.js";
 import sharedStyles from "../../shared/styles";
 
@@ -38,6 +39,10 @@ const styles = css`
     width: var(--j-avatar-size);
     height: var(--j-avatar-size);
     border-radius: 50%;
+  }
+  svg {
+    width: var(--j-avatar-size);
+    height: var(--j-avatar-size);
   }
   [part="icon"] {
     --j-icon-size: calc(var(--j-avatar-size) * 0.6);
@@ -106,24 +111,19 @@ export default class Component extends LitElement {
       size: 100,
     };
     if (canvas) {
-      renderIcon(opts, canvas);
+      //renderIcon(opts, canvas);
     }
   }
 
   render() {
-    if (this.hash) {
-      return html`<canvas
-        part="base"
-        id="identicon"
-        width="1"
-        height="1"
-      ></canvas>`;
-    }
-
     if (this.src) {
       return html`<button part="base">
         <img part="img" src=${this.src} />
       </button>`;
+    }
+
+    if (this.hash) {
+      return unsafeSVG(toSvg(this.hash, 100));
     }
 
     if (this.initials) {
