@@ -49,7 +49,7 @@ const styles = css`
   [part="editor"] p.is-editor-empty:first-child::before {
     content: attr(data-placeholder);
     float: left;
-    color: #ced4da;
+    color: var(--j-color-ui-400);
     pointer-events: none;
     height: 0;
   }
