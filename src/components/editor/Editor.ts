@@ -22,23 +22,23 @@ const styles = css`
     border-radius: var(--j-border-radius);
   }
   [part="toolbar"] {
+    border-top: 1px solid var(--j-border-color);
     padding: var(--j-space-200);
   }
-  .ProseMirror {
+  [part="editor"] {
     padding: var(--j-space-500);
-    border-bottom: 1px solid var(--j-border-color);
     width: 100%;
   }
-  .ProseMirror:focus {
+  [part="editor"]:focus-within {
     outline: 0;
   }
-  .ProseMirror *:first-of-type {
+  [part="editor"] *:first-of-type {
     margin-top: 0;
   }
-  .ProseMirror *:last-of-type {
+  [part="editor"] *:last-of-type {
     margin-bottom: 0;
   }
-  .ProseMirror pre {
+  [part="editor"] pre {
     background: #0d0d0d;
     color: #fff;
     font-family: JetBrainsMono, monospace;
@@ -46,7 +46,7 @@ const styles = css`
     border-radius: 0.5rem;
   }
   /* Placeholder (at the top) */
-  .ProseMirror p.is-editor-empty:first-child::before {
+  [part="editor"] p.is-editor-empty:first-child::before {
     content: attr(data-placeholder);
     float: left;
     color: #ced4da;
@@ -62,6 +62,9 @@ export default class Editor extends LitElement {
   @property({ type: String })
   value = "";
 
+  @property({ type: Boolean })
+  autofocus = false;
+
   @property({ type: Object })
   json = { type: "doc", content: [] };
 
@@ -75,10 +78,13 @@ export default class Editor extends LitElement {
   _editorChange = false;
 
   firstUpdated() {
-    const editorEl = this.renderRoot.querySelector("[part='editor']");
+    const editorContainer = this.renderRoot.querySelector(
+      "[part='editor-container']"
+    );
     this._editorInstance = new TipTap({
       content: this.value || this.json,
-      element: editorEl,
+      element: editorContainer,
+      autofocus: this.autofocus,
       extensions: [
         StarterKit,
         CodeBlock,
@@ -95,6 +101,8 @@ export default class Editor extends LitElement {
         );
       },
     });
+    const editorEl = this.renderRoot.querySelector(".ProseMirror");
+    editorEl.setAttribute("part", "editor");
   }
 
   shouldUpdate(changedProperties) {
@@ -116,7 +124,7 @@ export default class Editor extends LitElement {
 
   render() {
     return html` <div part="base">
-      <div part="editor"></div>
+      <div part="editor-container"></div>
       <div part="toolbar">
         <j-button
           size="sm"
