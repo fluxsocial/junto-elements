@@ -1,4 +1,5 @@
 import { html, css, LitElement } from "lit";
+import { createPopper } from "@popperjs/core";
 import { customElement, property, state } from "lit/decorators.js";
 import sharedStyles from "../../shared/styles";
 
@@ -7,7 +8,7 @@ import StarterKit from "@tiptap/starter-kit";
 import CodeBlock from "@tiptap/extension-code-block";
 import Placeholder from "@tiptap/extension-placeholder";
 import { Mention } from "./Mention";
- 
+
 const styles = css`
   :host {
     width: 100%;
@@ -38,6 +39,15 @@ const styles = css`
   }
   [part="editor"] *:last-of-type {
     margin-bottom: 0;
+  }
+  [part="suggestions"] {
+    display: none;
+    visibility: hidden;
+  }
+  [part="suggestions"][open] {
+    z-index: 100;
+    display: block;
+    visibility: visible;
   }
   [part="editor"] pre {
     background: #0d0d0d;
@@ -74,18 +84,16 @@ export default class Editor extends LitElement {
   @property({ type: Object })
   json = { type: "doc", content: [] };
 
-  @property({ type: Object })
-  mentions = (trigger, query) => []
-
-  @property({type: Object})
-  mentionRender = () => {
-    return {
-      onStart: () => {},
-      onUpdate: () => {},
-      onKeyDown: () => true,
-      onExit: () => {}
-    }
-  }
+  @property({
+    type: Array,
+    reflect: false,
+    converter: {
+      fromAttribute: (val, type) => {
+        return val.startsWith("[") ? JSON.parse(val) : val.split(",");
+      },
+    },
+  })
+  suggestions = [];
 
   @property({ type: String })
   placeholder = "";
@@ -96,6 +104,54 @@ export default class Editor extends LitElement {
   @state()
   _editorChange = false;
 
+  @state()
+  _showSugggestions = false;
+
+  @state()
+  _activeIndex = 0;
+
+  @state()
+  _query = "";
+
+  @state()
+  _mentionProps = null;
+
+  set activeIndex(val) {
+    this.requestUpdate();
+    this._activeIndex = val;
+  }
+
+  get activeIndex() {
+    return this._activeIndex;
+  }
+
+  set query(val) {
+    this.requestUpdate();
+    this._query = val;
+  }
+
+  get query() {
+    return this._query;
+  }
+
+  get suggestionItems(): any {
+    return [...this.suggestionsEl.children];
+  }
+
+  get suggestionsEl(): HTMLElement {
+    return this.renderRoot.querySelector("[part='suggestions']") as HTMLElement;
+  }
+
+  get mentionEl(): HTMLElement {
+    return this.renderRoot.querySelector(".suggestion") as HTMLElement;
+  }
+
+  get filteredOptions() {
+    return this.suggestions
+      .filter((item) => item.toLowerCase().startsWith(this.query.toLowerCase()))
+      .slice(0, 5);
+  }
+
   firstUpdated() {
     const editorContainer = this.renderRoot.querySelector(
       "[part='editor-container']"
@@ -104,19 +160,84 @@ export default class Editor extends LitElement {
       content: this.value || this.json,
       element: editorContainer,
       autofocus: this.autofocus,
+      enableInputRules: false,
+      enablePasteRules: false,
       extensions: [
         StarterKit,
         CodeBlock,
         Placeholder.configure({ placeholder: this.placeholder }),
         Mention.configure({
           HTMLAttributes: {
-            class: "mention"
+            class: "mention",
           },
           suggestion: {
-            items: this.mentions,
-            render: this.mentionRender,
-          }
-        })
+            render: () => {
+              let virtualElement;
+              let popper;
+              let startProps;
+
+              return {
+                onStart: (props) => {
+                  this.query = "";
+                  this.activeIndex = 0;
+                  this._mentionProps = props;
+                  virtualElement = {
+                    getBoundingClientRect: () =>
+                      this.mentionEl.getBoundingClientRect(),
+                  };
+
+                  popper = createPopper(virtualElement, this.suggestionsEl, {
+                    strategy: "fixed",
+                    placement: "bottom-start",
+                  });
+
+                  popper.update();
+                  this._showSugggestions = true;
+                  this.requestUpdate();
+                },
+                onUpdate: (props) => {
+                  console.log("update", props);
+                  this.query = props.query;
+                  this._mentionProps = props;
+                  virtualElement.getBoundingClientRect = () =>
+                    this.mentionEl.getBoundingClientRect();
+                  popper.update();
+                  this.requestUpdate();
+                },
+                onKeyDown: (props) => {
+                  console.log("keydown", props);
+                  if (props.event.code === "Enter") {
+                    this.selectItem(this.activeIndex);
+                    return true;
+                  }
+                  if (props.event.code === "ArrowUp") {
+                    this.activeIndex =
+                      (this.activeIndex + this.suggestionItems.length - 1) %
+                      this.suggestionItems.length;
+                    return true;
+                  }
+                  if (props.event.code === "ArrowDown") {
+                    this.activeIndex =
+                      (this.activeIndex + 1) % this.suggestionItems.length;
+                    return true;
+                  }
+
+                  virtualElement.getBoundingClientRect = () =>
+                    this.mentionEl.getBoundingClientRect();
+                  popper.update();
+                  this._showSugggestions = true;
+                  this.requestUpdate();
+                  return false;
+                },
+                onExit: () => {
+                  console.log("exit");
+                  this._showSugggestions = false;
+                  this.requestUpdate();
+                },
+              };
+            },
+          },
+        }),
       ],
       onUpdate: ({ editor }) => {
         this._editorChange = true;
@@ -131,6 +252,13 @@ export default class Editor extends LitElement {
     });
     const editorEl = this.renderRoot.querySelector(".ProseMirror");
     editorEl.setAttribute("part", "editor");
+  }
+
+  selectItem(index) {
+    const item = this.suggestionItems[index];
+    if (item) {
+      this._mentionProps.command({ id: item.value });
+    }
   }
 
   shouldUpdate(changedProperties) {
@@ -152,7 +280,17 @@ export default class Editor extends LitElement {
 
   render() {
     return html` <div part="base">
-      <div part="editor-container"></div>
+      <div id="container" part="editor-container"></div>
+      <j-menu part="suggestions" ?open=${this._showSugggestions} id="test">
+        ${this.filteredOptions.map(
+          (suggestion, index) =>
+            html`<j-menu-item
+              @click=${() => this.selectItem(index)}
+              ?active=${index === this.activeIndex}
+              >${suggestion}
+            </j-menu-item>`
+        )}
+      </j-menu>
       <div part="toolbar">
         <j-button
           size="sm"
