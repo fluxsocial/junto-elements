@@ -70,7 +70,10 @@ export default class Icon extends LitElement {
   fetchIcon() {
     fetch(`https://unpkg.com/bootstrap-icons@1.5.0/icons/${this.name}.svg`)
       .then((res) => res.text())
-      .then((svg) => (this.svg = svg));
+      .then((svg) => {
+        this.svg = svg;
+        this.requestUpdate();
+      });
   }
 
   shouldUpdate(changedProperties) {
