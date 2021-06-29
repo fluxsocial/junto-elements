@@ -2,10 +2,12 @@
   "compilerOptions": {
     "module": "commonjs",
     "outDir": "dist",
-    "target": "es6",
+    "target": "esnext",
     "experimentalDecorators": true,
     "allowJs": true
   },
   "exclude": ["node_modules", "dist"],
-  "lib": ["es2017"]
+  "lib": [
+    "esnext",
+  ]
 }
