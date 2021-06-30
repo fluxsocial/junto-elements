@@ -3,12 +3,20 @@ import { customElement, property, state } from "lit/decorators.js";
 import sharedStyles from "../../shared/styles";
 
 import { Editor as TipTap, Extension } from "@tiptap/core";
-import StarterKit from "@tiptap/starter-kit";
+import BulletList from "@tiptap/extension-bullet-list";
+import ListItem from "@tiptap/extension-list-item";
+import Text from "@tiptap/extension-text";
+import Italic from "@tiptap/extension-italic";
+import Bold from "@tiptap/extension-bold";
+import Strike from "@tiptap/extension-strike";
+import Paragraph from "@tiptap/extension-paragraph";
+import Document from "@tiptap/extension-document";
 import CodeBlock from "@tiptap/extension-code-block";
+import HardBreak from "@tiptap/extension-hard-break";
+import Link from "@tiptap/extension-link";
 import Placeholder from "@tiptap/extension-placeholder";
 import { Mention } from "./Mention";
 import { createPopper } from "@popperjs/core/lib/createPopper";
-import { Plugin } from "prosemirror-state";
 
 const styles = css`
   :host {
@@ -70,25 +78,29 @@ const styles = css`
     display: block;
     visibility: visible;
   }
+
+  [part="toolbar"] j-button::part(base) {
+    color: var(--j-color-ui-400);
+  }
+
+  [part="toolbar"] j-button[active]::part(base) {
+    color: var(--j-color-primary-500);
+  }
+
+  [part="mention"] {
+    border-radius: var(--j-border-radius);
+    padding: 2px var(--j-space-100);
+    background: var(--j-color-primary-100);
+    color: var(--j-color-primary-600);
+  }
 `;
 
 @customElement("j-editor")
 export default class Editor extends LitElement {
   static styles = [sharedStyles, styles];
 
-  _value = "";
-
-  // Needed this to force update
   @property({ type: String })
-  set value(val) {
-    let oldVal = this._value;
-    this._value = val;
-    this.requestUpdate("value", oldVal);
-  }
-
-  get value() {
-    return this._value;
-  }
+  value = "";
 
   @property({ type: Boolean })
   autofocus = false;
@@ -175,14 +187,23 @@ export default class Editor extends LitElement {
       element: editorContainer,
       autofocus: this.autofocus,
       enableInputRules: false,
-      enablePasteRules: false,
       extensions: [
-        StarterKit,
+        Document,
+        Text,
+        Paragraph,
+        Link,
+        Bold,
+        Strike,
+        Italic,
+        HardBreak,
+        ListItem,
+        BulletList,
         CodeBlock,
         Placeholder.configure({ placeholder: this.placeholder }),
         Mention.configure({
           HTMLAttributes: {
             class: "mention",
+            part: "mention",
           },
           suggestion: {
             items: (trigger, query) => {
@@ -263,28 +284,6 @@ export default class Editor extends LitElement {
             },
           },
         }),
-        Extension.create({
-          addProseMirrorPlugins: () => {
-            return [
-              new Plugin({
-                props: {
-                  handleKeyDown: (_, event) => {
-                    if (
-                      event.key === "Enter" &&
-                      !event.shiftKey &&
-                      !this.showSuggestions
-                    ) {
-                      this._editorInstance.commands.clearContent();
-                      return true;
-                    }
-
-                    return false;
-                  },
-                },
-              }),
-            ];
-          },
-        }),
       ],
       onUpdate: (props) => {
         this._editorChange = true;
@@ -344,34 +343,44 @@ export default class Editor extends LitElement {
       </j-menu>
       <div id="container" part="editor-container"></div>
       <div part="toolbar">
-        <j-button
-          size="sm"
-          @click=${() =>
-            this._editorInstance.chain().toggleBold().focus().run()}
-        >
-          <j-icon size="sm" name="type-bold"></j-icon>
-        </j-button>
-        <j-button
-          size="sm"
-          @click=${() =>
-            this._editorInstance.chain().toggleItalic().focus().run()}
-        >
-          <j-icon size="sm" name="type-italic"></j-icon>
-        </j-button>
-        <j-button
-          size="sm"
-          @click=${() =>
-            this._editorInstance.chain().toggleStrike().focus().run()}
-        >
-          <j-icon size="sm" name="type-strikethrough"></j-icon>
-        </j-button>
-        <j-button
-          size="sm"
-          @click=${() =>
-            this._editorInstance.chain().toggleCodeBlock().focus().run()}
-        >
-          <j-icon size="sm" name="code"></j-icon>
-        </j-button>
+        ${this._editorInstance
+          ? html`<j-button
+                variant="subtle"
+                size="sm"
+                ?active=${this._editorInstance.isActive("bold")}
+                @click=${() =>
+                  this._editorInstance.chain().toggleBold().focus().run()}
+              >
+                <j-icon size="sm" name="type-bold"></j-icon>
+              </j-button>
+              <j-button
+                variant="subtle"
+                size="sm"
+                ?active=${this._editorInstance.isActive("italic")}
+                @click=${() =>
+                  this._editorInstance.chain().toggleItalic().focus().run()}
+              >
+                <j-icon size="sm" name="type-italic"></j-icon>
+              </j-button>
+              <j-button
+                variant="subtle"
+                size="sm"
+                ?active=${this._editorInstance.isActive("strike")}
+                @click=${() =>
+                  this._editorInstance.chain().toggleStrike().focus().run()}
+              >
+                <j-icon size="sm" name="type-strikethrough"></j-icon>
+              </j-button>
+              <j-button
+                variant="subtle"
+                size="sm"
+                ?active=${this._editorInstance.isActive("code")}
+                @click=${() =>
+                  this._editorInstance.chain().toggleCodeBlock().focus().run()}
+              >
+                <j-icon size="sm" name="code"></j-icon>
+              </j-button>`
+          : null}
       </div>
     </div>`;
   }
