@@ -147,9 +147,25 @@ export default class Component extends LitElement {
     };
   }
 
+  firstUpdated() {
+    if (this.relative) {
+      this.runLoop();
+    }
+  }
+
+  runLoop() {
+    setTimeout(() => {
+      this.requestUpdate();
+      this.runLoop();
+    }, 60 * 1000);
+  }
+
   get formattedTime() {
     if (this.relative) {
-      const rtf = new Intl.RelativeTimeFormat(this.locales, this.options);
+      const rtf = new Intl.RelativeTimeFormat(this.locales, {
+        numeric: "auto",
+        style: "long",
+      });
       return getRelativeTime(new Date(this.value), new Date(), rtf);
     } else {
       return new Intl.DateTimeFormat(this.locales, this.options).format(
