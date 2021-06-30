@@ -145,7 +145,7 @@ export default class Tooltip extends LitElement {
     return html`
       <div part="base">
         <div part="tooltip">
-          ${this.title}
+          <slot name="title">${this.title}</slot>
           <div part="arrow" data-popper-arrow></div>
         </div>
         <div part="content" @click=${() => this.hide()}>
