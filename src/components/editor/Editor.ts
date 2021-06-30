@@ -2,7 +2,8 @@ import { html, css, LitElement } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import sharedStyles from "../../shared/styles";
 
-import { Editor as TipTap, Extension } from "@tiptap/core";
+import { Editor as TipTap } from "@tiptap/core";
+import LineBreak from "./LineBreak";
 import BulletList from "@tiptap/extension-bullet-list";
 import ListItem from "@tiptap/extension-list-item";
 import Text from "@tiptap/extension-text";
@@ -12,8 +13,9 @@ import Strike from "@tiptap/extension-strike";
 import Paragraph from "@tiptap/extension-paragraph";
 import Document from "@tiptap/extension-document";
 import CodeBlock from "@tiptap/extension-code-block";
-import HardBreak from "@tiptap/extension-hard-break";
+import History from "@tiptap/extension-history";
 import Link from "@tiptap/extension-link";
+import OrderedList from "@tiptap/extension-ordered-list";
 import Placeholder from "@tiptap/extension-placeholder";
 import { Mention } from "./Mention";
 import { createPopper } from "@popperjs/core/lib/createPopper";
@@ -85,6 +87,11 @@ const styles = css`
 
   [part="toolbar"] j-button[active]::part(base) {
     color: var(--j-color-primary-500);
+  }
+
+  [part="editor"] ul,
+  [part="editor"] ol {
+    padding-left: var(--j-space-500);
   }
 
   [part="mention"] {
@@ -191,14 +198,17 @@ export default class Editor extends LitElement {
         Document,
         Text,
         Paragraph,
+
         Link,
         Bold,
         Strike,
         Italic,
-        HardBreak,
         ListItem,
         BulletList,
+        OrderedList,
+        History,
         CodeBlock,
+        LineBreak,
         Placeholder.configure({ placeholder: this.placeholder }),
         Mention.configure({
           HTMLAttributes: {
@@ -374,11 +384,24 @@ export default class Editor extends LitElement {
               <j-button
                 variant="subtle"
                 size="sm"
-                ?active=${this._editorInstance.isActive("code")}
+                ?active=${this._editorInstance.isActive("bulletList")}
                 @click=${() =>
-                  this._editorInstance.chain().toggleCodeBlock().focus().run()}
+                  this._editorInstance.chain().focus().toggleBulletList().run()}
               >
-                <j-icon size="sm" name="code"></j-icon>
+                <j-icon size="sm" name="list-ul"></j-icon>
+              </j-button>
+              <j-button
+                variant="subtle"
+                size="sm"
+                ?active=${this._editorInstance.isActive("orderedList")}
+                @click=${() =>
+                  this._editorInstance
+                    .chain()
+                    .focus()
+                    .toggleOrderedList()
+                    .run()}
+              >
+                <j-icon size="sm" name="list-ol"></j-icon>
               </j-button>`
           : null}
       </div>
