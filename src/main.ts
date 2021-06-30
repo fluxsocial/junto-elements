@@ -24,3 +24,4 @@ import "./components/flex";
 import "./components/badge";
 import "./components/spinner";
 import "./components/toast";
+import "./components/timestamp";

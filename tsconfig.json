@@ -7,7 +7,5 @@
     "allowJs": true
   },
   "exclude": ["node_modules", "dist"],
-  "lib": [
-    "esnext",
-  ]
+  "lib": ["esnext"]
 }
