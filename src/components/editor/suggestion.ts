@@ -48,7 +48,7 @@ export function Suggestion({
   command = () => null,
   items = () => [],
   render = () => ({}),
-  allow = () => true
+  allow = () => true,
 }: SuggestionOptions) {
   const renderer = render?.();
 
@@ -85,12 +85,15 @@ export function Suggestion({
             range: state.range,
             query: state.query,
             text: state.text,
-            items: handleChange || handleStart ? await items(state.text[0], state.query) : [],
+            items:
+              handleChange || handleStart
+                ? await items(state.text[0], state.query)
+                : [],
             command: (commandProps) => {
               command({
                 editor,
                 range: state.range,
-                props: commandProps
+                props: commandProps,
               });
             },
             decorationNode,
@@ -98,7 +101,7 @@ export function Suggestion({
             // this can be used for building popups without a DOM node
             clientRect: decorationNode
               ? () => decorationNode.getBoundingClientRect()
-              : null
+              : null,
           };
 
           if (handleExit) {
@@ -112,7 +115,7 @@ export function Suggestion({
           if (handleStart) {
             renderer?.onStart?.(props);
           }
-        }
+        },
       };
     },
 
@@ -123,7 +126,7 @@ export function Suggestion({
           active: false,
           range: {},
           query: null,
-          text: null
+          text: null,
         };
       },
 
@@ -134,8 +137,6 @@ export function Suggestion({
 
         // We can only be suggesting if there is no selection
         if (selection.from === selection.to) {
-        console.log('what called', prev);
-
           // Reset active state if we just left the previous suggestion range
           if (
             selection.from < prev.range.from ||
@@ -144,7 +145,7 @@ export function Suggestion({
             next.active = false;
           }
 
-          const triggers = char.split('|');
+          const triggers = char.split("|");
 
           let match: SuggestionMatch = null;
 
@@ -154,11 +155,10 @@ export function Suggestion({
               char: trigger,
               allowSpaces,
               startOfLine,
-              $position: selection.$from
+              $position: selection.$from,
             });
 
-            if(match) break;
-            
+            if (match) break;
           }
 
           const decorationId = `id_${Math.floor(Math.random() * 0xffffffff)}`;
@@ -190,14 +190,14 @@ export function Suggestion({
         }
 
         return next;
-      }
+      },
     },
 
     props: {
       // Call the keydown hook if suggestion is active.
       handleKeyDown(view, event) {
         const { active, range } = this.getState(view.state);
-        
+
         if (!active) {
           return false;
         }
@@ -217,10 +217,10 @@ export function Suggestion({
           Decoration.inline(range.from, range.to, {
             nodeName: decorationTag,
             class: decorationClass,
-            "data-decoration-id": decorationId
-          })
+            "data-decoration-id": decorationId,
+          }),
         ]);
-      }
-    }
+      },
+    },
   });
 }

@@ -85,9 +85,6 @@ export default class Popover extends LitElement {
 
   firstUpdated() {
     const trigger = this.triggerPart;
-    const content = this.contentPart;
-
-    console.log(trigger);
 
     trigger.addEventListener(this.event, this._openMenuHandler);
 

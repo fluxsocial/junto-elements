@@ -159,7 +159,6 @@ export default class Component extends LitElement {
   }
 
   render() {
-    console.log("rerender");
     return html`<span>${this.formattedTime}</span>`;
   }
 }
