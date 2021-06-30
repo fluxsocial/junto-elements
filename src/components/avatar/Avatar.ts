@@ -11,18 +11,20 @@ const styles = css`
     --j-avatar-border: none;
     --j-avatar-color: var(--j-color-white);
     --j-avatar-bg: var(--j-color-ui-200);
+    display: inline-block;
+    position: relative;
   }
   :host([selected]) {
     --j-avatar-box-shadow: 0px 0px 0px 2px var(--j-color-primary-500);
   }
-  :host([online]) [part="base"]:before {
+  :host([online]):before {
     position: absolute;
     right: 0;
     bottom: 0;
     content: "";
     display: block;
-    width: 30%;
-    height: 30%;
+    width: 25%;
+    height: 25%;
     border-radius: 50%;
     background: var(--j-color-primary-500);
   }
@@ -40,7 +42,6 @@ const styles = css`
   }
   [part="base"] {
     cursor: inherit;
-    position: relative;
     box-shadow: var(--j-avatar-box-shadow);
     color: var(--j-avatar-color);
     background: var(--j-avatar-bg);
@@ -50,18 +51,22 @@ const styles = css`
     height: var(--j-avatar-size);
     border-radius: 50%;
   }
+
   svg {
     width: var(--j-avatar-size);
     height: var(--j-avatar-size);
   }
+
   [part="icon"] {
     --j-icon-size: calc(var(--j-avatar-size) * 0.6);
   }
+
   [part="img"] {
     width: 100%;
     height: 100%;
     border-radius: 50%;
   }
+
   [part="initials"] {
     font-weight: 600;
     text-transform: uppercase;
