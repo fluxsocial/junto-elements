@@ -227,7 +227,6 @@ export default class Editor extends LitElement {
                       this.showSuggestions = false;
                       this.requestUpdate();
                     })
-                    console.log('haha');
                     return true;
                   }
                   if (props.event.code === "ArrowUp") {
@@ -250,7 +249,6 @@ export default class Editor extends LitElement {
                   return false;
                 },
                 onExit: () => {
-                  console.log("exit");
                   this.showSuggestions = false;
                   this.requestUpdate();
                 },
@@ -263,8 +261,6 @@ export default class Editor extends LitElement {
             return [new Plugin({
               props: {
                 handleKeyDown: (_, event) => {
-                  console.log(event, this.showSuggestions);
-
                   if (event.key === 'Enter' && !event.shiftKey && !this.showSuggestions) {
                     this._editorInstance.commands.clearContent();
                     return true;
@@ -278,7 +274,6 @@ export default class Editor extends LitElement {
         })
       ],
       onUpdate: (props) => {
-        console.log('onupdate:', props, props.editor.getHTML());
         this._editorChange = true;
         this.value = props.editor.getHTML();
         this.json = props.editor.getJSON() as any;
@@ -306,13 +301,11 @@ export default class Editor extends LitElement {
   }
 
   shouldUpdate(changedProperties) {
-    console.log('working', changedProperties, this._editorInstance, !this._editorChange);
     if (
       changedProperties.has("value") &&
       this._editorInstance &&
       !this._editorChange
     ) {
-      console.log('working 101', changedProperties.has("value"), this._editorInstance, !this._editorChange);
       // TODO: Bug when this gets set and marker is put on bottom of input field
       this._editorInstance.commands.setContent(this.value);
     }
