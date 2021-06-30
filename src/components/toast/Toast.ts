@@ -43,9 +43,8 @@ const styles = css`
     background: var(--j-toast-background);
     border: var(--j-toast-border);
     color: var(--j-toast-color);
-    max-width: 500px;
+    max-width: 900px;
     min-width: 150px;
-    width: 400px;
     padding: var(--j-space-500);
   }
 
