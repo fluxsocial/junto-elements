@@ -9,7 +9,7 @@ import Placeholder from "@tiptap/extension-placeholder";
 import { Mention } from "./Mention";
 import { createPopper } from "@popperjs/core/lib/createPopper";
 import { Plugin } from "prosemirror-state";
- 
+
 const styles = css`
   :host {
     width: 100%;
@@ -83,10 +83,12 @@ export default class Editor extends LitElement {
   set value(val) {
     let oldVal = this._value;
     this._value = val;
-    this.requestUpdate('value', oldVal)
+    this.requestUpdate("value", oldVal);
   }
 
-  get value() { return this._value }
+  get value() {
+    return this._value;
+  }
 
   @property({ type: Boolean })
   autofocus = false;
@@ -95,7 +97,7 @@ export default class Editor extends LitElement {
   json = { type: "doc", content: [] };
 
   @property({ type: Object })
-  mentions = (trigger, query) => []
+  mentions = (trigger, query) => [];
 
   @property({ type: String })
   placeholder = "";
@@ -124,7 +126,7 @@ export default class Editor extends LitElement {
     this.dispatchEvent(
       new CustomEvent("onsuggestionlist", {
         detail: {
-          showSuggestions: this._showSuggestions
+          showSuggestions: this._showSuggestions,
         },
         bubbles: true,
       })
@@ -157,7 +159,10 @@ export default class Editor extends LitElement {
   selectItem(index) {
     const item = this.filteredList[index];
     if (item) {
-      this._mentionProps.command({ id: item.id, label: `${item.trigger}${item.name}` });
+      this._mentionProps.command({
+        id: item.id,
+        label: `${item.trigger}${item.name}`,
+      });
     }
   }
 
@@ -177,7 +182,7 @@ export default class Editor extends LitElement {
         Placeholder.configure({ placeholder: this.placeholder }),
         Mention.configure({
           HTMLAttributes: {
-            class: "mention"
+            class: "mention",
           },
           suggestion: {
             items: (trigger, query) => {
@@ -190,7 +195,6 @@ export default class Editor extends LitElement {
             render: () => {
               let virtualElement;
               let popper;
-              let startProps;
 
               return {
                 onStart: (props) => {
@@ -198,13 +202,14 @@ export default class Editor extends LitElement {
                   this._mentionProps = props;
 
                   virtualElement = {
-                    getBoundingClientRect: () => this.mentionEl.getBoundingClientRect(),
-                    contextElement: this.mentionEl
+                    getBoundingClientRect: () =>
+                      this.mentionEl.getBoundingClientRect(),
+                    contextElement: this.mentionEl,
                   };
-                  
+
                   popper = createPopper(virtualElement, this.suggestionsEl, {
-                    strategy: 'fixed',
-                    placement: 'bottom-start'
+                    strategy: "fixed",
+                    placement: "bottom-start",
                   });
 
                   popper.update();
@@ -213,8 +218,10 @@ export default class Editor extends LitElement {
 
                   this.requestUpdate();
                 },
-                onUpdate: (props) => {                                                    
-                  virtualElement.getBoundingClientRect = () => this.mentionEl.getBoundingClientRect();
+                onUpdate: (props) => {
+                  this._mentionProps = props;
+                  virtualElement.getBoundingClientRect = () =>
+                    this.mentionEl.getBoundingClientRect();
                   popper.update();
                   this.requestUpdate();
                 },
@@ -226,7 +233,7 @@ export default class Editor extends LitElement {
                     setTimeout(() => {
                       this.showSuggestions = false;
                       this.requestUpdate();
-                    })
+                    });
                     return true;
                   }
                   if (props.event.code === "ArrowUp") {
@@ -252,26 +259,32 @@ export default class Editor extends LitElement {
                   this.showSuggestions = false;
                   this.requestUpdate();
                 },
-              }
+              };
             },
-          }
+          },
         }),
         Extension.create({
           addProseMirrorPlugins: () => {
-            return [new Plugin({
-              props: {
-                handleKeyDown: (_, event) => {
-                  if (event.key === 'Enter' && !event.shiftKey && !this.showSuggestions) {
-                    this._editorInstance.commands.clearContent();
-                    return true;
-                  }
-      
-                  return false;
+            return [
+              new Plugin({
+                props: {
+                  handleKeyDown: (_, event) => {
+                    if (
+                      event.key === "Enter" &&
+                      !event.shiftKey &&
+                      !this.showSuggestions
+                    ) {
+                      this._editorInstance.commands.clearContent();
+                      return true;
+                    }
+
+                    return false;
+                  },
                 },
-              }
-            })];
-          }
-        })
+              }),
+            ];
+          },
+        }),
       ],
       onUpdate: (props) => {
         this._editorChange = true;
@@ -281,8 +294,8 @@ export default class Editor extends LitElement {
           new CustomEvent("change", {
             bubbles: true,
             detail: {
-              value: this.value
-            }
+              value: this.value,
+            },
           })
         );
       },
@@ -293,7 +306,7 @@ export default class Editor extends LitElement {
     this.dispatchEvent(
       new CustomEvent("editorinit", {
         detail: {
-          editorInstance: this._editorInstance
+          editorInstance: this._editorInstance,
         },
         bubbles: true,
       })
