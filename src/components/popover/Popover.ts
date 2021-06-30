@@ -21,29 +21,12 @@ type Placement =
   | "left-end";
 
 const styles = css`
-  :host {
+  :host [part="content"] {
     z-index: 999;
     display: none;
   }
-  :host([open]) {
+  :host([open]) [part="content"] {
     display: inline-block;
-  }
-  :host [part="base"] {
-    display: none;
-  }
-  :host([open]) [part="base"] {
-    display: block;
-    animation: fade-in 0.2s ease;
-  }
-  @keyframes fade-in {
-    from {
-      opacity: 0;
-      transform: scale(0.9);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
   }
 `;
 
@@ -75,36 +58,51 @@ export default class Popover extends LitElement {
   @property({ type: String, reflect: true })
   event = "click";
 
-  /**
-   * Selector
-   * @type {String}
-   * @attr
-   */
-  @property({ type: String, reflect: true })
-  selector = "";
-
   constructor() {
     super();
     this._openMenuHandler = this._openMenuHandler.bind(this);
   }
 
-  connectedCallback() {
-    super.connectedCallback();
+  get triggerPart(): HTMLElement {
+    return this.renderRoot.querySelector("[part='trigger']");
+  }
 
-    const trigger = document.querySelector(this.selector);
+  get contentPart(): HTMLElement {
+    return this.renderRoot.querySelector("[part='content']");
+  }
+
+  get triggerAssignedNode(): Node {
+    const slot: HTMLSlotElement =
+      this.renderRoot.querySelector("[name='trigger']");
+    return slot.assignedNodes()[0];
+  }
+
+  get contentAssignedNode(): Node {
+    const slot: HTMLSlotElement =
+      this.renderRoot.querySelector("[name='content']");
+    return slot.assignedNodes()[0];
+  }
+
+  firstUpdated() {
+    const trigger = this.triggerPart;
+    const content = this.contentPart;
+
+    console.log(trigger);
 
     trigger.addEventListener(this.event, this._openMenuHandler);
 
     if (this.event === "mouseover") {
-      this.addEventListener("mouseover", () => (this.open = true));
-      this.addEventListener("mouseleave", () => (this.open = false));
+      trigger.addEventListener("mouseover", () => (this.open = true));
+      trigger.addEventListener("mouseleave", () => (this.open = false));
       trigger.addEventListener("mouseleave", () => (this.open = false));
     }
 
     // Handle click outside
     window.addEventListener("mousedown", (e) => {
-      const clickedTrigger = trigger.contains(e.target as Node);
-      const clickedInside = this.contains(e.target as Node);
+      const clickedTrigger = this.triggerAssignedNode.contains(
+        e.target as Node
+      );
+      const clickedInside = this.contentAssignedNode.contains(e.target as Node);
       if (!clickedInside && !clickedTrigger) {
         this.open = false;
       }
@@ -116,7 +114,8 @@ export default class Popover extends LitElement {
     e.preventDefault();
     this.open = true;
 
-    const trigger = document.querySelector(this.selector);
+    const trigger = this.triggerPart;
+    const content = this.contentPart;
 
     if (this.event === "contextmenu") {
       const generateGetBoundingClientRect = (x = 0, y = 0) => {
@@ -135,8 +134,9 @@ export default class Popover extends LitElement {
         getBoundingClientRect: generateGetBoundingClientRect(),
       };
 
-      const instance = createPopper(virtualElement, this, {
+      const instance = createPopper(virtualElement, content, {
         placement: this.placement as Placement,
+        strategy: "fixed",
         modifiers: [
           {
             name: "offset",
@@ -153,13 +153,20 @@ export default class Popover extends LitElement {
       );
       instance.update();
     } else {
-      createPopper(trigger, this, {
+      createPopper(trigger, content, {
         placement: this.placement as Placement,
+        strategy: "fixed",
         modifiers: [
           {
             name: "offset",
             options: {
               offset: [10, 10],
+            },
+          },
+          {
+            name: "computeStyles",
+            options: {
+              gpuAcceleration: false, // true by default
             },
           },
         ],
@@ -168,6 +175,11 @@ export default class Popover extends LitElement {
   }
 
   render() {
-    return html` <div part="base"><slot></slot></div> `;
+    return html`
+      <div part="base">
+        <span part="trigger"><slot name="trigger"></slot></span>
+        <span part="content"><slot name="content"></slot></span>
+      </div>
+    `;
   }
 }
