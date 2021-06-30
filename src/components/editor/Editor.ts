@@ -7,7 +7,7 @@ import StarterKit from "@tiptap/starter-kit";
 import CodeBlock from "@tiptap/extension-code-block";
 import Placeholder from "@tiptap/extension-placeholder";
 import { Mention } from "./Mention";
- 
+
 const styles = css`
   :host {
     width: 100%;
@@ -75,17 +75,17 @@ export default class Editor extends LitElement {
   json = { type: "doc", content: [] };
 
   @property({ type: Object })
-  mentions = (trigger, query) => []
+  mentions = (trigger, query) => [];
 
-  @property({type: Object})
+  @property({ type: Object })
   mentionRender = () => {
     return {
       onStart: () => {},
       onUpdate: () => {},
-      onKeyDown: () => true,
-      onExit: () => {}
-    }
-  }
+      onKeyDown: () => false,
+      onExit: () => {},
+    };
+  };
 
   @property({ type: String })
   placeholder = "";
@@ -104,19 +104,21 @@ export default class Editor extends LitElement {
       content: this.value || this.json,
       element: editorContainer,
       autofocus: this.autofocus,
+      enableInputRules: false,
+      enablePasteRules: false,
       extensions: [
         StarterKit,
         CodeBlock,
         Placeholder.configure({ placeholder: this.placeholder }),
         Mention.configure({
           HTMLAttributes: {
-            class: "mention"
+            class: "mention",
           },
           suggestion: {
             items: this.mentions,
             render: this.mentionRender,
-          }
-        })
+          },
+        }),
       ],
       onUpdate: ({ editor }) => {
         this._editorChange = true;
