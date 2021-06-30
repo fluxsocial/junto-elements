@@ -9,9 +9,7 @@ const styles = css`
     --j-button-width: initial;
     --j-button-padding: 0 var(--j-space-400);
     --j-button-bg: var(--j-color-white);
-    --j-button-bg-hover: var(--j-color-white);
     --j-button-border: 1px solid var(--j-border-color);
-    --j-button-border-hover: 1px solid var(--j-border-color-strong);
     --j-button-text: var(--j-color-ui-800);
     --j-button-height: var(--j-size-md);
     --j-button-border-radius: var(--j-border-radius);
@@ -39,11 +37,6 @@ const styles = css`
     position: relative;
   }
 
-  :host(:not([disabled])) [part="base"]:hover {
-    border: var(--j-button-border-hover);
-    background-color: var(--j-button-bg-hover);
-  }
-
   :host([disabled]) [part="base"] {
     opacity: 0.5;
     cursor: default;
@@ -69,39 +62,56 @@ const styles = css`
 
   :host([variant="primary"]) {
     --j-button-bg: var(--j-color-primary-600);
-    --j-button-bg-hover: var(--j-color-primary-500);
     --j-button-text: var(--j-color-white);
     --j-button-border: 1px solid transparent;
-    --j-button-border-hover: 1px solid transparent;
   }
+
+  :host([variant="primary"]:hover) {
+    --j-button-bg: var(--j-color-primary-500);
+  }
+
+  :host([variant="link"]) {
+    --j-button-color: var(--j-color-primary-600);
+    --j-button-bg: transparent;
+    --j-button-text: var(--j-color-white);
+    --j-button-border: 1px solid transparent;
+  }
+
+  :host([variant="link"]:hover) {
+    --j-button-bg: transparent;
+    --j-button-color: var(--j-color-primary-800);
+  }
+
   :host([variant="subtle"]) {
     --j-button-bg: transparent;
-    --j-button-bg-hover: var(--j-color-ui-50);
     --j-button-text: var(--j-color-font);
     --j-button-border: 1px solid transparent;
-    --j-button-border-hover: 1px solid transparent;
   }
+
+  :host([variant="subtle"]:hover) {
+    --j-button-bg: var(--j-color-ui-50);
+  }
+
+  :host([variant="subtle"]) {
+    --j-button-bg: transparent;
+    --j-button-text: var(--j-color-font);
+    --j-button-border: 1px solid transparent;
+  }
+
+  :host([variant="subtle"]:hover) {
+    --j-button-bg: var(--j-color-ui-50);
+  }
+
   :host([variant="transparent"]) {
     --j-button-bg: transparent;
     --j-button-text: var(--j-color-font);
-    --j-button-bg-hover: transparent;
     --j-button-border: 1px solid transparent;
-    --j-button-border-hover: 1px solid transparent;
   }
-  :host([variant="success"]) {
-    --j-button-bg: var(--j-color-success-400);
-    --j-button-bg-hover: var(--j-color-success-500);
-    --j-button-text: var(--j-color-white);
+
+  :host([variant="transparent"]:hover) {
     --j-button-border: 1px solid transparent;
-    --j-button-border-hover: 1px solid transparent;
   }
-  :host([variant="danger"]) {
-    --j-button-bg: var(--j-color-danger-400);
-    --j-button-bg-hover: var(--j-color-danger-500);
-    --j-button-text: var(--j-color-white);
-    --j-button-border: 1px solid transparent;
-    --j-button-border-hover: 1px solid transparent;
-  }
+
   :host([size="sm"]) {
     --j-button-font-size: var(--j-font-size-400);
     --j-button-padding: 0 var(--j-space-300);
@@ -136,7 +146,7 @@ export default class Button extends LitElement {
 
   /**
    * Variations
-   * @type {""|"primary"|"subtle"|"transparent"|"success"|"danger"}
+   * @type {""|"link"|"primary"|"subtle"|"transparent"|}
    * @attr
    */
   @property({ type: String, reflect: true })
