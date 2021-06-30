@@ -6,17 +6,25 @@ import sharedStyles from "../../shared/styles";
 
 const styles = css`
   :host {
-    --j-avatar-depth: 0;
     --j-avatar-size: var(--j-size-md);
-    --j-avatar-border: 2px solid none;
+    --j-avatar-box-shadow: none;
+    --j-avatar-border: none;
     --j-avatar-color: var(--j-color-white);
     --j-avatar-bg: var(--j-color-ui-200);
   }
   :host([selected]) {
-    --j-avatar-border: 2px solid var(--j-color-primary-500);
+    --j-avatar-box-shadow: 0px 0px 0px 2px var(--j-color-primary-500);
   }
-  :host([online]) {
-    --j-avatar-border: 2px solid var(--j-color-success-500);
+  :host([online]) [part="base"]:before {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    content: "";
+    display: block;
+    width: 30%;
+    height: 30%;
+    border-radius: 50%;
+    background: var(--j-color-primary-500);
   }
   :host([size="xs"]) {
     --j-avatar-size: var(--j-size-xs);
@@ -31,9 +39,11 @@ const styles = css`
     --j-avatar-size: var(--j-size-xl);
   }
   [part="base"] {
+    cursor: inherit;
+    position: relative;
+    box-shadow: var(--j-avatar-box-shadow);
     color: var(--j-avatar-color);
     background: var(--j-avatar-bg);
-    box-shadow: var(--j-avatar-depth);
     border: var(--j-avatar-border);
     padding: 0;
     width: var(--j-avatar-size);
