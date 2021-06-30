@@ -4,18 +4,20 @@ import sharedStyles from "../../shared/styles";
 
 const styles = css`
   :host {
+    --j-button-text-decoration: none;
     --j-button-depth: none;
     --j-button-display: inline-flex;
     --j-button-width: initial;
     --j-button-padding: 0 var(--j-space-400);
     --j-button-bg: var(--j-color-white);
     --j-button-border: 1px solid var(--j-border-color);
-    --j-button-text: var(--j-color-ui-800);
+    --j-button-color: var(--j-color-ui-800);
     --j-button-height: var(--j-size-md);
     --j-button-border-radius: var(--j-border-radius);
     --j-button-font-size: var(--j-font-size-500);
   }
   [part="base"] {
+    text-decoration: var(--j-button-text-decoration);
     transition: box-shadow 0.2s ease;
     cursor: pointer;
     border: 0;
@@ -29,8 +31,8 @@ const styles = css`
     height: var(--j-button-height);
     border-radius: var(--j-button-border-radius);
     background: var(--j-button-bg);
-    color: var(--j-button-text);
-    fill: var(--j-button-text);
+    color: var(--j-button-color);
+    fill: var(--j-button-color);
     font-size: var(--j-button-font-size);
     font-family: inherit;
     border: var(--j-button-border);
@@ -52,7 +54,7 @@ const styles = css`
 
   :host([loading]) j-spinner {
     display: block;
-    --j-spinner-color: var(--j-button-text);
+    --j-spinner-color: var(--j-button-color);
   }
 
   :host([loading]) [part="base"] slot {
@@ -62,7 +64,7 @@ const styles = css`
 
   :host([variant="primary"]) {
     --j-button-bg: var(--j-color-primary-600);
-    --j-button-text: var(--j-color-white);
+    --j-button-color: var(--j-color-white);
     --j-button-border: 1px solid transparent;
   }
 
@@ -71,20 +73,20 @@ const styles = css`
   }
 
   :host([variant="link"]) {
-    --j-button-color: var(--j-color-primary-600);
+    --j-button-color: var(--j-color-primary-700);
     --j-button-bg: transparent;
-    --j-button-text: var(--j-color-white);
     --j-button-border: 1px solid transparent;
   }
 
   :host([variant="link"]:hover) {
     --j-button-bg: transparent;
-    --j-button-color: var(--j-color-primary-800);
+    --j-button-text-decoration: underline;
+    --j-button-color: var(--j-color-primary-600);
   }
 
   :host([variant="subtle"]) {
     --j-button-bg: transparent;
-    --j-button-text: var(--j-color-font);
+    --j-button-color: currentColor;
     --j-button-border: 1px solid transparent;
   }
 
@@ -94,7 +96,7 @@ const styles = css`
 
   :host([variant="subtle"]) {
     --j-button-bg: transparent;
-    --j-button-text: var(--j-color-font);
+    --j-button-color: currentColor;
     --j-button-border: 1px solid transparent;
   }
 
@@ -104,7 +106,7 @@ const styles = css`
 
   :host([variant="transparent"]) {
     --j-button-bg: transparent;
-    --j-button-text: var(--j-color-font);
+    --j-button-color: currentColor;
     --j-button-border: 1px solid transparent;
   }
 
