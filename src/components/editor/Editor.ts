@@ -2,11 +2,12 @@ import { html, css, LitElement } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import sharedStyles from "../../shared/styles";
 
-import { Editor as TipTap, generateHTML, generateJSON } from "@tiptap/core";
+import { Editor as TipTap } from "@tiptap/core";
 import StarterKit from "@tiptap/starter-kit";
 import CodeBlock from "@tiptap/extension-code-block";
 import Placeholder from "@tiptap/extension-placeholder";
-
+import { Mention } from "./Mention";
+ 
 const styles = css`
   :host {
     width: 100%;
@@ -53,6 +54,11 @@ const styles = css`
     pointer-events: none;
     height: 0;
   }
+  .mention {
+    padding: var(--j-badge-padding);
+    background: var(--j-badge-bg);
+    color: var(--j-badge-color);
+  }
 `;
 
 @customElement("j-editor")
@@ -67,6 +73,19 @@ export default class Editor extends LitElement {
 
   @property({ type: Object })
   json = { type: "doc", content: [] };
+
+  @property({ type: Object })
+  mentions = (trigger, query) => []
+
+  @property({type: Object})
+  mentionRender = () => {
+    return {
+      onStart: () => {},
+      onUpdate: () => {},
+      onKeyDown: () => true,
+      onExit: () => {}
+    }
+  }
 
   @property({ type: String })
   placeholder = "";
@@ -89,6 +108,15 @@ export default class Editor extends LitElement {
         StarterKit,
         CodeBlock,
         Placeholder.configure({ placeholder: this.placeholder }),
+        Mention.configure({
+          HTMLAttributes: {
+            class: "mention"
+          },
+          suggestion: {
+            items: this.mentions,
+            render: this.mentionRender,
+          }
+        })
       ],
       onUpdate: ({ editor }) => {
         this._editorChange = true;
