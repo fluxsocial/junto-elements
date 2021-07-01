@@ -33,13 +33,46 @@ const styles = css`
     width: 100%;
     border: 1px solid var(--j-editor-border-color);
     border-radius: var(--j-border-radius);
-  }
-  [part="toolbar"] {
-    border-top: 1px solid var(--j-border-color);
-    padding: var(--j-space-200);
-  }
-  [part="editor"] {
     padding: var(--j-space-500);
+  }
+
+  [part="editor-wrapper"] {
+    display: flex;
+    align-items: center;
+    gap: var(--j-space-300);
+  }
+
+  :host([toolbar]) [part="editor-wrapper"] {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  :host([toolbar]) [part="toolbar"] {
+    flex: 1;
+    width: 100%;
+    border-top: 1px solid var(--j-border-color);
+    margin-top: var(--j-space-400);
+    padding-top: var(--j-space-300);
+  }
+
+  [part="editor-container"] {
+    flex: 1;
+    width: 100%;
+  }
+
+  [part="toolbar"] {
+    align-self: flex-end;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--j-space-300);
+  }
+
+  [part="toolbar"] j-button[active]::part(base) {
+    color: var(--j-color-primary-500);
+  }
+
+  [part="editor"] {
     width: 100%;
   }
   [part="editor"]:focus-within {
@@ -81,14 +114,6 @@ const styles = css`
     visibility: visible;
   }
 
-  [part="toolbar"] j-button::part(base) {
-    color: var(--j-color-ui-400);
-  }
-
-  [part="toolbar"] j-button[active]::part(base) {
-    color: var(--j-color-primary-500);
-  }
-
   [part="editor"] ul,
   [part="editor"] ol {
     padding-left: var(--j-space-500);
@@ -111,6 +136,9 @@ export default class Editor extends LitElement {
 
   @property({ type: Boolean })
   autofocus = false;
+
+  @property({ type: Boolean, reflect: true })
+  toolbar = false;
 
   @property({ type: Object })
   json = { type: "doc", content: [] };
@@ -331,12 +359,21 @@ export default class Editor extends LitElement {
       // TODO: Bug when this gets set and marker is put on bottom of input field
       this._editorInstance.commands.setContent(this.value);
     }
+
+    if (changedProperties.has("toolbar")) {
+      this.dispatchEvent(new CustomEvent("toolbartoggle", { bubbles: true }));
+    }
+
     this._editorChange = false;
     return true;
   }
 
   _toggleBold() {
     this._editorInstance.chain().toggleBold().focus().run();
+  }
+
+  toggleToolbar() {
+    this.toolbar = !this.toolbar;
   }
 
   render() {
@@ -351,59 +388,98 @@ export default class Editor extends LitElement {
             </j-menu-item>`
         )}
       </j-menu>
-      <div id="container" part="editor-container"></div>
-      <div part="toolbar">
-        ${this._editorInstance
-          ? html`<j-button
-                variant="subtle"
-                size="sm"
-                ?active=${this._editorInstance.isActive("bold")}
-                @click=${() =>
-                  this._editorInstance.chain().toggleBold().focus().run()}
-              >
-                <j-icon size="sm" name="type-bold"></j-icon>
-              </j-button>
-              <j-button
-                variant="subtle"
-                size="sm"
-                ?active=${this._editorInstance.isActive("italic")}
-                @click=${() =>
-                  this._editorInstance.chain().toggleItalic().focus().run()}
-              >
-                <j-icon size="sm" name="type-italic"></j-icon>
-              </j-button>
-              <j-button
-                variant="subtle"
-                size="sm"
-                ?active=${this._editorInstance.isActive("strike")}
-                @click=${() =>
-                  this._editorInstance.chain().toggleStrike().focus().run()}
-              >
-                <j-icon size="sm" name="type-strikethrough"></j-icon>
-              </j-button>
-              <j-button
-                variant="subtle"
-                size="sm"
-                ?active=${this._editorInstance.isActive("bulletList")}
-                @click=${() =>
-                  this._editorInstance.chain().focus().toggleBulletList().run()}
-              >
-                <j-icon size="sm" name="list-ul"></j-icon>
-              </j-button>
-              <j-button
-                variant="subtle"
-                size="sm"
-                ?active=${this._editorInstance.isActive("orderedList")}
-                @click=${() =>
-                  this._editorInstance
-                    .chain()
-                    .focus()
-                    .toggleOrderedList()
-                    .run()}
-              >
-                <j-icon size="sm" name="list-ol"></j-icon>
-              </j-button>`
-          : null}
+      <div part="editor-wrapper">
+        <div id="container" part="editor-container"></div>
+        <div part="toolbar">
+          ${this.toolbar
+            ? html`<div part="toolbar-extended">
+                ${this._editorInstance
+                  ? html`<j-button
+                        variant="subtle"
+                        size="sm"
+                        ?active=${this._editorInstance.isActive("bold")}
+                        @click=${() =>
+                          this._editorInstance
+                            .chain()
+                            .toggleBold()
+                            .focus()
+                            .run()}
+                      >
+                        <j-icon size="sm" name="type-bold"></j-icon>
+                      </j-button>
+                      <j-button
+                        variant="subtle"
+                        size="sm"
+                        ?active=${this._editorInstance.isActive("italic")}
+                        @click=${() =>
+                          this._editorInstance
+                            .chain()
+                            .toggleItalic()
+                            .focus()
+                            .run()}
+                      >
+                        <j-icon size="sm" name="type-italic"></j-icon>
+                      </j-button>
+                      <j-button
+                        variant="subtle"
+                        size="sm"
+                        ?active=${this._editorInstance.isActive("strike")}
+                        @click=${() =>
+                          this._editorInstance
+                            .chain()
+                            .toggleStrike()
+                            .focus()
+                            .run()}
+                      >
+                        <j-icon size="sm" name="type-strikethrough"></j-icon>
+                      </j-button>
+                      <j-button
+                        variant="subtle"
+                        size="sm"
+                        ?active=${this._editorInstance.isActive("bulletList")}
+                        @click=${() =>
+                          this._editorInstance
+                            .chain()
+                            .focus()
+                            .toggleBulletList()
+                            .run()}
+                      >
+                        <j-icon size="sm" name="list-ul"></j-icon>
+                      </j-button>
+                      <j-button
+                        variant="subtle"
+                        size="sm"
+                        ?active=${this._editorInstance.isActive("orderedList")}
+                        @click=${() =>
+                          this._editorInstance
+                            .chain()
+                            .focus()
+                            .toggleOrderedList()
+                            .run()}
+                      >
+                        <j-icon size="sm" name="list-ol"></j-icon>
+                      </j-button>`
+                  : null}
+              </div>`
+            : null}
+          <div part="toolbar-standard">
+            <j-button
+              ?active=${this.toolbar}
+              variant="subtle"
+              size="sm"
+              @click=${() => this.toggleToolbar()}
+            >
+              <j-icon size="sm" name="type"></j-icon>
+            </j-button>
+            <j-button
+              variant="primary"
+              size="sm"
+              @click=${() => this.toggleToolbar()}
+            >
+              <j-icon size="sm" name="arrow-up-short"></j-icon>
+            </j-button>
+          </div>
+        </div>
       </div>
     </div>`;
   }
