@@ -51,7 +51,7 @@ const styles = css`
     flex: 1;
     width: 100%;
     border-top: 1px solid var(--j-border-color);
-    margin-top: var(--j-space-400);
+    margin-top: var(--j-space-200);
     padding-top: var(--j-space-300);
   }
 
