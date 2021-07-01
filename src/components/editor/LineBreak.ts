@@ -1,4 +1,4 @@
-import { Node, mergeAttributes, getNodeType } from "@tiptap/core";
+import { Node, mergeAttributes, getNodeType, Range, findParentNode, isList } from "@tiptap/core";
 
 export interface HardBreakOptions {
   HTMLAttributes: Record<string, any>;
@@ -34,12 +34,23 @@ export default Node.create({
       setHardBreak:
         () =>
         (props) => {
-          const { state } = props;
-          const listNodeType = getNodeType('listItem', state.schema)
+          const { state, editor } = props;
+          const listNodeType = getNodeType('listItem', state.schema);
 
           return props.commands.first([
             () => props.commands.exitCode(),
-            () => props.commands.splitListItem(listNodeType),
+            () => {
+              if (state.selection.$anchor.node().textContent.length <= 0 ) {
+                const parentList = findParentNode(node => isList(node.type.name, editor.extensionManager.extensions))(state.selection);
+                
+                if (parentList) {
+                  props.commands.toggleList(parentList.node.type, listNodeType);
+                  return props.commands.createParagraphNear();
+                }
+              } 
+              
+              return props.commands.splitListItem(listNodeType) 
+            },
             () => props.commands.insertContent({ type: this.name }),
           ]);
         },
