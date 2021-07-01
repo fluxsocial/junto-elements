@@ -58,6 +58,9 @@ const styles = css`
   [part="editor-container"] {
     flex: 1;
     width: 100%;
+    border: 1px solid var(--j-border-color);
+    border-radius: 5px;
+    padding: .5rem 1rem;
   }
 
   [part="toolbar"] {
