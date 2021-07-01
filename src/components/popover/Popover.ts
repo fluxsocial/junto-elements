@@ -1,7 +1,18 @@
 import { html, css, LitElement } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { customElement, property, state } from "lit/decorators.js";
 import { createPopper } from "@popperjs/core";
 import sharedStyles from "../../shared/styles";
+
+const generateGetBoundingClientRect = (x = 0, y = 0) => {
+  return () => ({
+    width: 0,
+    height: 0,
+    top: y,
+    right: x,
+    bottom: y,
+    left: x,
+  });
+};
 
 type Placement =
   | "auto"
@@ -58,9 +69,15 @@ export default class Popover extends LitElement {
   @property({ type: String, reflect: true })
   event = "click";
 
+  @state()
+  clientY = 0;
+
+  @state()
+  clientX = 0;
+
   constructor() {
     super();
-    this._openMenuHandler = this._openMenuHandler.bind(this);
+    this._createPopover = this._createPopover.bind(this);
   }
 
   get triggerPart(): HTMLElement {
@@ -86,7 +103,12 @@ export default class Popover extends LitElement {
   firstUpdated() {
     const trigger = this.triggerPart;
 
-    trigger.addEventListener(this.event, this._openMenuHandler);
+    trigger.addEventListener(this.event, (e: any) => {
+      e.preventDefault();
+      this.clientY = e.clientY;
+      this.clientX = e.clientX;
+      this.open = !this.open;
+    });
 
     if (this.event === "mouseover") {
       trigger.addEventListener("mouseover", () => (this.open = true));
@@ -106,26 +128,11 @@ export default class Popover extends LitElement {
     });
   }
 
-  _openMenuHandler(e) {
-    //e.stopPropagation();
-    e.preventDefault();
-    this.open = true;
-
+  _createPopover() {
     const trigger = this.triggerPart;
     const content = this.contentPart;
 
     if (this.event === "contextmenu") {
-      const generateGetBoundingClientRect = (x = 0, y = 0) => {
-        return () => ({
-          width: 0,
-          height: 0,
-          top: y,
-          right: x,
-          bottom: y,
-          left: x,
-        });
-      };
-
       const virtualElement = {
         contextElement: trigger,
         getBoundingClientRect: generateGetBoundingClientRect(),
@@ -145,8 +152,8 @@ export default class Popover extends LitElement {
       });
 
       virtualElement.getBoundingClientRect = generateGetBoundingClientRect(
-        e.clientX,
-        e.clientY
+        this.clientX,
+        this.clientY
       );
       instance.update();
     } else {
@@ -169,6 +176,16 @@ export default class Popover extends LitElement {
         ],
       });
     }
+  }
+
+  shouldUpdate(changedProperties) {
+    if (changedProperties.has("open")) {
+      this.dispatchEvent(new CustomEvent("toggle", { bubbles: true }));
+      if (this.open) {
+        this._createPopover();
+      }
+    }
+    return true;
   }
 
   render() {
