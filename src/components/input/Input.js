@@ -147,6 +147,10 @@ class Input extends LitElement {
     this.dispatchEvent(new CustomEvent("change", e));
   }
 
+  select() {
+    this.renderRoot.querySelector("input").select();
+  }
+
   onFocus(e) {
     e.stopPropagation();
     this.value = e.target.value;
