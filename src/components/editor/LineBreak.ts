@@ -1,4 +1,4 @@
-import { Node, mergeAttributes } from "@tiptap/core";
+import { Node, mergeAttributes, getNodeType } from "@tiptap/core";
 
 export interface HardBreakOptions {
   HTMLAttributes: Record<string, any>;
@@ -33,10 +33,14 @@ export default Node.create({
     return {
       setHardBreak:
         () =>
-        ({ commands }) => {
-          return commands.first([
-            () => commands.exitCode(),
-            () => commands.insertContent({ type: this.name }),
+        (props) => {
+          const { state } = props;
+          const listNodeType = getNodeType('listItem', state.schema)
+
+          return props.commands.first([
+            () => props.commands.exitCode(),
+            () => props.commands.splitListItem(listNodeType),
+            () => props.commands.insertContent({ type: this.name }),
           ]);
         },
     };
