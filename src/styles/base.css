@@ -263,9 +263,9 @@
   --j-border-color-strong: var(--j-color-ui-200);
 
   /* SIZES */
-  --j-size-xs: 20px;
-  --j-size-sm: 28px;
-  --j-size-sm-plus: 36px;
+  --j-size-xxs: 20px;
+  --j-size-xs: 28px;
+  --j-size-sm: 36px;
   --j-size-md: 42px;
   --j-size-lg: 52px;
   --j-size-xl: 58px;
