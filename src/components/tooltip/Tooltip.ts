@@ -31,7 +31,8 @@ const styles = css`
     z-index: 999;
     display: none;
     font-size: var(--j-font-size-400);
-    padding: var(--j-space-100) var(--j-space-300);
+    font-weight: 500;
+    padding: var(--j-space-300) var(--j-space-300);
     background: var(--j-color-ui-800);
     color: var(--j-color-ui-200);
     border-radius: var(--j-border-radius);

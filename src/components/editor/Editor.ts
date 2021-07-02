@@ -479,7 +479,7 @@ export default class Editor extends LitElement {
               size="sm"
               @click=${() => this.toggleToolbar()}
             >
-              <j-icon size="sm" name="arrow-up-short"></j-icon>
+              <j-icon size="sm" name="arrow-right-short"></j-icon>
             </j-button>
           </div>
         </div>
