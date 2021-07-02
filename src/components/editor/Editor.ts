@@ -51,13 +51,16 @@ const styles = css`
     flex: 1;
     width: 100%;
     border-top: 1px solid var(--j-border-color);
-    margin-top: var(--j-space-400);
+    margin-top: var(--j-space-200);
     padding-top: var(--j-space-300);
   }
 
   [part="editor-container"] {
     flex: 1;
     width: 100%;
+    border: 1px solid var(--j-border-color);
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
   }
 
   [part="toolbar"] {
@@ -376,6 +379,10 @@ export default class Editor extends LitElement {
     this.toolbar = !this.toolbar;
   }
 
+  handleSendClick() {
+    this.dispatchEvent(new CustomEvent("send", { bubbles: true }));
+  }
+
   render() {
     return html` <div part="base">
       <j-menu part="suggestions" ?open=${this.showSuggestions} id="test">
@@ -474,9 +481,9 @@ export default class Editor extends LitElement {
             <j-button
               variant="primary"
               size="sm"
-              @click=${() => this.toggleToolbar()}
+              @click=${() => this.handleSendClick()}
             >
-              <j-icon size="sm" name="arrow-up-short"></j-icon>
+              <j-icon size="sm" name="arrow-right-short"></j-icon>
             </j-button>
           </div>
         </div>

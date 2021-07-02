@@ -77,6 +77,8 @@ export default class Menu extends LitElement {
     ) as any;
   }
 
+  firstUpdated() {}
+
   shouldUpdate(changedProperties) {
     if (changedProperties.has("value")) {
       this.dispatchEvent(new CustomEvent("change", { bubbles: true }));
@@ -84,37 +86,33 @@ export default class Menu extends LitElement {
     return true;
   }
 
+  selectTab(value) {
+    this.optionElements.forEach((el: any) => {
+      const isChecked = el.value === value;
+      el.checked = isChecked;
+      this.value = value;
+      if (isChecked) {
+        this.style.setProperty(
+          "--j-tabs-indicator-width",
+          el.offsetWidth + "px"
+        );
+        this.style.setProperty("--j-tabs-indicator-left", el.offsetLeft + "px");
+      }
+    });
+  }
+
   connectedCallback() {
     super.connectedCallback();
 
     if (this.value) {
       setTimeout(() => {
-        this.style.setProperty(
-          "--j-tabs-indicator-width",
-          this.selectedElement?.offsetWidth + "px"
-        );
-        this.style.setProperty(
-          "--j-tabs-indicator-left",
-          this.selectedElement?.offsetLeft + "px"
-        );
+        this.selectTab(this.value);
       }, 100);
     }
 
     this.addEventListener("tab-selected", (e: any) => {
       e.stopPropagation();
-      this.optionElements.forEach((el: any) => {
-        const isChecked = el.value === e.target.value;
-        el.checked = isChecked;
-        this.value = e.target.value;
-        this.style.setProperty(
-          "--j-tabs-indicator-width",
-          e.target.offsetWidth + "px"
-        );
-        this.style.setProperty(
-          "--j-tabs-indicator-left",
-          e.target.offsetLeft + "px"
-        );
-      });
+      this.selectTab(e.target.value);
     });
   }
 
