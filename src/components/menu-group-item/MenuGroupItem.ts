@@ -18,6 +18,7 @@ const styles = css`
     display: flex;
     align-items: center;
     padding-left: var(--j-menu-group-item-title-padding-left);
+    margin-bottom: var(--j-space-100);
     -webkit-appearance: none;
   }
   [part="summary"]::marker,
@@ -62,8 +63,7 @@ const styles = css`
     text-overflow: ellipsis;
   }
   [part="content"] {
-    margin-top: var(--j-space-300);
-    margin-bottom: var(--j-space-300);
+
   }
 `;
 

@@ -35,6 +35,7 @@ const styles = css`
     fill: var(--j-button-color);
     font-size: var(--j-button-font-size);
     font-family: inherit;
+    font-weight: 700;
     border: var(--j-button-border);
     position: relative;
   }
@@ -64,12 +65,13 @@ const styles = css`
 
   :host([variant="primary"]) {
     --j-button-bg: var(--j-color-primary-600);
-    --j-button-color: var(--j-color-white);
+    --j-button-color: white;
     --j-button-border: 1px solid transparent;
   }
 
   :host([variant="primary"]:hover) {
     --j-button-bg: var(--j-color-primary-500);
+    cursor: pointer;
   }
 
   :host([variant="link"]) {
