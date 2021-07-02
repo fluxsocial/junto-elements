@@ -47,6 +47,7 @@
     "start": "run-p dev:*",
     "build": "run-s build:*",
     "dev": "run-p dev:*",
+    "dev:analyze": "web-component-analyzer src --outFile components.json",
     "dev:docs": "live-server",
     "dev:watch": "esbuild src/main.ts --watch --bundle --minify --sourcemap --outfile=dist/main.js --target=es2016",
     "build:analyze": "web-component-analyzer src --outFile components.json",
