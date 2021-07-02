@@ -114,6 +114,12 @@ const styles = css`
     --j-button-border: 1px solid transparent;
   }
 
+  :host([size="xs"]) {
+    --j-button-font-size: var(--j-font-size-400);
+    --j-button-padding: 0 var(--j-space-200);
+    --j-button-height: var(--j-size-xs);
+  }
+
   :host([size="sm"]) {
     --j-button-font-size: var(--j-font-size-400);
     --j-button-padding: 0 var(--j-space-300);
@@ -156,7 +162,7 @@ export default class Button extends LitElement {
 
   /**
    * Sizes
-   * @type {""|"sm"|"lg"}
+   * @type {""|"xs"|"sm"|"lg"|"xl"}
    * @attr
    */
   @property({ type: String, reflect: true })
