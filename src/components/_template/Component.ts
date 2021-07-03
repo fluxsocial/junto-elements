@@ -1,5 +1,6 @@
 import { html, css, LitElement } from "lit";
 import { property } from "lit/decorators";
+import sharedStyles from "../../shared/styles";
 
 const styles = css`
   :host button {
@@ -20,7 +21,7 @@ const styles = css`
 `;
 
 export default class Component extends LitElement {
-  static styles = styles;
+  static styles = [styles, sharedStyles];
 
   @property({ type: String, reflect: true }) variant = "";
 

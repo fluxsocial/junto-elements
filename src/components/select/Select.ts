@@ -102,6 +102,11 @@ export default class Select extends LitElement {
     return this.optionElements.find((el) => el.hasAttribute("active")) as any;
   }
 
+  firstUpdated() {
+    const selectedElement = this.selectedElement as any;
+    this.inputValue = selectedElement?.label || selectedElement?.value || "";
+  }
+
   connectedCallback() {
     super.connectedCallback();
     this.addEventListener("keydown", this._handleKeyDown);

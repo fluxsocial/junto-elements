@@ -6,7 +6,7 @@ const styles = css`
   :host {
     --j-menu-item-border-left: none;
     --j-menu-item-border-radius: none;
-    --j-menu-item-height: var(--j-size-sm-plus);
+    --j-menu-item-height: var(--j-size-md);
     --j-menu-item-bg: transparent;
     --j-menu-item-color: var(--j-color-ui-600);
     --j-menu-item-padding: 0 var(--j-space-500) 0 var(--j-space-500);
