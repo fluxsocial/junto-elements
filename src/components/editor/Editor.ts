@@ -233,7 +233,6 @@ export default class Editor extends LitElement {
 
   selectEmojiItem(index) {
     const item = this.filteredEmojiList[index];
-    console.log(item);
     if (item) {
       this._mentionProps.command({
         id: item.id,
@@ -276,7 +275,6 @@ export default class Editor extends LitElement {
           suggestion: {
             char: "@|#",
             items: (trigger, query) => {
-              console.log('triggered');
               this.filteredList = this.mentions(trigger, query);
 
               this.showSuggestions = this.filteredList.length !== 0;

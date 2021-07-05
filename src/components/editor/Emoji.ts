@@ -21,7 +21,6 @@ export const Emoji = Node.create<MentionOptions>({
     suggestion: {
       char: ":",
       command: ({ editor, range, props, state }) => {
-        console.log('rr', range, props, state)
         editor
           .chain()
           .focus()

@@ -90,7 +90,6 @@ export function Suggestion({
                 ? await items(state.text[0], state.query)
                 : [],
             command: (commandProps) => {
-              console.log('rrr', state, next, prev);
               command({
                 editor,
                 range: state.range,
