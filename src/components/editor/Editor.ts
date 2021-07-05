@@ -537,7 +537,7 @@ export default class Editor extends LitElement {
             html`<j-menu-item
               @click=${() => this.selectEmojiItem(index)}
               ?active=${index === this.activeIndex}
-              >${suggestion.label}
+              >${suggestion.label}&nbsp;&nbsp;:${suggestion.id}:
             </j-menu-item>`
         )}
       </j-menu>
