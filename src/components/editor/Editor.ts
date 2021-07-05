@@ -447,6 +447,19 @@ export default class Editor extends LitElement {
           return `<span data-emoji class="emoji" part="emoji" data-id="${code}" data-id=":${name}:">${code}</span>`
         });
 
+        const mentionRegex = new RegExp(`(?<!</?[^>]*|&[^;]*)(${this.filteredList.map(f => `${f.trigger}${f.name}|`)})`, 'g');
+
+        if ( this.filteredList.length > 0) {
+          this.value = this.value.replace(mentionRegex, (val, args) => {
+            if (val.trim().length !== 0) {
+              const item = this.filteredList.find(f => `${f.trigger}${f.name}` === val);
+              return `<span data-mention class="mention" part="mention" data-id="${item.trigger}${item.name}" data-id="${item.id}"></span> `
+            
+            }
+            return val;
+          });
+        }
+
         this.json = props.editor.getJSON() as any;
 
         props.editor.commands.setContent(this.value);
