@@ -368,11 +368,11 @@
                 href: "#popover",
                 example: `
                   <div>
-                    <button id="popovertarget">Click me</button>
-                    <j-popover selector="#popovertarget">
-                      <j-menu>
-                        <j-menu-item>Title</j-menu-item>
-                      </j-menu>
+                    <j-popover>
+                    <button slot="trigger" id="popovertarget">Click me</button>
+                    <j-menu slot="content">
+                      <j-menu-item>Title</j-menu-item>
+                    </j-menu>
                     </j-popover>
                   </div>
                 `,

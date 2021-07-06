@@ -10,7 +10,7 @@ export interface SuggestionOptions {
   startOfLine?: boolean;
   decorationTag?: string;
   decorationClass?: string;
-  command?: (props: { editor: Editor; range: Range; props: any }) => void;
+  command?: (props: { editor: Editor; range: Range; props: any, state: any }) => void;
   items?: (trigger: string | undefined, query: string) => any[];
   render?: () => {
     onStart?: (props: SuggestionProps) => void;
@@ -94,6 +94,7 @@ export function Suggestion({
                 editor,
                 range: state.range,
                 props: commandProps,
+                state: state
               });
             },
             decorationNode,
