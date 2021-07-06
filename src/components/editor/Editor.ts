@@ -19,6 +19,10 @@ import OrderedList from "@tiptap/extension-ordered-list";
 import Placeholder from "@tiptap/extension-placeholder";
 import { Mention } from "./Mention";
 import { createPopper } from "@popperjs/core/lib/createPopper";
+import emoji from "node-emoji";
+import emojiList from "node-emoji/lib/emoji";
+import { Emoji } from "./Emoji";
+import 'emoji-picker-element';
 
 const styles = css`
   :host {
@@ -34,6 +38,9 @@ const styles = css`
     border: 1px solid var(--j-editor-border-color);
     border-radius: var(--j-border-radius);
     padding: var(--j-space-500);
+  }
+  [part="toolbar-standard"] {
+    display: flex;
   }
 
   [part="editor-wrapper"] {
@@ -107,11 +114,13 @@ const styles = css`
     background: var(--j-badge-bg);
     color: var(--j-badge-color);
   }
-  [part="suggestions"] {
+  [part="mentionSuggestions"],
+  [part="emojiSuggestions"] {
     display: none;
     visibility: hidden;
   }
-  [part="suggestions"][open] {
+  [part="mentionSuggestions"][open],
+  [part="emojiSuggestions"][open] {
     z-index: 100;
     display: block;
     visibility: visible;
@@ -127,6 +136,10 @@ const styles = css`
     padding: 2px var(--j-space-100);
     background: var(--j-color-primary-100);
     color: var(--j-color-primary-600);
+  }
+  emoji-picker {
+    --background: var(--j-color-white);
+    --input-font-color: var(--j-color-ui-400);
   }
 `;
 
@@ -159,7 +172,10 @@ export default class Editor extends LitElement {
   _editorChange = false;
 
   @state()
-  _showSuggestions = false;
+  _showMentionSuggestions = false;
+
+  @state()
+  _showEmojiSuggestions = false;
 
   @state()
   _activeIndex = 0;
@@ -168,15 +184,21 @@ export default class Editor extends LitElement {
   filteredList = [];
 
   @state()
+  filteredEmojiList = [];
+
+  @state()
   _mentionProps = null;
 
+  @state()
+  _emojiProps = null;
+
   set showSuggestions(val) {
-    this._showSuggestions = val;
+    this._showMentionSuggestions = val;
 
     this.dispatchEvent(
       new CustomEvent("onsuggestionlist", {
         detail: {
-          showSuggestions: this._showSuggestions,
+          showSuggestions: this._showMentionSuggestions,
         },
         bubbles: true,
       })
@@ -186,7 +208,7 @@ export default class Editor extends LitElement {
   }
 
   get showSuggestions() {
-    return this._showSuggestions;
+    return this._showMentionSuggestions;
   }
 
   set activeIndex(val) {
@@ -198,8 +220,16 @@ export default class Editor extends LitElement {
     return this._activeIndex;
   }
 
-  get suggestionsEl(): HTMLElement {
-    return this.renderRoot.querySelector("[part='suggestions']") as HTMLElement;
+  get mentionSuggestions(): HTMLElement {
+    return this.renderRoot.querySelector(
+      "[part='mentionSuggestions']"
+    ) as HTMLElement;
+  }
+
+  get emojiSuggestions(): HTMLElement {
+    return this.renderRoot.querySelector(
+      "[part='emojiSuggestions']"
+    ) as HTMLElement;
   }
 
   get mentionEl(): HTMLElement {
@@ -216,7 +246,20 @@ export default class Editor extends LitElement {
     }
   }
 
+  selectEmojiItem(index) {
+    const item = this.filteredEmojiList[index];
+    if (item) {
+      this._emojiProps.command({
+        id: item.id,
+        label: `${item.label}`,
+      });
+    }
+  }
+
   firstUpdated() {
+    const formattedEmojiList = Object.entries(emojiList.emoji).map(
+      ([id, label]) => ({ id, label: label as string })
+    );
     const editorContainer = this.renderRoot.querySelector(
       "[part='editor-container']"
     );
@@ -247,6 +290,7 @@ export default class Editor extends LitElement {
             part: "mention",
           },
           suggestion: {
+            char: "@|#",
             items: (trigger, query) => {
               this.filteredList = this.mentions(trigger, query);
 
@@ -269,10 +313,14 @@ export default class Editor extends LitElement {
                     contextElement: this.mentionEl,
                   };
 
-                  popper = createPopper(virtualElement, this.suggestionsEl, {
-                    strategy: "fixed",
-                    placement: "bottom-start",
-                  });
+                  popper = createPopper(
+                    virtualElement,
+                    this.mentionSuggestions,
+                    {
+                      strategy: "fixed",
+                      placement: "bottom-start",
+                    }
+                  );
 
                   popper.update();
 
@@ -289,7 +337,7 @@ export default class Editor extends LitElement {
                 },
                 onKeyDown: (props) => {
                   if (props.event.code === "Enter") {
-                    this.selectItem(this.activeIndex);
+                    this.selectEmojiItem(this.activeIndex);
                     this.showSuggestions = true;
                     this.requestUpdate();
                     setTimeout(() => {
@@ -325,11 +373,129 @@ export default class Editor extends LitElement {
             },
           },
         }),
+        Emoji.configure({
+          HTMLAttributes: {
+            class: "emoji",
+            part: "emoji",
+          },
+          suggestion: {
+            char: ":",
+            items: (trigger, query) => {
+              this.filteredEmojiList = formattedEmojiList
+                .filter((e) => e.id.includes(query))
+                .slice(0, 10);
+
+              this._showEmojiSuggestions = this.filteredEmojiList.length > 0;
+
+              return this.filteredEmojiList;
+            },
+            render: () => {
+              let virtualElement;
+              let popper;
+
+              return {
+                onStart: (props) => {
+                  this._emojiProps = props;
+                  this._showEmojiSuggestions = true;
+
+                  virtualElement = {
+                    getBoundingClientRect: () =>
+                      this.mentionEl.getBoundingClientRect(),
+                    contextElement: this.mentionEl,
+                  };
+
+                  popper = createPopper(virtualElement, this.emojiSuggestions, {
+                    strategy: "fixed",
+                    placement: "bottom-start",
+                  });
+
+                  popper.update();
+
+                  this.requestUpdate();
+                },
+                onUpdate: (props) => {
+                  this._emojiProps = props;
+                  virtualElement.getBoundingClientRect = () =>
+                    this.mentionEl.getBoundingClientRect();
+                  popper.update();
+                  this.requestUpdate();
+                },
+                onKeyDown: (props) => {
+                  if (props.event.code === "Enter") {
+                    this.selectEmojiItem(this.activeIndex);
+                    this._showEmojiSuggestions = true;
+                    this.requestUpdate();
+                    setTimeout(() => {
+                      this._showEmojiSuggestions = false;
+                      this.requestUpdate();
+                    });
+                    return true;
+                  }
+                  if (props.event.code === "ArrowUp") {
+                    this.activeIndex =
+                      (this.activeIndex + this.filteredEmojiList.length - 1) %
+                      this.filteredEmojiList.length;
+                    return true;
+                  }
+                  if (props.event.code === "ArrowDown") {
+                    this.activeIndex =
+                      (this.activeIndex + 1) % this.filteredEmojiList.length;
+                    return true;
+                  }
+
+                  virtualElement.getBoundingClientRect = () =>
+                    this.mentionEl.getBoundingClientRect();
+                  popper.update();
+                  this._showEmojiSuggestions = true;
+                  this.requestUpdate();
+                  return false;
+                },
+                onExit: (props) => {
+                  this._showEmojiSuggestions = false;
+                  this.requestUpdate();
+                },
+              };
+            },
+          },
+        }),
       ],
       onUpdate: (props) => {
         this._editorChange = true;
-        this.value = props.editor.getHTML();
+        const anchorPosition = props.editor.state.selection;
+
+        this.value = emoji.emojify(
+          props.editor.getHTML(),
+          null,
+          (code, name) => {
+            return `<span data-emoji class="emoji" part="emoji" data-id="${code}" data-id=":${name}:">${code}</span>`;
+          }
+        );
+
+        const mentionRegex = new RegExp(
+          `(?<!</?[^>]*|&[^;]*)(${this.filteredList.map(
+            (f) => `${f.trigger}${f.name}|`
+          )})`,
+          "g"
+        );
+
+        if (this.filteredList.length > 0) {
+          this.value = this.value.replace(mentionRegex, (val, args) => {
+            if (val.trim().length !== 0) {
+              const item = this.filteredList.find(
+                (f) => `${f.trigger}${f.name}` === val
+              );
+              return `<span data-mention class="mention" part="mention" data-id="${item.trigger}${item.name}" data-id="${item.id}"></span> `;
+            }
+            return val;
+          });
+        }
+
         this.json = props.editor.getJSON() as any;
+
+        props.editor.commands.setContent(this.value);
+
+        props.editor.commands.setTextSelection(anchorPosition.anchor);
+
         this.dispatchEvent(
           new CustomEvent("change", {
             bubbles: true,
@@ -351,6 +517,24 @@ export default class Editor extends LitElement {
         bubbles: true,
       })
     );
+
+    this.renderRoot.querySelector('emoji-picker')
+      .addEventListener('emoji-click', event => {
+        const anchorPosition = this._editorInstance.view.state.selection;
+
+        this._editorInstance
+        .chain()
+        .focus().insertContentAt(anchorPosition, {
+          type: "emoji",
+          attrs: {label: event.detail.unicode, id: event.detail.emoji.shortcodes[0], trigger: ':'}
+        },
+        {
+          type: "text",
+          text: " "
+        }).run();
+
+        this.requestUpdate();
+      });
   }
 
   shouldUpdate(changedProperties) {
@@ -385,13 +569,27 @@ export default class Editor extends LitElement {
 
   render() {
     return html` <div part="base">
-      <j-menu part="suggestions" ?open=${this.showSuggestions} id="test">
+      <j-menu part="mentionSuggestions" ?open=${this.showSuggestions} id="test">
         ${this.filteredList.map(
           (suggestion, index) =>
             html`<j-menu-item
               @click=${() => this.selectItem(index)}
               ?active=${index === this.activeIndex}
               >${suggestion.name}
+            </j-menu-item>`
+        )}
+      </j-menu>
+      <j-menu
+        part="emojiSuggestions"
+        ?open=${this._showEmojiSuggestions}
+        id="test"
+      >
+        ${this.filteredEmojiList.map(
+          (suggestion, index) =>
+            html`<j-menu-item
+              @click=${() => this.selectEmojiItem(index)}
+              ?active=${index === this.activeIndex}
+              >${suggestion.label}&nbsp;&nbsp;:${suggestion.id}:
             </j-menu-item>`
         )}
       </j-menu>
@@ -470,6 +668,19 @@ export default class Editor extends LitElement {
               </div>`
             : null}
           <div part="toolbar-standard">
+            <j-popover placement="top-start">
+              <j-button
+                size="sm"
+                slot="trigger"
+                id="emojipopoverbtn"
+                variant="subtle"                
+                >
+                <j-icon size="sm" name="emoji-smile"></j-icon>
+              </j-button>
+              <div slot="content">
+                <emoji-picker></emoji-picker>
+              </div>
+            </j-popover>
             <j-button
               ?active=${this.toolbar}
               variant="subtle"
