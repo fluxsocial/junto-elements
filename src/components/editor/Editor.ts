@@ -19,8 +19,8 @@ import OrderedList from "@tiptap/extension-ordered-list";
 import Placeholder from "@tiptap/extension-placeholder";
 import { Mention } from "./Mention";
 import { createPopper } from "@popperjs/core/lib/createPopper";
-import emoji from 'node-emoji';
-import emojiList from 'node-emoji/lib/emoji'
+import emoji from "node-emoji";
+import emojiList from "node-emoji/lib/emoji";
 import { Emoji } from "./Emoji";
 
 const styles = css`
@@ -210,11 +210,15 @@ export default class Editor extends LitElement {
   }
 
   get mentionSuggestions(): HTMLElement {
-    return this.renderRoot.querySelector("[part='mentionSuggestions']") as HTMLElement;
+    return this.renderRoot.querySelector(
+      "[part='mentionSuggestions']"
+    ) as HTMLElement;
   }
 
   get emojiSuggestions(): HTMLElement {
-    return this.renderRoot.querySelector("[part='emojiSuggestions']") as HTMLElement;
+    return this.renderRoot.querySelector(
+      "[part='emojiSuggestions']"
+    ) as HTMLElement;
   }
 
   get mentionEl(): HTMLElement {
@@ -242,7 +246,9 @@ export default class Editor extends LitElement {
   }
 
   firstUpdated() {
-    const formattedEmojiList = Object.entries(emojiList.emoji).map(([id, label]) => ({id, label: label as string }));
+    const formattedEmojiList = Object.entries(emojiList.emoji).map(
+      ([id, label]) => ({ id, label: label as string })
+    );
     const editorContainer = this.renderRoot.querySelector(
       "[part='editor-container']"
     );
@@ -296,10 +302,14 @@ export default class Editor extends LitElement {
                     contextElement: this.mentionEl,
                   };
 
-                  popper = createPopper(virtualElement, this.mentionSuggestions, {
-                    strategy: "fixed",
-                    placement: "bottom-start",
-                  });
+                  popper = createPopper(
+                    virtualElement,
+                    this.mentionSuggestions,
+                    {
+                      strategy: "fixed",
+                      placement: "bottom-start",
+                    }
+                  );
 
                   popper.update();
 
@@ -316,7 +326,7 @@ export default class Editor extends LitElement {
                 },
                 onKeyDown: (props) => {
                   if (props.event.code === "Enter") {
-                    this.selectItem(this.activeIndex);
+                    this.selectEmojiItem(this.activeIndex);
                     this.showSuggestions = true;
                     this.requestUpdate();
                     setTimeout(() => {
@@ -360,10 +370,11 @@ export default class Editor extends LitElement {
           suggestion: {
             char: ":",
             items: (trigger, query) => {
-              this.filteredEmojiList = formattedEmojiList.filter(e => e.id.includes(query)).slice(0, 10);
+              this.filteredEmojiList = formattedEmojiList
+                .filter((e) => e.id.includes(query))
+                .slice(0, 10);
 
               this._showMentionSuggestions = this.filteredEmojiList.length > 0;
-
 
               return this.filteredEmojiList;
             },
@@ -372,7 +383,7 @@ export default class Editor extends LitElement {
               let popper;
 
               return {
-                onStart: props => {
+                onStart: (props) => {
                   this._mentionProps = props;
                   this._showMentionSuggestions = true;
 
@@ -391,7 +402,7 @@ export default class Editor extends LitElement {
 
                   this.requestUpdate();
                 },
-                onUpdate: props => {
+                onUpdate: (props) => {
                   this._mentionProps = props;
                   virtualElement.getBoundingClientRect = () =>
                     this.mentionEl.getBoundingClientRect();
@@ -400,7 +411,7 @@ export default class Editor extends LitElement {
                 },
                 onKeyDown: (props) => {
                   if (props.event.code === "Enter") {
-                    this.selectItem(this.activeIndex);
+                    this.selectEmojiItem(this.activeIndex);
                     this._showMentionSuggestions = true;
                     this.requestUpdate();
                     setTimeout(() => {
@@ -428,31 +439,41 @@ export default class Editor extends LitElement {
                   this.requestUpdate();
                   return false;
                 },
-                onExit: props => {
+                onExit: (props) => {
                   this._showMentionSuggestions = false;
                   this.requestUpdate();
                 },
-              }
-            }
-          }
-        })
+              };
+            },
+          },
+        }),
       ],
       onUpdate: (props) => {
         this._editorChange = true;
         const anchorPosition = props.editor.state.selection;
-        
-        this.value = emoji.emojify(props.editor.getHTML(), null, (code, name) => {
-          return `<span data-emoji class="emoji" part="emoji" data-id="${code}" data-id=":${name}:">${code}</span>`
-        });
 
-        const mentionRegex = new RegExp(`(?<!</?[^>]*|&[^;]*)(${this.filteredList.map(f => `${f.trigger}${f.name}|`)})`, 'g');
+        this.value = emoji.emojify(
+          props.editor.getHTML(),
+          null,
+          (code, name) => {
+            return `<span data-emoji class="emoji" part="emoji" data-id="${code}" data-id=":${name}:">${code}</span>`;
+          }
+        );
 
-        if ( this.filteredList.length > 0) {
+        const mentionRegex = new RegExp(
+          `(?<!</?[^>]*|&[^;]*)(${this.filteredList.map(
+            (f) => `${f.trigger}${f.name}|`
+          )})`,
+          "g"
+        );
+
+        if (this.filteredList.length > 0) {
           this.value = this.value.replace(mentionRegex, (val, args) => {
             if (val.trim().length !== 0) {
-              const item = this.filteredList.find(f => `${f.trigger}${f.name}` === val);
-              return `<span data-mention class="mention" part="mention" data-id="${item.trigger}${item.name}" data-id="${item.id}"></span> `
-            
+              const item = this.filteredList.find(
+                (f) => `${f.trigger}${f.name}` === val
+              );
+              return `<span data-mention class="mention" part="mention" data-id="${item.trigger}${item.name}" data-id="${item.id}"></span> `;
             }
             return val;
           });
@@ -462,7 +483,7 @@ export default class Editor extends LitElement {
 
         props.editor.commands.setContent(this.value);
 
-        props.editor.commands.setTextSelection(anchorPosition.anchor)
+        props.editor.commands.setTextSelection(anchorPosition.anchor);
 
         this.dispatchEvent(
           new CustomEvent("change", {
@@ -529,7 +550,11 @@ export default class Editor extends LitElement {
             </j-menu-item>`
         )}
       </j-menu>
-      <j-menu part="emojiSuggestions" ?open=${this._showMentionSuggestions} id="test">
+      <j-menu
+        part="emojiSuggestions"
+        ?open=${this._showMentionSuggestions}
+        id="test"
+      >
         ${this.filteredEmojiList.map(
           (suggestion, index) =>
             html`<j-menu-item
