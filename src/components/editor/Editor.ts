@@ -22,6 +22,7 @@ import { createPopper } from "@popperjs/core/lib/createPopper";
 import emoji from "node-emoji";
 import emojiList from "node-emoji/lib/emoji";
 import { Emoji } from "./Emoji";
+import 'emoji-picker-element';
 
 const styles = css`
   :host {
@@ -37,6 +38,9 @@ const styles = css`
     border: 1px solid var(--j-editor-border-color);
     border-radius: var(--j-border-radius);
     padding: var(--j-space-500);
+  }
+  [part="toolbar-standard"] {
+    display: flex;
   }
 
   [part="editor-wrapper"] {
@@ -506,6 +510,24 @@ export default class Editor extends LitElement {
         bubbles: true,
       })
     );
+
+    this.renderRoot.querySelector('emoji-picker')
+      .addEventListener('emoji-click', event => {
+        const anchorPosition = this._editorInstance.view.state.selection;
+
+        this._editorInstance
+        .chain()
+        .focus().insertContentAt(anchorPosition, {
+          type: "emoji",
+          attrs: {label: event.detail.unicode, id: event.detail.emoji.shortcodes[0], trigger: ':'}
+        },
+        {
+          type: "text",
+          text: " "
+        }).run();
+
+        this.requestUpdate();
+      });
   }
 
   shouldUpdate(changedProperties) {
@@ -639,6 +661,19 @@ export default class Editor extends LitElement {
               </div>`
             : null}
           <div part="toolbar-standard">
+            <j-popover placement="top-start">
+              <j-button
+                size="sm"
+                slot="trigger"
+                id="emojipopoverbtn"
+                variant="subtle"                
+                >
+                <j-icon size="sm" name="emoji-smile"></j-icon>
+              </j-button>
+              <div slot="content">
+                <emoji-picker></emoji-picker>
+              </div>
+            </j-popover>
             <j-button
               ?active=${this.toolbar}
               variant="subtle"
