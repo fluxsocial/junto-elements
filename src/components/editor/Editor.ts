@@ -172,10 +172,10 @@ export default class Editor extends LitElement {
   _editorChange = false;
 
   @state()
-  _showSuggestions = false;
+  _showMentionSuggestions = false;
 
   @state()
-  _showMentionSuggestions = false;
+  _showEmojiSuggestions = false;
 
   @state()
   _activeIndex = 0;
@@ -189,13 +189,16 @@ export default class Editor extends LitElement {
   @state()
   _mentionProps = null;
 
+  @state()
+  _emojiProps = null;
+
   set showSuggestions(val) {
-    this._showSuggestions = val;
+    this._showMentionSuggestions = val;
 
     this.dispatchEvent(
       new CustomEvent("onsuggestionlist", {
         detail: {
-          showSuggestions: this._showSuggestions,
+          showSuggestions: this._showMentionSuggestions,
         },
         bubbles: true,
       })
@@ -205,7 +208,7 @@ export default class Editor extends LitElement {
   }
 
   get showSuggestions() {
-    return this._showSuggestions;
+    return this._showMentionSuggestions;
   }
 
   set activeIndex(val) {
@@ -246,7 +249,7 @@ export default class Editor extends LitElement {
   selectEmojiItem(index) {
     const item = this.filteredEmojiList[index];
     if (item) {
-      this._mentionProps.command({
+      this._emojiProps.command({
         id: item.id,
         label: `${item.label}`,
       });
@@ -382,7 +385,7 @@ export default class Editor extends LitElement {
                 .filter((e) => e.id.includes(query))
                 .slice(0, 10);
 
-              this._showMentionSuggestions = this.filteredEmojiList.length > 0;
+              this._showEmojiSuggestions = this.filteredEmojiList.length > 0;
 
               return this.filteredEmojiList;
             },
@@ -392,8 +395,8 @@ export default class Editor extends LitElement {
 
               return {
                 onStart: (props) => {
-                  this._mentionProps = props;
-                  this._showMentionSuggestions = true;
+                  this._emojiProps = props;
+                  this._showEmojiSuggestions = true;
 
                   virtualElement = {
                     getBoundingClientRect: () =>
@@ -411,7 +414,7 @@ export default class Editor extends LitElement {
                   this.requestUpdate();
                 },
                 onUpdate: (props) => {
-                  this._mentionProps = props;
+                  this._emojiProps = props;
                   virtualElement.getBoundingClientRect = () =>
                     this.mentionEl.getBoundingClientRect();
                   popper.update();
@@ -420,10 +423,10 @@ export default class Editor extends LitElement {
                 onKeyDown: (props) => {
                   if (props.event.code === "Enter") {
                     this.selectEmojiItem(this.activeIndex);
-                    this._showMentionSuggestions = true;
+                    this._showEmojiSuggestions = true;
                     this.requestUpdate();
                     setTimeout(() => {
-                      this._showMentionSuggestions = false;
+                      this._showEmojiSuggestions = false;
                       this.requestUpdate();
                     });
                     return true;
@@ -443,12 +446,12 @@ export default class Editor extends LitElement {
                   virtualElement.getBoundingClientRect = () =>
                     this.mentionEl.getBoundingClientRect();
                   popper.update();
-                  this._showMentionSuggestions = true;
+                  this._showEmojiSuggestions = true;
                   this.requestUpdate();
                   return false;
                 },
                 onExit: (props) => {
-                  this._showMentionSuggestions = false;
+                  this._showEmojiSuggestions = false;
                   this.requestUpdate();
                 },
               };
@@ -578,7 +581,7 @@ export default class Editor extends LitElement {
       </j-menu>
       <j-menu
         part="emojiSuggestions"
-        ?open=${this._showMentionSuggestions}
+        ?open=${this._showEmojiSuggestions}
         id="test"
       >
         ${this.filteredEmojiList.map(
