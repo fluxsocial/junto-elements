@@ -137,6 +137,10 @@ const styles = css`
     background: var(--j-color-primary-100);
     color: var(--j-color-primary-600);
   }
+  emoji-picker {
+    --background: var(--j-color-white);
+    --input-font-color: var(--j-color-ui-400);
+  }
 `;
 
 @customElement("j-editor")
