@@ -117,11 +117,10 @@ export default class Popover extends LitElement {
     }
 
     // Handle click outside
-    this.renderRoot.addEventListener("mousedown", (e) => {
-      const clickedTrigger = this.triggerAssignedNode.contains(
-        e.target as Node
-      );
-      const clickedInside = this.contentAssignedNode.contains(e.target as Node);
+    window.addEventListener("mousedown", (e) => {
+      const clickedTrigger = (e as any).path.includes(this.triggerAssignedNode);
+      const clickedInside = (e as any).path.includes(this.contentAssignedNode);
+
       if (!clickedInside && !clickedTrigger) {
         this.open = false;
       }
