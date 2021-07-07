@@ -336,6 +336,7 @@ export default class Editor extends LitElement {
                 },
                 onKeyDown: (props) => {
                   if (props.event.code === "Enter") {
+                    props.event.stopPropagation();
                     this.selectItem(this.activeIndex);
                     this.showSuggestions = true;
                     this.requestUpdate();
@@ -421,6 +422,7 @@ export default class Editor extends LitElement {
                 },
                 onKeyDown: (props) => {
                   if (props.event.code === "Enter") {
+                    props.event.stopPropagation();
                     this.selectEmojiItem(this.activeIndex);
                     this._showEmojiSuggestions = true;
                     this.requestUpdate();
