@@ -58,8 +58,8 @@ const styles = css`
     border-radius: 100%;
   }
   [name="message"]::slotted(pre) {
-    background: black;
-    color: white;
+    background: var(--j-color-black);
+    color: var(--j-color-white);
   }
 `;
 

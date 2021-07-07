@@ -13,7 +13,7 @@ const styles = css`
     cursor: pointer;
     z-index: 1;
     border: 0;
-    font-weight: 500;
+    font-weight: 600;
     font-size: var(--j-font-size-500);
     background: 0;
     padding: 0 var(--j-space-500);
