@@ -484,7 +484,7 @@ export default class Editor extends LitElement {
               const item = this.filteredList.find(
                 (f) => `${f.trigger}${f.name}` === val
               );
-              return `<span data-mention class="mention" part="mention" data-label="${item.trigger}${item.name}" data-id="${item.id}">${item.trigger}${item.name}</span> `;
+              return `<span data-mention class="mention" part="mention" data-label="${item.trigger}${item.name}" data-id="${item.id}">${item.trigger}${item.name}</span>`;
             }
             return val;
           });
