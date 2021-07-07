@@ -467,14 +467,14 @@ export default class Editor extends LitElement {
           props.editor.getHTML(),
           null,
           (code, name) => {
-            return `<span data-emoji class="emoji" part="emoji" data-id="${code}" data-id=":${name}:">${code}</span>`;
+            return `<span data-emoji class="emoji" part="emoji" data-label="${code}" data-id="${name}">${code}</span>`;
           }
         );
 
         const mentionRegex = new RegExp(
-          `(?<!</?[^>]*|&[^;]*)(${this.filteredList.map(
+          `(${this.filteredList.map(
             (f) => `${f.trigger}${f.name}|`
-          )})`,
+          )})(?![^<span]*>|[^<span>]*<\/)`,
           "g"
         );
 
@@ -484,7 +484,7 @@ export default class Editor extends LitElement {
               const item = this.filteredList.find(
                 (f) => `${f.trigger}${f.name}` === val
               );
-              return `<span data-mention class="mention" part="mention" data-id="${item.trigger}${item.name}" data-id="${item.id}"></span> `;
+              return `<span data-mention class="mention" part="mention" data-label="${item.trigger}${item.name}" data-id="${item.id}">${item.trigger}${item.name}</span> `;
             }
             return val;
           });
