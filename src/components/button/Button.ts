@@ -70,7 +70,7 @@ const styles = css`
   }
 
   :host([variant="primary"]:hover) {
-    --j-button-bg: var(--j-color-primary-500);
+    --j-button-bg: var(--j-color-primary-700);
     cursor: pointer;
   }
 
