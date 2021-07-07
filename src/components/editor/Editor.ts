@@ -22,7 +22,7 @@ import { createPopper } from "@popperjs/core/lib/createPopper";
 import emoji from "node-emoji";
 import emojiList from "node-emoji/lib/emoji";
 import { Emoji } from "./Emoji";
-import 'emoji-picker-element';
+import "emoji-picker-element";
 
 const styles = css`
   :host {
@@ -272,7 +272,6 @@ export default class Editor extends LitElement {
         Document,
         Text,
         Paragraph,
-
         Link,
         Bold,
         Strike,
@@ -337,7 +336,7 @@ export default class Editor extends LitElement {
                 },
                 onKeyDown: (props) => {
                   if (props.event.code === "Enter") {
-                    this.selectEmojiItem(this.activeIndex);
+                    this.selectItem(this.activeIndex);
                     this.showSuggestions = true;
                     this.requestUpdate();
                     setTimeout(() => {
@@ -518,20 +517,30 @@ export default class Editor extends LitElement {
       })
     );
 
-    this.renderRoot.querySelector('emoji-picker')
-      .addEventListener('emoji-click', event => {
+    this.renderRoot
+      .querySelector("emoji-picker")
+      .addEventListener("emoji-click", (event) => {
         const anchorPosition = this._editorInstance.view.state.selection;
 
         this._editorInstance
-        .chain()
-        .focus().insertContentAt(anchorPosition, {
-          type: "emoji",
-          attrs: {label: event.detail.unicode, id: event.detail.emoji.shortcodes[0], trigger: ':'}
-        },
-        {
-          type: "text",
-          text: " "
-        }).run();
+          .chain()
+          .focus()
+          .insertContentAt(
+            anchorPosition,
+            {
+              type: "emoji",
+              attrs: {
+                label: event.detail.unicode,
+                id: event.detail.emoji.shortcodes[0],
+                trigger: ":",
+              },
+            },
+            {
+              type: "text",
+              text: " ",
+            }
+          )
+          .run();
 
         this.requestUpdate();
       });
@@ -673,8 +682,8 @@ export default class Editor extends LitElement {
                 size="sm"
                 slot="trigger"
                 id="emojipopoverbtn"
-                variant="subtle"                
-                >
+                variant="subtle"
+              >
                 <j-icon size="sm" name="emoji-smile"></j-icon>
               </j-button>
               <div slot="content">
