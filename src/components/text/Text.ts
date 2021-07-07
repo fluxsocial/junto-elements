@@ -20,21 +20,21 @@ const styles = css`
   }
 
   :host([variant="heading"]) {
-    --j-text-color: var(--j-color-ui-700);
+    --j-text-color: var(--j-color-ui-800);
     --j-text-font-size: var(--j-font-size-800);
     --j-text-weight: 600;
     --j-text-margin-bottom: var(--j-space-400);
   }
 
   :host([variant="heading-sm"]) {
-    --j-text-color: var(--j-color-ui-700);
+    --j-text-color: var(--j-color-ui-800);
     --j-text-font-size: var(--j-font-size-700);
     --j-text-weight: 600;
     --j-text-margin-bottom: var(--j-space-300);
   }
 
   :host([variant="heading-lg"]) {
-    --j-text-color: var(--j-color-ui-700);
+    --j-text-color: var(--j-color-ui-800);
     --j-text-font-size: var(--j-font-size-900);
     --j-text-weight: 600;
     --j-text-margin-bottom: var(--j-space-600);
