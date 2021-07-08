@@ -226,7 +226,8 @@
   --j-color-black: hsl(var(--j-color-ui-hue), 0%, 0%);
 
   /* FOCUS COLORS */
-  --j-focus-color: var(--j-color-primary-500);
+  --j-color-focus: var(--j-color-primary-500);
+
   --j-focus-outline: 0px 0px 0px 4px var(--j-color-focus);
 
   /* FONT FAMILY */

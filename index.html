@@ -6,133 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link href="dist/main.css" rel="stylesheet" />
+    <link href="docs/styles.css" rel="stylesheet" />
     <script src="dist/main.js" type="module"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue@latest"></script>
-    <style>
-      body {
-        padding: 0;
-        margin: 0;
-      }
-      [theme="dark"] {
-        --j-left-nav-bg: var(--j-color-white);
-        --j-sidebar-bg: var(--j-color-ui-50);
-        --j-main-content-bg: var(--j-color-ui-white);
-      }
-      .tooltip {
-        z-index: 999;
-        border-radius: 4px;
-        padding: 4px;
-        background-color: var(--j-color-ui-700);
-        color: var(--j-color-white);
-      }
-      .layout {
-        background-color: var(--j-main-content-bg);
-        display: grid;
-        grid-template-columns: 260px 1fr;
-      }
-      .logo {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: var(--j-space-400);
-        padding-top: var(--j-space-600);
-        padding-left: var(--j-space-500);
-        padding-right: var(--j-space-400);
-        padding-bottom: var(--j-space-600);
-      }
-      .dark-mode {
-        position: fixed;
-        right: var(--j-space-500);
-        top: var(--j-space-500);
-      }
-      .nav {
-        display: flex;
-        flex-direction: column;
-        gap: var(--j-space-500);
-        padding-top: var(--j-space-600);
-      }
-      .main-content {
-        max-width: 900px;
-        margin: 0 auto;
-        scroll-behavior: smooth;
-      }
-      .settings {
-        height: 100px;
-      }
-      .sidebar {
-        background-color: var(--j-sidebar-bg);
-        position: sticky;
-        top: 0;
-        left: 0;
-        height: 100vh;
-        overflow-y: auto;
-        overscroll-behavior: contain;
-        border-right: 1px solid var(--j-color-ui-50);
-      }
-      [theme="dark"] .sidebar j-menu-item {
-        --j-menu-item-bg-hover: var(--j-color-ui-100);
-      }
-      .section {
-        padding: var(--j-space-800);
-        margin-bottom: var(--j-space-800);
-      }
-    </style>
   </head>
   <body>
-    <div id="app">
-      <main class="layout">
-        <aside class="sidebar">
-          <div class="logo">
-            <div>
-              <img
-                class="logo__img"
-                width="25"
-                src="https://junto.foundation/dist/junto-home-2.0__logo--rainbow.png?d9ff94e4e39bfd0536e60f760a9e6bd7"
-              />
-            </div>
-            <j-text nomargin class="logo_text" size="600"
-              >Junto Elements</j-text
-            >
-          </div>
+    <script type="module" src="docs/main.js"></script>
 
-          <nav id="navtarget" class="nav">
-            <j-menu-group-item
-              :title="key"
-              open
-              v-for="(group, key) in groupedSections"
-              :key="key"
-            >
-              <a
-                @click="activeSection = section.id"
-                style="text-decoration: none"
-                v-for="(section, index) in group"
-                :key="section.id"
-                :href="'#' + section.id"
-              >
-                <j-menu-item :selected="activeSection === section.id">
-                  {{section.title}}
-                </j-menu-item>
-              </a>
-            </j-menu-group-item>
-          </nav>
-        </aside>
-        <div class="main-content">
-          <div v-for="(group, key) in groupedSections" :key="key">
-            <section
-              v-for="(section, index) in group"
-              :key="section.id"
-              class="section"
-              :id="section.id"
-            >
-              <j-text variant="heading-sm">{{section.title}}</j-text>
-              <j-knobs :element="section.tagName" v-html="section.example">
-              </j-knobs>
-            </section>
-          </div>
-        </div>
-      </main>
-    </div>
-
+    <!--
     <script>
       const app = new Vue({
         el: "#app",
@@ -141,6 +21,24 @@
             darkMode: false,
             activeSection: "",
             sections: [
+              {
+                id: "variables",
+                title: "CSS Variables",
+                group: "getting started",
+                href: "#variables",
+                example: `
+                  <
+                `,
+              },
+              {
+                id: "text",
+                title: "Text",
+                tagName: "j-text",
+                group: "elements",
+                icon: "text-paragraph",
+                href: "#text",
+                example: `<j-text variant="heading">The quick brown fox jumped over the lazy dog</j-text>`,
+              },
               {
                 id: "text",
                 title: "Text",
@@ -464,5 +362,5 @@
 
       //const vm = app.mount("#app");
     </script>
-  </body>
+  --></body>
 </html>
