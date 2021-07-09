@@ -1,6 +1,7 @@
 import { html } from "https://unpkg.com/htm/preact/standalone.module.js";
 import els from "./elements.js";
 import variables from "./variables.js";
+import ThemeEditor from "./ThemeEditor.js";
 
 const elements = Object.values(els);
 
@@ -24,6 +25,9 @@ export default function App() {
             <a class="sidebar-link" href="#installation">
               <j-menu-item>Installation</j-menu-item>
             </a>
+            <a class="sidebar-link" href="#theming">
+              <j-menu-item>Theming</j-menu-item>
+            </a>
           </j-menu-group-item>
           <j-menu-group-item title="Variables">
             ${Object.keys(variables).map((name) => {
@@ -44,31 +48,44 @@ export default function App() {
         </nav>
       </aside>
       <div class="main-content">
-        <section class="section" id="installation">
-          <j-text variant="heading-lg">Installation</j-text>
-          <j-text variant="subheading">NPM</j-text>
-          <j-text>npm install --save @junto-foundation/junto-elements</j-text>
-          <j-text>import "@junto-foundation/junto-elements"</j-text>
-          <j-text>
-            import "@junto-foundation/junto-elements/dist/main.css"
-          </j-text>
+        <section class="section" id="gettingstarted">
+          <section class="section" id="installation">
+            <j-text variant="heading-lg">Installation</j-text>
+            <j-text variant="heading">NPM</j-text>
+            <j-text>npm install --save @junto-foundation/junto-elements</j-text>
+            <j-text>import "@junto-foundation/junto-elements"</j-text>
+            <j-text>
+              import "@junto-foundation/junto-elements/dist/main.css"
+            </j-text>
+          </section>
+          <section class="section" id="theming">
+            <j-text variant="heading-lg">Theming</j-text>
+            <${ThemeEditor} />
+          </section>
         </section>
-        ${Object.keys(variables).map((name) => {
-          const vars = variables[name];
 
-          return html`<section class="section" id=${name}>
-            <j-text variant="heading-lg">${name}</j-text>
-            ${vars.map((variable) => {
-              return html`<j-text variant="subheading">${variable.name}</j-text>
-                ${variable.render(variable)}`;
-            })}
-          </section>`;
-        })}
+        <section id="variables">
+          <j-text variant="heading-lg">Elements</j-text>
+          ${Object.keys(variables).map((name) => {
+            const vars = variables[name];
+
+            return html`<section class="section" id=${name}>
+              <j-text variant="heading">${name}</j-text>
+              ${vars.map((variable) => {
+                return html`<j-text variant="heading-sm"
+                    >${variable.name}</j-text
+                  >
+                  ${variable.render(variable)}`;
+              })}
+            </section>`;
+          })}
+        </section>
+
         <section id="elements">
           <j-text variant="heading-lg">Elements</j-text>
           ${elements.map((el) => {
             return html`<section class="section" id=${el.tag}>
-              <j-text variant="subheading">${el.name}</j-text>
+              <j-text variant="heading">${el.name}</j-text>
               <j-knobs element=${el.tag}><${el.component} /></j-text>
             </section>`;
           })}

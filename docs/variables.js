@@ -1,62 +1,6 @@
 import { html } from "https://unpkg.com/htm/preact/standalone.module.js";
 
 export default {
-  Depth: [
-    {
-      name: "",
-      values: [100, 200, 300, 400, 500, 600, 700, 800, 900],
-      render: ({ values }) => {
-        return html` <j-flex wrap gap="300" a="center">
-          ${values.map(
-            (value) => html`<j-tooltip
-              placement="top"
-              title=${`--j-depth-${value}`}
-            >
-              <div
-                class="depth-box"
-                style=${`box-shadow: var(--j-depth-${value})`}
-              ></div>
-            </j-tooltip>`
-          )}
-        </j-flex>`;
-      },
-    },
-  ],
-  Spacing: [
-    {
-      name: "",
-      values: [100, 200, 300, 400, 500, 600, 700, 800, 900],
-      render: ({ values }) => {
-        return html` <j-flex wrap gap="300" a="center">
-          ${values.map(
-            (value) => html`<j-tooltip
-              placement="top"
-              title=${`--j-space-${value}`}
-            >
-              <div
-                class="space-box"
-                style=${`padding: var(--j-space-${value})`}
-              >
-                <div class="space-box__inner"></div>
-              </div>
-            </j-tooltip>`
-          )}
-        </j-flex>`;
-      },
-    },
-  ],
-  Fonts: [
-    {
-      name: "",
-      sizes: [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
-      render: ({ sizes }) =>
-        sizes.map(
-          (size) => html`<j-tooltip title=${`--j-font-size-${size}`}>
-            <j-text tag="span" size=${size}>Font size ${size}</j-text>
-          </j-tooltip>`
-        ),
-    },
-  ],
   Colors: [
     {
       name: "Primary",
@@ -102,6 +46,71 @@ export default {
       name: "Focus",
       prefix: "focus",
       render: SingleColor,
+    },
+  ],
+  Spacing: [
+    {
+      name: "",
+      values: [100, 200, 300, 400, 500, 600, 700, 800, 900],
+      render: ({ values }) => {
+        return html` <j-flex wrap gap="300" a="center">
+          ${values.map(
+            (value) => html`<j-tooltip
+              placement="top"
+              title=${`--j-space-${value}`}
+            >
+              <div
+                class="space-box"
+                style=${`padding: var(--j-space-${value})`}
+              >
+                <div class="space-box__inner"></div>
+              </div>
+            </j-tooltip>`
+          )}
+        </j-flex>`;
+      },
+    },
+  ],
+  Typography: [
+    {
+      name: "Font family",
+      render: () =>
+        html`<j-box pb="500"
+          ><j-tooltip title=${`--j-font-family`}>
+            <j-text size="600">Avenir</j-text>
+          </j-tooltip>
+        </j-box>`,
+    },
+    {
+      name: "Sizes",
+      sizes: [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+      render: ({ sizes }) =>
+        sizes.map(
+          (size) => html`<j-tooltip title=${`--j-font-size-${size}`}>
+            <j-text tag="span" size=${size}>Font size ${size}</j-text>
+          </j-tooltip>`
+        ),
+    },
+  ],
+  Depth: [
+    {
+      name: "",
+      values: [100, 200, 300, 400, 500, 600, 700, 800, 900],
+      render: ({ values }) => {
+        return html` <j-flex wrap gap="300" a="center">
+          ${values.map(
+            (value) => html`<j-tooltip
+              placement="top"
+              title=${`--j-depth-${value}`}
+            >
+              <div
+                class="depth-box"
+                style=${`box-shadow: var(--j-depth-${value})`}
+              ></div>
+            </j-tooltip>`
+          )}
+        </j-flex>`;
+      },
     },
   ],
 };
