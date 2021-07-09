@@ -9,6 +9,7 @@ const styles = css`
     min-width: 200px;
     background: var(--j-color-white);
     border: 1px solid var(--j-border-color);
+    overflow: hidden;
   }
 `;
 

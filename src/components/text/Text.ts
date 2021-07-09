@@ -8,14 +8,20 @@ const styles = css`
     --j-text-weight: initial;
     --j-text-font-size: var(--j-font-size-500);
     --j-text-margin-bottom: 0;
+    --j-text-display: block;
   }
 
   :host > *:first-child {
     margin: 0;
+    display: var(--j-text-display);
     color: var(--j-text-color);
     font-weight: var(--j-text-weight);
     font-size: var(--j-text-font-size);
     margin-bottom: var(--j-text-margin-bottom);
+  }
+
+  :host([inline]) {
+    --j-text-display: inline-block;
   }
 
   :host([variant="heading"]) {
@@ -68,6 +74,7 @@ const styles = css`
   }
 
   :host([variant="label"]) {
+    --j-text-display: block;
     --j-text-color: var(--j-color-ui-700);
     --j-text-font-size: var(--j-font-size-500);
     --j-text-weight: 500;
@@ -110,6 +117,13 @@ export default class Text extends LitElement {
    * @attr
    */
   @property({ type: Boolean, reflect: true }) nomargin = false;
+
+  /**
+   * Inline block
+   * @type {Boolean}
+   * @attr
+   */
+  @property({ type: Boolean, reflect: true }) inline = false;
 
   /**
    * Color
