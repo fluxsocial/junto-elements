@@ -34,7 +34,7 @@ const styles = css`
     border: 1px solid var(--j-border-color-strong);
   }
   [part="input-wrapper"]:focus-within {
-    border: 1px solid var(--j-focus-color);
+    border: 1px solid var(--j-color-focus);
   }
   [part="input-field"] {
     border: 0;
