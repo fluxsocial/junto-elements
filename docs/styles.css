@@ -1,0 +1,92 @@
+body {
+  padding: 0;
+  margin: 0;
+}
+
+/* apply a natural box layout model to all elements, but allowing components to change */
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+.sidebar-link {
+  text-decoration: none;
+}
+
+.layout {
+  background-color: var(--j-main-content-bg);
+  display: grid;
+  grid-template-columns: 260px 1fr;
+}
+
+.logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--j-space-400);
+  padding-top: var(--j-space-600);
+  padding-left: var(--j-space-500);
+  padding-right: var(--j-space-400);
+  padding-bottom: var(--j-space-600);
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--j-space-500);
+  padding-top: var(--j-space-600);
+}
+
+.main-content {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  scroll-behavior: smooth;
+}
+
+.settings {
+  height: 100px;
+}
+
+.sidebar {
+  background-color: var(--j-sidebar-bg);
+  position: sticky;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border-right: 1px solid var(--j-color-ui-50);
+}
+
+.section {
+  padding-top: var(--j-space-500);
+  margin-top: var(--j-space-1000);
+}
+
+.color-box {
+  width: 50px;
+  height: 50px;
+  border-radius: var(--j-border-radius);
+  border: 1px solid var(--j-color-ui-100);
+}
+
+.depth-box {
+  width: 100px;
+  height: 50px;
+}
+
+.space-box {
+  background: var(--j-color-primary-500);
+  display: inline-block;
+}
+
+.space-box__inner {
+  width: 30px;
+  height: 30px;
+  background: var(--j-color-white);
+}

@@ -11,7 +11,6 @@ const styles = css`
   }
 
   :host > *:first-child {
-    display: block;
     margin: 0;
     color: var(--j-text-color);
     font-weight: var(--j-text-weight);

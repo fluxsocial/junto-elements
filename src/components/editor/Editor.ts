@@ -30,14 +30,11 @@ const styles = css`
     --j-editor-border-color: var(--j-border-color);
   }
   :host(:focus-within) {
-    --j-editor-border-color: var(--j-focus-color);
+    --j-editor-border-color: var(--j-color-focus);
   }
   [part="base"] {
     font-size: var(--j-font-size-500);
     width: 100%;
-    border: 1px solid var(--j-editor-border-color);
-    border-radius: var(--j-border-radius);
-    padding: var(--j-space-500);
   }
   [part="toolbar-standard"] {
     display: flex;
@@ -57,7 +54,6 @@ const styles = css`
   :host([toolbar]) [part="toolbar"] {
     flex: 1;
     width: 100%;
-    border-top: 1px solid var(--j-border-color);
     margin-top: var(--j-space-200);
     padding-top: var(--j-space-300);
   }
@@ -66,8 +62,12 @@ const styles = css`
     flex: 1;
     width: 100%;
     border: 1px solid var(--j-border-color);
-    border-radius: 5px;
+    border-radius: var(--j-border-radius);
     padding: 0.5rem 1rem;
+  }
+
+  [part="editor-container"]:focus-within {
+    border-color: var(--j-border-color-strong);
   }
 
   [part="toolbar"] {
@@ -269,7 +269,17 @@ export default class Editor extends LitElement {
       autofocus: this.autofocus,
       enableInputRules: false,
       extensions: [
-        Document,
+        Document.extend({
+          addKeyboardShortcuts: () => {
+            return {
+              Enter: () => {
+                this.handleSendClick();
+                // Prevents us from getting a new paragraph if user pressed Enter
+                return true;
+              },
+            };
+          },
+        }),
         Text,
         Paragraph,
         Link,
@@ -507,6 +517,7 @@ export default class Editor extends LitElement {
         );
       },
     });
+
     const editorEl = this.renderRoot.querySelector(".ProseMirror");
     editorEl.setAttribute("part", "editor");
 

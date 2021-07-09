@@ -11,6 +11,19 @@
     "cache": "~/.npm",
     "access": "public"
   },
+  "scripts": {
+    "prepare": "run-s build:*",
+    "release": "np --no-2fa --no-tests --tag=latest",
+    "release:beta": "np --no-2fa --no-tests --tag=beta",
+    "start": "run-p dev:*",
+    "build": "run-s build:*",
+    "dev": "run-p dev:*",
+    "dev:analyze": "web-component-analyzer src --outFile components.json",
+    "dev:docs": "live-server",
+    "dev:watch": "esbuild src/main.ts --watch --bundle --minify --sourcemap --outfile=dist/main.js --target=es2016",
+    "build:analyze": "web-component-analyzer src --outFile components.json",
+    "build:package": "esbuild src/main.ts --metafile=meta.json --bundle --minify --sourcemap --outfile=dist/main.js --target=es2016"
+  },
   "dependencies": {
     "@popperjs/core": "^2.9.2",
     "@tiptap/core": "^2.0.0-beta.66",
@@ -41,19 +54,6 @@
     "np": "^7.5.0",
     "npm-run-all": "^4.1.5",
     "web-component-analyzer": "^1.1.6"
-  },
-  "scripts": {
-    "prepare": "run-s build:*",
-    "release": "np --no-2fa --no-tests --tag=latest",
-    "release:beta": "np --no-2fa --no-tests --tag=beta",
-    "start": "run-p dev:*",
-    "build": "run-s build:*",
-    "dev": "run-p dev:*",
-    "dev:analyze": "web-component-analyzer src --outFile components.json",
-    "dev:docs": "live-server",
-    "dev:watch": "esbuild src/main.ts --watch --bundle --minify --sourcemap --outfile=dist/main.js --target=es2016",
-    "build:analyze": "web-component-analyzer src --outFile components.json",
-    "build:package": "esbuild src/main.ts --metafile=meta.json --bundle --minify --sourcemap --outfile=dist/main.js --target=es2016"
   },
   "keywords": [],
   "author": "",
