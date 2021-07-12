@@ -1,5 +1,5 @@
 import { html, css, LitElement } from "lit";
-import { property } from "lit/decorators";
+import { property, customElement } from "lit/decorators.js";
 import sharedStyles from "../../shared/styles";
 
 const styles = css`
@@ -20,6 +20,7 @@ const styles = css`
   }
 `;
 
+@customElement("j-component")
 export default class Component extends LitElement {
   static styles = [styles, sharedStyles];
 

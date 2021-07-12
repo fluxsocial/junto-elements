@@ -25,3 +25,4 @@ import "./components/badge";
 import "./components/spinner";
 import "./components/toast";
 import "./components/timestamp";
+import "./components/carousel";

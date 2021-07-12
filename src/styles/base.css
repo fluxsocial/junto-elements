@@ -261,18 +261,18 @@
 
   /* BORDERS  */
   --j-border-width: 1px;
-  --j-border-radius: 6px;
+  --j-border-radius: 4px;
   --j-border-color: var(--j-color-ui-100);
   --j-border-color-strong: var(--j-color-ui-200);
 
   /* SIZES */
-  --j-size-xxs: 20px;
-  --j-size-xs: 28px;
-  --j-size-sm: 36px;
-  --j-size-md: 42px;
-  --j-size-lg: 52px;
-  --j-size-xl: 58px;
-  --j-size-xxl: 64px;
+  --j-size-xxs: 1.25rem;
+  --j-size-xs: 1.75rem;
+  --j-size-sm: 2.25rem;
+  --j-size-md: 2.625rem;
+  --j-size-lg: 3.25rem;
+  --j-size-xl: 3.8rem;
+  --j-size-xxl: 4.2rem;
 
   /* DEPTH */
   --j-depth-none: none;
