@@ -3,7 +3,7 @@ import els from "./elements.js";
 import variables from "./variables.js";
 import ThemeEditor from "./ThemeEditor.js";
 
-const elements = Object.values(els);
+const elements = Object.values(els).sort((a, b) => (a.name > b.name ? 1 : -1));
 
 export default function App() {
   return html`<div id="app">
