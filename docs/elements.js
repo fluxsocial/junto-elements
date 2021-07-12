@@ -21,6 +21,7 @@ import Text from "../src/components/text/Text.docs.js";
 import Timestamp from "../src/components/timestamp/Timestamp.docs.js";
 import Toast from "../src/components/toast/Toast.docs.js";
 import Tooltip from "../src/components/tooltip/Tooltip.docs.js";
+import Carousel from "../src/components/carousel/Carousel.docs.js";
 
 export default {
   Avatar,
@@ -46,4 +47,5 @@ export default {
   Timestamp,
   Toast,
   Tooltip,
+  Carousel,
 };
