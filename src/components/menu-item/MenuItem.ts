@@ -4,6 +4,7 @@ import sharedStyles from "../../shared/styles";
 
 const styles = css`
   :host {
+    --j-menu-item-gap: var(--j-space-300);
     --j-menu-item-border-left: none;
     --j-menu-item-border-radius: none;
     --j-menu-item-height: var(--j-size-md);
@@ -28,13 +29,16 @@ const styles = css`
     --j-menu-item-color: var(--j-color-primary-600);
   }
   :host([size="sm"]) {
+    --j-menu-item-gap: var(--j-space-300);
     --j-menu-item-font-size: var(--j-font-size-400);
     --j-menu-item-height: var(--j-size-sm);
   }
   :host([size="lg"]) {
+    --j-menu-item-gap: var(--j-space-400);
     --j-menu-item-height: var(--j-size-lg);
   }
   :host([size="xl"]) {
+    --j-menu-item-gap: var(--j-space-500);
     --j-menu-item-height: var(--j-size-xl);
   }
   :host(:last-of-type) [part="base"] {
@@ -43,7 +47,7 @@ const styles = css`
   [part="base"] {
     display: flex;
     align-items: center;
-    gap: var(--j-space-300);
+    gap: var(--j-menu-item-gap);
     border-radius: var(--j-menu-item-border-radius);
     background: var(--j-menu-item-bg);
     text-decoration: none;
