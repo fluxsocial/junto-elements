@@ -88,6 +88,7 @@ const styles = css`
 
   [part="content"] {
     flex: 1;
+    overflow-y: auto;
   }
 
   [part="close-button"] {
