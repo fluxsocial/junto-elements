@@ -4,6 +4,7 @@ import sharedStyles from "../../shared/styles";
 
 const styles = css`
   :host {
+    --j-text-transform: normal;
     --j-text-color: var(--j-color-ui-800);
     --j-text-weight: initial;
     --j-text-font-size: var(--j-font-size-500);
@@ -13,6 +14,7 @@ const styles = css`
 
   :host > *:first-child {
     margin: 0;
+    text-transform: var(--j-text-transform);
     display: var(--j-text-display);
     color: var(--j-text-color);
     font-weight: var(--j-text-weight);
@@ -75,7 +77,7 @@ const styles = css`
 
   :host([variant="label"]) {
     --j-text-display: block;
-    --j-text-color: var(--j-color-ui-700);
+    --j-text-color: var(--j-color-ui-500);
     --j-text-font-size: var(--j-font-size-500);
     --j-text-weight: 500;
     --j-text-margin-bottom: var(--j-space-300);
