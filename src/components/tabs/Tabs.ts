@@ -5,45 +5,30 @@ import sharedStyles from "../../shared/styles";
 const styles = css`
   :host {
     --j-tabs-padding: 4px;
-    --j-tabs-height: var(--j-size-md);
-    --j-tabs-indicator-bg: var(--j-color-primary-50);
-    --j-tabs-indicator-width: 0px;
-    --j-tabs-indicator-left: 0px;
+    --j-tab-item-border-selected: 0px 4px 0px -2px var(--j-color-primary-500);
+    --j-tab-item-border-hover: 0px 4px 0px -2px var(--j-color-ui-100);
   }
-  :host {
-    position: relative;
+  :host([vertical]) [part="base"] {
+    flex-direction: column;
+    --j-tab-item-text-align: left;
+    --j-tab-item-border-selected: 2px 0px 0px 0px var(--j-color-primary-500);
+    --j-tab-item-border-hover: 2px 0px 0px 0px var(--j-color-ui-100);
+  }
+  :host([vertical]) ::slotted(*) {
+    width: 100%;
+  }
+  :host([full]) [part="base"] {
+    display: flex;
   }
   [part="base"] {
-    height: var(--j-tabs-height);
+    overflow-x: auto;
     display: inline-flex;
     align-items: center;
-    justify-content: space-around;
+    flex-wrap: wrap;
     gap: var(--j-space-200);
     background: var(--j-color-white);
     border-radius: var(--j-border-radius);
-    border: 1px solid var(--j-border-color);
     padding: 0 var(--j-tabs-padding);
-    position: relative;
-  }
-  [part="base"]:before {
-    display: block;
-    content: "";
-    z-index: 0;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    left: var(--j-tabs-indicator-left);
-    width: var(--j-tabs-indicator-width);
-    height: calc(100% - calc(var(--j-tabs-padding) * 2));
-    background: var(--j-tabs-indicator-bg);
-    border-radius: var(--j-border-radius);
-    transition: all 0.2s ease;
-  }
-  :host([size="sm"]) {
-    --j-tabs-height: var(--j-size-sm);
-  }
-  :host([size="lg"]) {
-    --j-tabs-height: var(--j-size-lg);
   }
 `;
 
@@ -60,12 +45,20 @@ export default class Menu extends LitElement {
   value = "";
 
   /**
-   * Size
-   * @type {""|"sm"|"lg"}
+   * Vertical
+   * @type {Boolean}
    * @attr
    */
-  @property({ type: String, reflect: true })
-  size = "";
+  @property({ type: Boolean, reflect: true })
+  vertical = false;
+
+  /**
+   * Full
+   * @type {Boolean}
+   * @attr
+   */
+  @property({ type: Boolean, reflect: true })
+  full = false;
 
   get optionElements() {
     return [...this.children];
@@ -91,13 +84,6 @@ export default class Menu extends LitElement {
       const isChecked = el.value === value;
       el.checked = isChecked;
       this.value = value;
-      if (isChecked) {
-        this.style.setProperty(
-          "--j-tabs-indicator-width",
-          el.offsetWidth + "px"
-        );
-        this.style.setProperty("--j-tabs-indicator-left", el.offsetLeft + "px");
-      }
     });
   }
 
