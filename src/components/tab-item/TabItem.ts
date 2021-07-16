@@ -13,6 +13,10 @@ const styles = css`
     --j-tab-item-height: var(--j-size-lg);
   }
   [part="base"] {
+    display: flex;
+    align-items: center;
+    gap: var(--j-space-400);
+    justify-content: space-between;
     white-space: nowrap;
     width: inherit;
     outline: 0;
@@ -34,6 +38,9 @@ const styles = css`
       0px 4px 0px -2px var(--j-color-ui-100)
     );
     color: var(--j-color-primary-500);
+  }
+  [part="content"] {
+    flex: 1;
   }
   :host([checked]) [part="base"] {
     color: var(--j-color-primary-500);
@@ -144,7 +151,11 @@ class TabItem extends LitElement {
         part="base"
         role="tab"
       >
-        <slot></slot>
+        <slot name="start"></slot>
+        <div part="content">
+          <slot></slot>
+        </div>
+        <slot name="start"></slot>
       </button>
     `;
   }
