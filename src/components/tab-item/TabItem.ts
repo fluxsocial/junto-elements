@@ -35,18 +35,18 @@ const styles = css`
   [part="base"]:hover {
     box-shadow: var(
       --j-tab-item-border-hover,
-      0px 4px 0px -2px var(--j-color-ui-100)
+      0px 4px 0px -2px var(--j-color-ui-700)
     );
-    color: var(--j-color-primary-500);
+    color: var(--j-color-ui-700);
   }
   [part="content"] {
     flex: 1;
   }
   :host([checked]) [part="base"] {
-    color: var(--j-color-primary-500);
+    color: var(--j-color-primary-600);
     box-shadow: var(
       --j-tab-item-border-selected,
-      0px 4px 0px -2px var(--j-color-primary-500)
+      0px 4px 0px -2px var(--j-color-primary-600)
     );
   }
   :host([variant="button"]) [part="base"] {
@@ -59,7 +59,7 @@ const styles = css`
     color: var(--j-color-ui-600);
   }
   :host([variant="button"][checked]) [part="base"] {
-    background: var(--j-color-primary-500);
+    background: var(--j-color-primary-600);
     color: var(--j-color-white);
   }
 `;

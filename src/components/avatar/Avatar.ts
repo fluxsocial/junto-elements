@@ -6,13 +6,12 @@ import sharedStyles from "../../shared/styles";
 
 const styles = css`
   :host {
+    display: contents;
     --j-avatar-size: var(--j-size-md);
     --j-avatar-box-shadow: none;
     --j-avatar-border: none;
     --j-avatar-color: var(--j-color-white);
     --j-avatar-bg: var(--j-color-ui-200);
-    display: inline-block;
-    position: relative;
   }
   :host([selected]) {
     --j-avatar-box-shadow: 0px 0px 0px 2px var(--j-color-primary-500);

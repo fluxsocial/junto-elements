@@ -66,7 +66,6 @@ const styles = css`
     transition: all 0.2s ease;
     opacity: 0;
     transform: scale(0.95);
-    padding: var(--j-space-800);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
