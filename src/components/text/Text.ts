@@ -26,6 +26,10 @@ const styles = css`
     --j-text-display: inline-block;
   }
 
+  :host([uppercase]) {
+    --j-text-transform: uppercase;
+  }
+
   :host([variant="heading"]) {
     --j-text-color: var(--j-color-ui-800);
     --j-text-font-size: var(--j-font-size-800);
@@ -126,6 +130,13 @@ export default class Text extends LitElement {
    * @attr
    */
   @property({ type: Boolean, reflect: true }) inline = false;
+
+  /**
+   * Uppercase
+   * @type {Boolean}
+   * @attr
+   */
+  @property({ type: Boolean, reflect: true }) uppercase = false;
 
   /**
    * Color

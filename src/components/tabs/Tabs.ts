@@ -6,13 +6,13 @@ const styles = css`
   :host {
     --j-tabs-padding: 4px;
     --j-tab-item-border-selected: 0px 4px 0px -2px var(--j-color-primary-500);
-    --j-tab-item-border-hover: 0px 4px 0px -2px var(--j-color-ui-100);
+    --j-tab-item-border-hover: 0px 4px 0px -2px var(--j-color-ui-200);
   }
   :host([vertical]) [part="base"] {
     flex-direction: column;
     --j-tab-item-text-align: left;
     --j-tab-item-border-selected: 2px 0px 0px 0px var(--j-color-primary-500);
-    --j-tab-item-border-hover: 2px 0px 0px 0px var(--j-color-ui-100);
+    --j-tab-item-border-hover: 2px 0px 0px 0px var(--j-color-ui-200);
   }
   :host([vertical]) ::slotted(*) {
     width: 100%;
