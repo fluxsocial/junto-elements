@@ -74,6 +74,7 @@ export default class Menu extends LitElement {
 
   shouldUpdate(changedProperties) {
     if (changedProperties.has("value")) {
+      this.selectTab(this.value);
       this.dispatchEvent(new CustomEvent("change", { bubbles: true }));
     }
     return true;
