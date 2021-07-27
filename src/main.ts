@@ -26,3 +26,4 @@ import "./components/spinner";
 import "./components/toast";
 import "./components/timestamp";
 import "./components/carousel";
+import "./components/toggle";

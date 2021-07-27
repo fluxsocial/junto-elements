@@ -3,7 +3,7 @@ import sharedStyles from "../../shared/styles";
 
 const styles = css`
   :host {
-    --j-checkbox-size: var(--j-size-md);
+    --j-toggle-size: var(--j-size-md);
   }
   input {
     position: absolute;
@@ -14,32 +14,47 @@ const styles = css`
   [part="base"] {
     cursor: pointer;
     display: flex;
-    height: var(--j-checkbox-size);
+    height: var(--j-toggle-size);
     align-items: center;
     gap: var(--j-space-400);
   }
-  [part="indicator"] {
+  [part="base"]:hover [part="toggle"] {
+    background: var(--j-color-ui-300);
+  }
+  [part="toggle"] {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: calc(var(--j-checkbox-size) * 0.6);
-    height: calc(var(--j-checkbox-size) * 0.6);
+    width: calc(var(--j-toggle-size) * 1);
+    height: calc(var(--j-toggle-size) * 0.6);
     border-radius: var(--j-border-radius);
-    background: var(--j-color-primary-50);
+    background: var(--j-color-ui-200);
     color: var(--j-color-white);
+    position: relative;
+    border-radius: 300px;
   }
-  [part="checkmark"] {
-    display: none;
+  :host([checked]) [part="toggle"] {
+    background: var(--j-color-primary-500);
   }
-  :host([checked]) [part="checkmark"] {
-    display: contents;
+  [part="indicator"] {
+    position: absolute;
+    transition: all 0.2s ease;
+    top: 50%;
+    transform: translateY(-50%) translateX(0px);
+    left: 5px;
+    display: inline-block;
+    border-radius: 50%;
+    background: var(--j-color-white);
+    width: calc(var(--j-toggle-size) * 0.4);
+    height: calc(var(--j-toggle-size) * 0.4);
   }
   :host([checked]) [part="indicator"] {
-    background: var(--j-color-primary-500);
+    left: calc(100% - 5px);
+    transform: translateY(-50%) translateX(-100%);
   }
 `;
 
-class Checkbox extends LitElement {
+class Toggle extends LitElement {
   constructor() {
     super();
     /**
@@ -105,10 +120,8 @@ class Checkbox extends LitElement {
           value=${this.value}
           type="checkbox"
         />
-        <span aria-hidden="true" part="indicator">
-          <slot part="checkmark" name="checkmark">
-            <j-icon name="check"></j-icon>
-          </slot>
+        <span aria-hidden="true" part="toggle">
+          <span part="indicator" name="indicator"></span>
         </span>
         <span part="label"><slot></slot></span>
       </label>
@@ -116,6 +129,6 @@ class Checkbox extends LitElement {
   }
 }
 
-customElements.define("j-checkbox", Checkbox);
+customElements.define("j-toggle", Toggle);
 
-export default Checkbox;
+export default Toggle;

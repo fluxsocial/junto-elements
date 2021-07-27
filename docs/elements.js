@@ -22,6 +22,7 @@ import Timestamp from "../src/components/timestamp/Timestamp.docs.js";
 import Toast from "../src/components/toast/Toast.docs.js";
 import Tooltip from "../src/components/tooltip/Tooltip.docs.js";
 import Carousel from "../src/components/carousel/Carousel.docs.js";
+import Toggle from "../src/components/toggle/Toggle.docs.js";
 
 export default {
   Avatar,
@@ -48,4 +49,5 @@ export default {
   Toast,
   Tooltip,
   Carousel,
+  Toggle,
 };
