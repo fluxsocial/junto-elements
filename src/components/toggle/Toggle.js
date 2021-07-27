@@ -5,6 +5,12 @@ const styles = css`
   :host {
     --j-toggle-size: var(--j-size-md);
   }
+  :host([size="sm"]) {
+    --j-toggle-size: var(--j-size-sm);
+  }
+  :host([size="lg"]) {
+    --j-toggle-size: var(--j-size-lg);
+  }
   input {
     position: absolute;
     clip: rect(1px 1px 1px 1px);
@@ -18,7 +24,11 @@ const styles = css`
     align-items: center;
     gap: var(--j-space-400);
   }
-  [part="base"]:hover [part="toggle"] {
+  :host([disabled]) [part="base"] {
+    opacity: 0.5;
+    cursor: default;
+  }
+  :host(:not([disabled])) [part="base"]:hover [part="toggle"] {
     background: var(--j-color-ui-300);
   }
   [part="toggle"] {
