@@ -28,7 +28,7 @@ const styles = css`
     opacity: 0.5;
     cursor: default;
   }
-  :host(:not([disabled])) [part="base"]:hover [part="toggle"] {
+  :host(:not([disabled]):not([checked])) [part="base"]:hover [part="toggle"] {
     background: var(--j-color-ui-300);
   }
   [part="toggle"] {
