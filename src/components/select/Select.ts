@@ -91,7 +91,7 @@ export default class Select extends LitElement {
   }
 
   get optionElements() {
-    return [...this.children].filter((child: any) => child.value);
+    return [...this.querySelectorAll("*")].filter((child: any) => child.value);
   }
 
   get selectedElement() {
