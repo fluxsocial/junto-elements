@@ -38,6 +38,7 @@ const styles = css`
   }
   [part="toolbar-standard"] {
     display: flex;
+    gap: var(--j-space-100);
   }
 
   [part="editor-wrapper"] {
