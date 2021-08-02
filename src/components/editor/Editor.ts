@@ -132,6 +132,10 @@ const styles = css`
     padding-left: var(--j-space-500);
   }
 
+  [part="editor"] a {
+    color: var(--j-color-primary-500);
+  }
+
   [part="mention"] {
     border-radius: var(--j-border-radius);
     padding: 2px var(--j-space-100);
