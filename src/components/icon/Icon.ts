@@ -61,7 +61,7 @@ export default class Icon extends LitElement {
   color = null;
 
   @state()
-  svg = null;
+  svg = "";
 
   firstUpdated() {
     this.fetchIcon();

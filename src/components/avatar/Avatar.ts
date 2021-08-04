@@ -137,7 +137,7 @@ export default class Component extends LitElement {
     }
 
     if (this.hash) {
-      return unsafeSVG(toSvg(this.hash, 100));
+      return unsafeSVG(toSvg(this.hash || "", 100));
     }
 
     if (this.initials) {
