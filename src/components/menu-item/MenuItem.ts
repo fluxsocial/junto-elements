@@ -88,10 +88,10 @@ export default class MenuItem extends LitElement {
   active = false;
 
   @state()
-  _value = "";
+  _value = null;
 
   @state()
-  _label = "";
+  _label = null;
 
   get label() {
     return this._label || this.getAttribute("label") || this.innerText;

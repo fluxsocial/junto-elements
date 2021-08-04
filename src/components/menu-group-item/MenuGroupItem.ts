@@ -92,7 +92,7 @@ export default class MenuItem extends LitElement {
    * @attr
    */
   @property({ type: String, reflect: true })
-  title = "";
+  title = null;
 
   collapsibleContent() {
     return html`<details

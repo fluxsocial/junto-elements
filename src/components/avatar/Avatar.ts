@@ -81,7 +81,7 @@ export default class Component extends LitElement {
    * @type {String}
    * @attr
    */
-  @property({ type: String, reflect: true }) src = "";
+  @property({ type: String, reflect: true }) src = null;
 
   /**
    * Hash
@@ -109,14 +109,14 @@ export default class Component extends LitElement {
    * @type {String}
    * @attr
    */
-  @property({ type: String, reflect: true }) initials = "";
+  @property({ type: String, reflect: true }) initials = null;
 
   /**
    * Sizes
    * @type {""|"xs"|"sm"|"lg"|"xl"}
    * @attr
    */
-  @property({ type: String, reflect: true }) size = "";
+  @property({ type: String, reflect: true }) size = null;
 
   firstUpdated() {
     const canvas = this.shadowRoot.querySelector("#identicon");

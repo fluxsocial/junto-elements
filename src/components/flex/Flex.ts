@@ -57,7 +57,7 @@ export default class Box extends LitElement {
    * @attr
    */
   @property({ type: String, reflect: true })
-  j = "";
+  j = null;
 
   /**
    * Align items
@@ -65,7 +65,7 @@ export default class Box extends LitElement {
    * @attr
    */
   @property({ type: String, reflect: true })
-  a = "";
+  a = null;
 
   /**
    * Wrap
@@ -81,7 +81,7 @@ export default class Box extends LitElement {
    * @attr
    */
   @property({ type: String, reflect: true })
-  gap = "";
+  gap = null;
 
   /**
    * Direction
@@ -89,7 +89,7 @@ export default class Box extends LitElement {
    * @attr
    */
   @property({ type: String, reflect: true })
-  direction = "";
+  direction = null;
 
   shouldUpdate(changedProperties) {
     if (changedProperties.has("gap")) {

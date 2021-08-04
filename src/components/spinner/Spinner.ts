@@ -67,7 +67,7 @@ export default class Component extends LitElement {
    * @type {""|"sm"|"lg"}
    * @attr
    */
-  @property({ type: String, reflect: true }) size = "";
+  @property({ type: String, reflect: true }) size = null;
 
   render() {
     return html`<div class="lds-ring">

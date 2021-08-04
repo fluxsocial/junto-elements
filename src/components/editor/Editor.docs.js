@@ -1,8 +1,14 @@
-import { html } from "https://unpkg.com/htm/preact/standalone.module.js";
+import { html } from "htm/preact";
 
 export default {
   name: "Editor",
   description: "Editor",
   tag: "j-editor",
-  component: () => html`<j-editor>Editor</j-editor>`,
+  component: ({ changeProp, ...props }) =>
+    html`<j-editor
+      onChange=${(e) => changeProp("value", e.target.value)}
+      ...${props}
+    >
+      Editor
+    </j-editor>`,
 };

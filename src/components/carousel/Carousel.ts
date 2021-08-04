@@ -59,6 +59,12 @@ export default class Component extends LitElement {
   static styles = [styles, sharedStyles];
 
   _timer = null;
+
+  /**
+   * Value
+   * @type {string}
+   * @attr
+   */
   _value = 0;
   _isScrolling = false;
 
@@ -68,15 +74,19 @@ export default class Component extends LitElement {
    * @attr
    */
   @property({ type: String, reflect: true })
-  gap = "";
+  gap = null;
 
   constructor() {
     super();
-    this.goTo = this.goTo.bind(this);
+    this.goToSlide = this.goToSlide.bind(this);
   }
 
   get nearestIndex() {
     return Math.round(this.carouselEl.scrollLeft / this.carouselEl.clientWidth);
+  }
+
+  goToSlide(index) {
+    this.value = index;
   }
 
   firstUpdated() {
@@ -126,10 +136,6 @@ export default class Component extends LitElement {
     return this.renderRoot.querySelector("[part='carousel']");
   }
 
-  goTo(index) {
-    this.value = index;
-  }
-
   render() {
     return html`<div part="base">
       <div part="carousel">
@@ -141,7 +147,7 @@ export default class Component extends LitElement {
             html`<button
               ?active=${this.value === i}
               data-index=${i}
-              @click=${() => this.goTo(i)}
+              @click=${() => this.goToSlide(i)}
               part="navigation-button"
             ></button>`
         )}

@@ -1,8 +1,8 @@
-import { html } from "https://unpkg.com/htm/preact/standalone.module.js";
+import { html } from "htm/preact";
 
 export default {
   name: "Flex",
   description: "Flex",
   tag: "j-flex",
-  component: () => html`<j-flex>Flex</j-flex>`,
+  component: (props) => html`<j-flex ...${props}>Flex</j-flex>`,
 };

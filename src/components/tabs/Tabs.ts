@@ -42,7 +42,7 @@ export default class Menu extends LitElement {
    * @attr
    */
   @property({ type: String, reflect: true })
-  value = "";
+  value = null;
 
   /**
    * Vertical

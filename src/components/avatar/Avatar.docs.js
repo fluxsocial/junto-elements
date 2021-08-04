@@ -1,8 +1,8 @@
-import { html } from "https://unpkg.com/htm/preact/standalone.module.js";
+import { html } from "htm/preact";
 
 export default {
   name: "Avatar",
   description: "Hello",
   tag: "j-avatar",
-  component: () => html`<j-avatar></j-avatar>`,
+  component: (props) => html`<j-avatar ...${props}></j-avatar>`,
 };

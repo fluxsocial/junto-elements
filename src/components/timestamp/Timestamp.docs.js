@@ -1,8 +1,10 @@
-import { html } from "https://unpkg.com/htm/preact/standalone.module.js";
+import { html } from "htm/preact";
 
 export default {
   name: "Timestamp",
   description: "",
   tag: "j-timestamp",
-  component: () => html`<j-timestamp value="12/12/2021"></j-timestamp>`,
+  component: ({ value = "2/1/22", ...props }) => {
+    return html`<j-timestamp ...${props} value=${value}></j-timestamp>`;
+  },
 };

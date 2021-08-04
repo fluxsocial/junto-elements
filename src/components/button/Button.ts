@@ -160,7 +160,7 @@ export default class Button extends LitElement {
    * @attr
    */
   @property({ type: String, reflect: true })
-  variant = "";
+  variant = null;
 
   /**
    * Sizes
@@ -168,7 +168,7 @@ export default class Button extends LitElement {
    * @attr
    */
   @property({ type: String, reflect: true })
-  size = "";
+  size = null;
 
   /**
    * Disabled

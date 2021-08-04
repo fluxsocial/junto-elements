@@ -69,14 +69,14 @@ const styles = css`
 class RadioButton extends LitElement {
   constructor() {
     super();
-    this.value = "";
-    this.name = "";
+    this.value = null;
+    this.name = null;
     /**
      * Sizes
      * @type {""|"sm"|"md"|"lg"}
      * @attr
      */
-    this.size = "";
+    this.size = null;
     this.full = false;
     this.disabled = false;
     this._checked = false;

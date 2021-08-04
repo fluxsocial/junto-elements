@@ -1,8 +1,8 @@
-import { html } from "https://unpkg.com/htm/preact/standalone.module.js";
+import { html } from "htm/preact";
 
 export default {
   name: "Badge",
   description: "Badge",
   tag: "j-badge",
-  component: () => html`<j-badge>Badge</j-badge>`,
+  component: (props) => html`<j-badge ...${props}>Badge</j-badge>`,
 };

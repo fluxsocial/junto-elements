@@ -73,7 +73,7 @@ export default class Button extends LitElement {
    * @attr
    */
   @property({ type: String, reflect: true })
-  timestamp = "";
+  timestamp = null;
 
   /**
    * Hide user

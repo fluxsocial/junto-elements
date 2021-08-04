@@ -27,7 +27,7 @@ const styles = css`
     border: none;
     text-align: var(--j-tab-item-text-align, center);
     height: var(--j-tab-item-height);
-    font-weight: 600;
+    font-weight: 500;
     font-size: var(--j-font-size-500);
     background: 0;
     padding: 0 var(--j-space-500);
@@ -52,15 +52,15 @@ const styles = css`
   :host([variant="button"]) [part="base"] {
     border-radius: var(--j-border-radius);
     box-shadow: none;
-    color: var(--j-color-ui-500);
+    color: var(--j-color-ui-600);
   }
   :host([variant="button"]) [part="base"]:hover {
     background: var(--j-color-ui-50);
-    color: var(--j-color-ui-600);
+    color: var(--j-color-ui-700);
   }
   :host([variant="button"][checked]) [part="base"] {
-    background: var(--j-color-primary-600);
-    color: var(--j-color-white);
+    background: var(--j-color-primary-100);
+    color: var(--j-color-primary-600);
   }
 `;
 
@@ -88,7 +88,7 @@ class TabItem extends LitElement {
    * @attr
    */
   @property({ type: Boolean, reflect: true })
-  size = "";
+  size = null;
 
   /**
    * Variant
@@ -96,13 +96,13 @@ class TabItem extends LitElement {
    * @attr
    */
   @property({ type: String, reflect: true })
-  variant = "";
+  variant = null;
 
   @state()
-  _label = "";
+  _label = null;
 
   @state()
-  _value = "";
+  _value = null;
 
   get label() {
     return (

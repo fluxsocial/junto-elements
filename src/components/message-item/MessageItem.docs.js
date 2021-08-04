@@ -1,10 +1,10 @@
-import { html } from "https://unpkg.com/htm/preact/standalone.module.js";
+import { html } from "htm/preact";
 
 export default {
   name: "Message item",
   description: "",
   tag: "j-message-item",
-  component: () => html`<j-message-item>
+  component: (props) => html`<j-message-item ...${props}>
     <j-avatar slot="avatar"></j-avatar>
     <j-text slot="username">Username</j-text>
     <j-text slot="message">Message</j-text>

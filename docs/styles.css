@@ -13,6 +13,40 @@ html {
   box-sizing: inherit;
 }
 
+.hljs {
+  display: inline-block !important;
+  max-width: 100%;
+  padding: var(--j-space-500) !important;
+  border-radius: var(--j-border-radius);
+}
+
+.table {
+  width: 100%;
+  box-shadow: var(--j-depth-100);
+  border-collapse: collapse;
+  border-radius: var(--j-border-radius);
+  padding: 0px;
+  margin: 0px;
+  margin-top: var(--j-space-800);
+  border: 0px;
+  text-align: left;
+}
+
+.table tr:not(:last-of-type) td,
+.table th {
+  border-bottom: 1px solid var(--j-color-ui-100);
+}
+
+.tabe th {
+  font-weight: 600;
+}
+
+.table td,
+.table th {
+  padding: var(--j-space-500);
+  width: 150px;
+}
+
 .sidebar-link {
   text-decoration: none;
 }

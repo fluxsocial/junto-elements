@@ -24,7 +24,7 @@ const styles = css`
 export default class Component extends LitElement {
   static styles = [styles, sharedStyles];
 
-  @property({ type: String, reflect: true }) variant = "";
+  @property({ type: String, reflect: true }) variant = null;
 
   render() {
     return html`<div><slot></slot></div>`;

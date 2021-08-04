@@ -137,7 +137,7 @@ export default class Menu extends LitElement {
    * @attr
    */
   @property({ type: String, reflect: true })
-  size = "";
+  size = null;
 
   /**
    * Open

@@ -74,8 +74,8 @@ const styles = css`
 class Input extends LitElement {
   constructor() {
     super();
-    this.value = "";
-    this._initialValue = "";
+    this.value = null;
+    this._initialValue = null;
     this.max = null;
     this.min = null;
     this.maxlength = null;

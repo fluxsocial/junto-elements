@@ -42,7 +42,7 @@ export default class Icon extends LitElement {
    * @attr
    */
   @property({ type: String, reflect: true })
-  name = "";
+  name = null;
 
   /**
    * Size
@@ -50,7 +50,7 @@ export default class Icon extends LitElement {
    * @attr
    */
   @property({ type: String, reflect: true })
-  size = "";
+  size = null;
 
   /**
    * Color
@@ -58,10 +58,10 @@ export default class Icon extends LitElement {
    * @attr
    */
   @property({ type: String, reflect: true })
-  color = "";
+  color = null;
 
   @state()
-  svg = "";
+  svg = null;
 
   firstUpdated() {
     this.fetchIcon();

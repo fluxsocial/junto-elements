@@ -89,7 +89,7 @@ export default class Tooltip extends LitElement {
    * @attr
    */
   @property({ type: String, reflect: true })
-  title = "";
+  title = null;
 
   /**
    * Placement

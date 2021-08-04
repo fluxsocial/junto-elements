@@ -67,7 +67,7 @@ export default class Component extends LitElement {
    * @type {""|"success"|"danger"|"warning"}
    * @attr
    */
-  @property({ type: String, reflect: true }) variant = "";
+  @property({ type: String, reflect: true }) variant = null;
 
   /**
    * Open

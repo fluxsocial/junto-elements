@@ -90,21 +90,21 @@ class Toggle extends LitElement {
      * @type {""|"sm"|"lg"}
      * @attr
      */
-    this.size = "";
+    this.size = null;
     /**
      * Value
      * @type {String}
      * @attr
      */
-    this.value = "";
+    this.value = null;
     this._handleChange = this._handleChange.bind(this);
   }
 
   static get properties() {
     return {
       checked: { type: Boolean, reflect: true },
-      disabled: { type: Boolean },
-      full: { type: Boolean },
+      disabled: { type: Boolean, reflect: true },
+      full: { type: Boolean, reflect: true },
       size: { type: String, reflect: true },
       value: { type: String },
     };
@@ -117,7 +117,7 @@ class Toggle extends LitElement {
   _handleChange(e) {
     e.stopPropagation();
     this.checked = e.target.checked;
-    this.dispatchEvent(new CustomEvent("change", e));
+    this.dispatchEvent(new CustomEvent("change"));
   }
 
   render() {
@@ -126,7 +126,7 @@ class Toggle extends LitElement {
         <input
           ?disabled=${this.disabled}
           @change=${this._handleChange}
-          ?checked=${this.checked}
+          .checked=${this.checked}
           value=${this.value}
           type="checkbox"
         />

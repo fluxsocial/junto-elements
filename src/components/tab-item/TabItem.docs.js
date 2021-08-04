@@ -1,8 +1,8 @@
-import { html } from "https://unpkg.com/htm/preact/standalone.module.js";
+import { html } from "htm/preact";
 
 export default {
   name: "Tab Item",
   description: "",
   tag: "j-tab-item",
-  component: () => html`<j-tab-item>Tab item</j-tab-item>`,
+  component: (props) => html`<j-tab-item ...${props}>Tab item</j-tab-item>`,
 };

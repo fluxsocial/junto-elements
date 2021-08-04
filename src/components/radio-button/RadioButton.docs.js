@@ -1,8 +1,9 @@
-import { html } from "https://unpkg.com/htm/preact/standalone.module.js";
+import { html } from "htm/preact";
 
 export default {
   name: "Radio button",
   description: "",
   tag: "j-radio-button",
-  component: () => html`<j-radio-button>Radio button</j-radio-button>`,
+  component: (props) =>
+    html`<j-radio-button ...${props}>Radio button</j-radio-button>`,
 };

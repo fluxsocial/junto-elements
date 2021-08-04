@@ -153,7 +153,7 @@ export default class Editor extends LitElement {
   static styles = [sharedStyles, styles];
 
   @property({ type: String })
-  value = "";
+  value = null;
 
   @property({ type: Boolean })
   autofocus = false;
@@ -168,7 +168,7 @@ export default class Editor extends LitElement {
   mentions = (trigger, query) => [];
 
   @property({ type: String })
-  placeholder = "";
+  placeholder = null;
 
   @state()
   _editorInstance = null;

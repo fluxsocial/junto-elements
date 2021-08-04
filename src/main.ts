@@ -1,7 +1,6 @@
 import "./styles/base.css";
 
 import "./components/button";
-import "./components/knobs";
 import "./components/text";
 import "./components/box";
 import "./components/popover";
