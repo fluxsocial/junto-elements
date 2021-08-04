@@ -123,14 +123,12 @@ export default function Element({ el, meta }) {
         htmlWhitespaceSensitivity: "ignore",
       });
       const newAst = lowlight.highlight("xml", pret);
-      console.log(newAst);
       setAst(newAst);
     }
   }, [props]);
 
   function handlePropChange(name, value) {
-    if (value === "") {
-      console.log("whaat");
+    if (value === "" || value === null) {
       let newProps = { ...props };
       delete newProps[name];
       setProps(newProps);
