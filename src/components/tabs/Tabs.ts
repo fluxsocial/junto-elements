@@ -26,7 +26,6 @@ const styles = css`
     align-items: center;
     flex-wrap: wrap;
     gap: var(--j-space-200);
-    background: var(--j-color-white);
     border-radius: var(--j-border-radius);
     padding: 0 var(--j-tabs-padding);
   }
