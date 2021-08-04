@@ -101,7 +101,7 @@ export default class Text extends LitElement {
    * @type {""|"100"|"200"|"300"|"400"|"500"|"600"|"700"|"800"|"900"|"1000"}
    * @attr
    */
-  @property({ type: String, reflect: true }) size = "";
+  @property({ type: String, reflect: true }) size = null;
 
   /**
    * Variants
@@ -115,7 +115,7 @@ export default class Text extends LitElement {
    * @type {""|"h1"|"h2"|"h3"|"h4"|"h5"|"h6"|"p"|"small"|"b"|"span"|"div"}
    * @attr
    */
-  @property({ type: String, reflect: true }) tag = "";
+  @property({ type: String, reflect: true }) tag = null;
 
   /**
    * No margin
@@ -143,14 +143,14 @@ export default class Text extends LitElement {
    * @type {String}
    * @attr
    */
-  @property({ type: String, reflect: true }) color = "";
+  @property({ type: String, reflect: true }) color = null;
 
   /**
    * Weight
    * @type {String}
    * @attr
    */
-  @property({ type: String, reflect: true }) weight = "";
+  @property({ type: String, reflect: true }) weight = null;
 
   shouldUpdate(changedProperties) {
     if (changedProperties.has("size")) {

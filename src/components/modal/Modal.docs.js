@@ -1,23 +1,13 @@
-import {
-  html,
-  Component,
-  useState,
-} from "https://unpkg.com/htm/preact/standalone.module.js";
+import { html, Component, useState } from "htm/preact";
 
 export default {
   name: "Modal",
   description: "",
   tag: "j-modal",
-  component: () => {
-    const [open, setOpen] = useState(false);
-
+  component: ({ changeProp, ...props }) => {
     return html`
-      <j-button onClick=${() => setOpen(true)}>Toggle </j-button>
-      <j-modal
-        open=${open}
-        onToggle=${(e) => setOpen(e.target.open)}
-        id="modalexample"
-      >
+      <j-button onClick=${() => changeProp("open", true)}>Toggle </j-button>
+      <j-modal ...${props} onToggle=${(e) => changeProp("open", e.target.open)}>
         <header slot="header">
           <j-text variant="heading">Create something</j-text>
           <j-text variant="ingress">

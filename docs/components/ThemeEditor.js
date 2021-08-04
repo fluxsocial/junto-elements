@@ -1,8 +1,4 @@
-import {
-  html,
-  useEffect,
-  useState,
-} from "https://unpkg.com/htm/preact/standalone.module.js";
+import { html, useEffect, useState } from "htm/preact";
 
 function getPropValue(name) {
   return window

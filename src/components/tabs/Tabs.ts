@@ -26,7 +26,6 @@ const styles = css`
     align-items: center;
     flex-wrap: wrap;
     gap: var(--j-space-200);
-    background: var(--j-color-white);
     border-radius: var(--j-border-radius);
     padding: 0 var(--j-tabs-padding);
   }
@@ -42,7 +41,7 @@ export default class Menu extends LitElement {
    * @attr
    */
   @property({ type: String, reflect: true })
-  value = "";
+  value = null;
 
   /**
    * Vertical
@@ -74,6 +73,7 @@ export default class Menu extends LitElement {
 
   shouldUpdate(changedProperties) {
     if (changedProperties.has("value")) {
+      this.selectTab(this.value);
       this.dispatchEvent(new CustomEvent("change", { bubbles: true }));
     }
     return true;

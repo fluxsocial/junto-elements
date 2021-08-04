@@ -1,8 +1,8 @@
-import { html } from "https://unpkg.com/htm/preact/standalone.module.js";
+import { html } from "htm/preact";
 
 export default {
   name: "Spinner",
   description: "",
   tag: "j-spinner",
-  component: () => html`<j-spinner></j-spinner>`,
+  component: (props) => html`<j-spinner ...${props}></j-spinner>`,
 };

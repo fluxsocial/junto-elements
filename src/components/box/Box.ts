@@ -47,7 +47,7 @@ export default class Box extends LitElement {
    * @attr
    */
   @property({ type: String, reflect: true })
-  p = "";
+  p = null;
 
   /**
    * Padding left
@@ -55,7 +55,7 @@ export default class Box extends LitElement {
    * @attr
    */
   @property({ type: String, reflect: true })
-  pl = "";
+  pl = null;
 
   /**
    * Padding right
@@ -63,7 +63,7 @@ export default class Box extends LitElement {
    * @attr
    */
   @property({ type: String, reflect: true })
-  pr = "";
+  pr = null;
 
   /**
    * Padding top
@@ -71,7 +71,7 @@ export default class Box extends LitElement {
    * @attr
    */
   @property({ type: String, reflect: true })
-  pt = "";
+  pt = null;
 
   /**
    * Padding bottom
@@ -79,7 +79,7 @@ export default class Box extends LitElement {
    * @attr
    */
   @property({ type: String, reflect: true })
-  pb = "";
+  pb = null;
 
   /**
    * Padding horistonal
@@ -87,7 +87,7 @@ export default class Box extends LitElement {
    * @attr
    */
   @property({ type: String, reflect: true })
-  px = "";
+  px = null;
 
   /**
    * Padding vertical
@@ -95,7 +95,7 @@ export default class Box extends LitElement {
    * @attr
    */
   @property({ type: String, reflect: true })
-  py = "";
+  py = null;
 
   /**
    * Margin
@@ -103,7 +103,7 @@ export default class Box extends LitElement {
    * @attr
    */
   @property({ type: String, reflect: true })
-  m = "";
+  m = null;
 
   /**
    * Margin left
@@ -111,7 +111,7 @@ export default class Box extends LitElement {
    * @attr
    */
   @property({ type: String, reflect: true })
-  ml = "";
+  ml = null;
 
   /**
    * Margin right
@@ -119,7 +119,7 @@ export default class Box extends LitElement {
    * @attr
    */
   @property({ type: String, reflect: true })
-  mr = "";
+  mr = null;
 
   /**
    * Margin top
@@ -127,7 +127,7 @@ export default class Box extends LitElement {
    * @attr
    */
   @property({ type: String, reflect: true })
-  mt = "";
+  mt = null;
 
   /**
    * Margin bottom
@@ -135,7 +135,7 @@ export default class Box extends LitElement {
    * @attr
    */
   @property({ type: String, reflect: true })
-  mb = "";
+  mb = null;
 
   /**
    * Margin horistonal
@@ -143,7 +143,7 @@ export default class Box extends LitElement {
    * @attr
    */
   @property({ type: String, reflect: true })
-  mx = "";
+  mx = null;
 
   /**
    * Margin vertical
@@ -151,7 +151,7 @@ export default class Box extends LitElement {
    * @attr
    */
   @property({ type: String, reflect: true })
-  my = "";
+  my = null;
 
   /**
    * Background color
@@ -159,7 +159,7 @@ export default class Box extends LitElement {
    * @attr
    */
   @property({ type: String, reflect: true })
-  bg = "";
+  bg = null;
 
   shouldUpdate(changedProperties) {
     if (changedProperties.has("bg")) {

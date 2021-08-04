@@ -1,10 +1,11 @@
-import { html } from "https://unpkg.com/htm/preact/standalone.module.js";
+import { html } from "htm/preact";
 
 export default {
   name: "Tooltip",
   description: "",
   tag: "j-tooltip",
-  component: () => html`<j-tooltip title="Hello">
-    <j-button>Hover over me</j-button>
-  </j-tooltip>`,
+  component: ({ title = "Hello", ...props }) =>
+    html`<j-tooltip ...${props} title=${title}>
+      <j-button>Hover over me</j-button>
+    </j-tooltip>`,
 };

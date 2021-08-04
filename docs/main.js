@@ -1,4 +1,4 @@
-import { render } from "https://unpkg.com/htm/preact/standalone.module.js";
+import { render, html } from "htm/preact";
 import App from "./App.js";
 
-render(App(), document.body);
+render(html`<${App} />`, document.body);

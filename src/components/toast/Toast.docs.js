@@ -1,8 +1,8 @@
-import { html } from "https://unpkg.com/htm/preact/standalone.module.js";
+import { html } from "htm/preact";
 
 export default {
   name: "Toast",
   description: "",
   tag: "j-toast",
-  component: () => html`<j-toast>Toast content</j-toast>`,
+  component: (props) => html`<j-toast ...${props}>Toast content</j-toast>`,
 };

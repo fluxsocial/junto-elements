@@ -38,6 +38,7 @@ const styles = css`
   }
   [part="toolbar-standard"] {
     display: flex;
+    gap: var(--j-space-100);
   }
 
   [part="editor-wrapper"] {
@@ -131,6 +132,10 @@ const styles = css`
     padding-left: var(--j-space-500);
   }
 
+  [part="editor"] a {
+    color: var(--j-color-primary-500);
+  }
+
   [part="mention"] {
     border-radius: var(--j-border-radius);
     padding: 2px var(--j-space-100);
@@ -148,7 +153,7 @@ export default class Editor extends LitElement {
   static styles = [sharedStyles, styles];
 
   @property({ type: String })
-  value = "";
+  value = null;
 
   @property({ type: Boolean })
   autofocus = false;
@@ -163,7 +168,7 @@ export default class Editor extends LitElement {
   mentions = (trigger, query) => [];
 
   @property({ type: String })
-  placeholder = "";
+  placeholder = null;
 
   @state()
   _editorInstance = null;

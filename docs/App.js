@@ -1,11 +1,23 @@
-import { html } from "https://unpkg.com/htm/preact/standalone.module.js";
+import { html, useEffect, useState } from "htm/preact";
 import els from "./elements.js";
 import variables from "./variables.js";
-import ThemeEditor from "./ThemeEditor.js";
+import ThemeEditor from "./components/ThemeEditor.js";
+import Element from "./components/Element.js";
 
 const elements = Object.values(els).sort((a, b) => (a.name > b.name ? 1 : -1));
 
 export default function App() {
+  const [tags, setTags] = useState([]);
+
+  useEffect(() => {
+    async function fetchComponentProps() {
+      const res = await fetch("/components.json");
+      const json = await res.json();
+      setTags(json.tags);
+    }
+    fetchComponentProps();
+  }, []);
+
   return html`<div id="app">
     <main class="layout">
       <aside class="sidebar">
@@ -84,10 +96,8 @@ export default function App() {
         <section id="elements">
           <j-text variant="heading-lg">Elements</j-text>
           ${elements.map((el) => {
-            return html`<section class="section" id=${el.tag}>
-              <j-text variant="heading">${el.name}</j-text>
-              <j-knobs element=${el.tag}><${el.component} /></j-text>
-            </section>`;
+            const meta = tags.find((t) => el.tag === t.name);
+            return html`<${Element} meta=${meta} el=${el} />`;
           })}
         </section>
       </div>

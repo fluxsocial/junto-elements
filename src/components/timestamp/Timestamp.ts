@@ -3,21 +3,16 @@ import { customElement, property } from "lit/decorators.js";
 import sharedStyles from "../../shared/styles";
 import { getRelativeTime } from "../../utils/relativeTime";
 
-const styles = css`
-  :host {
-  }
-`;
-
 @customElement("j-timestamp")
 export default class Component extends LitElement {
-  static styles = [sharedStyles, styles];
+  static styles = [sharedStyles];
 
   /**
    * Value
    * @type {String}
    * @attr
    */
-  @property({ type: String, reflect: true }) value = "";
+  @property({ type: String, reflect: true }) value = "01/01/1970";
 
   /**
    * Locales
@@ -38,91 +33,91 @@ export default class Component extends LitElement {
    * @type {""|"full"|"long"|"medium"|"short"}
    * @attr
    */
-  @property({ type: String, reflect: true }) dateStyle = "";
+  @property({ type: String, reflect: true }) dateStyle = null;
 
   /**
    * Timestyle
    * @type {""|"full"|"long"|"medium"|"short"}
    * @attr
    */
-  @property({ type: String, reflect: true }) timeStyle = "";
+  @property({ type: String, reflect: true }) timeStyle = null;
 
   /**
    * Day period
    * @type {""|"narrow"|"short"|"long"}
    * @attr
    */
-  @property({ type: String, reflect: true }) dayPeriod = "";
+  @property({ type: String, reflect: true }) dayPeriod = null;
 
   /**
    * Hour cycle
    * @type {""|"h11"|"h12"|"h23"|"h24"}
    * @attr
    */
-  @property({ type: String, reflect: true }) hourCycle = "";
+  @property({ type: String, reflect: true }) hourCycle = null;
 
   /**
    * Timezone
    * @type {String}
    * @attr
    */
-  @property({ type: String, reflect: true }) timeZone = "";
+  @property({ type: String, reflect: true }) timeZone = null;
 
   /**
    * Weekday
    * @type {""|"long"|"short"|"narrow"}
    * @attr
    */
-  @property({ type: String, reflect: true }) weekday = "";
+  @property({ type: String, reflect: true }) weekday = null;
 
   /**
    * Era
    * @type {""|"long"|"short"|"narrow"}
    * @attr
    */
-  @property({ type: String, reflect: true }) era = "";
+  @property({ type: String, reflect: true }) era = null;
 
   /**
    * Year
    * @type {""|"numeric"|"2-digit"}
    * @attr
    */
-  @property({ type: String, reflect: true }) year = "";
+  @property({ type: String, reflect: true }) year = null;
 
   /**
    * Month
    * @type {""|"numeric"|"2-digit"|"long"|"short"|"narrow"}
    * @attr
    */
-  @property({ type: String, reflect: true }) month = "";
+  @property({ type: String, reflect: true }) month = null;
 
   /**
    * Day
    * @type {""|"numeric"|"2-digit"}
    * @attr
    */
-  @property({ type: String, reflect: true }) day = "";
+  @property({ type: String, reflect: true }) day = null;
 
   /**
    * Hour
    * @type {""|"numeric"|"2-digit"}
    * @attr
    */
-  @property({ type: String, reflect: true }) hour = "";
+  @property({ type: String, reflect: true }) hour = null;
 
   /**
    * Minute
    * @type {""|"numeric"|"2-digit"}
    * @attr
    */
-  @property({ type: String, reflect: true }) minute = "";
+  @property({ type: String, reflect: true }) minute = null;
 
   /**
    * Second
    * @type {""|"numeric"|"2-digit"}
    * @attr
    */
-  @property({ type: String, reflect: true }) second = "";
+  @property({ type: String, reflect: true }) second = null;
 
   get options(): DateTimeFormatOptions {
     if (this.dateStyle) {

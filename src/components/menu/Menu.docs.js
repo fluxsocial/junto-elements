@@ -1,11 +1,12 @@
-import { html } from "https://unpkg.com/htm/preact/standalone.module.js";
+import { html } from "htm/preact";
 
 export default {
   name: "Menu",
   description: "Menu",
   tag: "j-menu",
-  component: () => html`<j-menu>
-    <j-menu-item>Menu item</j-menu-item>
-    <j-menu-item>Menu item</j-menu-item>
-  </j-menu>`,
+  component: (props) =>
+    html`<j-menu ...${props}>
+      <j-menu-item>Menu item</j-menu-item>
+      <j-menu-item>Menu item</j-menu-item>
+    </j-menu>`,
 };

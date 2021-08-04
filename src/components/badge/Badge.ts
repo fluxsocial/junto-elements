@@ -55,14 +55,14 @@ export default class Badge extends LitElement {
    * @type {""|"primary"|"success"|"danger"|"warning"}
    * @attr
    */
-  @property({ type: String, reflect: true }) variant = "";
+  @property({ type: String, reflect: true }) variant = null;
 
   /**
    * Sizes
    * @type {""|"sm"|"lg"}
    * @attr
    */
-  @property({ type: String, reflect: true }) size = "";
+  @property({ type: String, reflect: true }) size = null;
 
   render() {
     return html`<span part="base">

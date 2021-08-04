@@ -53,7 +53,7 @@ export default class Select extends LitElement {
     type: String,
     reflect: true,
   })
-  value = "";
+  value = null;
 
   /**
    * Label
@@ -61,7 +61,7 @@ export default class Select extends LitElement {
    * @attr
    */
   @property({ type: String, reflect: true })
-  label = "";
+  label = null;
 
   /**
    * Open
@@ -77,7 +77,7 @@ export default class Select extends LitElement {
    * @attr
    */
   @property({ type: String, reflect: true })
-  inputValue = "";
+  inputValue = null;
 
   constructor() {
     super();
@@ -91,7 +91,7 @@ export default class Select extends LitElement {
   }
 
   get optionElements() {
-    return [...this.children].filter((child: any) => child.value);
+    return [...this.querySelectorAll("*")].filter((child: any) => child.value);
   }
 
   get selectedElement() {
