@@ -9,6 +9,5 @@ export default {
       onChange=${(e) => changeProp("value", e.target.value)}
       ...${props}
     >
-      Editor
     </j-editor>`,
 };

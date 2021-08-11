@@ -152,6 +152,11 @@ const styles = css`
 export default class Editor extends LitElement {
   static styles = [sharedStyles, styles];
 
+  /**
+   * Value
+   * @type {String}
+   * @attr
+   */
   @property({ type: String })
   value = null;
 
@@ -162,7 +167,7 @@ export default class Editor extends LitElement {
   toolbar = false;
 
   @property({ type: Object })
-  json = { type: "doc", content: [] };
+  json = null;
 
   @property({ type: Object })
   mentions = (trigger, query) => [];
@@ -269,7 +274,7 @@ export default class Editor extends LitElement {
       "[part='editor-container']"
     );
     this._editorInstance = new TipTap({
-      content: this.value || this.json,
+      content: this.value || this.json || "",
       element: editorContainer,
       autofocus: this.autofocus,
       enableInputRules: false,
@@ -306,7 +311,7 @@ export default class Editor extends LitElement {
           suggestion: {
             char: "@|#",
             items: (trigger, query) => {
-              this.filteredList = this.mentions(trigger, query);
+              this.filteredList = this.mentions(trigger, query) || [];
 
               this.showSuggestions = this.filteredList.length !== 0;
 
@@ -487,14 +492,14 @@ export default class Editor extends LitElement {
           }
         );
 
-        const mentionRegex = new RegExp(
-          `(${this.filteredList.map(
-            (f) => `${f.trigger}${f.name}|`
-          )})(?![^<span]*>|[^<span>]*<\/)`,
-          "g"
-        );
-
         if (this.filteredList.length > 0) {
+          const mentionRegex = new RegExp(
+            `(${this.filteredList.map(
+              (f) => `${f.trigger}${f.name}|`
+            )})(?![^<span]*>|[^<span>]*<\/)`,
+            "g"
+          );
+
           this.value = this.value.replace(mentionRegex, (val, args) => {
             if (val.trim().length !== 0) {
               const item = this.filteredList.find(
@@ -511,15 +516,6 @@ export default class Editor extends LitElement {
         props.editor.commands.setContent(this.value);
 
         props.editor.commands.setTextSelection(anchorPosition.anchor);
-
-        this.dispatchEvent(
-          new CustomEvent("change", {
-            bubbles: true,
-            detail: {
-              value: this.value,
-            },
-          })
-        );
       },
     });
 
@@ -565,6 +561,14 @@ export default class Editor extends LitElement {
   }
 
   shouldUpdate(changedProperties) {
+    if (changedProperties.has("value")) {
+      this.dispatchEvent(
+        new CustomEvent("change", {
+          bubbles: true,
+        })
+      );
+    }
+
     if (
       changedProperties.has("value") &&
       this._editorInstance &&
@@ -597,28 +601,32 @@ export default class Editor extends LitElement {
   render() {
     return html` <div part="base">
       <j-menu part="mentionSuggestions" ?open=${this.showSuggestions} id="test">
-        ${this.filteredList.map(
-          (suggestion, index) =>
-            html`<j-menu-item
-              @click=${() => this.selectItem(index)}
-              ?active=${index === this.activeIndex}
-              >${suggestion.name}
-            </j-menu-item>`
-        )}
+        ${Array.isArray(this.filteredList)
+          ? this.filteredList.map(
+              (suggestion, index) =>
+                html`<j-menu-item
+                  @click=${() => this.selectItem(index)}
+                  ?active=${index === this.activeIndex}
+                  >${suggestion.name}
+                </j-menu-item>`
+            )
+          : null}
       </j-menu>
       <j-menu
         part="emojiSuggestions"
         ?open=${this._showEmojiSuggestions}
         id="test"
       >
-        ${this.filteredEmojiList.map(
-          (suggestion, index) =>
-            html`<j-menu-item
-              @click=${() => this.selectEmojiItem(index)}
-              ?active=${index === this.activeIndex}
-              >${suggestion.label}&nbsp;&nbsp;:${suggestion.id}:
-            </j-menu-item>`
-        )}
+        ${Array.isArray(this.filteredList)
+          ? this.filteredEmojiList.map(
+              (suggestion, index) =>
+                html`<j-menu-item
+                  @click=${() => this.selectEmojiItem(index)}
+                  ?active=${index === this.activeIndex}
+                  >${suggestion.label}&nbsp;&nbsp;:${suggestion.id}:
+                </j-menu-item>`
+            )
+          : null}
       </j-menu>
       <div part="editor-wrapper">
         <div id="container" part="editor-container"></div>
@@ -696,12 +704,7 @@ export default class Editor extends LitElement {
             : null}
           <div part="toolbar-standard">
             <j-popover placement="top-start">
-              <j-button
-                size="sm"
-                slot="trigger"
-                id="emojipopoverbtn"
-                variant="subtle"
-              >
+              <j-button size="sm" slot="trigger" variant="subtle">
                 <j-icon size="sm" name="emoji-smile"></j-icon>
               </j-button>
               <div slot="content">
