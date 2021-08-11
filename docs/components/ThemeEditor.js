@@ -34,8 +34,6 @@ export default function ThemeEditor() {
     setProp(fontSizeName, baseSize + "px");
   }, [hue, saturation, radius, baseSize]);
 
-  console.log(saturation);
-
   return html`<div>
     <j-flex direction="column" gap="300">
       <j-text variant="label">Base font size: ${baseSize}px</j-text>

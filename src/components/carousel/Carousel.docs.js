@@ -5,8 +5,6 @@ export default {
   description: "Carousel",
   tag: "j-carousel",
   component: ({ changeProp, ...props }) => {
-    console.log(props);
-
     return html`
       <j-carousel
         onChange=${(e) => changeProp("value", e.target.value)}
