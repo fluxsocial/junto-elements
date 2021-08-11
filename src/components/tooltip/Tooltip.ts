@@ -21,8 +21,6 @@ type Placement =
   | "left-end";
 
 const styles = css`
-  :host {
-  }
   :host([open]) [part="tooltip"] {
     display: inline-block;
   }
@@ -36,6 +34,9 @@ const styles = css`
     background: var(--j-color-ui-800);
     color: var(--j-color-ui-200);
     border-radius: var(--j-border-radius);
+  }
+  [part="content"] {
+    display: inline-block;
   }
   [part="arrow"],
   [part="arrow"]::before {
@@ -103,25 +104,49 @@ export default class Tooltip extends LitElement {
   popperInstance = null;
 
   get tooltipEl() {
-    return this.renderRoot.querySelector("[part='tooltip'") as any;
+    return this.renderRoot.querySelector("[part='tooltip']") as any;
   }
 
   get contentEl() {
-    return this.renderRoot.querySelector("[part='content'") as any;
+    return this.renderRoot.querySelector("[part='content']") as any;
+  }
+
+  shouldUpdate(changedProperties) {
+    if (changedProperties.has("open")) {
+      if (this.open) {
+        if (this.popperInstance) {
+          this.popperInstance.setOptions({ placement: this.placement });
+          this.popperInstance.update();
+        } else {
+          this.createTooltip();
+        }
+      } else {
+        this.tooltipEl?.removeAttribute("data-show");
+      }
+      this.dispatchEvent(new CustomEvent("toggle", { bubbles: true }));
+    }
+    return true;
+  }
+
+  createTooltip() {
+    if (this.contentEl && this.tooltipEl) {
+      this.popperInstance = createPopper(this.contentEl, this.tooltipEl, {
+        placement: this.placement as Placement,
+        strategy: "absolute",
+        modifiers: [
+          {
+            name: "offset",
+            options: {
+              offset: [0, 10],
+            },
+          },
+        ],
+      });
+    }
   }
 
   firstUpdated() {
-    this.popperInstance = createPopper(this.contentEl, this.tooltipEl, {
-      placement: this.placement as Placement,
-      modifiers: [
-        {
-          name: "offset",
-          options: {
-            offset: [0, 10],
-          },
-        },
-      ],
-    });
+    this.createTooltip();
   }
 
   connectedCallback() {
@@ -134,12 +159,10 @@ export default class Tooltip extends LitElement {
 
   show() {
     this.open = true;
-    this.popperInstance.update();
   }
 
   hide() {
     this.open = false;
-    this.tooltipEl.removeAttribute("data-show");
   }
 
   render() {

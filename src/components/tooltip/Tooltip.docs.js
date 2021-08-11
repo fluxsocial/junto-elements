@@ -4,8 +4,12 @@ export default {
   name: "Tooltip",
   description: "",
   tag: "j-tooltip",
-  component: ({ title = "Hello", ...props }) =>
-    html`<j-tooltip ...${props} title=${title}>
+  component: ({ changeProp, title = "Hello", ...props }) =>
+    html`<j-tooltip
+      ...${props}
+      onToggle=${(e) => changeProp("open", e.target.open)}
+      title=${title}
+    >
       <j-button>Hover over me</j-button>
     </j-tooltip>`,
 };
