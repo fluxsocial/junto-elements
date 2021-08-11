@@ -162,7 +162,7 @@ export default class Box extends LitElement {
   bg = null;
 
   shouldUpdate(changedProperties) {
-    if (changedProperties.has("bg")) {
+    if (changedProperties.has("bg") && this.bg) {
       this.style.setProperty("--j-box-bg-color", `var(--j-color-${this.bg})`);
     }
     if (changedProperties.has("pl") && this.pl) {
