@@ -37,6 +37,18 @@ const styles = css`
   :host([j="center"]) {
     --j-flex-justify-content: center;
   }
+  :host([direction="row"]) {
+    --j-flex-direction: row;
+  }
+  :host([direction="row-reverse"]) {
+    --j-flex-direction: row-reverse;
+  }
+  :host([direction="column"]) {
+    --j-flex-direction: column;
+  }
+  :host([direction="column-reverse"]) {
+    --j-flex-direction: column-reverse;
+  }
   [part="base"] {
     display: var(--j-flex-display);
     gap: var(--j-flex-gap);
@@ -53,7 +65,7 @@ export default class Box extends LitElement {
 
   /**
    * Justify content
-   * @type {String}
+   * @type {""|"center"|"start"|"end"}
    * @attr
    */
   @property({ type: String, reflect: true })
@@ -61,7 +73,7 @@ export default class Box extends LitElement {
 
   /**
    * Align items
-   * @type {String}
+   * @type {""|"center"|"start"|"end"}
    * @attr
    */
   @property({ type: String, reflect: true })
@@ -85,19 +97,17 @@ export default class Box extends LitElement {
 
   /**
    * Direction
-   * @type {""|"100"|"200"|"300"|"400"|"500"|"600"|"700"|"800"|"900}
+   * @type {""|"row"|"row-reverse"|"column"|"column-reverse"}
    * @attr
    */
   @property({ type: String, reflect: true })
   direction = null;
 
   shouldUpdate(changedProperties) {
-    if (changedProperties.has("gap")) {
+    if (changedProperties.has("gap") && this.gap) {
       this.style.setProperty("--j-flex-gap", `var(--j-space-${this.gap})`);
     }
-    if (changedProperties.has("direction")) {
-      this.style.setProperty("--j-flex-direction", this.direction);
-    }
+
     return true;
   }
 
