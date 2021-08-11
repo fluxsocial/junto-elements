@@ -14,10 +14,15 @@ function mapChildren(child) {
   return child.value;
 }
 
+function isString(val) {
+  return typeof val === "string" || val instanceof String;
+}
+
 function typeCastValue(prop) {
   if (prop.default === "false") return false;
   if (prop.default === "true") return true;
   if (prop.default === '""') return null;
+  if (isString(prop.default)) return prop.default.replace(/"/g, "");
   return prop.default;
 }
 
