@@ -37,6 +37,7 @@ const styles = css`
   }
   [part="content"] {
     display: inline-block;
+    position: relative;
   }
   [part="arrow"],
   [part="arrow"]::before {
