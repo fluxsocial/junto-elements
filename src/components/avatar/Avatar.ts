@@ -112,6 +112,13 @@ export default class Component extends LitElement {
   @property({ type: String, reflect: true }) initials = null;
 
   /**
+   * Icon
+   * @type {String}
+   * @attr
+   */
+  @property({ type: String }) icon = "person-fill";
+
+  /**
    * Sizes
    * @type {""|"xs"|"sm"|"lg"|"xl"}
    * @attr
@@ -147,7 +154,7 @@ export default class Component extends LitElement {
     }
 
     return html`<button part="base">
-      <j-icon part="icon" name="person-fill"></j-icon>
+      <j-icon part="icon" name=${this.icon}></j-icon>
     </button>`;
   }
 }
