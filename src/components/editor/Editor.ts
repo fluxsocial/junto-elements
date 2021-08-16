@@ -511,6 +511,8 @@ export default class Editor extends LitElement {
           });
         }
 
+        this.value = this.value.replaceAll('data-id="did<span data-emoji class="emoji" part="emoji" data-label="🔑" data-id="key">🔑</span>', 'data-id="did:key:')
+
         this.json = props.editor.getJSON() as any;
 
         props.editor.commands.setContent(this.value);
