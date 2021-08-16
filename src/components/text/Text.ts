@@ -10,10 +10,13 @@ const styles = css`
     --j-text-font-size: var(--j-font-size-500);
     --j-text-margin-bottom: 0;
     --j-text-display: block;
+    --j-text-family: inherit;
+    --j-text-heading-family: inherit;
   }
 
   :host > *:first-child {
     margin: 0;
+    font-family: var(--j-text-family);
     text-transform: var(--j-text-transform);
     display: var(--j-text-display);
     color: var(--j-text-color);
@@ -35,6 +38,7 @@ const styles = css`
     --j-text-font-size: var(--j-font-size-800);
     --j-text-weight: 600;
     --j-text-margin-bottom: var(--j-space-400);
+    --j-text-family: var(--j-text-heading-family);
   }
 
   :host([variant="heading-sm"]) {
@@ -42,6 +46,7 @@ const styles = css`
     --j-text-font-size: var(--j-font-size-700);
     --j-text-weight: 600;
     --j-text-margin-bottom: var(--j-space-300);
+    --j-text-family: var(--j-text-heading-family);
   }
 
   :host([variant="heading-lg"]) {
@@ -49,6 +54,7 @@ const styles = css`
     --j-text-font-size: var(--j-font-size-900);
     --j-text-weight: 600;
     --j-text-margin-bottom: var(--j-space-600);
+    --j-text-family: var(--j-text-heading-family);
   }
 
   :host([variant="ingress"]) {
@@ -63,6 +69,7 @@ const styles = css`
     --j-text-font-size: var(--j-font-size-700);
     --j-text-weight: 400;
     --j-text-margin-bottom: var(--j-space-600);
+    --j-text-family: var(--j-text-heading-family);
   }
 
   :host([variant="body"]) {
