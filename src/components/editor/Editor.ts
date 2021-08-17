@@ -511,7 +511,10 @@ export default class Editor extends LitElement {
           });
         }
 
-        this.value = this.value.replaceAll('data-id="did<span data-emoji class="emoji" part="emoji" data-label="🔑" data-id="key">🔑</span>', 'data-id="did:key:')
+        this.value = this.value.replaceAll(
+          'data-id="did<span data-emoji class="emoji" part="emoji" data-label="🔑" data-id="key">🔑</span>',
+          'data-id="did:key:'
+        );
 
         this.json = props.editor.getJSON() as any;
 
@@ -637,7 +640,7 @@ export default class Editor extends LitElement {
             ? html`<div part="toolbar-extended">
                 ${this._editorInstance
                   ? html`<j-button
-                        variant="subtle"
+                        variant="ghost"
                         size="sm"
                         ?active=${this._editorInstance.isActive("bold")}
                         @click=${() =>
@@ -650,7 +653,7 @@ export default class Editor extends LitElement {
                         <j-icon size="sm" name="type-bold"></j-icon>
                       </j-button>
                       <j-button
-                        variant="subtle"
+                        variant="ghost"
                         size="sm"
                         ?active=${this._editorInstance.isActive("italic")}
                         @click=${() =>
@@ -663,7 +666,7 @@ export default class Editor extends LitElement {
                         <j-icon size="sm" name="type-italic"></j-icon>
                       </j-button>
                       <j-button
-                        variant="subtle"
+                        variant="ghost"
                         size="sm"
                         ?active=${this._editorInstance.isActive("strike")}
                         @click=${() =>
@@ -676,7 +679,7 @@ export default class Editor extends LitElement {
                         <j-icon size="sm" name="type-strikethrough"></j-icon>
                       </j-button>
                       <j-button
-                        variant="subtle"
+                        variant="ghost"
                         size="sm"
                         ?active=${this._editorInstance.isActive("bulletList")}
                         @click=${() =>
@@ -689,7 +692,7 @@ export default class Editor extends LitElement {
                         <j-icon size="sm" name="list-ul"></j-icon>
                       </j-button>
                       <j-button
-                        variant="subtle"
+                        variant="ghost"
                         size="sm"
                         ?active=${this._editorInstance.isActive("orderedList")}
                         @click=${() =>
@@ -706,7 +709,7 @@ export default class Editor extends LitElement {
             : null}
           <div part="toolbar-standard">
             <j-popover placement="top-start">
-              <j-button size="sm" slot="trigger" variant="subtle">
+              <j-button size="sm" slot="trigger" variant="ghost">
                 <j-icon size="sm" name="emoji-smile"></j-icon>
               </j-button>
               <div slot="content">
@@ -715,7 +718,7 @@ export default class Editor extends LitElement {
             </j-popover>
             <j-button
               ?active=${this.toolbar}
-              variant="subtle"
+              variant="ghost"
               size="sm"
               @click=${() => this.toggleToolbar()}
             >
