@@ -102,11 +102,7 @@ export default class Component extends LitElement {
   render() {
     return html`<div part="base">
       <div part="content"><slot></slot></div>
-      <j-button
-        @click=${() => (this.open = false)}
-        size="sm"
-        variant="transparent"
-      >
+      <j-button @click=${() => (this.open = false)} size="sm" variant="ghost">
         <j-icon size="sm" name="x"></j-icon>
       </j-button>
     </div>`;
