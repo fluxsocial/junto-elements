@@ -4,6 +4,7 @@ import sharedStyles from "../../shared/styles";
 
 const styles = css`
   :host {
+    --j-button-opacity: 1;
     --j-button-text-decoration: none;
     --j-button-depth: none;
     --j-button-display: inline-flex;
@@ -17,6 +18,7 @@ const styles = css`
     --j-button-font-size: var(--j-font-size-500);
   }
   [part="base"] {
+    opacity: var(--j-button-opacity);
     text-decoration: var(--j-button-text-decoration);
     transition: box-shadow 0.2s ease;
     cursor: pointer;
@@ -41,7 +43,7 @@ const styles = css`
   }
 
   :host([disabled]) [part="base"] {
-    opacity: 0.5;
+    --j-button-opacity: 0.5;
     cursor: default;
   }
 
@@ -87,33 +89,25 @@ const styles = css`
   }
 
   :host([variant="subtle"]) {
-    --j-button-bg: transparent;
-    --j-button-color: currentColor;
+    --j-button-bg: var(--j-color-ui-50);
+    --j-button-color: var(--j-color-ui-800);
     --j-button-border: 1px solid transparent;
   }
 
   :host([variant="subtle"]:hover) {
-    --j-button-bg: var(--j-color-ui-50);
+    --j-button-color: var(--j-color-black);
+    --j-button-bg: var(--j-color-ui-100);
   }
 
-  :host([variant="subtle"]) {
+  :host([variant="ghost"]) {
+    --j-button-opacity: 0.9;
     --j-button-bg: transparent;
     --j-button-color: currentColor;
     --j-button-border: 1px solid transparent;
   }
 
-  :host([variant="subtle"]:hover) {
-    --j-button-bg: var(--j-color-ui-50);
-  }
-
-  :host([variant="transparent"]) {
-    --j-button-bg: transparent;
-    --j-button-color: currentColor;
-    --j-button-border: 1px solid transparent;
-  }
-
-  :host([variant="transparent"]:hover) {
-    --j-button-border: 1px solid transparent;
+  :host([variant="ghost"]:hover) {
+    --j-button-opacity: 1;
   }
 
   :host([size="xs"]) {
