@@ -100,7 +100,7 @@ const styles = css`
   }
 
   :host([variant="ghost"]) {
-    --j-button-opacity: 0.9;
+    --j-button-opacity: 0.75;
     --j-button-bg: transparent;
     --j-button-color: currentColor;
     --j-button-border: 1px solid transparent;
