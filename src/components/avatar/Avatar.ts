@@ -13,6 +13,9 @@ const styles = css`
     --j-avatar-color: var(--j-color-white);
     --j-avatar-bg: var(--j-color-ui-200);
   }
+  :host([src]) {
+    --j-avatar-bg: transparent;
+  }
   :host([selected]) {
     --j-avatar-box-shadow: 0px 0px 0px 2px var(--j-color-primary-500);
   }
