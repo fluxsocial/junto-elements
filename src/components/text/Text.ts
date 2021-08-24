@@ -37,7 +37,7 @@ const styles = css`
   }
 
   :host([variant="heading"]) {
-    --j-text-color: var(--j-color-ui-800);
+    --j-text-color: var(--j-color-black);
     --j-text-font-size: var(--j-font-size-800);
     --j-text-weight: 600;
     --j-text-margin-bottom: var(--j-space-400);
@@ -46,7 +46,7 @@ const styles = css`
   }
 
   :host([variant="heading-sm"]) {
-    --j-text-color: var(--j-color-ui-800);
+    --j-text-color: var(--j-color-black);
     --j-text-font-size: var(--j-font-size-700);
     --j-text-weight: 600;
     --j-text-margin-bottom: var(--j-space-300);
@@ -55,7 +55,7 @@ const styles = css`
   }
 
   :host([variant="heading-lg"]) {
-    --j-text-color: var(--j-color-ui-800);
+    --j-text-color: var(--j-color-black);
     --j-text-font-size: var(--j-font-size-900);
     --j-text-weight: 600;
     --j-text-margin-bottom: var(--j-space-600);
@@ -64,7 +64,7 @@ const styles = css`
   }
 
   :host([variant="subheading"]) {
-    --j-text-color: var(--j-color-ui-800);
+    --j-text-color: var(--j-color-black);
     --j-text-font-size: var(--j-font-size-700);
     --j-text-weight: 400;
     --j-text-margin-bottom: var(--j-space-600);

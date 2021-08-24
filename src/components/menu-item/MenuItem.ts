@@ -11,7 +11,7 @@ const styles = css`
     --j-menu-item-bg: transparent;
     --j-menu-item-color: var(--j-color-ui-600);
     --j-menu-item-padding: 0 var(--j-space-500) 0 var(--j-space-500);
-    --j-menu-item-font-weight: 500;
+    --j-menu-item-font-weight: 600;
     --j-menu-item-font-size: var(--j-font-size-500);
   }
   :host(:hover) {
@@ -19,14 +19,12 @@ const styles = css`
     --j-menu-item-bg: var(--j-color-ui-50);
   }
   :host([active]) {
-    --j-menu-item-font-weight: 500;
     --j-menu-item-bg: var(--j-color-ui-50);
     --j-menu-item-color: var(--j-color-ui-600);
   }
   :host([selected]) {
-    --j-menu-item-font-weight: 500;
     --j-menu-item-bg: var(--j-color-primary-100);
-    --j-menu-item-color: var(--j-color-primary-600);
+    --j-menu-item-color: var(--j-color-primary-700);
   }
   :host([size="sm"]) {
     --j-menu-item-gap: var(--j-space-300);

@@ -27,7 +27,7 @@ const styles = css`
     border: none;
     text-align: var(--j-tab-item-text-align, center);
     height: var(--j-tab-item-height);
-    font-weight: 500;
+    font-weight: 600;
     font-size: var(--j-font-size-500);
     background: 0;
     padding: 0 var(--j-space-500);
@@ -60,7 +60,7 @@ const styles = css`
   }
   :host([variant="button"][checked]) [part="base"] {
     background: var(--j-color-primary-100);
-    color: var(--j-color-primary-600);
+    color: var(--j-color-primary-700);
   }
 `;
 
