@@ -1,4 +1,4 @@
-import { html, css, LitElement } from "lit";
+import { html, css, LitElement, adoptStyles } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import sharedStyles from "../../shared/styles";
 
@@ -11,29 +11,16 @@ const styles = css`
     --j-box-border-color: none;
     --j-box-border-color-hover: none;
     --j-box-display: block;
-    --j-box-padding-left: 0px;
-    --j-box-padding-right: 0px;
-    --j-box-padding-top: 0px;
-    --j-box-padding-bottom: 0px;
-    --j-box-margin-left: 0px;
-    --j-box-margin-right: 0px;
-    --j-box-margin-top: 0px;
-    --j-box-margin-bottom: 0px;
+    --j-box-padding: 0px;
+    --j-box-margin: 0px;
   }
   :host([inline]) {
     --j-box-display: inline-block;
   }
   [part="base"] {
     background-color: var(--j-box-bg-color);
-    padding-left: var(--j-box-padding-left);
-    padding-right: var(--j-box-padding-right);
-    padding-top: var(--j-box-padding-top);
-    padding-right: var(--j-box-padding-right);
-    padding-bottom: var(--j-box-padding-bottom);
-    margin-left: var(--j-box-margin-left);
-    margin-right: var(--j-box-margin-right);
-    margin-top: var(--j-box-margin-top);
-    margin-right: var(--j-box-margin-right);
+    padding: var(--j-box-padding);
+    margin: var(--j-box-margin);
   }
 `;
 
@@ -155,125 +142,29 @@ export default class Box extends LitElement {
 
   /**
    * Background color
-   * @type {""|"100"|"200"|"300"|"400"|"500"|"600"|"700"|"800"|"900}
+   * @type {""|"ui-100"|"ui-200"|"ui-300"|"ui-400"|"ui-500"|"ui-600"|"ui-700"|"ui-800"|"ui-900}
    * @attr
    */
   @property({ type: String, reflect: true })
   bg = null;
 
-  shouldUpdate(changedProperties) {
-    if (changedProperties.has("bg") && this.bg) {
-      this.style.setProperty("--j-box-bg-color", `var(--j-color-${this.bg})`);
-    }
-    if (changedProperties.has("pl") && this.pl) {
-      this.style.setProperty(
-        "--j-box-padding-left",
-        `var(--j-space-${this.pl})`
-      );
-    }
-    if (changedProperties.has("pr") && this.pr) {
-      this.style.setProperty(
-        "--j-box-padding-right",
-        `var(--j-space-${this.pr})`
-      );
-    }
-    if (changedProperties.has("pt") && this.pt) {
-      this.style.setProperty(
-        "--j-box-padding-top",
-        `var(--j-space-${this.pt})`
-      );
-    }
-    if (changedProperties.has("pb") && this.pb) {
-      this.style.setProperty(
-        "--j-box-padding-bottom",
-        `var(--j-space-${this.pb})`
-      );
-    }
-    if (changedProperties.has("px") && this.px) {
-      this.style.setProperty(
-        "--j-box-padding-left",
-        `var(--j-space-${this.px})`
-      );
-      this.style.setProperty(
-        "--j-box-padding-right",
-        `var(--j-space-${this.px})`
-      );
-    }
-    if (changedProperties.has("py") && this.py) {
-      this.style.setProperty(
-        "--j-box-padding-top",
-        `var(--j-space-${this.px})`
-      );
-      this.style.setProperty(
-        "--j-box-padding-bottom",
-        `var(--j-space-${this.px})`
-      );
-    }
-    if (changedProperties.has("p") && this.p) {
-      this.style.setProperty(
-        "--j-box-padding-left",
-        `var(--j-space-${this.p})`
-      );
-      this.style.setProperty(
-        "--j-box-padding-right",
-        `var(--j-space-${this.p})`
-      );
-      this.style.setProperty(
-        "--j-box-padding-bottom",
-        `var(--j-space-${this.p})`
-      );
-      this.style.setProperty("--j-box-padding-top", `var(--j-space-${this.p})`);
-    }
-    if (changedProperties.has("ml") && this.ml) {
-      this.style.setProperty(
-        "--j-box-margin-left",
-        `var(--j-space-${this.ml})`
-      );
-    }
-    if (changedProperties.has("mr") && this.mr) {
-      this.style.setProperty(
-        "--j-box-margin-right",
-        `var(--j-space-${this.mr})`
-      );
-    }
-    if (changedProperties.has("mt") && this.mt) {
-      this.style.setProperty("--j-box-margin-top", `var(--j-space-${this.mt})`);
-    }
-    if (changedProperties.has("mb") && this.mb) {
-      this.style.setProperty(
-        "--j-box-margin-bottom",
-        `var(--j-space-${this.mb})`
-      );
-    }
-    if (changedProperties.has("mx") && this.mx) {
-      this.style.setProperty(
-        "--j-box-margin-left",
-        `var(--j-space-${this.mx})`
-      );
-      this.style.setProperty(
-        "--j-box-margin-right",
-        `var(--j-space-${this.mx})`
-      );
-    }
-    if (changedProperties.has("my") && this.my) {
-      this.style.setProperty("--j-box-margin-top", `var(--j-space-${this.mx})`);
-      this.style.setProperty(
-        "--j-box-margin-bottom",
-        `var(--j-space-${this.mx})`
-      );
-    }
-    if (changedProperties.has("m") && this.m) {
-      this.style.setProperty("--j-box-margin-left", `var(--j-space-${this.m})`);
-      this.style.setProperty(
-        "--j-box-margin-right",
-        `var(--j-space-${this.m})`
-      );
-      this.style.setProperty(
-        "--j-box-margin-bottom",
-        `var(--j-space-${this.m})`
-      );
-      this.style.setProperty("--j-box-margin-top", `var(--j-space-${this.m})`);
-    }
+  shouldUpdate() {
+    const sheet = new CSSStyleSheet() as any;
+    sheet.replaceSync(`
+      :host {
+        --j-box-bg-color: var(--j-color-${this.bg};
+        --j-box-padding: var(--j-space-${this.pt || this.py || this.p})
+          var(--j-space-${this.pr || this.px || this.p})
+          var(--j-space-${this.pb || this.py || this.p})
+          var(--j-space-${this.pl || this.px || this.p});
+        --j-box-margin: var(--j-space-${this.mt || this.my || this.m})
+          var(--j-space-${this.mr || this.mx || this.mr})
+          var(--j-space-${this.mb || this.my || this.m})
+          var(--j-space-${this.ml || this.mx || this.m});
+      }
+    `);
+
+    adoptStyles(this.shadowRoot, [styles, sharedStyles, sheet]);
 
     return true;
   }

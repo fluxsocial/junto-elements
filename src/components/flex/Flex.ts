@@ -1,6 +1,7 @@
-import { html, css, LitElement } from "lit";
+import { html, css, LitElement, adoptStyles } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import sharedStyles from "../../shared/styles";
+import { generateStylesheet } from "../../utils/stylesheets";
 
 // TODO: Do we need this type  of generic component?
 
@@ -103,10 +104,17 @@ export default class Box extends LitElement {
   @property({ type: String, reflect: true })
   direction = null;
 
-  shouldUpdate(changedProperties) {
-    if (changedProperties.has("gap") && this.gap) {
-      this.style.setProperty("--j-flex-gap", `var(--j-space-${this.gap})`);
+  shouldUpdate() {
+    const styleSheets = [styles, sharedStyles];
+
+    if (this.gap) {
+      styleSheets.push(
+        generateStylesheet("--j-flex-gap", `var(--j-space-${this.gap})`)
+      );
     }
+
+    // @ts-ignore
+    adoptStyles(this.shadowRoot, styleSheets);
 
     return true;
   }

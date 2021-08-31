@@ -1,7 +1,8 @@
-import { html, css, LitElement } from "lit";
+import { html, css, LitElement, adoptStyles } from "lit";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg";
 import { customElement, property, state } from "lit/decorators.js";
 import sharedStyles from "../../shared/styles";
+import { generateStylesheet } from "../../utils/stylesheets";
 
 const styles = css`
   :host {
@@ -46,7 +47,7 @@ export default class Icon extends LitElement {
 
   /**
    * Size
-   * @type {String}
+   * @type {""|"sm"|"lg"}
    * @attr
    */
   @property({ type: String, reflect: true })
@@ -81,9 +82,16 @@ export default class Icon extends LitElement {
       this.fetchIcon();
     }
 
-    if (changedProperties.has("color") && this.color) {
-      this.style.setProperty("--j-icon-color", `var(--j-color-${this.color})`);
+    const styleSheets = [styles, sharedStyles];
+
+    if (this.color) {
+      styleSheets.push(
+        generateStylesheet("--j-icon-color", `var(--j-color-${this.color})`)
+      );
     }
+
+    // @ts-ignore
+    adoptStyles(this.shadowRoot, styleSheets);
 
     return true;
   }

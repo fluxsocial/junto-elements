@@ -1,7 +1,8 @@
-import { html, css, LitElement } from "lit";
+import { html, css, LitElement, adoptStyles } from "lit";
 import { property, customElement, state } from "lit/decorators.js";
 import sharedStyles from "../../shared/styles";
 import { scrollTo, scrollHandler } from "../../utils/scroll";
+import { generateStylesheet } from "../../utils/stylesheets";
 
 const styles = css`
   :host {
@@ -102,10 +103,17 @@ export default class Component extends LitElement {
     });
   }
 
-  shouldUpdate(changedProperties) {
-    if (changedProperties.has("gap")) {
-      this.style.setProperty("--j-carousel-gap", `var(--j-space-${this.gap})`);
+  shouldUpdate() {
+    const styleSheets = [styles, sharedStyles];
+
+    if (this.gap) {
+      styleSheets.push(
+        generateStylesheet("--j-carousel-gap", `var(--j-space-${this.gap})`)
+      );
     }
+
+    // @ts-ignore
+    adoptStyles(this.shadowRoot, styleSheets);
     return true;
   }
 
