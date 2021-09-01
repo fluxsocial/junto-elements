@@ -15,6 +15,8 @@ export default function ThemeEditor() {
   const saturationName = "--j-color-saturation";
   const radiusName = "--j-border-radius";
   const fontSizeName = "--j-font-base-size";
+  const substractorName = "--j-color-subtractor";
+  const multiplierName = "--j-color-multiplier";
 
   const [hue, setHue] = useState(getPropValue(hueName));
   const [saturation, setSaturation] = useState(
@@ -26,15 +28,33 @@ export default function ThemeEditor() {
   const [baseSize, setBaseSize] = useState(
     getPropValue(fontSizeName).replace("px", "")
   );
+  const [subtractor, setSubstractor] = useState(
+    getPropValue(substractorName).replace("%", "")
+  );
+  const [multiplier, setMultiplier] = useState(
+    getPropValue(multiplierName).replace("", "")
+  );
 
   useEffect(() => {
     setProp(hueName, hue);
     setProp(saturationName, saturation + "%");
     setProp(radiusName, radius + "px");
     setProp(fontSizeName, baseSize + "px");
-  }, [hue, saturation, radius, baseSize]);
+    setProp(multiplierName, multiplier);
+    setProp(substractorName, subtractor + "%");
+  }, [hue, saturation, radius, baseSize, subtractor, multiplier]);
+
+  function toggleDarkMode(dark) {
+    setMultiplier(dark ? "-1" : "1");
+    setSubstractor(dark ? 100 : 0);
+  }
 
   return html`<div>
+    <j-flex direction="column" gap="300">
+      <j-checkbox onChange=${(e) => toggleDarkMode(e.target.checked)}>
+        Dark mode
+      </j-checkbox>
+    </j-flex>
     <j-flex direction="column" gap="300">
       <j-text variant="label">Base font size: ${baseSize}px</j-text>
       <input
@@ -68,7 +88,7 @@ export default function ThemeEditor() {
       <input
         onInput=${(e) => setRadius(e.target.value)}
         min="0"
-        max="50"
+        max="12"
         type="range"
       />
     </j-flex>

@@ -355,6 +355,15 @@
   --j-size-xl: 3.8rem;
   --j-size-xxl: 4.2rem;
 
+  /* SCROLLBAR */
+  --j-scrollbar-width: 6px;
+  --j-scrollbar-background-image: none;
+  --j-scrollbar-background: transparent;
+  --j-scrollbar-corner-background: #dfdfdf;
+  --j-scrollbar-thumb-box-shadow: none;
+  --j-scrollbar-thumb-border-radius: var(--j-border-radius);
+  --j-scrollbar-thumb-background: rgba(180, 180, 180, 0.5);
+
   /* DEPTH */
   --j-depth-none: none;
   --j-depth-100: 0px 1px 1px 0px rgba(9, 30, 66, 0.06),
@@ -385,4 +394,23 @@ body {
   color: var(--j-color-ui-800);
   font-family: var(--j-font-family);
   background-color: var(--j-color-white);
+}
+
+::-webkit-scrollbar {
+  width: var(--j-scrollbar-width);
+}
+
+::-webkit-scrollbar-track {
+  background-image: var(--j-scrollbar-background-image);
+  background: var(--j-scrollbar-background, transparent);
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--j-scrollbar-corner-background);
+}
+
+::-webkit-scrollbar-thumb {
+  box-shadow: var(--j-scrollbar-thumb-box-shadow);
+  border-radius: var(--j-scrollbar-thumb-border-radius);
+  background-color: var(--j-scrollbar-thumb-background);
 }

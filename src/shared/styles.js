@@ -20,24 +20,21 @@ export default css`
   }
 
   ::-webkit-scrollbar {
-    width: var(--j-scrollbar-width, 10px);
+    width: var(--j-scrollbar-width);
   }
 
   ::-webkit-scrollbar-track {
-    background-image: var(--j-scrollbar-background-image, none);
-    background: var(--j-scrollbar-background, transparent);
+    background-image: var(--j-scrollbar-background-image);
+    background: var(--j-scrollbar-background);
   }
 
   ::-webkit-scrollbar-corner {
-    background: var(--j-scrollbar-corner-background, #dfdfdf);
+    background: var(--j-scrollbar-corner-background);
   }
 
   ::-webkit-scrollbar-thumb {
-    box-shadow: var(--j-scrollbar-thumb-box-shadow, none);
-    border-radius: var(--j-scrollbar-thumb-border-radius, 300px);
-    background-color: var(
-      --j-scrollbar-thumb-background,
-      rgba(180, 180, 180, 0.5)
-    );
+    box-shadow: var(--j-scrollbar-thumb-box-shadow);
+    border-radius: var(--j-scrollbar-thumb-border-radius);
+    background-color: var(--j-scrollbar-thumb-background);
   }
 `;
