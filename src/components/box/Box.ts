@@ -1,6 +1,7 @@
 import { html, css, LitElement, adoptStyles } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import sharedStyles from "../../shared/styles";
+import { generateVariable } from "../../utils/stylesheets";
 
 // TODO: Do we need this type  of generic component?
 
@@ -152,15 +153,17 @@ export default class Box extends LitElement {
     const sheet = new CSSStyleSheet() as any;
     sheet.replaceSync(`
       :host {
-        --j-box-bg-color: var(--j-color-${this.bg};
-        --j-box-padding: var(--j-space-${this.pt || this.py || this.p})
-          var(--j-space-${this.pr || this.px || this.p})
-          var(--j-space-${this.pb || this.py || this.p})
-          var(--j-space-${this.pl || this.px || this.p});
-        --j-box-margin: var(--j-space-${this.mt || this.my || this.m})
-          var(--j-space-${this.mr || this.mx || this.mr})
-          var(--j-space-${this.mb || this.my || this.m})
-          var(--j-space-${this.ml || this.mx || this.m});
+        --j-box-bg-color: var(--j-color-${this.bg});
+        --j-box-padding: 
+          ${generateVariable("j-space", this.pt || this.py || this.p)}
+          ${generateVariable("j-space", this.pr || this.px || this.p)}
+          ${generateVariable("j-space", this.pb || this.py || this.p)}
+          ${generateVariable("j-space", this.pl || this.px || this.p)};
+        --j-box-margin: 
+          ${generateVariable("j-space", this.mt || this.my || this.m)}
+          ${generateVariable("j-space", this.mr || this.mx || this.m)}
+          ${generateVariable("j-space", this.mb || this.my || this.m)}
+          ${generateVariable("j-space", this.ml || this.mx || this.m)}  
       }
     `);
 

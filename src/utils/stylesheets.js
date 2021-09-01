@@ -11,3 +11,7 @@ export function generateStylesheets(properties, variables) {
     return [...acc, generateStylesheet(property, getValue(value))];
   }, []);
 }
+
+export function generateVariable(variable, value, fallback = "0") {
+  return value ? `var(--${variable}-${value})` : fallback;
+}

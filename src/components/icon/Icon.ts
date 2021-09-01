@@ -2,7 +2,7 @@ import { html, css, LitElement, adoptStyles } from "lit";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg";
 import { customElement, property, state } from "lit/decorators.js";
 import sharedStyles from "../../shared/styles";
-import { generateStylesheet } from "../../utils/stylesheets";
+import { generateStylesheet, generateVariable } from "../../utils/stylesheets";
 
 const styles = css`
   :host {
@@ -85,9 +85,8 @@ export default class Icon extends LitElement {
     const styleSheets = [styles, sharedStyles];
 
     if (this.color) {
-      styleSheets.push(
-        generateStylesheet("--j-icon-color", `var(--j-color-${this.color})`)
-      );
+      const variable = generateVariable("j-color", this.color, "currentColor");
+      styleSheets.push(generateStylesheet("--j-icon-color", variable));
     }
 
     // @ts-ignore

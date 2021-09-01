@@ -54,7 +54,42 @@ html {
 .layout {
   background-color: var(--j-main-content-bg);
   display: grid;
-  grid-template-columns: 260px 1fr;
+  grid-template-columns: auto;
+  grid-template-areas: "content";
+}
+
+@media (min-width: 800px) {
+  .layout {
+    background-color: var(--j-main-content-bg);
+    display: grid;
+    grid-template-columns: 350px auto;
+    grid-template-areas: "sidebar content";
+  }
+}
+
+.sidebar.open {
+  position: fixed;
+  left: 0;
+}
+
+.sidebar {
+  grid-area: sidebar;
+  background-color: var(--j-sidebar-bg);
+  position: sticky;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border-right: 1px solid var(--j-color-ui-50);
+}
+
+.main-content {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  scroll-behavior: smooth;
+  grid-area: content;
 }
 
 .logo {
@@ -75,26 +110,8 @@ html {
   padding-top: var(--j-space-600);
 }
 
-.main-content {
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
-  scroll-behavior: smooth;
-}
-
 .settings {
   height: 100px;
-}
-
-.sidebar {
-  background-color: var(--j-sidebar-bg);
-  position: sticky;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  border-right: 1px solid var(--j-color-ui-50);
 }
 
 .section {

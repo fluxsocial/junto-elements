@@ -2,7 +2,7 @@ import { html, css, LitElement, adoptStyles } from "lit";
 import { property, customElement, state } from "lit/decorators.js";
 import sharedStyles from "../../shared/styles";
 import { scrollTo, scrollHandler } from "../../utils/scroll";
-import { generateStylesheet } from "../../utils/stylesheets";
+import { generateStylesheet, generateVariable } from "../../utils/stylesheets";
 
 const styles = css`
   :host {
@@ -107,9 +107,8 @@ export default class Component extends LitElement {
     const styleSheets = [styles, sharedStyles];
 
     if (this.gap) {
-      styleSheets.push(
-        generateStylesheet("--j-carousel-gap", `var(--j-space-${this.gap})`)
-      );
+      const variable = generateVariable("j-space", this.gap);
+      styleSheets.push(generateStylesheet("--j-carousel-gap", variable));
     }
 
     // @ts-ignore
