@@ -154,25 +154,27 @@ export default function Element({ el, meta }) {
       ${highlightedCode}
     </pre
     >
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Attribute</th>
-          <th>Type</th>
-          <th>Value</th>
-        </tr>
-      </thead>
-      <tbody>
-        ${meta?.properties?.map(
-          (property) =>
-            html`<${Attribute}
-              changeProp=${handlePropChange}
-              value=${props[property.name]}
-              name=${property.name}
-              type=${property.type}
-            />`
-        )}
-      </tbody>
-    </table>
+    <div class="table-wrapper">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Attribute</th>
+            <th>Type</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${meta?.properties?.map(
+            (property) =>
+              html`<${Attribute}
+                changeProp=${handlePropChange}
+                value=${props[property.name]}
+                name=${property.name}
+                type=${property.type}
+              />`
+          )}
+        </tbody>
+      </table>
+    </div>
   </section>`;
 }

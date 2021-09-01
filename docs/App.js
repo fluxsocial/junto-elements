@@ -3,11 +3,14 @@ import els from "./elements.js";
 import variables from "./variables.js";
 import ThemeEditor from "./components/ThemeEditor.js";
 import Element from "./components/Element.js";
+import classnames from "../src/utils/classnames.js";
 
 const elements = Object.values(els).sort((a, b) => (a.name > b.name ? 1 : -1));
 
 export default function App() {
   const [tags, setTags] = useState([]);
+
+  const [sidebarOpen, setSidebarOpen] = useState(true);
 
   useEffect(() => {
     async function fetchComponentProps() {
@@ -18,20 +21,35 @@ export default function App() {
     fetchComponentProps();
   }, []);
 
+  const layoutClasses = classnames({
+    layout: true,
+    "sidebar-open": sidebarOpen,
+  });
+
   return html`<div id="app">
-    <main class="layout">
-      <aside class="sidebar">
-        <div class="logo">
-          <div>
+    <div class=${layoutClasses}>
+      <header class="header">
+        <j-flex a="center" gap="500">
+          <j-button
+            size="sm"
+            variant="ghost"
+            onClick=${() => setSidebarOpen(!sidebarOpen)}
+            ><j-icon size="sm" name="list"></j-icon
+          ></j-button>
+          <j-flex a="center" gap="300">
             <img
               class="logo__img"
               width="25"
+              height="25"
               src="https://junto.foundation/dist/junto-home-2.0__logo--rainbow.png?d9ff94e4e39bfd0536e60f760a9e6bd7"
             />
-          </div>
-          <j-text nomargin class="logo_text" size="600">Junto Elements</j-text>
-        </div>
-
+            <j-text nomargin class="logo_text" size="600"
+              >Junto Elements</j-text
+            >
+          </j-flex>
+        </j-flex>
+      </header>
+      <aside class="sidebar">
         <nav id="navtarget" class="nav">
           <j-menu-group-item title="Getting started">
             <a class="sidebar-link" href="#installation">
@@ -59,7 +77,7 @@ export default function App() {
           </j-menu-group-item>
         </nav>
       </aside>
-      <div class="main-content">
+      <main class="main-content">
         <section class="section" id="gettingstarted">
           <section class="section" id="installation">
             <j-text variant="heading-lg">Installation</j-text>
@@ -100,7 +118,7 @@ export default function App() {
             return html`<${Element} meta=${meta} el=${el} />`;
           })}
         </section>
-      </div>
-    </main>
+      </main>
+    </div>
   </div>`;
 }
