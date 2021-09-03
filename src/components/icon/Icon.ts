@@ -1,5 +1,4 @@
 import { html, css, LitElement, adoptStyles } from "lit";
-import { unsafeSVG } from "lit-html/directives/unsafe-svg";
 import { customElement, property, state } from "lit/decorators.js";
 import sharedStyles from "../../shared/styles";
 import { generateStylesheet, generateVariable } from "../../utils/stylesheets";
@@ -12,23 +11,22 @@ const styles = css`
     align-items: center;
     justify-content: center;
   }
-  :host svg {
+  :host i {
     color: var(--j-icon-color);
     fill: var(--j-icon-color);
     display: block;
-    width: var(--j-icon-size);
-    height: var(--j-icon-size);
+    font-size: var(--j-icon-size);
   }
-  :host([size="xs"]) svg {
+  :host([size="xs"]) i {
     --j-icon-size: 16px;
   }
-  :host([size="sm"]) svg {
+  :host([size="sm"]) i {
     --j-icon-size: 18px;
   }
-  :host([size="lg"]) svg {
+  :host([size="lg"]) i {
     --j-icon-size: 32px;
   }
-  :host([size="xl"]) svg {
+  :host([size="xl"]) i {
     --j-icon-size: 48px;
   }
 `;
@@ -64,23 +62,13 @@ export default class Icon extends LitElement {
   @state()
   svg = "";
 
-  firstUpdated() {
-    this.fetchIcon();
+  constructor() {
+    super();
+    this.attachShadow({ mode: 'open' });
+    this.shadowRoot.innerHTML = `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">`
   }
 
-  fetchIcon() {
-    fetch(`https://unpkg.com/bootstrap-icons@1.5.0/icons/${this.name}.svg`)
-      .then((res) => res.text())
-      .then((svg) => {
-        this.svg = svg;
-        this.requestUpdate();
-      });
-  }
-
-  shouldUpdate(changedProperties) {
-    if (changedProperties.has("name")) {
-      this.fetchIcon();
-    }
+  shouldUpdate() {
 
     const styleSheets = [styles, sharedStyles];
 
@@ -96,6 +84,6 @@ export default class Icon extends LitElement {
   }
 
   render() {
-    return html`${unsafeSVG(this.svg)}`;
+    return html`<i class="bi-${this.name}" role="img" aria-label="${this.name}"></i>`;
   }
 }
