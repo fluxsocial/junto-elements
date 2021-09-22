@@ -3,7 +3,6 @@ import Badge from "../src/components/badge/Badge.docs.js";
 import Box from "../src/components/box/Box.docs.js";
 import Button from "../src/components/button/Button.docs.js";
 import Checkbox from "../src/components/checkbox/Checkbox.docs.js";
-import Editor from "../src/components/editor/Editor.docs.js";
 import Flex from "../src/components/flex/Flex.docs.js";
 import Icon from "../src/components/icon/Icon.docs.js";
 import Input from "../src/components/input/Input.docs.js";
@@ -30,7 +29,6 @@ export default {
   Box,
   Button,
   Checkbox,
-  Editor,
   Flex,
   Icon,
   Input,

@@ -26,25 +26,8 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.9.2",
-    "@tiptap/core": "^2.0.0-beta.66",
-    "@tiptap/extension-bold": "^2.0.0-beta.13",
-    "@tiptap/extension-bullet-list": "^2.0.0-beta.14",
-    "@tiptap/extension-code-block": "^2.0.0-beta.15",
-    "@tiptap/extension-document": "^2.0.0-beta.12",
-    "@tiptap/extension-hard-break": "^2.0.0-beta.14",
-    "@tiptap/extension-history": "^2.0.0-beta.13",
-    "@tiptap/extension-italic": "^2.0.0-beta.14",
-    "@tiptap/extension-link": "^2.0.0-beta.18",
-    "@tiptap/extension-list-item": "^2.0.0-beta.13",
-    "@tiptap/extension-ordered-list": "^2.0.0-beta.14",
-    "@tiptap/extension-paragraph": "^2.0.0-beta.14",
-    "@tiptap/extension-placeholder": "^2.0.0-beta.19",
-    "@tiptap/extension-strike": "^2.0.0-beta.16",
-    "@tiptap/extension-text": "^2.0.0-beta.12",
-    "emoji-picker-element": "^1.8.0",
     "jdenticon": "^3.1.0",
-    "lit": "^2.0.0-rc.2",
-    "node-emoji": "^1.10.0"
+    "lit": "^2.0.0-rc.2"
   },
   "devDependencies": {
     "esbuild": "^0.12.0",
